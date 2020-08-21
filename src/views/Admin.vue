@@ -3,7 +3,7 @@ import { mapMutations } from 'vuex';
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h2>Admin </h2> 
+        <h2>Admin: {{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}} </h2> 
       </v-col>
       
 
