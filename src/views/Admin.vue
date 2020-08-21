@@ -5,8 +5,6 @@ import { mapMutations } from 'vuex';
       <v-col cols="12">
         <h2>Administrador</h2> 
       </v-col>
-      
-
       <v-col cols="3" v-for="career in careerOptions" :key="career">
         <v-card @click="goDetailCareer(career)">
           <v-img
