@@ -3,8 +3,9 @@ import { mapMutations } from 'vuex';
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h2>Admin</h2>
+        <h2>Admin </h2> 
       </v-col>
+      
 
       <v-col cols="3" v-for="career in careerOptions" :key="career">
         <v-card @click="goDetailCareer(career)">
