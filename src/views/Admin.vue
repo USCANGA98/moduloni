@@ -5,11 +5,16 @@ import { mapMutations } from 'vuex';
     <v-row>
       <v-col cols="12">
         <h2>Administrador</h2> 
-
-        <button class="button is-success is-rounded" v-on:click="fetch">
-
-        </button>
       </v-col>
+      
+      <v-container> 
+
+      <button class="button is-success is-rounded" v-on:click="fetch">
+         Buscar
+      </button>
+
+        </v-container>
+      
       <v-col cols="3" v-for="career in careerOptions" :key="career">
         <v-card @click="goDetailCareer(career)">
           <v-img
