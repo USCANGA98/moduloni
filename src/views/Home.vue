@@ -48,7 +48,6 @@
               depressed
               :loading="loading"
               @click="iniciarSesion"
-              v-on: keyup.enter="Ingresar"
             >Ingresar</v-btn>
             <v-row>
               <v-col cols="12" class="d-flex justify-end pt-2">
