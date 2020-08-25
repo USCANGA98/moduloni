@@ -39,6 +39,7 @@
               type="password"
               placeholder="Ingresa tu contraseña"
               required
+              @keyup.enter="iniciarSesion"
             ></v-text-field>
             <v-btn
               class="mb-0"
