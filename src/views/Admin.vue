@@ -7,7 +7,7 @@ import { mapMutations } from 'vuex';
         <h2>Administrador</h2> 
       </v-col>
       
-      <v-container> 
+      <v-container class="field has-addon is-pulled-right"> 
 
       <button class="button is-success is-rounded" v-on:click="fetch">
          Buscar
