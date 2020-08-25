@@ -9,7 +9,7 @@ import { mapMutations } from 'vuex';
       
       <div class="field has-addons is-pulled-right"> 
 
-      <button class="button is-success is-rounded" v-on:click="fetch">
+      <button class="button is-success is-rounded" v-on: click="fetch">
          Buscar
       </button>
 
