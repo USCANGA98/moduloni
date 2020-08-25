@@ -1,20 +1,17 @@
 import { mapMutations } from 'vuex';
 <template>
   <v-container>
-     <q-input Label="Buscar..."/> 
-    <v-row>
-      <v-col cols="12">
-        <h2>Administrador</h2> 
-      </v-col>
-      
-      <div class="field has-addons is-pulled-right"> 
+     <div class="field has-addons is-pulled-right"> 
 
       <button class="button is-success is-rounded" v-on: click="fetch">
          Buscar
       </button>
 
       </div>
-      
+    <v-row>
+      <v-col cols="12">
+        <h2>Administrador</h2> 
+      </v-col>     
       <v-col cols="3" v-for="career in careerOptions" :key="career">
         <v-card @click="goDetailCareer(career)">
           <v-img
