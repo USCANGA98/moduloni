@@ -1,13 +1,13 @@
 import { mapMutations } from 'vuex';
 <template>
   <v-container>
-     <div class="field has-addons is-pulled-right"> 
+     <v-container class="field has-addons is-pulled-right"> 
 
       <button class="button is-success is-rounded" v-on: click="fetch">
          Buscar
       </button>
 
-      </div>
+     </v-container>
     <v-row>
       <v-col cols="12">
         <h2>Administrador</h2> 
