@@ -29,6 +29,7 @@
               label="Usuario"
               placeholder="Ingresa tu usuario"
               required
+              @keyup.enter="iniciarSesion"
             ></v-text-field>
             <v-text-field
               outlined
