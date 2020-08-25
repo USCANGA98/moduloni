@@ -7,13 +7,13 @@ import { mapMutations } from 'vuex';
         <h2>Administrador</h2> 
       </v-col>
       
-      <v-container class="field has-addons is-pulled-right"> 
+      <div class="field has-addons is-pulled-right"> 
 
       <button class="button is-success is-rounded" v-on:click="fetch">
          Buscar
       </button>
 
-        </v-container>
+      </div>
       
       <v-col cols="3" v-for="career in careerOptions" :key="career">
         <v-card @click="goDetailCareer(career)">
