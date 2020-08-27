@@ -2,7 +2,7 @@ import { mapMutations } from 'vuex';
 <template>
   <v-container>
    
-      <input type="text" class="search-query st-default-search-input aa-input"> 
+      <input type="text" class="form-control"> 
 
       <v-btn class="mb-20"
               color="green"
