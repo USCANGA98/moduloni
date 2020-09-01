@@ -1,16 +1,6 @@
 import { mapMutations } from 'vuex';
 <template>
   <v-container>
-    <v-btn
-      class="mb-20"
-      color="green"
-      dark
-      depressed
-      right="top"
-      rounded
-      :loading="loading"
-      @click="searchData"
-    >Buscar Alumnos</v-btn>
     <v-row>
       <v-col cols="12">
         <h2>Administrador</h2>
@@ -31,7 +21,6 @@ import { mapMutations } from 'vuex';
 </template>
 
 <script>
-
 import { mapMutations } from "vuex";
 export default {
   name: "AdminView",
@@ -57,7 +46,7 @@ export default {
       this.setCareerSelected(career);
       this.$router.push("/admin/detail-career");
     },
-
+  
   },
 };
 </script>
