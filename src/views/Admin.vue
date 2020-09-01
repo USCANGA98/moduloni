@@ -1,25 +1,19 @@
 import { mapMutations } from 'vuex';
 <template>
   <v-container>
-   
-      <input type="text" class="form-control"> 
-
-      <v-btn class="mb-20"
-              color="green"
-              dark
-              depressed
-              rounded
-              :loading="loading"
-              @click="searchData">
-              Buscar
-        </v-btn>
-
-       
-   
-      <v-row>
+    <v-btn
+      class="mb-20"
+      color="green"
+      dark
+      depressed
+      rounded
+      :loading="loading"
+      @click="searchData"
+    >Buscar Alumnos</v-btn>
+    <v-row>
       <v-col cols="12">
-        <h2>Administrador</h2> 
-      </v-col>     
+        <h2>Administrador</h2>
+      </v-col>
       <v-col cols="3" v-for="career in careerOptions" :key="career">
         <v-card @click="goDetailCareer(career)">
           <v-img
