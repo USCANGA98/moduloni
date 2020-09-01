@@ -6,6 +6,7 @@ import { mapMutations } from 'vuex';
       color="green"
       dark
       depressed
+      right="top"
       rounded
       :loading="loading"
       @click="searchData"
@@ -30,6 +31,7 @@ import { mapMutations } from 'vuex';
 </template>
 
 <script>
+
 import { mapMutations } from "vuex";
 export default {
   name: "AdminView",
@@ -55,6 +57,7 @@ export default {
       this.setCareerSelected(career);
       this.$router.push("/admin/detail-career");
     },
+
   },
 };
 </script>
