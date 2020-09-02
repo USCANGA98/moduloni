@@ -4,6 +4,7 @@ import { mapMutations } from 'vuex';
     <v-row>
       <v-col cols="12">
         <h2>Administrador</h2>
+        <v-text-field v-model="search" color="green" append-icon="mdi-magnify" label="Buscar"></v-text-field>
       </v-col>
       <v-col cols="3" v-for="career in careerOptions" :key="career">
         <v-card @click="goDetailCareer(career)">

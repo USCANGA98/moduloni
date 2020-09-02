@@ -4,7 +4,6 @@
       <v-col cols="12">
         <h2>Alumnos de la carrera {{careerSelected}}</h2>
       </v-col>
-
       <v-text-field v-model="search" color="green" append-icon="mdi-magnify" label="Buscar"></v-text-field>
       <v-col cols="12">
         <v-data-table :headers="headers" :items="items" sort-by="statusProceso" class="elevation-1">

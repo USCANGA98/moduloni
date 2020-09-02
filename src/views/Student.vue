@@ -3,9 +3,7 @@
     <v-row>
       <v-col cols="12">
         <h2>
-          Bienvenido(a):
-          <br />
-          {{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}
+          Bienvenido(a):&nbsp;{{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}
         </h2>
       </v-col>
       <v-col cols="4" v-for="(document, index) in user.documents" :key="document.name">
