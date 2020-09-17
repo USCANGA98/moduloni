@@ -8,7 +8,7 @@
       <v-text-field v-model="search" color="green" append-icon="mdi-magnify" label="Buscar"></v-text-field>
 
       <v-col cols="12">
-        <v-data-table :headers="headers" :items="items" sort-by="statusProceso" class="elevation-1">
+        <v-data-table :search="search" :headers="headers" :items="items" sort-by="statusProceso" class="elevation-1">
           <template v-slot:item.direccion="{ item }">
             <v-btn
               small
@@ -70,6 +70,7 @@ export default {
     items: [],
     item: {},
     user: {},
+    search: '',
     headers: [
       {
         text: "Nombre",
