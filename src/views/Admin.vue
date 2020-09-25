@@ -2,10 +2,80 @@ import { mapMutations } from 'vuex';
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12">
-        <h2>Administrador</h2>
-        <v-text-field v-model="search" color="green" append-icon="mdi-magnify" label="Buscar"></v-text-field>
-      </v-col>
+      <!-- Aqui empieza linea de todos los alumnos-->
+      <v-container>
+        
+        <v-row>
+          <v-container class="text-right">
+          <v-btn class="ma-2 mb-4 my-2" @click="expand = !expand ">Buscar Alumno</v-btn>
+        </v-container>
+          <v-col cols="12">
+            <h2>Administrador</h2>
+            <v-text-field
+              v-show="expand"
+              v-model="search"
+              color="green"
+              append-icon="mdi-magnify"
+              label="Buscar"
+            ></v-text-field>
+          </v-col>
+          <v-expand-transition>
+            <v-col cols="12">
+              <v-data-table
+                v-show="expand"
+                :search="search"
+                :headers="headers"
+                :items="estudiantes"
+                sort-by="statusProceso"
+                class="elevation-4 mx-auto"
+              >
+                <template v-slot:item.direccion="{ item }">
+                  <v-btn
+                    small
+                    depressed
+                    color="green"
+                    dark
+                    @click="verDireccion(item.direccion)"
+                  >dirección</v-btn>
+                </template>
+
+                <template v-slot:item.documents="{ item }">
+                  <v-btn small depressed color="green" dark @click="verDocumentos(item)">documentos</v-btn>
+                </template>
+
+                <template v-slot:item.detalleCompleto="{ item }">
+                  <v-btn small depressed color="green" dark @click="verUsuario(item)">detalle</v-btn>
+                </template>
+
+                <template v-slot:item.actions="{ item }">
+                  <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+                  <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+                </template>
+              </v-data-table>
+            </v-col>
+          </v-expand-transition>
+        </v-row>
+        <addressModal
+          :viewAddress="viewAddress"
+          :address="addressData"
+          @cerrar="viewAddress = false"
+        />
+        <documentsModal
+          :viewDocuments="viewDocuments"
+          :item="item"
+          @cerrar="viewDocuments = false"
+          @guardado="guardado"
+        />
+
+        <userModal
+          v-if="viewDetailUser"
+          :viewDetailUser="viewDetailUser"
+          :user="user"
+          @cerrar="viewDetailUser = false"
+        />
+      </v-container>
+      <!-- Aqui termina linea de todos los alumnos-->
+
       <v-col cols="3" v-for="career in careerOptions" :key="career">
         <v-card @click="goDetailCareer(career)">
           <v-img
@@ -22,10 +92,72 @@ import { mapMutations } from 'vuex';
 </template>
 
 <script>
+import { db } from "../services/firebase";
+import { mapState } from "vuex";
 import { mapMutations } from "vuex";
 export default {
   name: "AdminView",
+  mounted() {
+    this.getData();
+    this.Students();
+  },
+  components: {
+    addressModal: () => import("../components/Address"),
+    documentsModal: () => import("../components/Documents"),
+    userModal: () => import("../components/DetailUser"),
+  },
   data: () => ({
+    viewAddress: false,
+    viewDocuments: false,
+    viewDetailUser: false,
+    loading: false,
+    addressData: {},
+    documents: {},
+    expand: false,
+    items: [],
+    item: {},
+    user: {},
+    search: "",
+    estudiantes: [],
+    headers: [
+      {
+        text: "Nombre",
+        value: "nombre",
+      },
+      {
+        text: "Apellido Paterno",
+        value: "apellidoPaterno",
+      },
+      {
+        text: "Apellido Materno",
+        value: "apellidoMaterno",
+      },
+      {
+        text: "Edad",
+        value: "edad",
+      },
+      {
+        text: "Status",
+        value: "statusProceso",
+      },
+      {
+        text: "Carrera",
+        value: "carrera",
+      },
+      {
+        text: "Direccion",
+        value: "direccion",
+      },
+      {
+        text: "Documentos",
+        value: "documents",
+      },
+      {
+        text: "Detalle completo",
+        value: "detalleCompleto",
+      },
+    ],
+
     careerOptions: [
       "TSU Tecnologías de Información y Comunicación",
       "TSU Contaduría",
@@ -47,7 +179,65 @@ export default {
       this.setCareerSelected(career);
       this.$router.push("/admin/detail-career");
     },
-  
+
+    async guardado() {
+      this.items = [];
+      await this.getData();
+      this.viewDocuments = false;
+    },
+    verDireccion(direccion) {
+      this.addressData = direccion;
+      this.viewAddress = true;
+    },
+    verDocumentos(item) {
+      this.item = item;
+      this.viewDocuments = true;
+    },
+    verUsuario(item) {
+      this.user = item;
+      this.viewDetailUser = true;
+    },
+    async getData() {
+      this.loading = true;
+      try {
+        const response = await db
+          .collection("users")
+          .where("carrera", "==", this.careerSelected)
+          .get();
+
+        if (response.docs.length > 0) {
+          response.docs.forEach((e) => {
+            this.items.push(e.data());
+          });
+        }
+      } catch (error) {
+        console.warn(error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    async Students() {
+      this.loading = true;
+      try {
+        const response = await db
+          .collection("users")
+          .where("rol", "==", "Estudiante")
+          .get();
+        if (response.docs.length > 0) {
+          response.docs.forEach((e) => {
+            this.estudiantes.push(e.data());
+          });
+        }
+      } catch (error) {
+        console.warn(error);
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
+
+  computed: {
+    ...mapState(["careerSelected"]),
   },
 };
 </script>

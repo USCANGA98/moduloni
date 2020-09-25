@@ -2,7 +2,9 @@
   <v-dialog v-model="viewDetailUser" persistent max-width="600">
     <v-card>
       <v-toolbar dense flat color="green" dark>
-        <v-toolbar-title>Detalle alumno - {{user.nombre}}</v-toolbar-title>
+        <v-toolbar-title>Detalle alumno - {{user.nombre}} </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn color="white" text @click="cerrar">Cerrar</v-btn>
       </v-toolbar>
       <v-container>
         <v-row>
@@ -255,16 +257,17 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="green darken-1" text @click="cerrar">Cerrar</v-btn>
-      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
 export default {
+data: () => ({
+    viewDocumentEdit: false,
+    itemData: {},
+  }),
+  name2: "AdressComponent",
   name: "DetailUserComponent",
   props: {
     viewDetailUser: {
@@ -280,7 +283,15 @@ export default {
     cerrar() {
       this.$emit("cerrar");
     },
+
+    async guardar(){
+
+    }
+    
   },
+
+  
+
 };
 </script>
 
