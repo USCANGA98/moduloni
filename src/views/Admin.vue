@@ -4,30 +4,32 @@ import { mapMutations } from 'vuex';
     <v-row>
       <!-- Aqui empieza linea de todos los alumnos-->
       <v-container>
-        
         <v-row>
           <v-container class="text-right">
-          <v-btn class="ma-2 mb-4 my-2" @click="expand = !expand ">Buscar Alumno</v-btn>
-        </v-container>
+            <v-btn class="ma-2 mb-4 my-2" @click="expand = !expand"
+              >Buscar Alumno</v-btn
+            >
+          </v-container>
           <v-col cols="12">
             <h2>Administrador</h2>
-            <v-text-field
-              v-show="expand"
-              v-model="search"
-              color="green"
-              append-icon="mdi-magnify"
-              label="Buscar"
-            ></v-text-field>
           </v-col>
-          <v-expand-transition>
-            <v-col cols="12">
-              <v-data-table
+          <v-text-field
+                clearable
                 v-show="expand"
+                v-model="search"
+                solo
+                color="green"
+                append-icon="mdi-magnify"
+                label="Buscar"
+              ></v-text-field>
+          <v-expand-transition>
+            <v-card v-show="expand" class="mx-auto" width="100%" elevation="5">
+              
+              <v-data-table
                 :search="search"
                 :headers="headers"
                 :items="estudiantes"
                 sort-by="statusProceso"
-                class="elevation-4 mx-auto"
               >
                 <template v-slot:item.direccion="{ item }">
                   <v-btn
@@ -36,23 +38,40 @@ import { mapMutations } from 'vuex';
                     color="green"
                     dark
                     @click="verDireccion(item.direccion)"
-                  >dirección</v-btn>
+                    >dirección</v-btn
+                  >
                 </template>
 
                 <template v-slot:item.documents="{ item }">
-                  <v-btn small depressed color="green" dark @click="verDocumentos(item)">documentos</v-btn>
+                  <v-btn
+                    small
+                    depressed
+                    color="green"
+                    dark
+                    @click="verDocumentos(item)"
+                    >documentos</v-btn
+                  >
                 </template>
 
                 <template v-slot:item.detalleCompleto="{ item }">
-                  <v-btn small depressed color="green" dark @click="verUsuario(item)">detalle</v-btn>
+                  <v-btn
+                    small
+                    depressed
+                    color="green"
+                    dark
+                    @click="verUsuario(item)"
+                    >detalle</v-btn
+                  >
                 </template>
 
                 <template v-slot:item.actions="{ item }">
-                  <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+                  <v-icon small class="mr-2" @click="editItem(item)"
+                    >mdi-pencil</v-icon
+                  >
                   <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
                 </template>
               </v-data-table>
-            </v-col>
+            </v-card>
           </v-expand-transition>
         </v-row>
         <addressModal
@@ -77,15 +96,23 @@ import { mapMutations } from 'vuex';
       <!-- Aqui termina linea de todos los alumnos-->
 
       <v-col cols="3" v-for="career in careerOptions" :key="career">
-        <v-card @click="goDetailCareer(career)">
-          <v-img
-            src="../assets/utsv-logo.png"
-            class="white--text align-end"
-            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.8)"
+        <v-hover v-slot:default="{ hover }" open-delay="0">
+          <v-card
+            :elevation="hover ? 16 : 2"
+            :class="{ 'on-hover': hover }"
+            @click="goDetailCareer(career)"
           >
-            <h3 class="pa-3 text-subtitle-2 font-weight-medium">{{career}}</h3>
-          </v-img>
-        </v-card>
+            <v-img
+              src="../assets/utsv-logo.png"
+              class="white--text align-end"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.8)"
+            >
+              <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                {{ career }}
+              </h3>
+            </v-img>
+          </v-card>
+        </v-hover>
       </v-col>
     </v-row>
   </v-container>

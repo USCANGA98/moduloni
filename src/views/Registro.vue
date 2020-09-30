@@ -312,9 +312,11 @@
                     color="green"
                     label="Contraseña"
                     placeholder="Ingresa tu contraseña"
-                    type="password"
                     dense
                     v-model="password"
+                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                    :type="show1 ? 'text' : 'password'"
+                    @click:append="show1 = !show1"
                     :rules="rulePassword"
                   ></v-text-field>
                 </v-col>
@@ -324,11 +326,13 @@
                     color="green"
                     label="Contraseña"
                     placeholder="Repite tu contraseña"
-                    type="password"
                     dense
                     v-model="passwordRepeat"
                     :rules="rulePasswordRepeat"
                     :disabled="password == ''"
+                    :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                    :type="show2 ? 'text' : 'password'"
+                    @click:append="show2 = !show2"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -478,6 +482,8 @@ export default {
     passwordRepeat: "",
     snackbar: false,
     timeout: 5000,
+    show1: false,
+    show2: false,
     user: {
       statusProceso: "En revisión",
       nombre: "",
