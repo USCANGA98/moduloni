@@ -221,7 +221,7 @@ export default {
       this.viewDocuments = true;
     },
     verUsuario(item) {
-      this.user = item;
+      this.user = Object.assign({},item);
       this.viewDetailUser = true;
     },
     async getData() {
