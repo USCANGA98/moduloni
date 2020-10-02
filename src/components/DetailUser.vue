@@ -2,9 +2,10 @@
   <v-dialog v-model="viewDetailUser" persistent max-width="600">
     <v-card>
       <v-toolbar dense flat color="green" dark>
-        <v-toolbar-title>Detalle alumno - {{user.nombre}} </v-toolbar-title>
+        <v-toolbar-title>Detalle alumno - {{ user.nombre }} </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn color="white" text @click="cerrar">Cerrar</v-btn>
+        <v-btn color="white" text @click="actualizar">Guardar Cambios </v-btn>
       </v-toolbar>
       <v-container>
         <v-row>
@@ -262,12 +263,13 @@
 </template>
 
 <script>
+
 export default {
-data: () => ({
+  data: () => ({
     viewDocumentEdit: false,
     itemData: {},
   }),
-  name2: "AdressComponent",
+  
   name: "DetailUserComponent",
   props: {
     viewDetailUser: {
@@ -283,15 +285,7 @@ data: () => ({
     cerrar() {
       this.$emit("cerrar");
     },
-
-    async guardar(){
-
-    }
-    
   },
-
-  
-
 };
 </script>
 

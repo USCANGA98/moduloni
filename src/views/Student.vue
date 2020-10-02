@@ -293,6 +293,7 @@
               prepend-inner-icon="mdi-file-document-outline"
               label="Editar documento"
               outlined
+              show-size
               dense
               accept="application/pdf, image/*"
               @change="input($event, index)"

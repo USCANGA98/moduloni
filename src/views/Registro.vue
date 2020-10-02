@@ -361,6 +361,7 @@
                     prepend-inner-icon="mdi-file-document-outline"
                     label="Acta de nacimiento"
                     outlined
+                    show-size
                     dense
                     :rules="ruleDocument"
                     accept="application/pdf, image/*"
@@ -374,6 +375,7 @@
                     prepend-inner-icon="mdi-file-document-outline"
                     label="CURP"
                     outlined
+                    show-size
                     dense
                     :rules="ruleDocument"
                     accept="application/pdf, image/*"
@@ -387,6 +389,7 @@
                     prepend-inner-icon="mdi-file-document-outline"
                     label="Comprobante de domicilio"
                     outlined
+                    show-size
                     dense
                     :rules="ruleDocument"
                     accept="application/pdf, image/*"
@@ -400,6 +403,7 @@
                     prepend-inner-icon="mdi-file-document-outline"
                     label="Certificado preparatoria"
                     outlined
+                    show-size
                     dense
                     :rules="ruleDocument"
                     accept="application/pdf, image/*"
@@ -413,6 +417,7 @@
                     prepend-inner-icon="mdi-file-document-outline"
                     label="Credencial de elector"
                     outlined
+                    show-size
                     dense
                     :rules="ruleDocument"
                     accept="application/pdf, image/*"
@@ -426,6 +431,7 @@
                     prepend-inner-icon="mdi-file-document-outline"
                     label="Fotografía"
                     outlined
+                    show-size
                     dense
                     :rules="ruleDocument"
                     accept="application/pdf, image/*"
@@ -439,6 +445,7 @@
                     prepend-inner-icon="mdi-file-document-outline"
                     label="Analisis VDRL"
                     outlined
+                    show-size
                     dense
                     type="file"
                     accept="application/pdf, image/*"

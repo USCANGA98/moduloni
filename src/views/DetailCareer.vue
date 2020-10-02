@@ -5,10 +5,10 @@
         <h2>Alumnos de la carrera {{careerSelected}}</h2>
       </v-col>
 
-      <v-text-field v-model="search" clearable color="green" solo append-icon="mdi-magnify" label="Buscar"></v-text-field>
+      <v-text-field rounded v-model="search" clearable color="green" solo append-icon="mdi-magnify" label="Buscar"></v-text-field>
 
       <v-col cols="12">
-        <v-data-table :search="search" :headers="headers" :items="items" sort-by="statusProceso" class="elevation-1">
+        <v-data-table :search="search" :loading="loading" :headers="headers" :items="items" sort-by="statusProceso" class="elevation-1">
           <template v-slot:item.direccion="{ item }">
             <v-btn
               small

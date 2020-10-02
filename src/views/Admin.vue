@@ -5,8 +5,9 @@ import { mapMutations } from 'vuex';
       <!-- Aqui empieza linea de todos los alumnos-->
       <v-container>
         <v-row>
+          
           <v-container class="text-right">
-            <v-btn class="ma-2 mb-4 my-2" @click="expand = !expand"
+            <v-btn color="green" rounded elevation="2" outlined class="ma-2 mb-4 my-2" @click="expand = !expand"
               >Buscar Alumno</v-btn
             >
           </v-container>
@@ -14,17 +15,17 @@ import { mapMutations } from 'vuex';
             <h2>Administrador</h2>
           </v-col>
           <v-text-field
-                clearable
-                v-show="expand"
-                v-model="search"
-                solo
-                color="green"
-                append-icon="mdi-magnify"
-                label="Buscar"
-              ></v-text-field>
+          rounded
+            clearable
+            v-show="expand"
+            v-model="search"
+            solo
+            color="green"
+            append-icon="mdi-magnify"
+            label="Buscar"
+          ></v-text-field>
           <v-expand-transition>
             <v-card v-show="expand" class="mx-auto" width="100%" elevation="5">
-              
               <v-data-table
                 :search="search"
                 :headers="headers"
@@ -221,7 +222,7 @@ export default {
       this.viewDocuments = true;
     },
     verUsuario(item) {
-      this.user = Object.assign({},item);
+      this.user = Object.assign({}, item);
       this.viewDetailUser = true;
     },
     async getData() {
