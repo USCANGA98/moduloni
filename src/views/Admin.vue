@@ -99,14 +99,14 @@ import { mapMutations } from 'vuex';
       <v-col cols="3" v-for="career in careerOptions" :key="career">
         <v-hover v-slot:default="{ hover }" open-delay="0">
           <v-card
-            :elevation="hover ? 16 : 2"
+            :elevation="hover ? 10 : 1"
             :class="{ 'on-hover': hover }"
             @click="goDetailCareer(career)"
           >
             <v-img
               src="../assets/utsv-logo.png"
               class="white--text align-end"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.8)"
+              gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
             >
               <h3 class="pa-3 text-subtitle-2 font-weight-medium">
                 {{ career }}
