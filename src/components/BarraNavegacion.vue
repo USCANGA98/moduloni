@@ -2,9 +2,10 @@
   <div>
     
       <v-app-bar
-        style="background-color: rgb(44, 56, 86); border-color: rgb(44, 56, 86)"
-        elevate-on-scroll
+        style="background-color: rgb(4, 146, 6 ); border-color: rgb(44, 56, 86)"
+        elevate
         dense
+        color="green"
         dark
         
       >

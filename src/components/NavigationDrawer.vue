@@ -2,15 +2,23 @@
   <div>
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list-item>
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+        <v-list-item-avatar class="absolte">
+          <v-img src="https://randomuser.me/api/portraits/men/79.jpg"></v-img>
         </v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title>{{user}}</v-list-item-title>
-        </v-list-item-content>
       </v-list-item>
       <div>
-        <div>
+        <v-list dense>
+          <v-list-item v-for="item in items" :key="item.title" link>
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title @click="Panel()" >{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <div class="v-btn__content">
           <v-btn
             @click="cerrarSesion()"
             type="button"
@@ -43,20 +51,21 @@ export default {
     cerrarSesion() {
       auth
         .signOut()
-        .then( () => {
-          this.$router.replace('/');
+        .then(() => {
+          this.$router.replace("/");
           // Sign-out successful.
         })
-        .catch( (error) => {
+        .catch((error) => {
           // An error happened.
           console.log(error);
         });
     },
+
   },
   data() {
     return {
       items: [
-        { title: "Home", icon: "dashboard" },
+        { title: "Home", icon: "Panel" },
         { title: "About", icon: "question_answer" },
       ],
     };
