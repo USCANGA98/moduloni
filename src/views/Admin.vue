@@ -1,128 +1,145 @@
 import { mapMutations } from 'vuex';
+
 <template>
-  <v-container>
-    <v-row>
-      <!-- Aqui empieza linea de todos los alumnos-->
-      <v-container>
-        <v-row>
-          
-          <v-container class="text-right">
-            <v-btn color="green" rounded elevation="2" outlined class="ma-2 mb-4 my-2" @click="expand = !expand"
-              >Buscar Alumno</v-btn
-            >
-          </v-container>
-          <v-col cols="12">
-            <h2>Administrador</h2>
-          </v-col>
-          <v-text-field
-          rounded
-            clearable
-            v-show="expand"
-            v-model="search"
-            solo
-            color="green"
-            append-icon="mdi-magnify"
-            label="Buscar"
-          ></v-text-field>
-          <v-expand-transition>
-            <v-card v-show="expand" class="mx-auto" width="100%" elevation="5">
-              <v-data-table
-                :search="search"
-                :headers="headers"
-                :items="estudiantes"
-                sort-by="statusProceso"
+  <div>
+    <BarraNavegacion />
+    <v-container>
+      <v-row>
+        <!-- Aqui empieza linea de todos los alumnos-->
+        <v-container>
+          <v-row>
+            <v-container class="text-right">
+              <v-btn
+                color="green"
+                rounded
+                large
+                elevation="2"
+                outlined
+                class="ma-2 mb-4 my-2"
+                @click="expand = !expand"
               >
-                <template v-slot:item.direccion="{ item }">
-                  <v-btn
-                    small
-                    depressed
-                    color="green"
-                    dark
-                    @click="verDireccion(item.direccion)"
-                    >dirección</v-btn
-                  >
-                </template>
+                Buscar Alumno
+              </v-btn>
+            </v-container>
+            <v-col cols="12">
+              <h2>Administrador</h2>
+            </v-col>
+            <v-text-field
+              rounded
+              clearable
+              v-show="expand"
+              v-model="search"
+              solo
+              color="green"
+              append-icon="mdi-magnify"
+              label="Buscar"
+            ></v-text-field>
+            <v-expand-transition>
+              <v-card
+                v-show="expand"
+                class="mx-auto"
+                width="100%"
+                elevation="5"
+              >
+                <v-data-table
+                  :search="search"
+                  :headers="headers"
+                  :items="estudiantes"
+                  sort-by="statusProceso"
+                >
+                  <template v-slot:item.direccion="{ item }">
+                    <v-btn
+                      small
+                      depressed
+                      color="green"
+                      dark
+                      @click="verDireccion(item.direccion)"
+                      >dirección</v-btn
+                    >
+                  </template>
 
-                <template v-slot:item.documents="{ item }">
-                  <v-btn
-                    small
-                    depressed
-                    color="green"
-                    dark
-                    @click="verDocumentos(item)"
-                    >documentos</v-btn
-                  >
-                </template>
+                  <template v-slot:item.documents="{ item }">
+                    <v-btn
+                      small
+                      depressed
+                      color="green"
+                      dark
+                      @click="verDocumentos(item)"
+                      >documentos</v-btn
+                    >
+                  </template>
 
-                <template v-slot:item.detalleCompleto="{ item }">
-                  <v-btn
-                    small
-                    depressed
-                    color="green"
-                    dark
-                    @click="verUsuario(item)"
-                    >detalle</v-btn
-                  >
-                </template>
+                  <template v-slot:item.detalleCompleto="{ item }">
+                    <v-btn
+                      small
+                      depressed
+                      color="green"
+                      dark
+                      @click="verUsuario(item)"
+                      >detalle</v-btn
+                    >
+                  </template>
 
-                <template v-slot:item.actions="{ item }">
-                  <v-icon small class="mr-2" @click="editItem(item)"
-                    >mdi-pencil</v-icon
-                  >
-                  <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
-                </template>
-              </v-data-table>
-            </v-card>
-          </v-expand-transition>
-        </v-row>
-        <addressModal
-          :viewAddress="viewAddress"
-          :address="addressData"
-          @cerrar="viewAddress = false"
-        />
-        <documentsModal
-          :viewDocuments="viewDocuments"
-          :item="item"
-          @cerrar="viewDocuments = false"
-          @guardado="guardado"
-        />
+                  <template v-slot:item.actions="{ item }">
+                    <v-icon small class="mr-2" @click="editItem(item)"
+                      >mdi-pencil</v-icon
+                    >
+                    <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+                  </template>
+                </v-data-table>
+              </v-card>
+            </v-expand-transition>
+          </v-row>
+          <addressModal
+            :viewAddress="viewAddress"
+            :address="addressData"
+            @cerrar="viewAddress = false"
+          />
+          <documentsModal
+            :viewDocuments="viewDocuments"
+            :item="item"
+            @cerrar="viewDocuments = false"
+            @guardado="guardado"
+          />
 
-        <userModal
-          v-if="viewDetailUser"
-          :viewDetailUser="viewDetailUser"
-          :user="user"
-          @cerrar="viewDetailUser = false"
-        />
-      </v-container>
-      <!-- Aqui termina linea de todos los alumnos-->
+          <userModal
+            v-if="viewDetailUser"
+            :viewDetailUser="viewDetailUser"
+            :user="user"
+            @cerrar="viewDetailUser = false"
+          />
+        </v-container>
+        <!-- Aqui termina linea de todos los alumnos-->
 
-      <v-col cols="3" v-for="career in careerOptions" :key="career">
-        <v-hover v-slot:default="{ hover }" open-delay="0">
-          <v-card
-            :elevation="hover ? 10 : 1"
-            :class="{ 'on-hover': hover }"
-            @click="goDetailCareer(career)"
-          >
-            <v-img
-              src="../assets/utsv-logo.png"
-              class="white--text align-end"
-              gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+        <v-col cols="3" v-for="career in careerOptions" :key="career">
+          <v-hover v-slot:default="{ hover }" open-delay="0">
+            <v-card
+              :elevation="hover ? 10 : 1"
+              :class="{ 'on-hover': hover }"
+              @click="goDetailCareer(career)"
             >
-              <h3 class="pa-3 text-subtitle-2 font-weight-medium">
-                {{ career }}
-              </h3>
-            </v-img>
-          </v-card>
-        </v-hover>
-      </v-col>
-    </v-row>
-  </v-container>
+              <v-img
+                src="../assets/utsv-logo.png"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+            </v-card>
+          </v-hover>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
 import { db } from "../services/firebase";
 import { mapState } from "vuex";
 import { mapMutations } from "vuex";
+import BarraNavegacion from "../components/BarraNavegacion";
 export default {
   name: "AdminView",
   mounted() {
@@ -130,6 +147,7 @@ export default {
     this.Students();
   },
   components: {
+    BarraNavegacion,
     addressModal: () => import("../components/Address"),
     documentsModal: () => import("../components/Documents"),
     userModal: () => import("../components/DetailUser"),
