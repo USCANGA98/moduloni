@@ -1,20 +1,30 @@
 <template>
   <div>
     <v-navigation-drawer v-model="drawer" absolute temporary>
-      <v-list-item>
-        <v-list-item-avatar class="absolte">
-          <v-img src="https://randomuser.me/api/portraits/men/79.jpg"></v-img>
-        </v-list-item-avatar>
-      </v-list-item>
+      <v-layout mt-4 column class="align-center">
+        <v-flex>
+          <v-avatar>
+            <v-img
+              src="https://firebasestorage.googleapis.com/v0/b/moduloni.appspot.com/o/DmCzjUsLw9Mw7qugU2jYbgyG3243%2F%5Bobject%20File%5D.jpg?alt=media&token=f3ddeee5-3a95-45e6-8f23-e306a92b64e3"
+            ></v-img>
+          </v-avatar>
+        </v-flex>
+
+        <v-flex>
+          <p class="dark--text mt-3 headline">Luis Angel Uscanga</p>
+        </v-flex>
+      </v-layout>
       <div>
         <v-list dense>
           <v-list-item v-for="item in items" :key="item.title" link>
             <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon @click="Panel()" >{{ item.icon }}</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title @click="Panel()" >{{ item.title }}</v-list-item-title>
+              <v-list-item-title @click="Graficos()">{{
+                item.title
+              }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -61,12 +71,18 @@ export default {
         });
     },
 
+    Graficos() {
+      this.$router.push("/admin/graficos");
+    },
+    Panel() {
+      this.$router.push("/admin");
+    },
   },
   data() {
     return {
       items: [
-        { title: "Home", icon: "Panel" },
-        { title: "About", icon: "question_answer" },
+        { title: "Graficas", icon: "Panel" },
+        { title: "About", icon: "question" },
       ],
     };
   },

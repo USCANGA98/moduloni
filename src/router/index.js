@@ -44,6 +44,13 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "admin" */ "../views/Student.vue"),
     beforeEnter: ifAuthenticated
+  },
+  {
+    path: "/admin/Graficos",
+    name: "Graficos",
+    component: () =>
+      import(/* webpackChunkName: "admin" */ "../views/Graficos.vue"),
+    beforeEnter: ifAuthenticated
   }
 ];
 

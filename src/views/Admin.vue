@@ -2,7 +2,6 @@ import { mapMutations } from 'vuex';
 
 <template>
   <div>
-    <BarraNavegacion />
     <v-container>
       <v-row>
         <!-- Aqui empieza linea de todos los alumnos-->
@@ -114,8 +113,8 @@ import { mapMutations } from 'vuex';
         <v-col cols="3" v-for="career in careerOptions" :key="career">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
-              :elevation="hover ? 10 : 1"
-              :class="{ 'on-hover': hover }"
+              :class="`elevation-${hover ? 20 : 1}`"
+              class="mx-auto transition-swing"
               @click="goDetailCareer(career)"
             >
               <v-img
@@ -139,7 +138,7 @@ import { mapMutations } from 'vuex';
 import { db } from "../services/firebase";
 import { mapState } from "vuex";
 import { mapMutations } from "vuex";
-import BarraNavegacion from "../components/BarraNavegacion";
+
 export default {
   name: "AdminView",
   mounted() {
@@ -147,7 +146,6 @@ export default {
     this.Students();
   },
   components: {
-    BarraNavegacion,
     addressModal: () => import("../components/Address"),
     documentsModal: () => import("../components/Documents"),
     userModal: () => import("../components/DetailUser"),

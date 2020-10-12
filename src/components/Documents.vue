@@ -11,27 +11,40 @@
         <v-row>
           <v-col cols="12" v-for="item in item.documents" :key="item.name">
             <v-card>
-              <v-card-title>{{item.name}}</v-card-title>
+              <v-card-title>{{ item.name }}</v-card-title>
               <v-card-text>
-                <v-btn block depressed color="green" dark @click="abrir(item.url)">Ver documento</v-btn>
+                <v-btn
+                  block
+                  depressed
+                  color="green"
+                  dark
+                  @click="abrir(item.url)"
+                  >Ver documento</v-btn
+                >
               </v-card-text>
               <v-card-text class="mb-0 pb-0">
                 Aprobado:
-                <strong>{{item.aprobado}}</strong>
+                <strong>{{ item.aprobado }}</strong>
               </v-card-text>
               <v-card-text class="mb-0 mt-0 pb-5 pt-0">
                 Mensaje:
-                <strong>{{item.mensaje}}</strong>
+                <strong>{{ item.mensaje }}</strong>
               </v-card-text>
               <v-card-actions>
-                <v-btn block depressed color="green" dark @click="editar(item)">Editar</v-btn>
+                <v-btn block depressed color="green" dark @click="editar(item)"
+                  >Editar</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
       </v-container>
     </v-card>
-    <edit :viewDocumentEdit="viewDocumentEdit" :item="itemData" @cerrar="viewDocumentEdit = false" />
+    <edit
+      :viewDocumentEdit="viewDocumentEdit"
+      :item="itemData"
+      @cerrar="viewDocumentEdit = false"
+    />
   </v-dialog>
 </template>
 
@@ -69,13 +82,29 @@ export default {
     },
     async guardar() {
       let uid = this.item.uid;
+      if (this.estaAprobado()) {
+        this.item.statusProceso = "Revisado";
+      }
+      if (!this.estaAprobado()) {
+        this.item.statusProceso = "En revision";
+      }
 
       try {
         const response = await db.collection("users").doc(uid).set(this.item);
-        if(response == undefined) this.$emit("guardado");
+        if (response == undefined) this.$emit("guardado");
       } catch (error) {
         console.warn(error);
       }
+    },
+    estaAprobado() {
+      let aprobado = true;
+
+      for (const propiedad in this.item.documents) {
+        if (!this.item.documents[propiedad].aprobado) {
+          aprobado = false;
+        }
+      }
+      return aprobado;
     },
   },
 };

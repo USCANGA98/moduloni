@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <BarraNavegacion />
     <v-main class="grey lighten-5">
       <router-view></router-view>
     </v-main>
@@ -7,10 +8,13 @@
 </template>
 
 <script>
+import BarraNavegacion from "./components/BarraNavegacion";
 export default {
   name: "App",
 
-  components: {},
+  components: {
+    BarraNavegacion
+  },
 
   data: () => ({
     

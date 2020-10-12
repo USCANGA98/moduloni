@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@mdi/font": "^3.6.95",
+    "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
     "firebase": "^7.18.0",
     "roboto-fontface": "*",
     "vue": "^2.6.11",
+    "vue-chartkick": "^0.6.1",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
     "vuex": "^3.4.0"

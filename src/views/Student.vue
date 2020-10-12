@@ -1,6 +1,5 @@
 <template>
   <div>
-    <BarraNavegacion />
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -335,7 +334,6 @@
 <script>
 import { mapState } from "vuex";
 import { storage, db } from "../services/firebase";
-import BarraNavegacion from "../components/BarraNavegacion";
 export default {
   name: "Student",
   data: () => ({
@@ -343,7 +341,7 @@ export default {
     expand: false,
   }),
   components: {
-    BarraNavegacion
+    
   },
   methods: {
     async input(e, tipo) {
