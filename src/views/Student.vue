@@ -11,17 +11,16 @@
         <v-container>
           <v-row>
             <v-col cols="12">
-              <v-container class="text-right">
+              <v-container class="text-left">
                 <v-btn
-                  large
                   rounded
-                  elevation="2"
+                  depressed
                   class="ma-2 mb-4 my-2"
                   color="info"
-                  outlined
+                  dark
                   @click="expand = !expand"
                 >
-                  Datos Personales
+                  Detalles <v-icon right>mdi-account-circle</v-icon>
                 </v-btn>
               </v-container>
               <v-expand-transition>
@@ -338,11 +337,9 @@ export default {
   name: "Student",
   data: () => ({
     overlay: false,
-    expand: false,
+    expand: false
   }),
-  components: {
-    
-  },
+  components: {},
   methods: {
     async input(e, tipo) {
       this.overlay = true;
@@ -367,18 +364,20 @@ export default {
       const uid = user.uid;
 
       try {
-        const response = await db.collection("users").doc(uid).set(user);
+        const response = await db
+          .collection("users")
+          .doc(uid)
+          .set(user);
         if (response == undefined) alert("Documeto actualizado con exito!");
       } catch (error) {
         console.warn(error);
       }
-    },
+    }
   },
   computed: {
-    ...mapState(["user"]),
-  },
+    ...mapState(["user"])
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -1,30 +1,28 @@
 <template>
   <div>
-    
-      <v-app-bar
-        style="background-color: rgb(4, 146, 6 ); border-color: rgb(44, 56, 86)"
-        elevate
-        dense
-        color="green"
-        dark
-        
-      >
-        <v-app-bar-nav-icon
-          @click="mostrarNavigationDrawer = true"
-        ></v-app-bar-nav-icon>
+    <v-app-bar
+      app
+      style="background-color: rgb(4, 146, 6 ); border-color: rgb(44, 56, 86)"
+      elevate
+      dense
+      color="green"
+      dark
+    >
+      <v-app-bar-nav-icon
+        @click="mostrarNavigationDrawer = true"
+      ></v-app-bar-nav-icon>
 
-        <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-        <v-toolbar-title>UTSV</v-toolbar-title>
+      <v-toolbar-title>UTSV</v-toolbar-title>
 
-        <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-        <v-btn icon>
-          <v-icon>mdi-google-translate</v-icon>
-          ES
-        </v-btn>
-      </v-app-bar>
-    
+      <v-btn icon>
+        <v-icon>mdi-google-translate</v-icon>
+        ES
+      </v-btn>
+    </v-app-bar>
 
     <NavigationDrawer
       :drawer="mostrarNavigationDrawer"
@@ -38,13 +36,12 @@ import NavigationDrawer from "./NavigationDrawer";
 
 export default {
   components: {
-    NavigationDrawer,
+    NavigationDrawer
   },
   data: () => ({
-    mostrarNavigationDrawer: false,
-  }),
+    mostrarNavigationDrawer: false
+  })
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

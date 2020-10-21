@@ -2,13 +2,28 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h2>Alumnos de la carrera {{careerSelected}}</h2>
+        <h2>Alumnos de la carrera {{ careerSelected }}</h2>
       </v-col>
 
-      <v-text-field rounded v-model="search" clearable color="green" solo append-icon="mdi-magnify" label="Buscar"></v-text-field>
+      <v-text-field
+        rounded
+        v-model="search"
+        clearable
+        color="green"
+        solo
+        append-icon="mdi-magnify"
+        label="Buscar"
+      ></v-text-field>
 
       <v-col cols="12">
-        <v-data-table :search="search" :loading="loading" :headers="headers" :items="items" sort-by="statusProceso" class="elevation-1">
+        <v-data-table
+          :search="search"
+          :loading="loading"
+          :headers="headers"
+          :items="items"
+          sort-by="statusProceso"
+          class="elevation-1"
+        >
           <template v-slot:item.direccion="{ item }">
             <v-btn
               small
@@ -16,27 +31,41 @@
               color="green"
               dark
               @click="verDireccion(item.direccion)"
-            >dirección</v-btn>
+              >dirección</v-btn
+            >
           </template>
 
           <template v-slot:item.documents="{ item }">
-            <v-btn small depressed color="green" dark @click="verDocumentos(item)">documentos</v-btn>
+            <v-btn
+              small
+              depressed
+              color="green"
+              dark
+              @click="verDocumentos(item)"
+              >documentos</v-btn
+            >
           </template>
 
           <template v-slot:item.detalleCompleto="{ item }">
-            <v-btn small depressed color="green" dark @click="verUsuario(item)">detalle</v-btn>
+            <v-btn small depressed color="green" dark @click="verUsuario(item)"
+              >detalle</v-btn
+            >
           </template>
         </v-data-table>
       </v-col>
     </v-row>
-    <addressModal :viewAddress="viewAddress" :address="addressData" @cerrar="viewAddress = false" />
+    <addressModal
+      :viewAddress="viewAddress"
+      :address="addressData"
+      @cerrar="viewAddress = false"
+    />
     <documentsModal
       :viewDocuments="viewDocuments"
       :item="item"
       @cerrar="viewDocuments = false"
       @guardado="guardado"
     />
-    
+
     <userModal
       v-if="viewDetailUser"
       :viewDetailUser="viewDetailUser"
@@ -58,7 +87,7 @@ export default {
   components: {
     addressModal: () => import("../components/Address"),
     documentsModal: () => import("../components/Documents"),
-    userModal: () => import("../components/DetailUser"),
+    userModal: () => import("../components/DetailUser")
   },
   data: () => ({
     viewAddress: false,
@@ -70,41 +99,41 @@ export default {
     items: [],
     item: {},
     user: {},
-    search: '',
+    search: "",
     headers: [
       {
         text: "Nombre",
-        value: "nombre",
+        value: "nombre"
       },
       {
         text: "Apellido Paterno",
-        value: "apellidoPaterno",
+        value: "apellidoPaterno"
       },
       {
         text: "Apellido Materno",
-        value: "apellidoMaterno",
+        value: "apellidoMaterno"
       },
       {
         text: "Status",
-        value: "statusProceso",
+        value: "statusProceso"
       },
       {
         text: "Correo",
-        value: "correoElectronico",
+        value: "correoElectronico"
       },
       {
         text: "Direccion",
-        value: "direccion",
+        value: "direccion"
       },
       {
         text: "Documentos",
-        value: "documents",
+        value: "documents"
       },
       {
         text: "Detalle completo",
-        value: "detalleCompleto",
-      },
-    ],
+        value: "detalleCompleto"
+      }
+    ]
   }),
   methods: {
     async guardado() {
@@ -121,7 +150,7 @@ export default {
       this.viewDocuments = true;
     },
     verUsuario(item) {
-      this.user = Object.assign({},item);
+      this.user = Object.assign({}, item);
       this.viewDetailUser = true;
     },
     async getData() {
@@ -133,7 +162,7 @@ export default {
           .get();
 
         if (response.docs.length > 0) {
-          response.docs.forEach((e) => {
+          response.docs.forEach(e => {
             this.items.push(e.data());
           });
         }
@@ -142,13 +171,12 @@ export default {
       } finally {
         this.loading = false;
       }
-    },
+    }
   },
   computed: {
-    ...mapState(["careerSelected"]),
-  },
+    ...mapState(["careerSelected"])
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

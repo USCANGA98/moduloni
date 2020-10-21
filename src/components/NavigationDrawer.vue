@@ -11,35 +11,41 @@
         </v-flex>
 
         <v-flex>
-          <p class="dark--text mt-3 headline">Luis Angel Uscanga</p>
+          <v-toolbar-title class="dark--text mt-3 title"
+            >Luis Angel Uscanga</v-toolbar-title
+          >
         </v-flex>
       </v-layout>
       <div>
         <v-list dense>
-          <v-list-item v-for="item in items" :key="item.title" link>
+          <v-list-item
+            v-for="item in items"
+            :key="item.title"
+            link
+            :to="item.path"
+            exact
+          >
             <v-list-item-icon>
-              <v-icon @click="Panel()" >{{ item.icon }}</v-icon>
+              <v-icon>{{ item.icon }} </v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title @click="Graficos()">{{
-                item.title
-              }}</v-list-item-title>
+              <v-list-item-icon>{{ item.title }} </v-list-item-icon>
             </v-list-item-content>
           </v-list-item>
         </v-list>
-        <div class="v-btn__content">
+        <div>
           <v-btn
             @click="cerrarSesion()"
             type="button"
-            class="font-weight-medium v-btn v-btn--block v-btn--depressed v-btn--flat v-btn--outlined theme--light v-size--default"
+            class="v-btn--block v-btn--depressed v-btn--flat"
             style="color: rgb(254, 5, 69); caret-color: rgb(254, 5, 69)"
           >
-            <span class="v-btn__content">
+            <span class="">
               <i
-                class="v-icon notranslate v-icon--left mdi mdi-account-arrow-left theme--light"
+                class="v-icon notranslate v-icon--left mdi mdi-power theme--light"
               ></i>
-              Cerrar Sesion
+              Salir
             </span>
           </v-btn>
         </div>
@@ -54,8 +60,8 @@ export default {
   name: "NavigationDrawerComponent",
   props: {
     drawer: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   methods: {
     cerrarSesion() {
@@ -65,35 +71,35 @@ export default {
           this.$router.replace("/");
           // Sign-out successful.
         })
-        .catch((error) => {
+        .catch(error => {
           // An error happened.
           console.log(error);
         });
-    },
-
-    Graficos() {
-      this.$router.push("/admin/graficos");
-    },
-    Panel() {
-      this.$router.push("/admin");
-    },
+    }
   },
   data() {
     return {
       items: [
-        { title: "Graficas", icon: "Panel" },
-        { title: "About", icon: "question" },
-      ],
+        {
+          title: "Panel",
+          icon: "mdi-view-dashboard",
+          path: "/admin"
+        },
+        {
+          title: "Graficas",
+          icon: "mdi-chart-areaspline",
+          path: "/admin/graficos"
+        }
+      ]
     };
   },
 
   watch: {
-    drawer: function () {
+    drawer: function() {
       if (!this.drawer) this.$emit("cerrar");
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

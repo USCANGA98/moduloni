@@ -2,7 +2,9 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h2 class="text-center">UNIVERSIDAD TECNOLÓGICA DEL SURESTE DE VERACRUZ</h2>
+        <h2 class="text-center">
+          UNIVERSIDAD TECNOLÓGICA DEL SURESTE DE VERACRUZ
+        </h2>
         <h3 class="text-center">Módulo para nuevo ingreso</h3>
       </v-col>
     </v-row>
@@ -50,10 +52,15 @@
               depressed
               :loading="loading"
               @click="iniciarSesion"
-            >Ingresar</v-btn>
+              >Ingresar</v-btn
+            >
             <v-row>
               <v-col cols="12" class="d-flex justify-end pt-2">
-                <router-link to="/registro" class="enlace blue--text text-subtitle-2">Crear cuenta</router-link>
+                <router-link
+                  to="/registro"
+                  class="enlace blue--text text-subtitle-2"
+                  >Crear cuenta</router-link
+                >
               </v-col>
             </v-row>
           </v-form>
@@ -73,10 +80,10 @@ export default {
     loading: false,
     user: {
       mail: "",
-      password: "",
+      password: ""
     },
     error: "",
-    userData: "",
+    userData: ""
   }),
   methods: {
     ...mapMutations(["setUser"]),
@@ -111,13 +118,16 @@ export default {
     },
     async getDataUser(uid) {
       try {
-        const response = await db.collection("users").doc(uid).get();
+        const response = await db
+          .collection("users")
+          .doc(uid)
+          .get();
         return response.data();
       } catch (error) {
         console.warn(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

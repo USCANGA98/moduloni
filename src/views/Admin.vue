@@ -11,13 +11,12 @@ import { mapMutations } from 'vuex';
               <v-btn
                 color="green"
                 rounded
-                large
-                elevation="2"
-                outlined
+                dark
+                depressed
                 class="ma-2 mb-4 my-2"
                 @click="expand = !expand"
               >
-                Buscar Alumno
+                Buscar Alumno <v-icon right>mdi-account-search</v-icon>
               </v-btn>
             </v-container>
             <v-col cols="12">
@@ -148,7 +147,7 @@ export default {
   components: {
     addressModal: () => import("../components/Address"),
     documentsModal: () => import("../components/Documents"),
-    userModal: () => import("../components/DetailUser"),
+    userModal: () => import("../components/DetailUser")
   },
   data: () => ({
     viewAddress: false,
@@ -166,40 +165,40 @@ export default {
     headers: [
       {
         text: "Nombre",
-        value: "nombre",
+        value: "nombre"
       },
       {
         text: "Apellido Paterno",
-        value: "apellidoPaterno",
+        value: "apellidoPaterno"
       },
       {
         text: "Apellido Materno",
-        value: "apellidoMaterno",
+        value: "apellidoMaterno"
       },
       {
         text: "Edad",
-        value: "edad",
+        value: "edad"
       },
       {
         text: "Status",
-        value: "statusProceso",
+        value: "statusProceso"
       },
       {
         text: "Carrera",
-        value: "carrera",
+        value: "carrera"
       },
       {
         text: "Direccion",
-        value: "direccion",
+        value: "direccion"
       },
       {
         text: "Documentos",
-        value: "documents",
+        value: "documents"
       },
       {
         text: "Detalle completo",
-        value: "detalleCompleto",
-      },
+        value: "detalleCompleto"
+      }
     ],
 
     careerOptions: [
@@ -214,8 +213,8 @@ export default {
       "Ingeniería en Tecnologías de la Información",
       "Ingeniería en Mantenimiento Industrial",
       "Ingeniería en Mecatrónica",
-      "Ingeniería Química",
-    ],
+      "Ingeniería Química"
+    ]
   }),
   methods: {
     ...mapMutations(["setCareerSelected"]),
@@ -250,7 +249,7 @@ export default {
           .get();
 
         if (response.docs.length > 0) {
-          response.docs.forEach((e) => {
+          response.docs.forEach(e => {
             this.items.push(e.data());
           });
         }
@@ -268,7 +267,7 @@ export default {
           .where("rol", "==", "Estudiante")
           .get();
         if (response.docs.length > 0) {
-          response.docs.forEach((e) => {
+          response.docs.forEach(e => {
             this.estudiantes.push(e.data());
           });
         }
@@ -277,14 +276,13 @@ export default {
       } finally {
         this.loading = false;
       }
-    },
+    }
   },
 
   computed: {
-    ...mapState(["careerSelected"]),
-  },
+    ...mapState(["careerSelected"])
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
