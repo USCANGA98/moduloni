@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <BarraNavegacion />
+    <BarraNavegacion v-if="$route.path != '/'" />
     <v-main class="grey lighten-5">
       <router-view></router-view>
     </v-main>
@@ -9,16 +9,19 @@
 
 <script>
 import BarraNavegacion from "./components/BarraNavegacion";
+
 export default {
   name: "App",
+  mounted() {
+    console.log(this.$route);
+  },
 
   components: {
     BarraNavegacion
   },
 
   data: () => ({
-    
     //
-  }),
+  })
 };
 </script>

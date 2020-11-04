@@ -76,6 +76,7 @@ import { mapMutations } from "vuex";
 
 export default {
   name: "Home",
+
   data: () => ({
     loading: false,
     user: {
@@ -92,8 +93,14 @@ export default {
       try {
         this.userData = await this.getUser();
         this.setUser(this.userData);
-        if (this.userData.rol == "admin") this.$router.push("/admin");
-        if (this.userData.rol == "Estudiante") this.$router.push("/student");
+        if (this.userData.rol == "admin") {
+          console.log("accedió el admin");
+          this.$router.push("/admin");
+        }
+        if (this.userData.rol == "Estudiante") {
+          console.log("accedió el estudiante");
+          this.$router.push("/student");
+        }
       } catch (error) {
         console.warn(error);
       } finally {
