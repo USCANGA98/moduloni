@@ -108,7 +108,6 @@ import { mapMutations } from 'vuex';
           />
         </v-container>
         <!-- Aqui termina linea de todos los alumnos-->
-
         <v-col cols="3" v-for="career in careerOptions" :key="career">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
