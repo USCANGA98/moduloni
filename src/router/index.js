@@ -39,6 +39,13 @@ const routes = [
     beforeEnter: ifAuthenticated
   },
   {
+    path: "/director/detail-career",
+    name: "DetailCareer",
+    component: () =>
+      import(/* webpackChunkName: "admin" */ "../views/DetailCareer.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  {
     path: "/student",
     name: "Student",
     component: () =>
@@ -50,6 +57,21 @@ const routes = [
     name: "Graficos",
     component: () =>
       import(/* webpackChunkName: "admin" */ "../views/Graficos.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  {
+    path: "/director",
+    name: "Control-Estudiantes",
+    component: () =>
+      import(/* webpackChunkName: "admin" */ "../views/Control-Estudiantes.vue"),
+    beforeEnter: ifAuthenticated
+  }
+  ,
+  {
+    path: "/admin/nuevo-usuario",
+    name: "Agregar-Usuario",
+    component: () =>
+      import(/* webpackChunkName: "admin" */ "../views/Agregar-Usuario.vue"),
     beforeEnter: ifAuthenticated
   }
 ];

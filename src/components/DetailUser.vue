@@ -5,7 +5,6 @@
         <v-toolbar-title>Detalle alumno - {{ user.nombre }} </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn color="white" text @click="cerrar">Cerrar</v-btn>
-        <v-btn color="white" text @click="actualizar">Guardar Cambios </v-btn>
       </v-toolbar>
       <v-container>
         <v-row>
@@ -263,31 +262,29 @@
 </template>
 
 <script>
-
 export default {
   data: () => ({
     viewDocumentEdit: false,
-    itemData: {},
+    itemData: {}
   }),
-  
+
   name: "DetailUserComponent",
   props: {
     viewDetailUser: {
       type: Boolean,
-      required: true,
+      required: true
     },
     user: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   methods: {
     cerrar() {
       this.$emit("cerrar");
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

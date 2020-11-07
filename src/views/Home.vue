@@ -101,6 +101,15 @@ export default {
           console.log("accedió el estudiante");
           this.$router.push("/student");
         }
+        if (
+          this.userData.rol == "DirectorTi" ||
+          this.userData.rol == "DirectorQui" ||
+          this.userData.rol == "DirectorMeca" ||
+          this.userData.rol == "DirectorMantto"
+        ) {
+          console.log("accedió el director de carrera");
+          this.$router.push("/director");
+        }
       } catch (error) {
         console.warn(error);
       } finally {

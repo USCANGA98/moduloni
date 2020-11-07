@@ -53,21 +53,21 @@ import { db } from "../services/firebase";
 export default {
   name: "AddressComponent",
   components: {
-    edit: () => import("./DocumentEdit"),
+    edit: () => import("./DocumentEdit")
   },
   props: {
     viewDocuments: {
       type: Boolean,
-      required: true,
+      required: true
     },
     item: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   data: () => ({
     viewDocumentEdit: false,
-    itemData: {},
+    itemData: {}
   }),
   methods: {
     cerrar() {
@@ -90,7 +90,10 @@ export default {
       }
 
       try {
-        const response = await db.collection("users").doc(uid).set(this.item);
+        const response = await db
+          .collection("users")
+          .doc(uid)
+          .set(this.item);
         if (response == undefined) this.$emit("guardado");
       } catch (error) {
         console.warn(error);
@@ -105,10 +108,9 @@ export default {
         }
       }
       return aprobado;
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

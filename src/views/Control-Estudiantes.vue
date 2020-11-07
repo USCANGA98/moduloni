@@ -1,5 +1,3 @@
-import { mapMutations } from 'vuex';
-
 <template>
   <div>
     <v-container>
@@ -7,20 +5,8 @@ import { mapMutations } from 'vuex';
         <!-- Aqui empieza linea de todos los alumnos-->
         <v-container>
           <v-row>
-            <v-container class="text-right">
-              <v-btn
-                color="green"
-                rounded
-                dark
-                depressed
-                class="ma-2 mb-4 my-2"
-                @click="expand = !expand"
-              >
-                Buscar Alumno <v-icon right>mdi-account-search</v-icon>
-              </v-btn>
-            </v-container>
             <v-col cols="12">
-              <h2>Todas las carreras</h2>
+              <h2>Carreras</h2>
             </v-col>
             <v-text-field
               rounded
@@ -103,16 +89,21 @@ import { mapMutations } from 'vuex';
           <userModal
             v-if="viewDetailUser"
             :viewDetailUser="viewDetailUser"
-            :user="user"
+            :data="data"
             @cerrar="viewDetailUser = false"
           />
         </v-container>
         <!-- Aqui termina linea de todos los alumnos-->
-
-        <v-col cols="3" v-for="career in careerOptions" :key="career">
+        <!-- Aqui empieza renderizado condicional de directores de carrera TECNOLOGIAS-->
+        <v-col
+          cols="3"
+          v-for="career in careerOptionsTi"
+          :key="career"
+          v-show="user.rol === 'DirectorTi'"
+        >
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
-              :class="`elevation-${hover ? 20 : 1}`"
+              :class="`elevation-${hover ? 20 : 0}`"
               class="mx-auto transition-swing"
               @click="goDetailCareer(career)"
             >
@@ -128,6 +119,85 @@ import { mapMutations } from 'vuex';
             </v-card>
           </v-hover>
         </v-col>
+        <!-- Aqui termina renderizado condicional de directores de carrera TECNOLOGIAS-->
+        <!-- Aqui empieza renderizado condicional de directores de carrera QUIMICA-->
+        <v-col
+          cols="3"
+          v-for="career in careerOptionsQuimica"
+          :key="career"
+          v-show="user.rol === 'DirectorQui'"
+        >
+          <v-hover v-slot:default="{ hover }" open-delay="0">
+            <v-card
+              :class="`elevation-${hover ? 20 : 0}`"
+              class="mx-auto transition-swing"
+              @click="goDetailCareer(career)"
+            >
+              <v-img
+                src="../assets/utsv-logo.png"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+            </v-card>
+          </v-hover>
+        </v-col>
+        <!-- Aqui termina renderizado condicional de directores de carrera QUIMICA-->
+        <!-- Aqui empieza renderizado condicional de directores de carrera Mantenimiento Industrial-->
+        <v-col
+          cols="3"
+          v-for="career in careerOptionsMantto"
+          :key="career"
+          v-show="user.rol === 'DirectorMantto'"
+        >
+          <v-hover v-slot:default="{ hover }" open-delay="0">
+            <v-card
+              :class="`elevation-${hover ? 20 : 0}`"
+              class="mx-auto transition-swing"
+              @click="goDetailCareer(career)"
+            >
+              <v-img
+                src="../assets/utsv-logo.png"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+            </v-card>
+          </v-hover>
+        </v-col>
+        <!-- Aqui termina renderizado condicional de directores de carrera Mantenimiento Industrial-->
+        <!-- Aqui empieza renderizado condicional de directores de carrera Mecatronica-->
+        <v-col
+          cols="3"
+          v-for="career in careerOptionsMecatronica"
+          :key="career"
+          v-show="user.rol === 'DirectorMeca'"
+        >
+          <v-hover v-slot:default="{ hover }" open-delay="0">
+            <v-card
+              :class="`elevation-${hover ? 20 : 0}`"
+              class="mx-auto transition-swing"
+              @click="goDetailCareer(career)"
+            >
+              <v-img
+                src="../assets/utsv-logo.png"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+            </v-card>
+          </v-hover>
+        </v-col>
+        <!-- Aqui empieza renderizado condicional de directores de carrera Mecatronica-->
       </v-row>
     </v-container>
   </div>
@@ -159,7 +229,7 @@ export default {
     expand: false,
     items: [],
     item: {},
-    user: {},
+    data: {},
     search: "",
     estudiantes: [],
     headers: [
@@ -201,18 +271,24 @@ export default {
       }
     ],
 
-    careerOptions: [
+    careerOptionsTi: [
       "TSU Tecnologías de Información y Comunicación",
       "TSU Contaduría",
+      "Ingeniería en Tecnologías de la Información"
+    ],
+    careerOptionsMantto: [
       "TSU Mantenimiento Área Industrial",
-      "TSU Mecatrónica área Automatización",
-      "TSU Química Industrial",
       "TSU Mecánica área Automotriz",
+      "Ingeniería en Mantenimiento Industrial"
+    ],
+    careerOptionsMecatronica: [
+      "TSU Mecatrónica área Automatización",
+      "Ingeniería en Mecatrónica"
+    ],
+    careerOptionsQuimica: [
+      "TSU Química Industrial",
       "TSU Administración área Capital Humano",
       "TSU Energías Renovables",
-      "Ingeniería en Tecnologías de la Información",
-      "Ingeniería en Mantenimiento Industrial",
-      "Ingeniería en Mecatrónica",
       "Ingeniería Química"
     ]
   }),
@@ -220,7 +296,7 @@ export default {
     ...mapMutations(["setCareerSelected"]),
     goDetailCareer(career) {
       this.setCareerSelected(career);
-      this.$router.push("/admin/detail-career");
+      this.$router.push("/director/detail-career");
     },
 
     async guardado() {
@@ -237,7 +313,7 @@ export default {
       this.viewDocuments = true;
     },
     verUsuario(item) {
-      this.user = Object.assign({}, item);
+      this.data = Object.assign({}, item);
       this.viewDetailUser = true;
     },
     async getData() {
@@ -280,7 +356,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["careerSelected"])
+    ...mapState(["careerSelected", "user"])
   }
 };
 </script>
