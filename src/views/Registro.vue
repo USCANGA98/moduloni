@@ -2,7 +2,9 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h2 class="text-center">UNIVERSIDAD TECNOLÓGICA DEL SURESTE DE VERACRUZ</h2>
+        <h2 class="text-center">
+          UNIVERSIDAD TECNOLÓGICA DEL SURESTE DE VERACRUZ
+        </h2>
         <h3 class="text-center">Módulo para nuevo ingreso</h3>
       </v-col>
     </v-row>
@@ -281,7 +283,10 @@
                     color="info"
                     icon="mdi-information"
                     border="left"
-                  >Es importante que guarde los siguientes datos en un lugar seguro, ya que serán los accesos para que puedas ingresara a la plataforma y saber el status de tu trámite.</v-alert>
+                    >Es importante que guarde los siguientes datos en un lugar
+                    seguro, ya que serán los accesos para que puedas ingresara a
+                    la plataforma y saber el status de tu trámite.</v-alert
+                  >
                 </v-col>
                 <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
                   <v-text-field
@@ -348,10 +353,18 @@
               <h2 class="mb-5">Documentos</h2>
               <v-row>
                 <v-col cols="12">
-                  <v-alert text dense color="info" icon="mdi-information" border="left">
+                  <v-alert
+                    text
+                    dense
+                    color="info"
+                    icon="mdi-information"
+                    border="left"
+                  >
                     Adjunta la documentación en formato
-                    <strong>PDF</strong> o en imagen con buena calidad, con peso máximo de
-                    <strong>2 MB</strong>, en caso de no contar con la credencial de elector, subir una imagen con el texto "Credencial de elector en trámite".
+                    <strong>PDF</strong> o en imagen con buena calidad, con peso
+                    máximo de <strong>2 MB</strong>, en caso de no contar con la
+                    credencial de elector, subir una imagen con el texto
+                    "Credencial de elector en trámite".
                   </v-alert>
                 </v-col>
                 <v-col cols="6" md="4" class="ma-0 pt-0 pb-0">
@@ -462,11 +475,13 @@
 
     <v-row>
       <v-col cols="12">
-        <v-btn block large depressed color="green" dark @click="setInfo">Enviar información</v-btn>
+        <v-btn block large depressed color="green" dark @click="setInfo"
+          >Enviar información</v-btn
+        >
       </v-col>
     </v-row>
 
-    <v-snackbar v-model="snackbar" :timeout="timeout">{{text}}</v-snackbar>
+    <v-snackbar v-model="snackbar" :timeout="timeout">{{ text }}</v-snackbar>
 
     <v-overlay :value="overlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
@@ -492,7 +507,7 @@ export default {
     show1: false,
     show2: false,
     user: {
-      statusProceso: "En revisión",
+      statusProceso: "En revision",
       nombre: "",
       apellidoPaterno: "",
       apellidoMaterno: "",
@@ -508,7 +523,7 @@ export default {
         colonia: "",
         codigoPostal: "",
         estado: "",
-        ciudad: "",
+        ciudad: ""
       },
       escuelaProcedencia: "",
       carrera: "",
@@ -519,47 +534,47 @@ export default {
           name: "Acta de nacimiento",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado",
+          mensaje: "No ha sido revisado"
         },
         curp: {
           name: "CURP",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado",
+          mensaje: "No ha sido revisado"
         },
         comprobanteDomicilio: {
           name: "Comprobante de domicilio",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado",
+          mensaje: "No ha sido revisado"
         },
         certificadoPreparatoria: {
           name: "Certificado de preparatoria",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado",
+          mensaje: "No ha sido revisado"
         },
         credencialElector: {
           name: "Credencial de elector",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado",
+          mensaje: "No ha sido revisado"
         },
         fotografia: {
           name: "Fotografia",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado",
+          mensaje: "No ha sido revisado"
         },
         analisisVDRL: {
           name: "Analisis VDRL",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado",
-        },
+          mensaje: "No ha sido revisado"
+        }
       },
       rol: "Estudiante",
-      uid: "",
+      uid: ""
     },
     menu: false,
     sexOptions: ["Femenino", "Masculino", "No binario"],
@@ -575,23 +590,23 @@ export default {
       "Ingeniería en Tecnologías de la Información",
       "Ingeniería en Mantenimiento Industrial",
       "Ingeniería en Mecatrónica",
-      "Ingeniería Química",
+      "Ingeniería Química"
     ],
-    ruleRequired: [(v) => !!v || "Campo requerido"],
+    ruleRequired: [v => !!v || "Campo requerido"],
     rulePassword: [
-      (v) => !!v || "Campo requerido",
-      (v) =>
+      v => !!v || "Campo requerido",
+      v =>
         (v && v.length >= 6) ||
-        "La contraseña debe contener al menos 6 caracteres",
+        "La contraseña debe contener al menos 6 caracteres"
     ],
     ruleMail: [
-      (v) => !!v || "Campo requerido",
-      (v) => /.+@.+\..+/.test(v) || "Ingresa un correo válido",
+      v => !!v || "Campo requerido",
+      v => /.+@.+\..+/.test(v) || "Ingresa un correo válido"
     ],
     ruleDocument: [
-      (v) => !!v || "Campo requerido",
-      (v) => !v || v.size < 2000000 || "El archivo solo puede pesar 2 MB!",
-    ],
+      v => !!v || "Campo requerido",
+      v => !v || v.size < 2000000 || "El archivo solo puede pesar 2 MB!"
+    ]
   }),
   methods: {
     async createAccount() {
@@ -631,7 +646,10 @@ export default {
       console.log(this.user);
 
       try {
-        const response = await db.collection("users").doc(uid).set(this.user);
+        const response = await db
+          .collection("users")
+          .doc(uid)
+          .set(this.user);
         if (response == undefined) {
           alert(
             "Cuenta creada con exito!, puedes iniciar sesión para ver tu status"
@@ -664,31 +682,30 @@ export default {
       } catch (error) {
         console.warn(error);
       }
-    },
+    }
   },
   computed: {
     rulePasswordRepeat() {
       return [
-        (v) => {
+        v => {
           if (this.passwordRepeat == this.password) return true;
           if (this.password != this.passwordRepeat)
             return "Las contraseñas deben coincidir";
           if (v.length < 6)
             return "La contraseña debe contener al menos 6 caracteres";
-        },
+        }
       ];
     },
     ruleMailRepeat() {
       return [
-        (v) => {
+        v => {
           if (v == this.mail) return true;
           if (v != this.mail) return "Los correos deben coincidir";
-        },
+        }
       ];
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

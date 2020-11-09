@@ -78,11 +78,13 @@ import { mapMutations } from 'vuex';
                     >
                   </template>
 
-                  <template v-slot:item.actions="{ item }">
-                    <v-icon small class="mr-2" @click="editItem(item)"
-                      >mdi-pencil</v-icon
+                  <template v-slot:item.eliminarestudiante="{ item }">
+                    <v-btn
+                      icon
+                      color="red"
+                      @click="eliminarEstudiante(item.uid)"
+                      ><v-icon> mdi-delete </v-icon></v-btn
                     >
-                    <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
                   </template>
                 </v-data-table>
               </v-card>
@@ -197,6 +199,10 @@ export default {
       {
         text: "Detalle completo",
         value: "detalleCompleto"
+      },
+      {
+        text: "Eliminar Estudiante",
+        value: "eliminarestudiante"
       }
     ],
 
@@ -274,6 +280,19 @@ export default {
         console.warn(error);
       } finally {
         this.loading = false;
+      }
+    },
+    async eliminarEstudiante(uid) {
+      try {
+        const response = await db
+          .collection("users")
+          .doc(uid)
+          .delete();
+        console.log(response);
+        alert("Usuario eliminado correctamente");
+      } catch (error) {
+        console.log(error);
+        alert("No se pudo eliminar");
       }
     }
   },

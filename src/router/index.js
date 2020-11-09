@@ -40,7 +40,7 @@ const routes = [
   },
   {
     path: "/director/detail-career",
-    name: "DetailCareer",
+    name: "DetailCareerDirector",
     component: () =>
       import(/* webpackChunkName: "admin" */ "../views/DetailCareer.vue"),
     beforeEnter: ifAuthenticated
