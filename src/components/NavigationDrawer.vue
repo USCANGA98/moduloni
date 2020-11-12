@@ -162,8 +162,8 @@ export default {
     cerrarSesion() {
       auth
         .signOut()
-        .then(() => {
-          this.$router.replace("/");
+        .then(function() {
+          window.location.reload(true);
           // Sign-out successful.
         })
         .catch(error => {

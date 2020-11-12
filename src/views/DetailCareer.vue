@@ -141,12 +141,14 @@
       :user="user"
       @cerrar="viewDetailUser = false"
     />
+    <EliminarEstudiante :uid="uid" :dialog="dialog" @cancel="dialog = false" />
   </v-container>
 </template>
 
 <script>
 import { db } from "../services/firebase";
 import { mapState } from "vuex";
+import EliminarEstudiante from "../components/actions/EliminarEstudiante";
 
 export default {
   mounted() {
@@ -156,7 +158,8 @@ export default {
   components: {
     addressModal: () => import("../components/Address"),
     documentsModal: () => import("../components/Documents"),
-    userModal: () => import("../components/DetailUser")
+    userModal: () => import("../components/DetailUser"),
+    EliminarEstudiante
   },
   data: () => ({
     viewAddress: false,
@@ -167,6 +170,8 @@ export default {
     documents: {},
     items: [],
     item: {},
+    dialog: false,
+    uid: "",
     user: {},
     search: "",
     headers: [
@@ -246,17 +251,8 @@ export default {
       }
     },
     async eliminarEstudiante(uid) {
-      try {
-        const response = await db
-          .collection("users")
-          .doc(uid)
-          .delete();
-        console.log(response);
-        console.log("eliminado correctamente");
-      } catch (error) {
-        console.log(error);
-        alert("no se ha podido eliminar");
-      }
+      this.uid = uid;
+      this.dialog = true;
     }
   },
   computed: {
