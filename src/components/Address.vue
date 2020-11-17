@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="viewAddress" persistent max-width="600">
+  <v-dialog v-model="viewAddress" persistent max-width="750">
     <v-card>
       <v-toolbar dense flat color="green" dark>
         <v-toolbar-title>Detalle dirección alumno</v-toolbar-title>
@@ -8,7 +8,7 @@
         <v-row>
           <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
             <v-text-field
-              readonly
+              disabled
               outlined
               color="green"
               label="Calle"
@@ -19,7 +19,7 @@
           </v-col>
           <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
             <v-text-field
-              readonly
+              disabled
               outlined
               color="green"
               label="Número exterior"
@@ -33,7 +33,7 @@
           </v-col>
           <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
             <v-text-field
-              readonly
+              disabled
               outlined
               color="green"
               label="Número interior"
@@ -46,7 +46,7 @@
           </v-col>
           <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
             <v-text-field
-              readonly
+              disabled
               outlined
               color="green"
               label="Colonia"
@@ -57,7 +57,7 @@
           </v-col>
           <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
             <v-text-field
-              readonly
+              disabled
               outlined
               color="green"
               label="Código postal"
@@ -71,7 +71,7 @@
           </v-col>
           <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
             <v-text-field
-              readonly
+              disabled
               outlined
               color="green"
               label="Estado"
@@ -82,7 +82,7 @@
           </v-col>
           <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
             <v-text-field
-              readonly
+              disabled
               outlined
               color="green"
               label="Ciudad"
@@ -107,20 +107,19 @@ export default {
   props: {
     viewAddress: {
       type: Boolean,
-      required: true,
+      required: true
     },
     address: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   methods: {
     cerrar() {
       this.$emit("cerrar");
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

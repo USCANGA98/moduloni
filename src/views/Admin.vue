@@ -81,6 +81,7 @@ import { mapMutations } from 'vuex';
                   <template v-slot:item.eliminarestudiante="{ item }">
                     <v-btn
                       icon
+                      dark
                       color="red"
                       @click="eliminarEstudiante(item.uid)"
                       ><v-icon> mdi-delete </v-icon></v-btn
@@ -131,10 +132,12 @@ import { mapMutations } from 'vuex';
         </v-col>
       </v-row>
     </v-container>
+    <EliminarEstudiante :uid="uid" :dialog="dialog" @cancel="dialog = false" />
   </div>
 </template>
 
 <script>
+import EliminarEstudiante from "../components/actions/EliminarEstudiante";
 import { db } from "../services/firebase";
 import { mapState } from "vuex";
 import { mapMutations } from "vuex";
@@ -148,7 +151,8 @@ export default {
   components: {
     addressModal: () => import("../components/Address"),
     documentsModal: () => import("../components/Documents"),
-    userModal: () => import("../components/DetailUser")
+    userModal: () => import("../components/DetailUser"),
+    EliminarEstudiante
   },
   data: () => ({
     viewAddress: false,
@@ -161,6 +165,8 @@ export default {
     items: [],
     item: {},
     user: {},
+    dialog: false,
+    uid: "",
     search: "",
     estudiantes: [],
     headers: [
@@ -283,17 +289,8 @@ export default {
       }
     },
     async eliminarEstudiante(uid) {
-      try {
-        const response = await db
-          .collection("users")
-          .doc(uid)
-          .delete();
-        console.log(response);
-        alert("Usuario eliminado correctamente");
-      } catch (error) {
-        console.log(error);
-        alert("No se pudo eliminar");
-      }
+      this.uid = uid;
+      this.dialog = true;
     }
   },
 

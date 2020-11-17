@@ -2,45 +2,91 @@
   <div>
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <!-- Condicion de renderizado para asignar un tipo de drawer a un tipo de usuario en este caso "admin" -->
-      <v-layout mt-4 column class="align-center" v-if="user.rol === 'admin'">
-        <v-flex>
-          <div>
-            <v-img
-              max-height="70"
-              max-width="100"
-              src="../assets/utsv-logo.png"
-            ></v-img>
-          </div>
-        </v-flex>
+      <v-layout mt-2 class="align-center" v-if="user.rol === 'admin'">
+        <v-menu bottom min-width="200px" rounded offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn class="ml-2" fab elevation="0" color="#fff" v-on="on">
+              <v-avatar size="65">
+                <v-img src="../assets/utsv-logo.png"></v-img>
+              </v-avatar>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-list-item-content class="justify-center">
+              <div class="mx-auto text-center">
+                <v-avatar size="70">
+                  <v-img src="../assets/utsv-logo.png"></v-img>
+                </v-avatar>
+                <h3>{{ user.nombre }}</h3>
+                <p class="caption mt-1">
+                  {{ user.rol }}
+                  <v-icon color="green" right> mdi mdi-check-decagram</v-icon>
+                </p>
+                <v-divider class="my-3"></v-divider>
+                <v-btn depressed rounded text>
+                  Edit Account
+                </v-btn>
+                <v-divider class="my-3"></v-divider>
+                <v-btn @click="cerrarSesion()" depressed rounded text>
+                  Cerrar Sesión
+                </v-btn>
+              </div>
+            </v-list-item-content>
+          </v-card>
+        </v-menu>
 
-        <v-flex>
-          <v-toolbar-title class="dark--text mt-3 title">{{
-            user.nombre
-          }}</v-toolbar-title>
-        </v-flex>
+        <v-list>
+          <v-list-item-content>
+            <v-list-item-title class="title ml-3"
+              >{{ user.nombre }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list>
       </v-layout>
       <!-- Condicion de renderizado para "Estudiante" -->
-      <v-layout
-        mt-4
-        column
-        class="align-center"
-        v-if="user.rol === 'Estudiante'"
-      >
-        <v-flex>
-          <v-avatar>
-            <v-img src="../assets/user.png"></v-img>
-          </v-avatar>
-        </v-flex>
-        <v-flex>
-          <v-toolbar-title class="dark--text mt-3 title">{{
-            user.nombre
-          }}</v-toolbar-title>
-        </v-flex>
+      <v-layout class="align-center" link v-if="user.rol === 'Estudiante'">
+        <v-menu bottom min-width="200px" rounded offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn class="ml-2" fab elevation="0" color="#fff" v-on="on">
+              <v-avatar size="60">
+                <v-img src="../assets/user.png"></v-img>
+              </v-avatar>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-list-item-content class="justify-center">
+              <div class="mx-auto text-center">
+                <v-avatar size="70">
+                  <v-img src="../assets/user.png"></v-img>
+                </v-avatar>
+                <h3>{{ user.nombre }}</h3>
+                <p class="caption mt-1">
+                  {{ user.rol }}
+                  <v-icon color="green" left> mdi mdi-circle-medium</v-icon>
+                </p>
+                <v-divider class="my-3"></v-divider>
+                <v-btn depressed rounded text>
+                  Edit Account
+                </v-btn>
+                <v-divider class="my-3"></v-divider>
+                <v-btn @click="cerrarSesion()" depressed rounded text>
+                  Cerrar Sesión
+                </v-btn>
+              </div>
+            </v-list-item-content>
+          </v-card>
+        </v-menu>
+        <v-list>
+          <v-list-item-content>
+            <v-list-item-title class="title ml-4"
+              >{{ user.nombre }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list>
       </v-layout>
       <!-- Condicion de renderizado para "director"-->
       <v-layout
-        mt-4
-        column
+        mt-2
         class="align-center"
         v-if="
           user.rol === 'DirectorTi' ||
@@ -49,25 +95,50 @@
             user.rol === 'DirectorMantto'
         "
       >
-        <v-flex>
-          <div>
-            <v-img
-              max-height="70"
-              max-width="100"
-              src="../assets/utsv-logo.png"
-            ></v-img>
-          </div>
-        </v-flex>
-        <v-flex>
-          <v-toolbar-title class="dark--text mt-3 title"
-            >{{ user.rol }}&nbsp;{{ user.nombre }}</v-toolbar-title
-          >
-        </v-flex>
+        <v-menu bottom min-width="200px" rounded offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn class="ml-2" fab elevation="0" color="#fff" v-on="on">
+              <v-avatar size="65">
+                <v-img src="../assets/utsv-logo.png"></v-img>
+              </v-avatar>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-list-item-content class="justify-center">
+              <div class="mx-auto text-center">
+                <v-avatar size="70">
+                  <v-img src="../assets/utsv-logo.png"></v-img>
+                </v-avatar>
+                <h3>{{ user.nombre }}</h3>
+                <p class="caption mt-1">
+                  {{ user.rol }}
+                  <v-icon color="green" right> mdi mdi-check-decagram</v-icon>
+                </p>
+                <v-divider class="my-3"></v-divider>
+                <v-btn depressed rounded text>
+                  Edit Account
+                </v-btn>
+                <v-divider class="my-3"></v-divider>
+                <v-btn @click="cerrarSesion()" depressed rounded text>
+                  Cerrar Sesión
+                </v-btn>
+              </div>
+            </v-list-item-content>
+          </v-card>
+        </v-menu>
+
+        <v-list>
+          <v-list-item-content>
+            <v-list-item-title class="title ml-4"
+              >{{ user.nombre }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list>
       </v-layout>
       <v-divider></v-divider>
       <!-- Items renderizados de "admin"-->
       <div>
-        <v-list dense v-if="user.rol === 'admin'">
+        <v-list dense nav v-if="user.rol === 'admin'">
           <v-list-item
             v-for="items in itemsAdmin"
             :key="items.title"
@@ -85,7 +156,7 @@
           </v-list-item>
         </v-list>
         <!-- Items renderizados de "Estudiante"-->
-        <v-list dense v-if="user.rol === 'Estudiante'">
+        <v-list dense nav v-if="user.rol === 'Estudiante'">
           <v-list-item
             v-for="items in itemsStudent"
             :key="items.title"
@@ -105,6 +176,7 @@
         <!--Renderizado para "director"-->
         <v-list
           dense
+          nav
           v-if="
             user.rol === 'DirectorTi' ||
               user.rol === 'DirectorQui' ||
@@ -128,21 +200,6 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-        <div>
-          <v-btn
-            @click="cerrarSesion()"
-            type="button"
-            class="v-btn--block v-btn--depressed v-btn--flat "
-            style="color: rgb(254, 5, 69); caret-color: rgb(254, 5, 69)"
-          >
-            <span>
-              <i
-                class="v-icon notranslate v-icon--left mdi mdi-account-arrow-left theme--light"
-              ></i>
-              Cerrar Sesion
-            </span>
-          </v-btn>
-        </div>
       </div>
     </v-navigation-drawer>
   </div>

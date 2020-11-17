@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="viewDocuments" persistent max-width="600">
+  <v-dialog v-model="viewDocuments" persistent max-width="750">
     <v-card>
       <v-toolbar dense flat color="green" dark>
         <v-toolbar-title>Documentos</v-toolbar-title>

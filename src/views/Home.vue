@@ -8,15 +8,56 @@
         <h3 class="text-center">Módulo para nuevo ingreso</h3>
       </v-col>
     </v-row>
-    <v-row class="d-flex justify-center mt-13">
+    <v-row class="d-flex justify-center">
       <v-col cols="12" md="4">
-        <v-card>
+        <v-card elevation="12">
           <v-row class="ma-0 pa-0">
             <v-col cols="12" class="d-flex justify-center pa-0 ma-0">
               <v-avatar size="150">
                 <v-img src="../assets/utsv-logo.png"></v-img>
               </v-avatar>
             </v-col>
+            <v-container class="justify-center d-flex pa-0 ma-0">
+              <v-hover v-slot:default="{ hover }" open-delay="0">
+                <v-btn
+                  href="https://www.facebook.com/UTSV1/"
+                  class="mx-1"
+                  :class="`elevation-${hover ? 10 : 0}`"
+                  color="#fff"
+                  outlined
+                  fab
+                  ><v-icon color="blue-grey darken-2"
+                    >mdi mdi-facebook</v-icon
+                  ></v-btn
+                >
+              </v-hover>
+              <v-hover v-slot:default="{ hover }" open-delay="0">
+                <v-btn
+                  href="https://twitter.com/UTSV1"
+                  class="mx-1"
+                  :class="`elevation-${hover ? 10 : 0}`"
+                  color="#fff"
+                  outlined
+                  fab
+                  ><v-icon color="blue-grey darken-2"
+                    >mdi mdi-twitter</v-icon
+                  ></v-btn
+                >
+              </v-hover>
+              <v-hover v-slot:default="{ hover }" open-delay="0">
+                <v-btn
+                  href="https://www.youtube.com/channel/UCROW9bCyFzCL7lKw1JuFZnA"
+                  class="mx-1"
+                  :class="`elevation-${hover ? 10 : 0}`"
+                  color="#fff"
+                  outlined
+                  fab
+                  ><v-icon color="blue-grey darken-2"
+                    >mdi mdi-youtube</v-icon
+                  ></v-btn
+                >
+              </v-hover>
+            </v-container>
             <v-col cols="12" v-if="error != ''">
               <v-alert outlined type="error" text dense>{{ error }}</v-alert>
             </v-col>
@@ -29,7 +70,6 @@
               v-model="user.mail"
               color="green"
               label="Usuario"
-              placeholder="Ingresa tu usuario"
               required
               @keyup.enter="iniciarSesion"
             ></v-text-field>
@@ -40,13 +80,13 @@
               color="green"
               label="Contraseña"
               type="password"
-              placeholder="Ingresa tu contraseña"
               required
               @keyup.enter="iniciarSesion"
             ></v-text-field>
             <v-btn
               class="mb-0"
               block
+              rounded
               color="green"
               dark
               depressed

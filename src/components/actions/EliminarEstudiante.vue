@@ -1,11 +1,11 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="290">
+    <v-dialog v-model="dialog" persistent max-width="500">
       <v-card>
         <v-card-title class="headline">
-          ¿Esta seguro de que desea eliminar a este usuario?
+          Está a punto de eliminar a este usuario
         </v-card-title>
-
+        <v-card-text>Esta acción es irreversible</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" text @click="$emit('cancel')">

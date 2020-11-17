@@ -14,10 +14,6 @@
 
       <v-spacer></v-spacer>
 
-      <v-toolbar-title>UTSV</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
       <v-btn icon>
         <v-icon>mdi-google-translate</v-icon>
         ES
