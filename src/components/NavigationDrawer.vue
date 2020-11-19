@@ -22,9 +22,15 @@
                   {{ user.rol }}
                   <v-icon color="green" right> mdi mdi-check-decagram</v-icon>
                 </p>
-                <v-divider class="my-3"></v-divider>
-                <v-btn depressed rounded text>
-                  Edit Account
+                <v-divider v-if="user.rol != 'admin'" class="my-3"></v-divider>
+                <v-btn
+                  v-if="user.rol != 'admin'"
+                  @click="perfil()"
+                  depressed
+                  rounded
+                  text
+                >
+                  Ver tu perfil
                 </v-btn>
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="cerrarSesion()" depressed rounded text>
@@ -65,8 +71,8 @@
                   <v-icon color="green" left> mdi mdi-circle-medium</v-icon>
                 </p>
                 <v-divider class="my-3"></v-divider>
-                <v-btn depressed rounded text>
-                  Edit Account
+                <v-btn @click="perfil()" depressed rounded text>
+                  Ver tu perfil
                 </v-btn>
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="cerrarSesion()" depressed rounded text>
@@ -115,8 +121,8 @@
                   <v-icon color="green" right> mdi mdi-check-decagram</v-icon>
                 </p>
                 <v-divider class="my-3"></v-divider>
-                <v-btn depressed rounded text>
-                  Edit Account
+                <v-btn @click="perfil()" depressed rounded text>
+                  Ver tu perfil
                 </v-btn>
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="cerrarSesion()" depressed rounded text>
@@ -227,6 +233,9 @@ export default {
           // An error happened.
           console.log(error);
         });
+    },
+    perfil() {
+      this.$router.push("/perfil");
     }
   },
   data() {
@@ -243,12 +252,18 @@ export default {
           path: "/admin/graficos"
         },
         {
-          title: "Nuevo Usuario",
-          icon: "mdi-account-plus",
+          title: "Agregar Director",
+          icon: "mdi-account-circle",
           path: "/admin/nuevo-usuario"
         }
       ],
-      itemsStudent: "",
+      itemsStudent: [
+        {
+          title: "Seguimiento",
+          icon: "mdi-clipboard-account-outline",
+          path: "/student"
+        }
+      ],
       itemsDirect: [
         {
           title: "Panel",

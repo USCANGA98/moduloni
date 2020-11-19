@@ -277,15 +277,10 @@
               <h2 class="mb-5">Cuenta</h2>
               <v-row>
                 <v-col cols="12">
-                  <v-alert
-                    text
-                    dense
-                    color="info"
-                    icon="mdi-information"
-                    border="left"
+                  <v-alert text dense color="info" type="info" border="left"
                     >Es importante que guarde los siguientes datos en un lugar
                     seguro, ya que serán los accesos para que puedas ingresara a
-                    la plataforma y saber el status de tu trámite.</v-alert
+                    la plataforma y saber el status de su trámite.</v-alert
                   >
                 </v-col>
                 <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
@@ -356,7 +351,7 @@
                   <v-alert
                     text
                     dense
-                    color="info"
+                    type="info"
                     icon="mdi-information"
                     border="left"
                   >

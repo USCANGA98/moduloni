@@ -73,6 +73,13 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "admin" */ "../views/Agregar-Usuario.vue"),
     beforeEnter: ifAuthenticated
+  },
+  {
+    path: "/perfil",
+    name: "Perfil",
+    component: () =>
+      import(/* webpackChunkName: "admin" */ "../views/Perfil.vue"),
+    beforeEnter: ifAuthenticated
   }
 ];
 

@@ -116,18 +116,6 @@
             <v-container>
               <h2 class="mb-5">Cuenta</h2>
               <v-row>
-                <v-col cols="12">
-                  <v-alert
-                    text
-                    dense
-                    color="info"
-                    icon="mdi-information"
-                    border="left"
-                    >Es importante que guarde los siguientes datos en un lugar
-                    seguro, ya que serán los accesos para que puedas ingresara a
-                    la plataforma y saber el status de tu trámite.</v-alert
-                  >
-                </v-col>
                 <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
                   <v-text-field
                     outlined
@@ -282,9 +270,7 @@ export default {
           .doc(uid)
           .set(this.user);
         if (response == undefined) {
-          alert(
-            "Cuenta creada con exito!, puedes iniciar sesión para ver tu status"
-          );
+          alert("Cuenta creada con exito!");
           console.log(response);
           this.$router.push("/admin");
         }
