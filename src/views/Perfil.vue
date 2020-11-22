@@ -38,6 +38,7 @@
                       </v-col>
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
                         <v-text-field
+                          disabled
                           outlined
                           color="green"
                           label="Correo electrónico"
@@ -147,19 +148,6 @@
                         <v-text-field
                           outlined
                           color="green"
-                          label="Número exterior"
-                          placeholder="Ingresa el número exterior"
-                          type="number"
-                          min="0"
-                          max="99999"
-                          dense
-                          v-model="user.direccion.numeroExterior"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
                           label="Número interior"
                           placeholder="Ingresa número interior"
                           type="number"
@@ -214,6 +202,16 @@
                       </v-col>
                     </v-row>
                   </v-container>
+                  <v-card-actions class="justify-right">
+                    <v-container class="text-right">
+                      <v-btn
+                        rounded
+                        @click="actualizarPerfilAlumno(user)"
+                        color="success"
+                        >Guardar Cambios</v-btn
+                      >
+                    </v-container>
+                  </v-card-actions>
                 </v-card>
               </v-expand-transition>
             </v-col>
@@ -267,6 +265,7 @@
                     </v-col>
                     <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
                       <v-text-field
+                        disabled
                         outlined
                         color="green"
                         label="Correo electrónico"
@@ -300,6 +299,16 @@
                     </v-col>
                   </v-row>
                 </v-container>
+                <v-card-actions>
+                  <v-container class="text-right">
+                    <v-btn
+                      rounded
+                      @click="actualizarPerfilDirector(user)"
+                      color="success"
+                      >Guardar Cambios</v-btn
+                    >
+                  </v-container>
+                </v-card-actions>
               </v-card>
             </v-col>
           </v-row>
@@ -349,6 +358,62 @@ export default {
       } catch (error) {
         console.warn(error);
       }
+    },
+    async actualizarPerfilAlumno(user) {
+      const uid = user.uid;
+
+      const response = await db.collection("users").doc(uid);
+
+      // Set the "capital" field of the city 'DC'
+      return response
+        .update({
+          nombre: user.nombre,
+          apellidoPaterno: user.apellidoPaterno,
+          apellidoMaterno: user.apellidoMaterno,
+          fechaNacimiento: user.fechaNacimiento,
+          edad: user.edad,
+          sexo: user.sexo,
+          numeroSeguroSocial: user.numeroSeguroSocial,
+          tutor: user.tutor,
+          direccion: {
+            calle: user.direccion.calle,
+            ciudad: user.direccion.ciudad,
+            codigoPostal: user.direccion.codigoPostal,
+            colonia: user.direccion.colonia,
+            estado: user.direccion.estado,
+            numeroExterior: user.direccion.numeroExterior,
+            numeroInterior: user.direccion.numeroInterior
+          }
+        })
+        .then(function() {
+          alert("Documento Actualizado Correctamente!");
+        })
+        .catch(function(error) {
+          // The document probably doesn't exist.
+          alert("Ocurrió un error", error);
+        });
+    },
+    async actualizarPerfilDirector(user) {
+      const uid = user.uid;
+
+      const response = await db.collection("users").doc(uid);
+
+      // Set the "capital" field of the city 'DC'
+      return response
+        .update({
+          nombre: user.nombre,
+          apellidoPaterno: user.apellidoPaterno,
+          apellidoMaterno: user.apellidoMaterno,
+          fechaNacimiento: user.fechaNacimiento,
+          edad: user.edad
+        })
+        .then(function() {
+          alert("Documento Actualizado Correctamente!");
+        })
+        .catch(function(error) {
+          // The document probably doesn't exist.
+          alert("Ocurrió un error", error);
+        });
     }
   },
   computed: {

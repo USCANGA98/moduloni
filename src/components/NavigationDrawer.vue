@@ -30,7 +30,7 @@
                   rounded
                   text
                 >
-                  Ver tu perfil
+                  Editar Cuenta
                 </v-btn>
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="cerrarSesion()" depressed rounded text>
@@ -54,7 +54,7 @@
         <v-menu bottom min-width="200px" rounded offset-y>
           <template v-slot:activator="{ on }">
             <v-btn class="ml-2" fab elevation="0" color="#fff" v-on="on">
-              <v-avatar size="60">
+              <v-avatar size="55">
                 <v-img src="../assets/user.png"></v-img>
               </v-avatar>
             </v-btn>
@@ -67,12 +67,12 @@
                 </v-avatar>
                 <h3>{{ user.nombre }}</h3>
                 <p class="caption mt-1">
-                  {{ user.rol }}
+                  {{ user.correoElectronico }}
                   <v-icon color="green" left> mdi mdi-circle-medium</v-icon>
                 </p>
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="perfil()" depressed rounded text>
-                  Ver tu perfil
+                  Editar Cuenta
                 </v-btn>
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="cerrarSesion()" depressed rounded text>
@@ -122,7 +122,7 @@
                 </p>
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="perfil()" depressed rounded text>
-                  Ver tu perfil
+                  Editar Cuenta
                 </v-btn>
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="cerrarSesion()" depressed rounded text>

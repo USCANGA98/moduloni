@@ -18,9 +18,10 @@
                   type="info"
                   icon="mdi-account-circle"
                   border="top"
-                  elevation="8"
-                  >Bienvenido {{ user.nombre }}, podrás actualizar tus
-                  documentos hasta que el 'Status' haya cambiado a 'Aprobado'.
+                  ><h4>
+                    Bienvenido(a) {{ user.nombre }}, podrás actualizar tus
+                    documentos hasta que el 'Status' haya cambiado a 'Aprobado'.
+                  </h4>
                 </v-alert>
                 <v-btn
                   rounded
@@ -41,8 +42,8 @@
                   elevation="5"
                 >
                   <v-container>
-                    <v-alert text dismissible dense type="info" border="left"
-                      >Tu informacion es de carácter sensible, no compartas tu
+                    <v-alert text dense type="info" border="left"
+                      >Tu información es de carácter sensible, no compartas tu
                       usuario y contraseña.
                     </v-alert>
                     <h2 class="mb-5">Datos personales</h2>

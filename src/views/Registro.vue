@@ -623,7 +623,8 @@ export default {
     },
     async setInfo() {
       if (!this.$refs.form.validate()) {
-        this.text = "Faltan campos por llenar y/o estan mal llenados.";
+        this.text =
+          "Faltan campos por llenar y/o la información es incorrecta.";
         this.snackbar = true;
       }
 

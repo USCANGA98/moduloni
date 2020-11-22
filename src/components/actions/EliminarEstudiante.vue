@@ -41,6 +41,7 @@ export default {
           .delete();
         console.log(response);
         alert("eliminado correctamente");
+
         this.$emit("cancel");
       } catch (error) {
         console.log(error);
