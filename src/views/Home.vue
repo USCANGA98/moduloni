@@ -102,14 +102,6 @@
                   >Crear cuenta</router-link
                 >
               </v-col>
-              <v-col cols="12" class="d-flex justify-end pt-0">
-                <router-link
-                  class="enlace blue--text text-subtitle-2"
-                  to="/recuperarContraseña"
-                >
-                  ¿Olvidaste tu contraseña?
-                </router-link>
-              </v-col>
             </v-row>
           </v-form>
         </v-card>

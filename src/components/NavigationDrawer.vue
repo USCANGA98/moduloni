@@ -144,7 +144,7 @@
       <v-divider></v-divider>
       <!-- Items renderizados de "admin"-->
       <div>
-        <v-list dense nav v-if="user.rol === 'admin'">
+        <v-list shaped v-if="user.rol === 'admin'">
           <v-list-item
             v-for="items in itemsAdmin"
             :key="items.title"
@@ -157,12 +157,12 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-icon>{{ items.title }} </v-list-item-icon>
+              <v-list-item-title>{{ items.title }} </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
         <!-- Items renderizados de "Estudiante"-->
-        <v-list dense nav v-if="user.rol === 'Estudiante'">
+        <v-list shaped v-if="user.rol === 'Estudiante'">
           <v-list-item
             v-for="items in itemsStudent"
             :key="items.title"
@@ -175,14 +175,13 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-icon>{{ items.title }} </v-list-item-icon>
+              <v-list-item-title>{{ items.title }} </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
         <!--Renderizado para "director"-->
         <v-list
-          dense
-          nav
+          shaped
           v-if="
             user.rol === 'DirectorTi' ||
               user.rol === 'DirectorQui' ||
@@ -202,7 +201,7 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-icon>{{ items.title }} </v-list-item-icon>
+              <v-list-item-title>{{ items.title }} </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>

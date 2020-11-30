@@ -20,7 +20,7 @@
   </v-row>
 </template>
 <script>
-import { db } from "../../services/firebase";
+import { db, storage } from "../../services/firebase";
 export default {
   props: {
     dialog: {
@@ -40,13 +40,31 @@ export default {
           .doc(this.uid)
           .delete();
         console.log(response);
-        alert("eliminado correctamente");
+        alert("Eliminado correctamente de Firestore");
 
         this.$emit("cancel");
       } catch (error) {
         console.log(error);
-        alert("no se ha podido eliminar");
+        alert("No se ha podido eliminar de Firestore");
       }
+    },
+    async eliminarDocumento() {
+      const uid = this.user.uid;
+      let extension = this.user.documents[document].url.name.split(".")[1];
+      let storageRef = await storage.child(`${uid}/${document}.${extension}`);
+
+      // Delete the file
+      storageRef
+        .delete()
+        .then(function() {
+          // File deleted successfully
+          alert("Eliminado de Storage");
+        })
+        .catch(function(error) {
+          // Uh-oh, an error occurred!
+          console.log(error);
+          alert("No se pudo eliminar de Storage");
+        });
     }
   }
 };
