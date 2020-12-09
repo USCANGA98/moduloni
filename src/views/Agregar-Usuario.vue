@@ -93,7 +93,7 @@
                     dense
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" md="4" class=" ma-0 pt-0 pb-0">
+                <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
                   <v-select
                     outlined
                     color="green"
@@ -214,21 +214,21 @@ export default {
       fechaNacimiento: "",
       edad: "",
       rol: "",
-      uid: ""
+      uid: "",
     },
     menu: false,
     rolOptions: ["DirectorTi", "DirectorMeca", "DirectorQui", "DirectorMantto"],
-    ruleRequired: [v => !!v || "Campo requerido"],
+    ruleRequired: [(v) => !!v || "Campo requerido"],
     rulePassword: [
-      v => !!v || "Campo requerido",
-      v =>
+      (v) => !!v || "Campo requerido",
+      (v) =>
         (v && v.length >= 6) ||
-        "La contraseña debe contener al menos 6 caracteres"
+        "La contraseña debe contener al menos 6 caracteres",
     ],
     ruleMail: [
-      v => !!v || "Campo requerido",
-      v => /.+@.+\..+/.test(v) || "Ingresa un correo válido"
-    ]
+      (v) => !!v || "Campo requerido",
+      (v) => /.+@.+\..+/.test(v) || "Ingresa un correo válido",
+    ],
   }),
   methods: {
     async createAccount() {
@@ -265,10 +265,7 @@ export default {
       console.log(this.user);
 
       try {
-        const response = await db
-          .collection("users")
-          .doc(uid)
-          .set(this.user);
+        const response = await db.collection("users").doc(uid).set(this.user);
         if (response == undefined) {
           alert("Cuenta creada con exito!");
           console.log(response);
@@ -300,29 +297,29 @@ export default {
       } catch (error) {
         console.warn(error);
       }
-    }
+    },
   },
   computed: {
     rulePasswordRepeat() {
       return [
-        v => {
+        (v) => {
           if (this.passwordRepeat == this.password) return true;
           if (this.password != this.passwordRepeat)
             return "Las contraseñas deben coincidir";
           if (v.length < 6)
             return "La contraseña debe contener al menos 6 caracteres";
-        }
+        },
       ];
     },
     ruleMailRepeat() {
       return [
-        v => {
+        (v) => {
           if (v == this.mail) return true;
           if (v != this.mail) return "Los correos deben coincidir";
-        }
+        },
       ];
-    }
-  }
+    },
+  },
 };
 </script>
 

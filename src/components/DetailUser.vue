@@ -265,25 +265,25 @@
 export default {
   data: () => ({
     viewDocumentEdit: false,
-    itemData: {}
+    itemData: {},
   }),
 
   name: "DetailUserComponent",
   props: {
     viewDetailUser: {
       type: Boolean,
-      required: true
+      required: true,
     },
     user: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     cerrar() {
       this.$emit("cerrar");
-    }
-  }
+    },
+  },
 };
 </script>
 

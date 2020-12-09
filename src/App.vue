@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <BarraNavegacion v-if="$route.path != '/' && $route.path != '/registro'" />
+    <!-- <BarraNavegacion v-if="$route.path != '/' && $route.path != '/registro'" /> -->
+    <NavigationDrawer v-if="$route.path != '/' && $route.path != '/registro'"/>
     <v-main class="grey lighten-5">
       <router-view></router-view>
     </v-main>
@@ -8,14 +9,16 @@
 </template>
 
 <script>
-import BarraNavegacion from "./components/BarraNavegacion";
+// import BarraNavegacion from "./components/BarraNavegacion";
+import NavigationDrawer from "./components/NavigationDrawer"
 
 export default {
   name: "App",
   mounted() {},
 
   components: {
-    BarraNavegacion
+    // BarraNavegacion,
+    NavigationDrawer
   },
 
   data: () => ({

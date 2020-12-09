@@ -1,12 +1,19 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" absolute temporary>
+    <v-navigation-drawer
+      v-model="drawer"
+      expand-on-hover
+      absolute
+      permanent
+      floating
+      navigation-drawer-temporary-elevation
+    >
       <!-- Condicion de renderizado para asignar un tipo de drawer a un tipo de usuario en este caso "admin" -->
       <v-layout mt-2 class="align-center" v-if="user.rol === 'admin'">
         <v-menu bottom min-width="200px" rounded offset-y>
           <template v-slot:activator="{ on }">
-            <v-btn class="ml-2" fab elevation="0" color="#fff" v-on="on">
-              <v-avatar size="65">
+            <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
+              <v-avatar size="55">
                 <v-img src="../assets/utsv-logo.png"></v-img>
               </v-avatar>
             </v-btn>
@@ -53,8 +60,8 @@
       <v-layout class="align-center" link v-if="user.rol === 'Estudiante'">
         <v-menu bottom min-width="200px" rounded offset-y>
           <template v-slot:activator="{ on }">
-            <v-btn class="ml-2" fab elevation="0" color="#fff" v-on="on">
-              <v-avatar size="55">
+            <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
+              <v-avatar size="48">
                 <v-img src="../assets/user.png"></v-img>
               </v-avatar>
             </v-btn>
@@ -96,15 +103,15 @@
         class="align-center"
         v-if="
           user.rol === 'DirectorTi' ||
-            user.rol === 'DirectorQui' ||
-            user.rol === 'DirectorMeca' ||
-            user.rol === 'DirectorMantto'
+          user.rol === 'DirectorQui' ||
+          user.rol === 'DirectorMeca' ||
+          user.rol === 'DirectorMantto'
         "
       >
         <v-menu bottom min-width="200px" rounded offset-y>
           <template v-slot:activator="{ on }">
-            <v-btn class="ml-2" fab elevation="0" color="#fff" v-on="on">
-              <v-avatar size="65">
+            <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
+              <v-avatar size="55">
                 <v-img src="../assets/utsv-logo.png"></v-img>
               </v-avatar>
             </v-btn>
@@ -184,9 +191,9 @@
           shaped
           v-if="
             user.rol === 'DirectorTi' ||
-              user.rol === 'DirectorQui' ||
-              user.rol === 'DirectorMeca' ||
-              user.rol === 'DirectorMantto'
+            user.rol === 'DirectorQui' ||
+            user.rol === 'DirectorMeca' ||
+            user.rol === 'DirectorMantto'
           "
         >
           <v-list-item
@@ -217,25 +224,25 @@ export default {
   name: "NavigationDrawerComponent",
   props: {
     drawer: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   methods: {
     cerrarSesion() {
       auth
         .signOut()
-        .then(function() {
+        .then(function () {
           window.location.reload(true);
           // Sign-out successful.
         })
-        .catch(error => {
+        .catch((error) => {
           // An error happened.
           console.log(error);
         });
     },
     perfil() {
       this.$router.push("/perfil");
-    }
+    },
   },
   data() {
     return {
@@ -243,44 +250,44 @@ export default {
         {
           title: "Panel",
           icon: "mdi-view-dashboard",
-          path: "/admin"
+          path: "/admin",
         },
         {
           title: "Graficas",
           icon: "mdi-chart-areaspline",
-          path: "/admin/graficos"
+          path: "/admin/graficos",
         },
         {
           title: "Agregar Director",
           icon: "mdi-account-circle",
-          path: "/admin/nuevo-usuario"
-        }
+          path: "/admin/nuevo-usuario",
+        },
       ],
       itemsStudent: [
         {
           title: "Seguimiento",
           icon: "mdi-clipboard-account-outline",
-          path: "/student"
-        }
+          path: "/student",
+        },
       ],
       itemsDirect: [
         {
           title: "Panel",
           icon: "mdi-view-dashboard",
-          path: "/director"
-        }
-      ]
+          path: "/director",
+        },
+      ],
     };
   },
   computed: {
-    ...mapState(["user"])
+    ...mapState(["user"]),
   },
 
   watch: {
-    drawer: function() {
+    drawer: function () {
       if (!this.drawer) this.$emit("cerrar");
-    }
-  }
+    },
+  },
 };
 </script>
 

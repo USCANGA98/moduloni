@@ -13,21 +13,21 @@
             <v-col cols="12">
               <v-container class="text-left">
                 <v-alert
-                  dismissible
-                  prominent
+                  colored-border
                   type="info"
                   icon="mdi-account-circle"
-                  border="top"
-                  ><h4>
-                    Bienvenido(a) {{ user.nombre }}, podrás actualizar tus
-                    documentos hasta que el 'Status' haya cambiado a 'Aprobado'.
-                  </h4>
+                  border="bottom"
+                  elevation="2"
+                >
+                  Bienvenido(a) {{ user.nombre }}, podrás actualizar tus
+                  documentos hasta que el 'Status' haya cambiado a 'Aprobado'.
                 </v-alert>
                 <v-btn
                   rounded
                   depressed
                   class="ma-2 mb-4 my-2"
                   color="info"
+                  elevation="2"
                   dark
                   @click="expand = !expand"
                 >
@@ -343,7 +343,7 @@ export default {
   name: "Student",
   data: () => ({
     overlay: false,
-    expand: false
+    expand: false,
   }),
   components: {},
   methods: {
@@ -370,19 +370,16 @@ export default {
       const uid = user.uid;
 
       try {
-        const response = await db
-          .collection("users")
-          .doc(uid)
-          .set(user);
+        const response = await db.collection("users").doc(uid).set(user);
         if (response == undefined) alert("Documeto actualizado con exito!");
       } catch (error) {
         console.warn(error);
       }
-    }
+    },
   },
   computed: {
-    ...mapState(["user"])
-  }
+    ...mapState(["user"]),
+  },
 };
 </script>
 
