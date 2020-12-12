@@ -8,16 +8,22 @@ import { mapMutations } from 'vuex';
         <v-container>
           <v-row>
             <v-container class="text-right">
-              <v-btn
-                color="green"
-                rounded
-                dark
-                depressed
-                class="ma-2 mb-4 my-2"
-                @click="expand = !expand"
-              >
-                Buscar Alumno <v-icon right>mdi-account-search</v-icon>
-              </v-btn>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    elevation="2"
+                    v-bind="attrs"
+                    v-on="on"
+                    color="white"
+                    rounded
+                    class="ma-2 mb-4 my-2"
+                    @click="expand = !expand"
+                  >
+                    <v-icon color="success">mdi-account-search</v-icon>
+                  </v-btn>
+                </template>
+                <span>Buscar Alumno</span>
+              </v-tooltip>
             </v-container>
             <v-col cols="12">
               <h2>Todas las carreras</h2>
@@ -152,7 +158,7 @@ export default {
     addressModal: () => import("../components/Address"),
     documentsModal: () => import("../components/Documents"),
     userModal: () => import("../components/DetailUser"),
-    EliminarEstudiante
+    EliminarEstudiante,
   },
   data: () => ({
     viewAddress: false,
@@ -172,44 +178,44 @@ export default {
     headers: [
       {
         text: "Nombre",
-        value: "nombre"
+        value: "nombre",
       },
       {
         text: "Apellido Paterno",
-        value: "apellidoPaterno"
+        value: "apellidoPaterno",
       },
       {
         text: "Apellido Materno",
-        value: "apellidoMaterno"
+        value: "apellidoMaterno",
       },
       {
         text: "Edad",
-        value: "edad"
+        value: "edad",
       },
       {
         text: "Status",
-        value: "statusProceso"
+        value: "statusProceso",
       },
       {
         text: "Carrera",
-        value: "carrera"
+        value: "carrera",
       },
       {
         text: "Direccion",
-        value: "direccion"
+        value: "direccion",
       },
       {
         text: "Documentos",
-        value: "documents"
+        value: "documents",
       },
       {
         text: "Detalle completo",
-        value: "detalleCompleto"
+        value: "detalleCompleto",
       },
       {
         text: "Eliminar Estudiante",
-        value: "eliminarestudiante"
-      }
+        value: "eliminarestudiante",
+      },
     ],
 
     careerOptions: [
@@ -224,8 +230,8 @@ export default {
       "Ingeniería en Tecnologías de la Información",
       "Ingeniería en Mantenimiento Industrial",
       "Ingeniería en Mecatrónica",
-      "Ingeniería Química"
-    ]
+      "Ingeniería Química",
+    ],
   }),
   methods: {
     ...mapMutations(["setCareerSelected"]),
@@ -260,7 +266,7 @@ export default {
           .get();
 
         if (response.docs.length > 0) {
-          response.docs.forEach(e => {
+          response.docs.forEach((e) => {
             this.items.push(e.data());
           });
         }
@@ -278,7 +284,7 @@ export default {
           .where("rol", "==", "Estudiante")
           .get();
         if (response.docs.length > 0) {
-          response.docs.forEach(e => {
+          response.docs.forEach((e) => {
             this.estudiantes.push(e.data());
           });
         }
@@ -291,12 +297,12 @@ export default {
     async eliminarEstudiante(uid) {
       this.uid = uid;
       this.dialog = true;
-    }
+    },
   },
 
   computed: {
-    ...mapState(["careerSelected"])
-  }
+    ...mapState(["careerSelected"]),
+  },
 };
 </script>
 

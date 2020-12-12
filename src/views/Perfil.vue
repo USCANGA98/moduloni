@@ -204,12 +204,19 @@
                   </v-container>
                   <v-card-actions class="justify-right">
                     <v-container class="text-right">
-                      <v-btn
-                        rounded
-                        @click="actualizarPerfilAlumno(user)"
-                        color="success"
-                        >Guardar Cambios</v-btn
-                      >
+                      <v-tooltip top>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn
+                            v-bind="attrs"
+                            v-on="on"
+                            rounded
+                            @click="actualizarPerfilAlumno(user)"
+                            color="success"
+                            >Guardar Cambios</v-btn
+                          >
+                        </template>
+                        <span>Actualizar Información</span>
+                      </v-tooltip>
                     </v-container>
                   </v-card-actions>
                 </v-card>
@@ -221,9 +228,9 @@
         <v-container
           v-if="
             user.rol == 'DirectorTi' ||
-              user.rol == 'DirectorQui' ||
-              user.rol == 'DirectorMeca' ||
-              user.rol == 'DirectorMantto'
+            user.rol == 'DirectorQui' ||
+            user.rol == 'DirectorMeca' ||
+            user.rol == 'DirectorMantto'
           "
         >
           <v-row>
@@ -301,12 +308,19 @@
                 </v-container>
                 <v-card-actions>
                   <v-container class="text-right">
-                    <v-btn
-                      rounded
-                      @click="actualizarPerfilDirector(user)"
-                      color="success"
-                      >Guardar Cambios</v-btn
-                    >
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          v-bind="attrs"
+                          v-on="on"
+                          rounded
+                          @click="actualizarPerfilDirector(user)"
+                          color="success"
+                          >Guardar Cambios</v-btn
+                        >
+                      </template>
+                      <span>Actualizar Información</span>
+                    </v-tooltip>
                   </v-container>
                 </v-card-actions>
               </v-card>
@@ -350,10 +364,7 @@ export default {
       const uid = user.uid;
 
       try {
-        const response = await db
-          .collection("users")
-          .doc(uid)
-          .set(user);
+        const response = await db.collection("users").doc(uid).set(user);
         if (response == undefined) alert("Documeto actualizado con exito!");
       } catch (error) {
         console.warn(error);
@@ -382,13 +393,13 @@ export default {
             colonia: user.direccion.colonia,
             estado: user.direccion.estado,
             numeroExterior: user.direccion.numeroExterior,
-            numeroInterior: user.direccion.numeroInterior
-          }
+            numeroInterior: user.direccion.numeroInterior,
+          },
         })
-        .then(function() {
+        .then(function () {
           alert("Documento Actualizado Correctamente!");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           // The document probably doesn't exist.
           alert("Ocurrió un error", error);
         });
@@ -405,20 +416,20 @@ export default {
           apellidoPaterno: user.apellidoPaterno,
           apellidoMaterno: user.apellidoMaterno,
           fechaNacimiento: user.fechaNacimiento,
-          edad: user.edad
+          edad: user.edad,
         })
-        .then(function() {
+        .then(function () {
           alert("Documento Actualizado Correctamente!");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           // The document probably doesn't exist.
           alert("Ocurrió un error", error);
         });
-    }
+    },
   },
   computed: {
-    ...mapState(["user"])
-  }
+    ...mapState(["user"]),
+  },
 };
 </script>
 

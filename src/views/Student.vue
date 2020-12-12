@@ -12,27 +12,88 @@
           <v-row>
             <v-col cols="12">
               <v-container class="text-left">
-                <v-alert
-                  colored-border
-                  type="info"
-                  icon="mdi-account-circle"
-                  border="bottom"
+                <v-card
+                  v-if="user.rol == 'Estudiante'"
+                  max-width="auto"
                   elevation="2"
                 >
-                  Bienvenido(a) {{ user.nombre }}, podrás actualizar tus
-                  documentos hasta que el 'Status' haya cambiado a 'Aprobado'.
-                </v-alert>
-                <v-btn
-                  rounded
-                  depressed
-                  class="ma-2 mb-4 my-2"
-                  color="info"
-                  elevation="2"
-                  dark
-                  @click="expand = !expand"
-                >
-                  Detalles <v-icon right>mdi-account-details</v-icon>
-                </v-btn>
+                  <v-card-subtitle
+                    v-if="user.statusProceso != 'Revisado'"
+                    class="text-center"
+                  >
+                    Bienvenido(a) {{ user.nombre }}, podrás actualizar tus
+                    documentos hasta que el 'Status' haya cambiado a
+                    'Aprobado'.</v-card-subtitle
+                  >
+                  <v-card-subtitle
+                    v-if="user.statusProceso == 'Revisado'"
+                    class="text-center"
+                  >
+                    Tu proceso de evaluación ha concluido satisfactoriamente,
+                    espera las indicaciones de servicios escolares.
+                  </v-card-subtitle>
+                  <v-stepper value="2" class="mt-0">
+                    <v-stepper-header>
+                      <v-stepper-step step="1" color="success" complete>
+                        Documentos enviados
+                      </v-stepper-step>
+
+                      <v-divider></v-divider>
+
+                      <v-stepper-step
+                        v-if="user.statusProceso != 'Revisado'"
+                        step="2"
+                        color="info"
+                      >
+                        En revisión
+                        <small>Proceso de evaluación</small>
+                      </v-stepper-step>
+
+                      <v-stepper-step
+                        v-if="user.statusProceso == 'Revisado'"
+                        step="2"
+                        color="success"
+                        complete
+                      >
+                        En revisión
+                        <small>Proceso de evaluación</small>
+                      </v-stepper-step>
+
+                      <v-divider></v-divider>
+
+                      <v-stepper-step
+                        v-if="user.statusProceso != 'Revisado'"
+                        step="3"
+                      >
+                        Finalizado</v-stepper-step
+                      >
+                      <v-stepper-step
+                        v-if="user.statusProceso == 'Revisado'"
+                        step="3"
+                        color="success"
+                        complete
+                      >
+                        Finalizado</v-stepper-step
+                      >
+                    </v-stepper-header>
+                  </v-stepper>
+                </v-card>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      v-bind="attrs"
+                      v-on="on"
+                      rounded
+                      color="white"
+                      class="ma-2 mb-4 my-5"
+                      elevation="2"
+                      @click="expand = !expand"
+                    >
+                      <v-icon color="info">mdi-account-details</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Informacion Personal</span>
+                </v-tooltip>
               </v-container>
               <v-expand-transition>
                 <v-card

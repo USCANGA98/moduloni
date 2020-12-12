@@ -1,22 +1,35 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="12">
-        <h2 class="text-center">
-          UNIVERSIDAD TECNOLÓGICA DEL SURESTE DE VERACRUZ
-        </h2>
-        <h3 class="text-center">Módulo para nuevo ingreso</h3>
-      </v-col>
-    </v-row>
+  <v-container class="body">
+    <v-row> </v-row>
     <v-row class="d-flex justify-center">
       <v-col cols="12" md="4">
-        <v-card elevation="12">
+        <v-card elevation="24">
+          <v-card-subtitle class="text-center">
+            Módulo de alumnos de nuevo ingreso</v-card-subtitle
+          >
           <v-row class="ma-0 pa-0">
-            <v-col cols="12" class="d-flex justify-center pa-0 ma-0">
-              <v-avatar size="150">
-                <v-img src="../assets/utsv-logo.png"></v-img>
-              </v-avatar>
-            </v-col>
+            <v-container class="mt-0 p-0 ma-0">
+              <v-col cols="12" class="d-flex justify-center pa-0 ma-0">
+                <v-hover v-slot:default="{ hover }" open-delay="0">
+                  <v-btn
+                    href="http://www.utsv.com.mx/wp/"
+                    class="mt-12 mb-15"
+                    fab
+                    icon
+                    color="#fff"
+                    v-on="on"
+                  >
+                    <v-avatar
+                      :class="`elevation-${hover ? 10 : 0}`"
+                      class="transition-swing"
+                      size="150"
+                    >
+                      <v-img src="../assets/utsv-logo.png"></v-img>
+                    </v-avatar>
+                  </v-btn>
+                </v-hover>
+              </v-col>
+            </v-container>
             <v-container class="justify-center d-flex pa-0 ma-0">
               <v-hover v-slot:default="{ hover }" open-delay="0">
                 <v-btn
@@ -121,10 +134,10 @@ export default {
     loading: false,
     user: {
       mail: "",
-      password: ""
+      password: "",
     },
     error: "",
-    userData: ""
+    userData: "",
   }),
   methods: {
     ...mapMutations(["setUser"]),
@@ -174,16 +187,13 @@ export default {
     },
     async getDataUser(uid) {
       try {
-        const response = await db
-          .collection("users")
-          .doc(uid)
-          .get();
+        const response = await db.collection("users").doc(uid).get();
         return response.data();
       } catch (error) {
         console.warn(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -194,5 +204,13 @@ export default {
 
 .enlace:hover {
   text-decoration: underline;
+}
+.body {
+  background: url("../assets/utsv_portada.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  position: relative;
+  background-size: cover;
 }
 </style>
