@@ -21,16 +21,19 @@
                     v-if="user.statusProceso != 'Revisado'"
                     class="text-center"
                   >
-                    Bienvenido(a) {{ user.nombre }}, podrás actualizar tus
-                    documentos hasta que el 'Status' haya cambiado a
-                    'Aprobado'.</v-card-subtitle
+                    <strong
+                      >¡Hola {{ user.nombre }}!, podrás actualizar tus
+                      documentos hasta que el 'Status' haya cambiado a
+                      'Aprobado'.</strong
+                    ></v-card-subtitle
                   >
                   <v-card-subtitle
                     v-if="user.statusProceso == 'Revisado'"
                     class="text-center"
-                  >
-                    Tu proceso de evaluación ha concluido satisfactoriamente,
-                    espera las indicaciones de servicios escolares.
+                    ><strong>
+                      Tu proceso de evaluación ha concluido satisfactoriamente,
+                      espera las indicaciones de servicios escolares.</strong
+                    >
                   </v-card-subtitle>
                   <v-stepper value="2" class="mt-0">
                     <v-stepper-header>
@@ -42,6 +45,7 @@
 
                       <v-stepper-step
                         v-if="user.statusProceso != 'Revisado'"
+                        editable
                         step="2"
                         color="info"
                       >
