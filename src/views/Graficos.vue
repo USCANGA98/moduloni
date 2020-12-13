@@ -6,7 +6,7 @@
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
               :class="`elevation-${hover ? 10 : 1}`"
-              class="  pa-2 transition-swing"
+              class="pa-2 transition-swing"
               ripple
             >
               <v-card-title class="justify-center"
@@ -32,10 +32,10 @@
               outlined
               ripple
               :class="`elevation-${hover ? 10 : 1}`"
-              class="  pa-2 transition-swing"
+              class="pa-2 transition-swing"
             >
               <v-card-title class="justify-center"
-                ><strong>Grafica de indide de aspirantes</strong></v-card-title
+                ><strong>Gráfica de índice de aspirantes</strong></v-card-title
               >
               <column-chart
                 :colors="['#1FC2BA']"
@@ -51,7 +51,7 @@
                   [IngTi[0].carrera, IngTi.length],
                   [IngMantto[0].carrera, IngMantto.length],
                   [IngMeca[0].carrera, IngMeca.length],
-                  [IngQuimica[0].carrera, IngQuimica.length]
+                  [IngQuimica[0].carrera, IngQuimica.length],
                 ]"
               ></column-chart>
               <v-card-subtitle>UTSV</v-card-subtitle>
@@ -66,14 +66,14 @@
               ripple
               :class="`elevation-${hover ? 10 : 1}`"
               outlined
-              class="  pa-2 transition-swing"
+              class="pa-2 transition-swing"
             >
               <v-card-title class="justify-center"
                 ><strong>Aspirantes por carrera</strong></v-card-title
               >
               <pie-chart
                 :library="{ cutoutPercentage: 40 }"
-                class="mt-3 mb-5 "
+                class="mt-3 mb-5"
                 :data="[
                   [Contaduria[0].carrera, Contaduria.length],
                   [Tic[0].carrera, Tic.length],
@@ -86,7 +86,7 @@
                   [IngTi[0].carrera, IngTi.length],
                   [IngMantto[0].carrera, IngMantto.length],
                   [IngMeca[0].carrera, IngMeca.length],
-                  [IngQuimica[0].carrera, IngQuimica.length]
+                  [IngQuimica[0].carrera, IngQuimica.length],
                 ]"
               ></pie-chart>
               <v-card-subtitle>UTSV</v-card-subtitle>

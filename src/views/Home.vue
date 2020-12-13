@@ -1,7 +1,7 @@
 <template>
-  <v-container class="body">
+  <v-container fluid class="img">
     <v-row> </v-row>
-    <v-row class="d-flex justify-center">
+    <v-row class="d-flex ma-15 justify-center">
       <v-col cols="12" md="4">
         <v-card elevation="24">
           <v-card-subtitle class="text-center">
@@ -13,14 +13,13 @@
                 <v-hover v-slot:default="{ hover }" open-delay="0">
                   <v-btn
                     href="http://www.utsv.com.mx/wp/"
-                    class="mt-12 mb-15"
+                    class="mt-5 mb-12"
                     fab
                     icon
                     color="#fff"
-                    v-on="on"
                   >
                     <v-avatar
-                      :class="`elevation-${hover ? 10 : 0}`"
+                      :class="`elevation-${hover ? 5 : 0}`"
                       class="transition-swing"
                       size="150"
                     >
@@ -35,7 +34,7 @@
                 <v-btn
                   href="https://www.facebook.com/UTSV1/"
                   class="mx-1"
-                  :class="`elevation-${hover ? 10 : 0}`"
+                  :class="`elevation-${hover ? 5 : 0}`"
                   color="#fff"
                   outlined
                   fab
@@ -48,7 +47,7 @@
                 <v-btn
                   href="https://twitter.com/UTSV1"
                   class="mx-1"
-                  :class="`elevation-${hover ? 10 : 0}`"
+                  :class="`elevation-${hover ? 5 : 0}`"
                   color="#fff"
                   outlined
                   fab
@@ -61,7 +60,7 @@
                 <v-btn
                   href="https://www.youtube.com/channel/UCROW9bCyFzCL7lKw1JuFZnA"
                   class="mx-1"
-                  :class="`elevation-${hover ? 10 : 0}`"
+                  :class="`elevation-${hover ? 5 : 0}`"
                   color="#fff"
                   outlined
                   fab
@@ -205,12 +204,12 @@ export default {
 .enlace:hover {
   text-decoration: underline;
 }
-.body {
+.img {
   background: url("../assets/utsv_portada.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%;
-  position: relative;
+  background-size: 100vh;
+
   background-size: cover;
 }
 </style>
