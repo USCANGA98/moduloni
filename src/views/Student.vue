@@ -366,7 +366,12 @@
           :key="document.name"
         >
           <v-card elevation="5">
-            <v-card-title>{{ document.name }}</v-card-title>
+            <v-card-title
+              >{{ document.name }}
+              <v-icon v-if="document.aprobado == true" color="success" right
+                >mdi-checkbox-marked-circle-outline</v-icon
+              >
+            </v-card-title>
             <v-card-text>
               Status:
               <br />
