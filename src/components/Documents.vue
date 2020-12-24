@@ -10,32 +10,46 @@
       <v-container>
         <v-row>
           <v-col cols="12" v-for="item in item.documents" :key="item.name">
-            <v-card>
-              <v-card-title>{{ item.name }}</v-card-title>
-              <v-card-text>
-                <v-btn
-                  block
-                  depressed
-                  color="green"
-                  dark
-                  @click="abrir(item.url)"
-                  >Ver documento</v-btn
-                >
-              </v-card-text>
-              <v-card-text class="mb-0 pb-0">
-                Aprobado:
-                <strong>{{ item.aprobado }}</strong>
-              </v-card-text>
-              <v-card-text class="mb-0 mt-0 pb-5 pt-0">
-                Mensaje:
-                <strong>{{ item.mensaje }}</strong>
-              </v-card-text>
-              <v-card-actions>
-                <v-btn block depressed color="green" dark @click="editar(item)"
-                  >Editar</v-btn
-                >
-              </v-card-actions>
-            </v-card>
+            <v-hover v-slot:default="{ hover }" open-delay="0">
+              <v-card :class="`elevation-${hover ? 10 : 1}`" class="pa-8">
+                <v-card-title class="mb-5"
+                  >{{ item.name }}
+                  <v-card-text
+                    v-if="item.aprobado == true"
+                    class="mb-0 pa-0 text-right"
+                    >Documento Revisado</v-card-text
+                  >
+                </v-card-title>
+                <v-card-text>
+                  <v-btn
+                    block
+                    depressed
+                    color="green"
+                    dark
+                    @click="abrir(item.url)"
+                    >Ver documento</v-btn
+                  >
+                </v-card-text>
+                <v-card-text class="mb-0 pb-0">
+                  <strong> Aprobado:</strong>
+                  {{ item.aprobado }}
+                </v-card-text>
+                <v-card-text class="mb-0 mt-0 pb-5 pt-0">
+                  <strong> Mensaje:</strong>
+                  {{ item.mensaje }}
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn
+                    block
+                    depressed
+                    color="green"
+                    dark
+                    @click="editar(item)"
+                    >Editar</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-hover>
           </v-col>
         </v-row>
       </v-container>
@@ -50,24 +64,25 @@
 
 <script>
 import { db } from "../services/firebase";
+import { mapState } from "vuex";
 export default {
   name: "AddressComponent",
   components: {
-    edit: () => import("./DocumentEdit")
+    edit: () => import("./DocumentEdit"),
   },
   props: {
     viewDocuments: {
       type: Boolean,
-      required: true
+      required: true,
     },
     item: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data: () => ({
     viewDocumentEdit: false,
-    itemData: {}
+    itemData: {},
   }),
   methods: {
     cerrar() {
@@ -90,10 +105,7 @@ export default {
       }
 
       try {
-        const response = await db
-          .collection("users")
-          .doc(uid)
-          .set(this.item);
+        const response = await db.collection("users").doc(uid).set(this.item);
         if (response == undefined) this.$emit("guardado");
       } catch (error) {
         console.warn(error);
@@ -108,8 +120,11 @@ export default {
         }
       }
       return aprobado;
-    }
-  }
+    },
+  },
+  computed: {
+    ...mapState(["user"]),
+  },
 };
 </script>
 

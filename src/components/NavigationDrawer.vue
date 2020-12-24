@@ -62,7 +62,7 @@
           <template v-slot:activator="{ on }">
             <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
               <v-avatar size="48">
-                <v-img src="../assets/user.png"></v-img>
+                <v-img :src="user.documents.fotografia.url"></v-img>
               </v-avatar>
             </v-btn>
           </template>
@@ -70,7 +70,7 @@
             <v-list-item-content class="justify-center">
               <div class="mx-auto text-center">
                 <v-avatar size="70">
-                  <v-img src="../assets/user.png"></v-img>
+                  <v-img :src="user.documents.fotografia.url"></v-img>
                 </v-avatar>
                 <h3>{{ user.nombre }}</h3>
                 <p class="caption mt-1">

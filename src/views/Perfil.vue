@@ -11,216 +11,244 @@
         <v-container v-if="user.rol == 'Estudiante'">
           <v-row>
             <v-col cols="12">
-              <v-expand-transition>
-                <v-card max-width="8000" elevation="5">
-                  <v-container>
-                    <h2 class="mb-5">Datos personales</h2>
-                    <v-row>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Nombre(s)"
-                          placeholder="Ingresa tu nombre(s)"
-                          v-model="user.nombre"
-                          dense
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Apellido paterno"
-                          placeholder="Ingresa tu apellido paterno"
-                          v-model="user.apellidoPaterno"
-                          dense
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          disabled
-                          outlined
-                          color="green"
-                          label="Correo electrónico"
-                          placeholder="Ingresa tu correo electrónico"
-                          dense
-                          v-model="user.correoElectronico"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Apellido materno"
-                          placeholder="Ingresa tu apellido materno"
-                          v-model="user.apellidoMaterno"
-                          dense
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          dense
-                          color="green"
-                          v-model="user.fechaNacimiento"
-                          label="Fecha de nacimiento"
-                          placeholder="Ingresa tu fecha de nacimiento"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Edad"
-                          placeholder="Ingresa tu edad"
-                          type="number"
-                          min="0"
-                          max="99"
-                          v-model="user.edad"
-                          dense
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Sexo"
-                          placeholder="Ingresa tu sexo"
-                          dense
-                          v-model="user.sexo"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Número seguro social"
-                          placeholder="Ingresa número de seguridad social"
-                          type="number"
-                          min="0"
-                          max="99"
-                          dense
-                          v-model="user.numeroSeguroSocial"
-                        ></v-text-field>
-                      </v-col>
+              <v-card class="ma-8 mt-10" max-width="8000" elevation="5">
+                <v-container class="text-center">
+                  <v-col cols="12" class="mb-0 mt-0 pb-0 pt-0">
+                    <v-avatar position="absolute" size="220" class="mt-n16">
+                      <!-- <v-img v-if="image != ''" :src="image"></v-img> -->
+                      <v-img :src="user.documents.fotografia.url"> </v-img>
+                    </v-avatar>
+                    <br />
 
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Padre o tutor"
-                          placeholder="Ingresa el nombre de tu padre o tutor"
-                          dense
-                          v-model="user.tutor"
-                        ></v-text-field>
-                      </v-col>
-                    </v-row>
-                    <v-row>
-                      <v-container>
-                        <h2 class="mb-5">Dirección</h2></v-container
-                      >
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Calle"
-                          placeholder="Ingresa tu calle"
-                          dense
-                          v-model="user.direccion.calle"
-                        ></v-text-field>
-                      </v-col>
+                    <!-- <v-tooltip bottom> 
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          v-bind="attrs"
+                          v-on="on"
+                          icon
+                          class="mb-5 mt-2 mt-n16"
+                          dark
+                          @click="$refs.boton.click()"
+                        >
+                          <v-icon color="grey">mdi-camera</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Insertar Imagen</span>
+                    </v-tooltip>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref="boton"
+                      @change="processImage($event)"
+                      class="d-none"
+                    />-->
+                  </v-col>
+                </v-container>
+                <v-container>
+                  <h2 class="mb-5">Datos personales</h2>
+                  <v-row>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Nombre(s)"
+                        placeholder="Ingresa tu nombre(s)"
+                        v-model="user.nombre"
+                        dense
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Apellido paterno"
+                        placeholder="Ingresa tu apellido paterno"
+                        v-model="user.apellidoPaterno"
+                        dense
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        disabled
+                        outlined
+                        color="green"
+                        label="Correo electrónico"
+                        placeholder="Ingresa tu correo electrónico"
+                        dense
+                        v-model="user.correoElectronico"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Apellido materno"
+                        placeholder="Ingresa tu apellido materno"
+                        v-model="user.apellidoMaterno"
+                        dense
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        dense
+                        color="green"
+                        v-model="user.fechaNacimiento"
+                        label="Fecha de nacimiento"
+                        placeholder="Ingresa tu fecha de nacimiento"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Edad"
+                        placeholder="Ingresa tu edad"
+                        type="number"
+                        min="0"
+                        max="99"
+                        v-model="user.edad"
+                        dense
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Sexo"
+                        placeholder="Ingresa tu sexo"
+                        dense
+                        v-model="user.sexo"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Número seguro social"
+                        placeholder="Ingresa número de seguridad social"
+                        type="number"
+                        min="0"
+                        max="99"
+                        dense
+                        v-model="user.numeroSeguroSocial"
+                      ></v-text-field>
+                    </v-col>
 
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Número exterior"
-                          placeholder="Ingresa el número exterior"
-                          type="number"
-                          min="0"
-                          max="99999"
-                          dense
-                          v-model="user.direccion.numeroExterior"
-                        ></v-text-field>
-                      </v-col>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Padre o tutor"
+                        placeholder="Ingresa el nombre de tu padre o tutor"
+                        dense
+                        v-model="user.tutor"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-container> <h2 class="mb-5">Dirección</h2></v-container>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Calle"
+                        placeholder="Ingresa tu calle"
+                        dense
+                        v-model="user.direccion.calle"
+                      ></v-text-field>
+                    </v-col>
 
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Número interior"
-                          placeholder="Ingresa número interior"
-                          type="number"
-                          min="0"
-                          max="99999"
-                          dense
-                          v-model="user.direccion.numeroInterior"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Colonia"
-                          placeholder="Ingresa tu colonia"
-                          dense
-                          v-model="user.direccion.colonia"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Código postal"
-                          placeholder="Ingresa tu código postal"
-                          type="number"
-                          min="0"
-                          max="99999"
-                          dense
-                          v-model="user.direccion.codigoPostal"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Estado"
-                          placeholder="Ingresa tu estado"
-                          dense
-                          v-model="user.direccion.estado"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                        <v-text-field
-                          outlined
-                          color="green"
-                          label="Ciudad"
-                          placeholder="Ingresa tu ciudad"
-                          dense
-                          v-model="user.direccion.ciudad"
-                        ></v-text-field>
-                      </v-col>
-                    </v-row>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Número exterior"
+                        placeholder="Ingresa el número exterior"
+                        type="number"
+                        min="0"
+                        max="99999"
+                        dense
+                        v-model="user.direccion.numeroExterior"
+                      ></v-text-field>
+                    </v-col>
+
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Número interior"
+                        placeholder="Ingresa número interior"
+                        type="number"
+                        min="0"
+                        max="99999"
+                        dense
+                        v-model="user.direccion.numeroInterior"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Colonia"
+                        placeholder="Ingresa tu colonia"
+                        dense
+                        v-model="user.direccion.colonia"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Código postal"
+                        placeholder="Ingresa tu código postal"
+                        type="number"
+                        min="0"
+                        max="99999"
+                        dense
+                        v-model="user.direccion.codigoPostal"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Estado"
+                        placeholder="Ingresa tu estado"
+                        dense
+                        v-model="user.direccion.estado"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                      <v-text-field
+                        outlined
+                        color="green"
+                        label="Ciudad"
+                        placeholder="Ingresa tu ciudad"
+                        dense
+                        v-model="user.direccion.ciudad"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+                <v-card-actions class="justify-right">
+                  <v-container class="text-right">
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          v-bind="attrs"
+                          v-on="on"
+                          rounded
+                          @click="actualizarPerfilAlumno(user)"
+                          color="success"
+                          >Guardar Cambios</v-btn
+                        >
+                      </template>
+                      <span>Actualizar Información</span>
+                    </v-tooltip>
                   </v-container>
-                  <v-card-actions class="justify-right">
-                    <v-container class="text-right">
-                      <v-tooltip top>
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-btn
-                            v-bind="attrs"
-                            v-on="on"
-                            rounded
-                            @click="actualizarPerfilAlumno(user)"
-                            color="success"
-                            >Guardar Cambios</v-btn
-                          >
-                        </template>
-                        <span>Actualizar Información</span>
-                      </v-tooltip>
-                    </v-container>
-                  </v-card-actions>
-                </v-card>
-              </v-expand-transition>
+                </v-card-actions>
+              </v-card>
             </v-col>
           </v-row>
         </v-container>
@@ -338,7 +366,11 @@ import { mapState } from "vuex";
 import { storage, db } from "../services/firebase";
 export default {
   name: "Perfil",
-  data: () => ({}),
+  data: () => ({
+    image: "",
+    imgUrl: "",
+    imageFile: "",
+  }),
   components: {},
   methods: {
     async input(e, tipo) {
@@ -371,6 +403,7 @@ export default {
       }
     },
     async actualizarPerfilAlumno(user) {
+      await this.subirImagen();
       const uid = user.uid;
 
       const response = await db.collection("users").doc(uid);
@@ -405,6 +438,7 @@ export default {
         });
     },
     async actualizarPerfilDirector(user) {
+      await this.subirImagen();
       const uid = user.uid;
 
       const response = await db.collection("users").doc(uid);
@@ -426,6 +460,26 @@ export default {
           alert("Ocurrió un error", error);
         });
     },
+    processImage(e) {
+      this.imageFile = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(this.imageFile);
+      reader.onload = async (e) => {
+        this.image = await e.target.result;
+      };
+    },
+    async subirImagen() {
+      try {
+        const upload = await storage
+          .child(`uid/${this.imageFile.name}`)
+          .put(this.imageFile);
+        const urlImg = await upload.ref.getDownloadURL();
+        console.log(urlImg);
+        this.estacion.imgUrl = urlImg;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   computed: {
     ...mapState(["user"]),
@@ -433,4 +487,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.input {
+  position: relative;
+  top: 20%;
+  left: 10%;
+  right: 20%;
+}
+</style>

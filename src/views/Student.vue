@@ -24,7 +24,7 @@
                     <strong
                       >¡Hola {{ user.nombre }}!, podrás actualizar tus
                       documentos hasta que el 'Status' haya cambiado a
-                      'Aprobado'.</strong
+                      'Revisado'.</strong
                     ></v-card-subtitle
                   >
                   <v-card-subtitle
@@ -35,7 +35,7 @@
                       espera las indicaciones de servicios escolares.</strong
                     >
                   </v-card-subtitle>
-                  <v-stepper value="2" class="mt-0">
+                  <v-stepper value="2" class="ma-0 pa-0">
                     <v-stepper-header>
                       <v-stepper-step step="1" color="success" complete>
                         Documentos enviados
@@ -373,12 +373,12 @@
               >
             </v-card-title>
             <v-card-text>
-              Status:
+              <strong> Status:</strong>
               <br />
-              {{ document.aprobado ? "Aprobado" : "No aprobada" }}
+              {{ document.aprobado ? "Revisado" : "En revisión" }}
             </v-card-text>
             <v-card-text>
-              Mensaje:
+              <strong> Mensaje:</strong>
               <br />
               {{ document.mensaje }}
             </v-card-text>

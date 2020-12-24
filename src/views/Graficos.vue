@@ -13,7 +13,6 @@
                 ><strong>Total de Aspirantes</strong></v-card-title
               >
               <v-progress-circular
-                :indeterminate="indeterminate"
                 :rotate="360"
                 :size="215"
                 :width="50"
@@ -22,6 +21,7 @@
               >
                 <h1>{{ sumaTotal.length }}</h1>
               </v-progress-circular>
+              <v-card-subtitle class="text-left">UTSV</v-card-subtitle>
             </v-card>
           </v-hover>
         </v-col>
@@ -193,96 +193,73 @@ export default {
             this.sumaTotal.push(e.data());
             let Contaduria = this.Contaduria;
             console.log(Contaduria);
-
           });
         }
         if (response2.docs.length > 0) {
           response2.docs.forEach(e => {
             this.Tic.push(e.data());
             this.sumaTotal.push(e.data());
-            let Tic = this.Tic;
-            console.log(Tic);
-
           });
         }
         if (response3.docs.length > 0) {
           response3.docs.forEach(e => {
             this.Mantto.push(e.data());
             this.sumaTotal.push(e.data());
-            let Mantto = this.Mantto;
-            console.log(Mantto);
           });
         }
         if (response4.docs.length > 0) {
           response4.docs.forEach(e => {
             this.Meca.push(e.data());
             this.sumaTotal.push(e.data());
-            let Meca = this.Meca;
-            console.log(Meca);
           });
         }
         if (response5.docs.length > 0) {
           response5.docs.forEach(e => {
             this.Quimica.push(e.data());
             this.sumaTotal.push(e.data());
-            let Quimica = this.Quimica;
-            console.log(Quimica);
+            
           });
         }
         if (response6.docs.length > 0) {
           response6.docs.forEach(e => {
             this.Mecanica.push(e.data());
             this.sumaTotal.push(e.data());
-            let Mecanica = this.Mecanica;
-            console.log(Mecanica);
           });
         }
         if (response7.docs.length > 0) {
           response7.docs.forEach(e => {
             this.Administracion.push(e.data());
             this.sumaTotal.push(e.data());
-            let Administracion = this.Administracion;
-            console.log(Administracion);
           });
         }
         if (response8.docs.length > 0) {
           response8.docs.forEach(e => {
             this.Energias.push(e.data());
             this.sumaTotal.push(e.data());
-            let Energias = this.Energias;
-            console.log(Energias);
           });
         }
         if (response9.docs.length > 0) {
           response9.docs.forEach(e => {
             this.IngTi.push(e.data());
             this.sumaTotal.push(e.data());
-            let IngTi = this.IngTi;
-            console.log(IngTi);
           });
         }
         if (response10.docs.length > 0) {
           response10.docs.forEach(e => {
             this.IngMantto.push(e.data());
             this.sumaTotal.push(e.data());
-            let IngMantto = this.IngMantto;
-            console.log(IngMantto);
           });
         }
         if (response11.docs.length > 0) {
           response11.docs.forEach(e => {
             this.IngMeca.push(e.data());
             this.sumaTotal.push(e.data());
-            let IngMeca = this.IngMeca;
-            console.log(IngMeca);
           });
         }
         if (response12.docs.length > 0) {
           response12.docs.forEach(e => {
             this.IngQuimica.push(e.data());
             this.sumaTotal.push(e.data());
-            let IngQuimica = this.IngQuimica;
-            console.log(IngQuimica);
           });
         }
       } catch (error) {

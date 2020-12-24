@@ -2,7 +2,7 @@
   <v-dialog v-model="viewDocumentEdit" persistent max-width="600">
     <v-card>
       <v-toolbar dense flat color="green" dark>
-        <v-toolbar-title>Editar documento - {{item.name}}</v-toolbar-title>
+        <v-toolbar-title>Editar documento - {{ item.name }}</v-toolbar-title>
       </v-toolbar>
       <v-container>
         <v-row>
@@ -10,11 +10,16 @@
             <v-switch
               color="green"
               v-model="item.aprobado"
-              :label="item.aprobado ? 'Aprobado' : 'Pendiente'"
+              :label="item.aprobado ? 'Revisado' : 'En revisión'"
             ></v-switch>
           </v-col>
           <v-col cols="12">
-            <v-textarea v-model="item.mensaje" dense outlined color="green"></v-textarea>
+            <v-textarea
+              v-model="item.mensaje"
+              dense
+              outlined
+              color="green"
+            ></v-textarea>
           </v-col>
         </v-row>
       </v-container>

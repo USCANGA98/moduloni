@@ -25,20 +25,17 @@ export default {
   props: {
     dialog: {
       type: Boolean,
-      required: true
+      required: true,
     },
     uid: {
-      type: String
-    }
+      type: String,
+    },
   },
   data: () => ({}),
   methods: {
     async eliminarEstudiante() {
       try {
-        const response = await db
-          .collection("users")
-          .doc(this.uid)
-          .delete();
+        const response = await db.collection("users").doc(this.uid).delete();
         console.log(response);
         alert("Eliminado correctamente de Firestore");
 
@@ -56,16 +53,16 @@ export default {
       // Delete the file
       storageRef
         .delete()
-        .then(function() {
+        .then(function () {
           // File deleted successfully
           alert("Eliminado de Storage");
         })
-        .catch(function(error) {
+        .catch(function (error) {
           // Uh-oh, an error occurred!
           console.log(error);
           alert("No se pudo eliminar de Storage");
         });
-    }
-  }
+    },
+  },
 };
 </script>
