@@ -147,7 +147,7 @@ export default {
         this.setUser(this.userData);
         if (this.userData.rol == "admin") {
           console.log("accedió el admin");
-          this.$router.push("/admin");
+          this.$router.push("/admin/graficos");
         }
         if (this.userData.rol == "Estudiante") {
           console.log("accedió el estudiante");

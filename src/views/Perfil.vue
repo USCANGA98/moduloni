@@ -11,13 +11,22 @@
         <v-container v-if="user.rol == 'Estudiante'">
           <v-row>
             <v-col cols="12">
-              <v-card class="ma-8 mt-10" max-width="8000" elevation="5">
+              <v-card class="ma-15 mt-8" shaped elevation="10">
                 <v-container class="text-center">
                   <v-col cols="12" class="mb-0 mt-0 pb-0 pt-0">
-                    <v-avatar position="absolute" size="220" class="mt-n16">
+                    <v-avatar color="#E5E8E8" size="260" class="mt-n16 mb-5">
                       <!-- <v-img v-if="image != ''" :src="image"></v-img> -->
-                      <v-img :src="user.documents.fotografia.url"> </v-img>
+                      <v-img
+                        max-width="250"
+                        max-height="250"
+                        :src="user.documents.fotografia.url"
+                      >
+                      </v-img>
                     </v-avatar>
+                    <h2>
+                      {{ user.nombre }} {{ user.apellidoPaterno }}
+                      {{ user.apellidoMaterno }}
+                    </h2>
                     <br />
 
                     <!-- <v-tooltip bottom> 
@@ -263,7 +272,48 @@
         >
           <v-row>
             <v-col cols="12">
-              <v-card max-width="8000" elevation="5">
+              <v-card class="ma-15 mt-8" shaped elevation="10">
+                <v-container class="text-center">
+                  <v-col cols="12" class="mb-0 mt-0 pb-0 pt-0">
+                    <v-avatar color="#E5E8E8" size="260" class="mt-n16 mb-5">
+                      <!-- <v-img v-if="image != ''" :src="image"></v-img> -->
+                      <v-img
+                        max-width="250"
+                        max-height="250"
+                        src="../assets/utsv-logo.png"
+                      >
+                      </v-img>
+                    </v-avatar>
+                    <h2>
+                      {{ user.nombre }} {{ user.apellidoPaterno }}
+                      {{ user.apellidoMaterno }}
+                    </h2>
+                    <br />
+
+                    <!-- <v-tooltip bottom> 
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          v-bind="attrs"
+                          v-on="on"
+                          icon
+                          class="mb-5 mt-2 mt-n16"
+                          dark
+                          @click="$refs.boton.click()"
+                        >
+                          <v-icon color="grey">mdi-camera</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Insertar Imagen</span>
+                    </v-tooltip>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref="boton"
+                      @change="processImage($event)"
+                      class="d-none"
+                    />-->
+                  </v-col>
+                </v-container>
                 <v-container>
                   <h2 class="mb-5">Datos personales</h2>
                   <v-row>

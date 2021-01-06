@@ -5,6 +5,7 @@
         <v-col class="text-center" cols="3">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
+              outlined
               :class="`elevation-${hover ? 10 : 1}`"
               class="pa-2 transition-swing"
               ripple
@@ -62,7 +63,6 @@
         <v-col cols="5">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
-              color=""
               ripple
               :class="`elevation-${hover ? 10 : 1}`"
               outlined

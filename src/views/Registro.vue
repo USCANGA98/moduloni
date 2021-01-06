@@ -356,10 +356,11 @@
                     border="left"
                   >
                     Adjunta la documentación en formato
-                    <strong>PDF</strong> o en imagen con buena calidad, con peso
-                    máximo de <strong>2 MB</strong>, en caso de no contar con la
-                    credencial de elector, subir una imagen con el texto
-                    "Credencial de elector en trámite".
+                    <strong>PDF</strong> y una fotografía en formato
+                    <strong>JPG</strong> o <strong>PNG</strong> con buena
+                    calidad, con peso máximo de <strong>2 MB</strong>, en caso
+                    de no contar con la credencial de elector, subir una imagen
+                    con el texto "Credencial de elector en trámite".
                   </v-alert>
                 </v-col>
                 <v-col cols="6" md="4" class="ma-0 pt-0 pb-0">
@@ -518,7 +519,7 @@ export default {
         colonia: "",
         codigoPostal: "",
         estado: "",
-        ciudad: ""
+        ciudad: "",
       },
       escuelaProcedencia: "",
       carrera: "",
@@ -529,79 +530,79 @@ export default {
           name: "Acta de nacimiento",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado"
+          mensaje: "No ha sido revisado",
         },
         curp: {
           name: "CURP",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado"
+          mensaje: "No ha sido revisado",
         },
         comprobanteDomicilio: {
           name: "Comprobante de domicilio",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado"
+          mensaje: "No ha sido revisado",
         },
         certificadoPreparatoria: {
           name: "Certificado de preparatoria",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado"
+          mensaje: "No ha sido revisado",
         },
         credencialElector: {
           name: "Credencial de elector",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado"
+          mensaje: "No ha sido revisado",
         },
         fotografia: {
           name: "Fotografia",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado"
+          mensaje: "No ha sido revisado",
         },
         analisisVDRL: {
           name: "Analisis VDRL",
           url: "",
           aprobado: false,
-          mensaje: "No ha sido revisado"
-        }
+          mensaje: "No ha sido revisado",
+        },
       },
       rol: "Estudiante",
-      uid: ""
+      uid: "",
     },
     menu: false,
     sexOptions: ["Femenino", "Masculino", "No binario"],
     careerOptions: [
-      "TSU Tecnologías de Información y Comunicación",
-      "TSU Contaduría",
-      "TSU Mantenimiento Área Industrial",
-      "TSU Mecatrónica área Automatización",
-      "TSU Química Industrial",
-      "TSU Mecánica área Automotriz",
-      "TSU Administración área Capital Humano",
-      "TSU Energías Renovables",
-      "Ingeniería en Tecnologías de la Información",
-      "Ingeniería en Mantenimiento Industrial",
-      "Ingeniería en Mecatrónica",
-      "Ingeniería Química"
+      "TSU Tecnologias de Informacion y Comunicacion",
+      "TSU Contaduria",
+      "TSU Mantenimiento Area Industrial",
+      "TSU Mecatronica Area Automatizacion",
+      "TSU Quimica Industrial",
+      "TSU Mecanica Area Automotriz",
+      "TSU Administracion Area Capital Humano",
+      "TSU Energias Renovables",
+      "Ingenieria en Tecnologias de la Informacion",
+      "Ingenieria en Mantenimiento Industrial",
+      "Ingenieria en Mecatronica",
+      "Ingenieria Quimica",
     ],
-    ruleRequired: [v => !!v || "Campo requerido"],
+    ruleRequired: [(v) => !!v || "Campo requerido"],
     rulePassword: [
-      v => !!v || "Campo requerido",
-      v =>
+      (v) => !!v || "Campo requerido",
+      (v) =>
         (v && v.length >= 6) ||
-        "La contraseña debe contener al menos 6 caracteres"
+        "La contraseña debe contener al menos 6 caracteres",
     ],
     ruleMail: [
-      v => !!v || "Campo requerido",
-      v => /.+@.+\..+/.test(v) || "Ingresa un correo válido"
+      (v) => !!v || "Campo requerido",
+      (v) => /.+@.+\..+/.test(v) || "Ingresa un correo válido",
     ],
     ruleDocument: [
-      v => !!v || "Campo requerido",
-      v => !v || v.size < 2000000 || "El archivo solo puede pesar 2 MB!"
-    ]
+      (v) => !!v || "Campo requerido",
+      (v) => !v || v.size < 2000000 || "El archivo solo puede pesar 2 MB!",
+    ],
   }),
   methods: {
     async createAccount() {
@@ -642,10 +643,7 @@ export default {
       console.log(this.user);
 
       try {
-        const response = await db
-          .collection("users")
-          .doc(uid)
-          .set(this.user);
+        const response = await db.collection("users").doc(uid).set(this.user);
         if (response == undefined) {
           alert(
             "Cuenta creada con exito!, puedes iniciar sesión para ver tu status"
@@ -678,29 +676,29 @@ export default {
       } catch (error) {
         console.warn(error);
       }
-    }
+    },
   },
   computed: {
     rulePasswordRepeat() {
       return [
-        v => {
+        (v) => {
           if (this.passwordRepeat == this.password) return true;
           if (this.password != this.passwordRepeat)
             return "Las contraseñas deben coincidir";
           if (v.length < 6)
             return "La contraseña debe contener al menos 6 caracteres";
-        }
+        },
       ];
     },
     ruleMailRepeat() {
       return [
-        v => {
+        (v) => {
           if (v == this.mail) return true;
           if (v != this.mail) return "Los correos deben coincidir";
-        }
+        },
       ];
-    }
-  }
+    },
+  },
 };
 </script>
 

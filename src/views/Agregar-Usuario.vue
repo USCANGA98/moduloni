@@ -8,10 +8,11 @@
         <h3 class="text-center">Control de directores de carrera</h3>
       </v-col>
     </v-row>
+
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row>
         <v-col cols="12">
-          <v-card>
+          <v-card class="pa-2" elevation="5">
             <v-container>
               <h2 class="mb-5">Datos personales</h2>
               <v-row>
@@ -112,7 +113,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-card>
+          <v-card class="pa-2" elevation="5">
             <v-container>
               <h2 class="mb-5">Cuenta</h2>
               <v-row>
@@ -174,14 +175,25 @@
         </v-col>
       </v-row>
     </v-form>
-    <v-row>
+    <v-container>
       <v-col cols="12">
-        <v-btn block large depressed color="green" dark @click="setInfo"
-          >Enviar información</v-btn
-        >
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              large
+              block
+              color="green"
+              dark
+              @click="setInfo"
+              >Enviar información</v-btn
+            >
+          </template>
+          <span>Enviar Datos</span>
+        </v-tooltip>
       </v-col>
-    </v-row>
-
+    </v-container>
     <v-snackbar v-model="snackbar" :timeout="timeout">{{ text }}</v-snackbar>
 
     <v-overlay :value="overlay">

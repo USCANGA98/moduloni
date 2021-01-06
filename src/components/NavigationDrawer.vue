@@ -9,11 +9,11 @@
       navigation-drawer-temporary-elevation
     >
       <!-- Condicion de renderizado para asignar un tipo de drawer a un tipo de usuario en este caso "admin" -->
-      <v-layout mt-2 class="align-center" v-if="user.rol === 'admin'">
-        <v-menu bottom min-width="200px" rounded offset-y>
+      <v-layout class="align-center" v-if="user.rol === 'admin'">
+        <v-menu bottom min-width="200px" rounded offset-x>
           <template v-slot:activator="{ on }">
             <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
-              <v-avatar size="55">
+              <v-avatar size="50">
                 <v-img src="../assets/utsv-logo.png"></v-img>
               </v-avatar>
             </v-btn>
@@ -21,13 +21,19 @@
           <v-card>
             <v-list-item-content class="justify-center">
               <div class="mx-auto text-center">
-                <v-avatar size="70">
-                  <v-img src="../assets/utsv-logo.png"></v-img>
+                <v-avatar class="mb-2" color="#E5E8E8" size="70">
+                  <v-img
+                    max-width="68"
+                    max-height="68"
+                    src="../assets/utsv-logo.png"
+                  ></v-img>
                 </v-avatar>
-                <h3>{{ user.nombre }}</h3>
+                <h3>
+                  {{ user.nombre }}
+                  <v-icon color="blue" small> mdi mdi-check-decagram</v-icon>
+                </h3>
                 <p class="caption mt-1">
                   {{ user.rol }}
-                  <v-icon color="green" right> mdi mdi-check-decagram</v-icon>
                 </p>
                 <v-divider v-if="user.rol != 'admin'" class="my-3"></v-divider>
                 <v-btn
@@ -58,10 +64,10 @@
       </v-layout>
       <!-- Condicion de renderizado para "Estudiante" -->
       <v-layout class="align-center" link v-if="user.rol === 'Estudiante'">
-        <v-menu bottom min-width="200px" rounded offset-y>
+        <v-menu bottom min-width="200px" rounded offset-x>
           <template v-slot:activator="{ on }">
             <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
-              <v-avatar size="48">
+              <v-avatar size="50">
                 <v-img :src="user.documents.fotografia.url"></v-img>
               </v-avatar>
             </v-btn>
@@ -69,13 +75,20 @@
           <v-card>
             <v-list-item-content class="justify-center">
               <div class="mx-auto text-center">
-                <v-avatar size="70">
-                  <v-img :src="user.documents.fotografia.url"></v-img>
+                <v-avatar class="mb-2" color="#E5E8E8" size="70">
+                  <v-img
+                    max-height="68"
+                    max-width="68"
+                    :src="user.documents.fotografia.url"
+                  ></v-img>
                 </v-avatar>
-                <h3>{{ user.nombre }}</h3>
+                <h3>
+                  {{ user.nombre }}
+                  <v-icon color="blue" small>mdi mdi-check-decagram</v-icon>
+                </h3>
+
                 <p class="caption mt-1">
                   {{ user.correoElectronico }}
-                  <v-icon color="green" left> mdi mdi-circle-medium</v-icon>
                 </p>
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="perfil()" depressed rounded text>
@@ -99,7 +112,6 @@
       </v-layout>
       <!-- Condicion de renderizado para "director"-->
       <v-layout
-        mt-2
         class="align-center"
         v-if="
           user.rol === 'DirectorTi' ||
@@ -108,10 +120,10 @@
           user.rol === 'DirectorMantto'
         "
       >
-        <v-menu bottom min-width="200px" rounded offset-y>
+        <v-menu bottom min-width="200px" rounded offset-x>
           <template v-slot:activator="{ on }">
             <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
-              <v-avatar size="55">
+              <v-avatar size="50">
                 <v-img src="../assets/utsv-logo.png"></v-img>
               </v-avatar>
             </v-btn>
@@ -119,13 +131,19 @@
           <v-card>
             <v-list-item-content class="justify-center">
               <div class="mx-auto text-center">
-                <v-avatar size="70">
-                  <v-img src="../assets/utsv-logo.png"></v-img>
+                <v-avatar class="mb-2" color="#E5E8E8" size="70">
+                  <v-img
+                    max-width="68"
+                    max-height="68"
+                    src="../assets/utsv-logo.png"
+                  ></v-img>
                 </v-avatar>
-                <h3>{{ user.nombre }}</h3>
+                <h3>
+                  {{ user.nombre }}
+                  <v-icon color="blue" small> mdi mdi-check-decagram</v-icon>
+                </h3>
                 <p class="caption mt-1">
                   {{ user.rol }}
-                  <v-icon color="green" right> mdi mdi-check-decagram</v-icon>
                 </p>
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="perfil()" depressed rounded text>

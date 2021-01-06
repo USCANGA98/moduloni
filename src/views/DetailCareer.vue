@@ -136,7 +136,6 @@
     />
 
     <userModal
-      v-if="viewDetailUser"
       :viewDetailUser="viewDetailUser"
       :user="user"
       @cerrar="viewDetailUser = false"
@@ -159,7 +158,7 @@ export default {
     addressModal: () => import("../components/Address"),
     documentsModal: () => import("../components/Documents"),
     userModal: () => import("../components/DetailUser"),
-    EliminarEstudiante
+    EliminarEstudiante,
   },
   data: () => ({
     viewAddress: false,
@@ -177,41 +176,41 @@ export default {
     headers: [
       {
         text: "Nombre",
-        value: "nombre"
+        value: "nombre",
       },
       {
         text: "Apellido Paterno",
-        value: "apellidoPaterno"
+        value: "apellidoPaterno",
       },
       {
         text: "Apellido Materno",
-        value: "apellidoMaterno"
+        value: "apellidoMaterno",
       },
       {
         text: "Status",
-        value: "statusProceso"
+        value: "statusProceso",
       },
       {
         text: "Correo",
-        value: "correoElectronico"
+        value: "correoElectronico",
       },
       {
         text: "Direccion",
-        value: "direccion"
+        value: "direccion",
       },
       {
         text: "Documentos",
-        value: "documents"
+        value: "documents",
       },
       {
         text: "Detalle completo",
-        value: "detalleCompleto"
+        value: "detalleCompleto",
       },
       {
         text: "Eliminar estudiante",
-        value: "eliminarestudiante"
-      }
-    ]
+        value: "eliminarestudiante",
+      },
+    ],
   }),
   methods: {
     async guardado() {
@@ -240,7 +239,7 @@ export default {
           .get();
 
         if (response.docs.length > 0) {
-          response.docs.forEach(e => {
+          response.docs.forEach((e) => {
             this.items.push(e.data());
           });
         }
@@ -253,11 +252,11 @@ export default {
     async eliminarEstudiante(uid) {
       this.uid = uid;
       this.dialog = true;
-    }
+    },
   },
   computed: {
-    ...mapState(["careerSelected"])
-  }
+    ...mapState(["careerSelected"]),
+  },
 };
 </script>
 
