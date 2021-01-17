@@ -1,16 +1,15 @@
 <template>
   <div>
-    <v-navigation-drawer
-      v-model="drawer"
-      expand-on-hover
-      absolute
-      permanent
-      floating
-      navigation-drawer-temporary-elevation
-    >
+    <v-navigation-drawer v-model="drawer" expand-on-hover absolute permanent>
       <!-- Condicion de renderizado para asignar un tipo de drawer a un tipo de usuario en este caso "admin" -->
       <v-layout class="align-center" v-if="user.rol === 'admin'">
-        <v-menu bottom min-width="200px" rounded offset-x>
+        <v-menu
+          transition="scale-transition"
+          bottom
+          min-width="200px"
+          rounded
+          offset-x
+        >
           <template v-slot:activator="{ on }">
             <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
               <v-avatar size="50">
@@ -35,16 +34,6 @@
                 <p class="caption mt-1">
                   {{ user.rol }}
                 </p>
-                <v-divider v-if="user.rol != 'admin'" class="my-3"></v-divider>
-                <v-btn
-                  v-if="user.rol != 'admin'"
-                  @click="perfil()"
-                  depressed
-                  rounded
-                  text
-                >
-                  Editar Cuenta
-                </v-btn>
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="cerrarSesion()" depressed rounded text>
                   Cerrar Sesión
@@ -64,7 +53,13 @@
       </v-layout>
       <!-- Condicion de renderizado para "Estudiante" -->
       <v-layout class="align-center" link v-if="user.rol === 'Estudiante'">
-        <v-menu bottom min-width="200px" rounded offset-x>
+        <v-menu
+          transition="scale-transition"
+          bottom
+          min-width="200px"
+          rounded
+          offset-x
+        >
           <template v-slot:activator="{ on }">
             <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
               <v-avatar size="50">
@@ -120,7 +115,13 @@
           user.rol === 'DirectorMantto'
         "
       >
-        <v-menu bottom min-width="200px" rounded offset-x>
+        <v-menu
+          transition="scale-transition"
+          bottom
+          min-width="200px"
+          rounded
+          offset-x
+        >
           <template v-slot:activator="{ on }">
             <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
               <v-avatar size="50">

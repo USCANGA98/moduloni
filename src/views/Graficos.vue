@@ -2,94 +2,210 @@
   <v-container>
     <div>
       <v-row>
-        <v-col class="text-center" cols="3">
+        <v-col cols="7">
           <v-hover v-slot:default="{ hover }" open-delay="0">
-            <v-card
-              outlined
-              :class="`elevation-${hover ? 10 : 1}`"
-              class="pa-2 transition-swing"
-              ripple
-            >
-              <v-card-title class="justify-center"
-                ><strong>Total de Aspirantes</strong></v-card-title
-              >
-              <v-progress-circular
-                :rotate="360"
-                :size="215"
-                :width="50"
-                :value="sumaTotal.length"
-                color="green"
-              >
-                <h1>{{ sumaTotal.length }}</h1>
-              </v-progress-circular>
-              <v-card-subtitle class="text-left">UTSV</v-card-subtitle>
+            <v-card class="mt-16" max-height="800">
+              <v-container>
+                <v-card
+                  ripple
+                  color="teal accent-4"
+                  :class="`elevation-${hover ? 10 : 10}`"
+                  outlined
+                  class="ml-6 mt-n16 mr-6 mt"
+                >
+                  <pie-chart
+                    :refresh="1"
+                    :library="{ cutoutPercentage: 20 }"
+                    class="mt-3 mb-3"
+                    :data="[
+                      [Contaduria[0].carrera, Contaduria.length],
+                      [Tic[0].carrera, Tic.length],
+                      [Mantto[0].carrera, Mantto.length],
+                      [Meca[0].carrera, Meca.length],
+                      [Quimica[0].carrera, Quimica.length],
+                      [Mecanica[0].carrera, Mecanica.length],
+                      [Administracion[0].carrera, Administracion.length],
+                      [Energias[0].carrera, Energias.length],
+                      [IngTi[0].carrera, IngTi.length],
+                      [IngMantto[0].carrera, IngMantto.length],
+                      [IngMeca[0].carrera, IngMeca.length],
+                      [IngQuimica[0].carrera, IngQuimica.length],
+                    ]"
+                  ></pie-chart>
+                </v-card>
+
+                <v-card-title class="justify-left"
+                  >Aspirantes por carrera</v-card-title
+                >
+                <v-card-subtitle>
+                  Se muestra todos los alumnos mediante una gráfica de pastel
+                </v-card-subtitle>
+                <v-divider></v-divider>
+                <v-card-text>UTSV</v-card-text>
+              </v-container>
+            </v-card>
+          </v-hover>
+        </v-col>
+        <v-col cols="5">
+          <v-hover v-slot:default="{ hover }" open-delay="0">
+            <v-card class="mt-16" min-height="100" min-width="100">
+              <v-container>
+                <v-card
+                  outlined
+                  ripple
+                  :class="`elevation-${hover ? 10 : 10}`"
+                  class="pa-1 mt-n16 ml-3 mr-3"
+                >
+                  <column-chart
+                    :refresh="10"
+                    class="mt-0 mb-0 pa-0"
+                    :colors="['#00BFA5']"
+                    :data="[
+                      [Administracion[0].carrera, Administracion.length],
+                      [Energias[0].carrera, Energias.length],
+                      [Contaduria[0].carrera, Contaduria.length],
+                      [Tic[0].carrera, Tic.length],
+                      [Mantto[0].carrera, Mantto.length],
+                      [Meca[0].carrera, Meca.length],
+                      [Quimica[0].carrera, Quimica.length],
+                      [Mecanica[0].carrera, Mecanica.length],
+                      [IngTi[0].carrera, IngTi.length],
+                      [IngMantto[0].carrera, IngMantto.length],
+                      [IngMeca[0].carrera, IngMeca.length],
+                      [IngQuimica[0].carrera, IngQuimica.length],
+                    ]"
+                  ></column-chart>
+                </v-card>
+                <v-card-title class="text-left">
+                  Gráfica de índice de aspirantes
+                </v-card-title>
+                <v-card-subtitle
+                  >Se muestra la cantidad de aspirantes en una gráfica de
+                  barras</v-card-subtitle
+                >
+                <v-divider></v-divider>
+                <v-card-text>UTSV</v-card-text>
+              </v-container>
             </v-card>
           </v-hover>
         </v-col>
 
-        <v-col cols="4">
+        <v-col cols="5">
           <v-hover v-slot:default="{ hover }" open-delay="0">
-            <v-card
-              outlined
-              ripple
-              :class="`elevation-${hover ? 10 : 1}`"
-              class="pa-2 transition-swing"
-            >
-              <v-card-title class="justify-center"
-                ><strong>Gráfica de índice de aspirantes</strong></v-card-title
-              >
-              <column-chart
-                :colors="['#1FC2BA']"
-                :data="[
-                  [Administracion[0].carrera, Administracion.length],
-                  [Energias[0].carrera, Energias.length],
-                  [Contaduria[0].carrera, Contaduria.length],
-                  [Tic[0].carrera, Tic.length],
-                  [Mantto[0].carrera, Mantto.length],
-                  [Meca[0].carrera, Meca.length],
-                  [Quimica[0].carrera, Quimica.length],
-                  [Mecanica[0].carrera, Mecanica.length],
-                  [IngTi[0].carrera, IngTi.length],
-                  [IngMantto[0].carrera, IngMantto.length],
-                  [IngMeca[0].carrera, IngMeca.length],
-                  [IngQuimica[0].carrera, IngQuimica.length],
-                ]"
-              ></column-chart>
-              <v-card-subtitle>UTSV</v-card-subtitle>
+            <v-card class="mt-16" min-height="300" min-width="100">
+              <v-container>
+                <v-card
+                  outlined
+                  dark
+                  color="teal accent-4"
+                  :class="`elevation-${hover ? 10 : 10}`"
+                  class="text-center pa-2 mt-n16 ml-3 mr-3"
+                  ripple
+                >
+                  <v-progress-circular
+                    :refresh="10"
+                    class="mt-5 justify-center"
+                    :size="180"
+                    :width="50"
+                    :value="sumaTotal.length"
+                  >
+                    <h1>{{ sumaTotal.length }}</h1>
+                  </v-progress-circular>
+                </v-card>
+                <v-card-title class="text-left"
+                  >Total de Aspirantes</v-card-title
+                >
+                <v-card-subtitle
+                  >Se muestra la cantidad de aspirantes en un contador
+                  circular</v-card-subtitle
+                >
+                <v-divider></v-divider>
+                <v-card-text>UTSV</v-card-text>
+              </v-container>
             </v-card>
           </v-hover>
         </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="5">
+
+        <v-col cols="7">
           <v-hover v-slot:default="{ hover }" open-delay="0">
-            <v-card
-              ripple
-              :class="`elevation-${hover ? 10 : 1}`"
-              outlined
-              class="pa-2 transition-swing"
-            >
-              <v-card-title class="justify-center"
-                ><strong>Aspirantes por carrera</strong></v-card-title
-              >
-              <pie-chart
-                :library="{ cutoutPercentage: 40 }"
-                class="mt-3 mb-5"
-                :data="[
-                  [Contaduria[0].carrera, Contaduria.length],
-                  [Tic[0].carrera, Tic.length],
-                  [Mantto[0].carrera, Mantto.length],
-                  [Meca[0].carrera, Meca.length],
-                  [Quimica[0].carrera, Quimica.length],
-                  [Mecanica[0].carrera, Mecanica.length],
-                  [Administracion[0].carrera, Administracion.length],
-                  [Energias[0].carrera, Energias.length],
-                  [IngTi[0].carrera, IngTi.length],
-                  [IngMantto[0].carrera, IngMantto.length],
-                  [IngMeca[0].carrera, IngMeca.length],
-                  [IngQuimica[0].carrera, IngQuimica.length],
-                ]"
-              ></pie-chart>
-              <v-card-subtitle>UTSV</v-card-subtitle>
+            <v-card class="mt-16" min-height="200" min-width="100">
+              <v-container>
+                <v-card
+                  color="teal accent-4"
+                  dark
+                  outlined
+                  ripple
+                  :class="`elevation-${hover ? 10 : 10}`"
+                  class="pa-2 mt-n16 ml-3 mr-3"
+                >
+                  <v-row>
+                    <v-col cols="6">
+                      <v-card-text class="text-left ma-2 mt-n3">
+                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon
+                        ><strong>{{
+                          Administracion[0].direccion.ciudad
+                        }}</strong>
+                        <br />
+                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon
+                        ><strong>{{ Energias[0].direccion.ciudad }}</strong>
+                        <br />
+                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon
+                        ><strong>{{ Contaduria[0].direccion.ciudad }}</strong>
+                        <br />
+                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon
+                        ><strong>{{ Tic[0].direccion.ciudad }}</strong>
+                        <br />
+                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon
+                        ><strong>{{ Mantto[0].direccion.ciudad }}</strong>
+                        <br />
+                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon
+                        ><strong>{{ Meca[0].direccion.ciudad }}</strong>
+                        <br />
+                      </v-card-text>
+                    </v-col>
+
+                    <v-col cols="6">
+                      <v-card-text class="text-right ma-2 mt-n3">
+                        <strong>{{ Quimica[0].direccion.ciudad }}</strong
+                        ><v-icon right x-small
+                          >mdi-checkbox-blank-circle</v-icon
+                        >
+                        <br />
+                        <strong>{{ Mecanica[0].direccion.ciudad }}</strong>
+                        <v-icon right x-small>mdi-checkbox-blank-circle</v-icon
+                        ><br />
+                        <strong>{{ IngTi[0].direccion.ciudad }}</strong
+                        ><v-icon right x-small
+                          >mdi-checkbox-blank-circle</v-icon
+                        >
+                        <br />
+                        <strong>{{ IngMantto[0].direccion.ciudad }}</strong
+                        ><v-icon right x-small
+                          >mdi-checkbox-blank-circle</v-icon
+                        >
+                        <br />
+                        <strong>{{ IngMeca[0].direccion.ciudad }}</strong
+                        ><v-icon right x-small
+                          >mdi-checkbox-blank-circle</v-icon
+                        >
+                        <br />
+                        <strong>{{ IngQuimica[0].direccion.ciudad }}</strong
+                        ><v-icon right x-small
+                          >mdi-checkbox-blank-circle</v-icon
+                        >
+                        <br />
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-card>
+                <v-card-title>Ciudades Emisoras</v-card-title>
+                <v-card-subtitle
+                  >Ciudades de donde aplican los nuevos
+                  aspirantes</v-card-subtitle
+                >
+                <v-divider></v-divider>
+                <v-card-text>UTSV</v-card-text>
+              </v-container>
             </v-card>
           </v-hover>
         </v-col>
@@ -106,8 +222,12 @@ import Chartkick from 'vue-chartkick'
 import Chart from 'chart.js'
 
 Vue.use(Chartkick.use(Chart))
+
 export default {
   name: "ViewGraficos",
+  colors: [ '#4572A7', '#AA4643', '#89A54E', '#80699B', '#3D96AE', '#DB843D', '#92A8CD', '#A47D7C', '#B5CA92' ], plotOptions: { column: { colorByPoint: true } },
+
+
 
   data: () => ({
 
@@ -140,51 +260,51 @@ export default {
       try {
         const response = await db
           .collection("users")
-          .where("carrera", "==", "TSU Contaduría")
+          .where("carrera", "==", "TSU Contaduria")
           .get();
           const response2 = await db
           .collection("users")
-          .where("carrera", "==", "TSU Tecnologías de Información y Comunicación")
+          .where("carrera", "==", "TSU Tecnologias de Informacion y Comunicacion")
           .get();
           const response3 = await db
           .collection("users")
-          .where("carrera", "==", "TSU Mantenimiento Área Industrial")
+          .where("carrera", "==", "TSU Mantenimiento Area Industrial")
           .get();
           const response4 = await db
           .collection("users")
-          .where("carrera", "==", "TSU Mecatrónica área Automatización")
+          .where("carrera", "==", "TSU Mecatronica Area Automatizacion")
           .get();
           const response5 = await db
           .collection("users")
-          .where("carrera", "==", "TSU Química Industrial")
+          .where("carrera", "==", "TSU Quimica Industrial")
           .get();
           const response6 = await db
           .collection("users")
-          .where("carrera", "==", "TSU Mecánica área Automotriz")
+          .where("carrera", "==", "TSU Mecanica Area Automotriz")
           .get();
           const response7 = await db
           .collection("users")
-          .where("carrera", "==", "TSU Administración área Capital Humano")
+          .where("carrera", "==", "TSU Administracion Area Capital Humano")
           .get();
           const response8 = await db
           .collection("users")
-          .where("carrera", "==", "TSU Energías Renovables")
+          .where("carrera", "==", "TSU Energias Renovables")
           .get();
           const response9 = await db
           .collection("users")
-          .where("carrera", "==", "Ingeniería en Tecnologías de la Información")
+          .where("carrera", "==", "Ingenieria en Tecnologias de la Informacion")
           .get();
           const response10 = await db
           .collection("users")
-          .where("carrera", "==", "Ingeniería en Mantenimiento Industrial")
+          .where("carrera", "==", "Ingenieria en Mantenimiento Industrial")
           .get();
           const response11 = await db
           .collection("users")
-          .where("carrera", "==", "Ingeniería en Mecatrónica")
+          .where("carrera", "==", "Ingenieria en Mecatronica")
           .get();
           const response12 = await db
           .collection("users")
-          .where("carrera", "==", "Ingeniería Química")
+          .where("carrera", "==", "Ingenieria Quimica")
           .get();
 
         if (response.docs.length > 0) {
