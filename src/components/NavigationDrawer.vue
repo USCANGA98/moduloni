@@ -277,8 +277,8 @@ export default {
           path: "/admin/graficos",
         },
         {
-          title: "Agregar Director",
-          icon: "mdi-account-circle",
+          title: "Agregar Usuario",
+          icon: "mdi-account-multiple",
           path: "/admin/nuevo-usuario",
         },
       ],

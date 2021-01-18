@@ -53,8 +53,8 @@
                   <v-menu
                     ref="menu"
                     v-model="menu"
-                    :close-on-content-click="true"
-                    transition="scale-transition"
+                    :close-on-content-click="false"
+                    transition="slide-y-transition"
                     offset-y
                     max-width="290px"
                     min-width="290px"

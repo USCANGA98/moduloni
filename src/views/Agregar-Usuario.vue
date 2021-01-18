@@ -12,7 +12,7 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row>
         <v-col cols="12">
-          <v-card class="pa-2" elevation="5">
+          <v-card v-if="user.rol != 'admin'" class="pa-2" elevation="5">
             <v-container>
               <h2 class="mb-5">Datos personales</h2>
               <v-row>
@@ -53,8 +53,8 @@
                   <v-menu
                     ref="menu"
                     v-model="menu"
-                    :close-on-content-click="true"
-                    transition="scale-transition"
+                    :close-on-content-click="false"
+                    transition="slide-y-transition"
                     offset-y
                     max-width="290px"
                     min-width="290px"
@@ -116,7 +116,33 @@
           <v-card class="pa-2" elevation="5">
             <v-container>
               <h2 class="mb-5">Cuenta</h2>
+
               <v-row>
+                <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
+                  <v-text-field
+                    v-if="user.rol == 'admin'"
+                    outlined
+                    color="green"
+                    label="Nombre(s)"
+                    placeholder="Ingresa tu nombre(s)"
+                    v-model="user.nombre"
+                    :rules="ruleRequired"
+                    dense
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
+                  <v-select
+                    v-if="user.rol == 'admin'"
+                    outlined
+                    color="green"
+                    label="Rol"
+                    placeholder="Area de director"
+                    dense
+                    :items="rolOptions"
+                    v-model="user.rol"
+                    :rules="ruleRequired"
+                  ></v-select>
+                </v-col>
                 <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
                   <v-text-field
                     outlined
@@ -229,7 +255,13 @@ export default {
       uid: "",
     },
     menu: false,
-    rolOptions: ["DirectorTi", "DirectorMeca", "DirectorQui", "DirectorMantto"],
+    rolOptions: [
+      "DirectorTi",
+      "DirectorMeca",
+      "DirectorQui",
+      "DirectorMantto",
+      "admin",
+    ],
     ruleRequired: [(v) => !!v || "Campo requerido"],
     rulePassword: [
       (v) => !!v || "Campo requerido",

@@ -125,6 +125,90 @@ import { mapMutations } from 'vuex';
               @click="goDetailCareer(career)"
             >
               <v-img
+                v-if="
+                  career == 'TSU Tecnologias de Informacion y Comunicacion' ||
+                  career == 'Ingenieria en Tecnologias de la Informacion'
+                "
+                src="../assets/utsv-logo-tic.jpg"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+
+              <v-img
+                v-if="
+                  career == 'TSU Mantenimiento Area Industrial' ||
+                  career == 'Ingenieria en Mantenimiento Industrial'
+                "
+                src="../assets/utsv-logo-mantto.jpg"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+              <v-img
+                v-if="career == 'TSU Contaduria'"
+                src="../assets/utsv-logo-conta.png"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+              <v-img
+                v-if="
+                  career == 'TSU Mecatronica Area Automatizacion' ||
+                  career == 'Ingenieria en Mecatronica'
+                "
+                src="../assets/utsv-logo-mecatronica.jpg"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+              <v-img
+                v-if="
+                  career == 'TSU Quimica Industrial' ||
+                  career == 'Ingenieria Quimica'
+                "
+                src="../assets/utsv-logo-quimica.jpg"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+              <v-img
+                v-if="career == 'TSU Mecanica Area Automotriz'"
+                src="../assets/utsv-logo-mecanica.jpg"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+              <v-img
+                v-if="career == 'TSU Administracion Area Capital Humano'"
+                src="../assets/utsv-logo-administracion.jpg"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+              <v-img
+                v-if="career == 'TSU Energias Renovables'"
                 src="../assets/utsv-logo.png"
                 class="white--text align-end"
                 gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
