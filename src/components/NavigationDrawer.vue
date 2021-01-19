@@ -1,6 +1,12 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" expand-on-hover absolute permanent>
+    <v-navigation-drawer
+      app
+      v-model="drawer"
+      expand-on-hover
+      absolute
+      permanent
+    >
       <!-- Condicion de renderizado para asignar un tipo de drawer a un tipo de usuario en este caso "admin" -->
       <v-layout class="align-center" v-if="user.rol === 'admin'">
         <v-menu
