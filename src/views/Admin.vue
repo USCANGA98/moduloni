@@ -110,7 +110,6 @@ import { mapMutations } from 'vuex';
           />
 
           <userModal
-            v-if="viewDetailUser"
             :viewDetailUser="viewDetailUser"
             :user="user"
             @cerrar="viewDetailUser = false"

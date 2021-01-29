@@ -287,6 +287,11 @@ export default {
           icon: "mdi-account-multiple",
           path: "/admin/nuevo-usuario",
         },
+        {
+          title: "Agregar Admin",
+          icon: "mdi-account-circle",
+          path: "/admin/nuevo-admin",
+        },
       ],
       itemsStudent: [
         {

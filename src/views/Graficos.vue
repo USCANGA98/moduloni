@@ -11,11 +11,16 @@
                   color="teal accent-4"
                   :class="`elevation-${hover ? 10 : 10}`"
                   outlined
-                  class="ml-6 mt-n16 mr-6 mt"
+                  class="ml-3 mt-n16 mr-3 mt"
                 >
                   <pie-chart
-                    :refresh="1"
-                    :library="{ cutoutPercentage: 20 }"
+                    :messages="{ empty: 'No data' }"
+                    :refresh="5"
+                    :dataset="{}"
+                    :library="{
+                      cutoutPercentage: 30,
+                      animation: { duration: 3000 },
+                    }"
                     class="mt-3 mb-3"
                     :data="[
                       [Contaduria[0].carrera, Contaduria.length],
@@ -51,13 +56,17 @@
             <v-card class="mt-16" min-height="100" min-width="100">
               <v-container>
                 <v-card
+                  color="teal accent-4"
                   outlined
                   ripple
                   :class="`elevation-${hover ? 10 : 10}`"
                   class="pa-1 mt-n16 ml-3 mr-3"
                 >
                   <column-chart
-                    :refresh="10"
+                    :dataset="{ borderWidth: 5, backgroundColor: '#fff' }"
+                    :messages="{ empty: 'No data' }"
+                    :refresh="5"
+                    :library="{ animation: { duration: 3000 } }"
                     class="mt-0 mb-0 pa-0"
                     :colors="['#00BFA5']"
                     :data="[
@@ -103,7 +112,6 @@
                   ripple
                 >
                   <v-progress-circular
-                    :refresh="10"
                     class="mt-5 justify-center"
                     :size="180"
                     :width="50"

@@ -3,21 +3,13 @@
     <v-container>
       <v-row>
         <!-- Aqui empieza linea de todos los alumnos-->
+
         <v-container>
           <v-row>
             <v-col cols="12">
               <h2>Carreras</h2>
             </v-col>
-            <v-text-field
-              rounded
-              clearable
-              v-show="expand"
-              v-model="search"
-              solo
-              color="green"
-              append-icon="mdi-magnify"
-              label="Buscar"
-            ></v-text-field>
+
             <v-expand-transition>
               <v-card
                 v-show="expand"
@@ -108,7 +100,21 @@
               @click="goDetailCareer(career)"
             >
               <v-img
-                src="../assets/utsv-logo.png"
+                v-if="
+                  career == 'Ingenieria en Tecnologias de la Informacion' ||
+                  career == 'TSU Tecnologias de Informacion y Comunicacion'
+                "
+                src="../assets/utsv-logo-tic.jpg"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+              <v-img
+                v-if="career == 'TSU Contaduria'"
+                src="../assets/utsv-logo-conta.png"
                 class="white--text align-end"
                 gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
               >
@@ -134,7 +140,31 @@
               @click="goDetailCareer(career)"
             >
               <v-img
+                v-if="
+                  career == 'TSU Quimica Industrial' ||
+                  career == 'Ingenieria Quimica'
+                "
+                src="../assets/utsv-logo-quimica.jpg"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+              <v-img
+                v-if="career == 'TSU Energias Renovables'"
                 src="../assets/utsv-logo.png"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+              <v-img
+                v-if="career == 'TSU Administracion Area Capital Humano'"
+                src="../assets/utsv-logo-administracion.jpg"
                 class="white--text align-end"
                 gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
               >
@@ -160,7 +190,21 @@
               @click="goDetailCareer(career)"
             >
               <v-img
-                src="../assets/utsv-logo.png"
+                v-if="
+                  career == 'TSU Mantenimiento Area Industrial' ||
+                  career == 'Ingenieria en Mantenimiento Industrial'
+                "
+                src="../assets/utsv-logo-mantto.jpg"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+              >
+                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                  {{ career }}
+                </h3>
+              </v-img>
+              <v-img
+                v-if="career == 'TSU Mecanica Area Automotriz'"
+                src="../assets/utsv-logo-mecanica.jpg"
                 class="white--text align-end"
                 gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
               >
@@ -186,7 +230,11 @@
               @click="goDetailCareer(career)"
             >
               <v-img
-                src="../assets/utsv-logo.png"
+                v-if="
+                  career == 'TSU Mecatronica Area Automatizacion' ||
+                  career == 'Ingenieria en Mecatronica'
+                "
+                src="../assets/utsv-logo-mecatronica.jpg"
                 class="white--text align-end"
                 gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
               >
@@ -217,7 +265,7 @@ export default {
   components: {
     addressModal: () => import("../components/Address"),
     documentsModal: () => import("../components/Documents"),
-    userModal: () => import("../components/DetailUser")
+    userModal: () => import("../components/DetailUser"),
   },
   data: () => ({
     viewAddress: false,
@@ -235,62 +283,62 @@ export default {
     headers: [
       {
         text: "Nombre",
-        value: "nombre"
+        value: "nombre",
       },
       {
         text: "Apellido Paterno",
-        value: "apellidoPaterno"
+        value: "apellidoPaterno",
       },
       {
         text: "Apellido Materno",
-        value: "apellidoMaterno"
+        value: "apellidoMaterno",
       },
       {
         text: "Edad",
-        value: "edad"
+        value: "edad",
       },
       {
         text: "Status",
-        value: "statusProceso"
+        value: "statusProceso",
       },
       {
         text: "Carrera",
-        value: "carrera"
+        value: "carrera",
       },
       {
         text: "Direccion",
-        value: "direccion"
+        value: "direccion",
       },
       {
         text: "Documentos",
-        value: "documents"
+        value: "documents",
       },
       {
         text: "Detalle completo",
-        value: "detalleCompleto"
-      }
+        value: "detalleCompleto",
+      },
     ],
 
     careerOptionsTi: [
-      "TSU Tecnologías de Información y Comunicación",
-      "TSU Contaduría",
-      "Ingeniería en Tecnologías de la Información"
+      "TSU Tecnologias de Informacion y Comunicacion",
+      "TSU Contaduria",
+      "Ingenieria en Tecnologias de la Informacion",
     ],
     careerOptionsMantto: [
-      "TSU Mantenimiento Área Industrial",
-      "TSU Mecánica área Automotriz",
-      "Ingeniería en Mantenimiento Industrial"
+      "TSU Mantenimiento Area Industrial",
+      "TSU Mecanica Area Automotriz",
+      "Ingenieria en Mantenimiento Industrial",
     ],
     careerOptionsMecatronica: [
-      "TSU Mecatrónica área Automatización",
-      "Ingeniería en Mecatrónica"
+      "TSU Mecatronica Area Automatizacion",
+      "Ingenieria en Mecatronica",
     ],
     careerOptionsQuimica: [
-      "TSU Química Industrial",
-      "TSU Administración área Capital Humano",
-      "TSU Energías Renovables",
-      "Ingeniería Química"
-    ]
+      "TSU Quimica Industrial",
+      "TSU Administracion Area Capital Humano",
+      "TSU Energias Renovables",
+      "Ingenieria Quimica",
+    ],
   }),
   methods: {
     ...mapMutations(["setCareerSelected"]),
@@ -325,7 +373,7 @@ export default {
           .get();
 
         if (response.docs.length > 0) {
-          response.docs.forEach(e => {
+          response.docs.forEach((e) => {
             this.items.push(e.data());
           });
         }
@@ -340,10 +388,10 @@ export default {
       try {
         const response = await db
           .collection("users")
-          .where("rol", "==", "Estudiante")
+          .where("carrera", "==", "TSU Contaduria")
           .get();
         if (response.docs.length > 0) {
-          response.docs.forEach(e => {
+          response.docs.forEach((e) => {
             this.estudiantes.push(e.data());
           });
         }
@@ -352,12 +400,12 @@ export default {
       } finally {
         this.loading = false;
       }
-    }
+    },
   },
 
   computed: {
-    ...mapState(["careerSelected", "user"])
-  }
+    ...mapState(["careerSelected", "user"]),
+  },
 };
 </script>
 

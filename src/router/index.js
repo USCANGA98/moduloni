@@ -75,6 +75,13 @@ const routes = [
     beforeEnter: ifAuthenticated
   },
   {
+    path: "/admin/nuevo-admin",
+    name: "Agregar-Admin",
+    component: () =>
+      import(/* webpackChunkName: "admin" */ "../views/Agregar-Admin.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  {
     path: "/perfil",
     name: "Perfil",
     component: () =>

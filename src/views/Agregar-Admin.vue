@@ -14,9 +14,10 @@
         <v-col cols="12">
           <v-card class="pa-2" elevation="5">
             <v-container>
-              <h2 class="mb-5">Datos personales</h2>
+              <h2 class="mb-5">Cuenta Administrador</h2>
+
               <v-row>
-                <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
                   <v-text-field
                     outlined
                     color="green"
@@ -27,97 +28,18 @@
                     dense
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
+                <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
                   <v-text-field
                     outlined
                     color="green"
-                    label="Primer apellido"
-                    placeholder="Apellido paterno"
-                    v-model="user.apellidoPaterno"
+                    label="Apellidos"
+                    placeholder="Ingresa tus apellidos(s)"
+                    v-model="user.apellidos"
                     :rules="ruleRequired"
                     dense
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                  <v-text-field
-                    outlined
-                    color="green"
-                    label="Segundo apellido "
-                    placeholder="Apellido materno"
-                    v-model="user.apellidoMaterno"
-                    :rules="ruleRequired"
-                    dense
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                  <v-menu
-                    ref="menu"
-                    v-model="menu"
-                    :close-on-content-click="false"
-                    transition="slide-y-transition"
-                    offset-y
-                    max-width="290px"
-                    min-width="290px"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        outlined
-                        dense
-                        color="green"
-                        v-model="user.fechaNacimiento"
-                        label="Fecha de nacimiento"
-                        placeholder="Ingresa tu fecha de nacimiento"
-                        v-bind="attrs"
-                        v-on="on"
-                        :rules="ruleRequired"
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker
-                      :max="new Date().toISOString()"
-                      v-model="user.fechaNacimiento"
-                      color="green"
-                      @input="menu = false"
-                    ></v-date-picker>
-                  </v-menu>
-                </v-col>
-                <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                  <v-text-field
-                    outlined
-                    color="green"
-                    label="Edad"
-                    placeholder="Ingresa tu edad"
-                    type="number"
-                    min="0"
-                    max="99"
-                    v-model="user.edad"
-                    :rules="ruleRequired"
-                    dense
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
-                  <v-select
-                    outlined
-                    color="green"
-                    label="Rol"
-                    placeholder="Area de director"
-                    dense
-                    :items="rolOptions"
-                    v-model="user.rol"
-                    :rules="ruleRequired"
-                  ></v-select>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-card class="pa-2" elevation="5">
-            <v-container>
-              <h2 class="mb-5">Cuenta</h2>
 
-              <v-row>
                 <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
                   <v-text-field
                     outlined
@@ -222,15 +144,12 @@ export default {
     show2: false,
     user: {
       nombre: "",
-      apellidoPaterno: "",
-      apellidoMaterno: "",
-      fechaNacimiento: "",
-      edad: "",
-      rol: "",
+      apellidos: "",
+      rol: "admin",
       uid: "",
     },
     menu: false,
-    rolOptions: ["DirectorTi", "DirectorMeca", "DirectorQui", "DirectorMantto"],
+
     ruleRequired: [(v) => !!v || "Campo requerido"],
     rulePassword: [
       (v) => !!v || "Campo requerido",

@@ -1,6 +1,5 @@
 <template>
   <v-container fluid class="img">
-    <v-row> </v-row>
     <v-row class="d-flex ma-15 justify-center">
       <v-col cols="12" md="4">
         <v-card elevation="24">
