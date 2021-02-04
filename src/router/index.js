@@ -63,10 +63,11 @@ const routes = [
     path: "/director",
     name: "Control-Estudiantes",
     component: () =>
-      import(/* webpackChunkName: "admin" */ "../views/Control-Estudiantes.vue"),
+      import(
+        /* webpackChunkName: "admin" */ "../views/Control-Estudiantes.vue"
+      ),
     beforeEnter: ifAuthenticated
-  }
-  ,
+  },
   {
     path: "/admin/nuevo-usuario",
     name: "Agregar-Usuario",
@@ -82,10 +83,19 @@ const routes = [
     beforeEnter: ifAuthenticated
   },
   {
+    path: "/admin/valorar-proyecto",
+    name: "Valorar",
+    component: () =>
+      import(/* webpackChunkName: "admin" */ "../views/Valorar-Proyecto.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  {
     path: "/perfil",
     name: "Perfil",
     component: () =>
-      import(/* webpackChunkName: "admin" */ "../views/Perfil.vue"),
+      import(
+        /* webpackChunkName: "Director/Estudiante" */ "../views/Perfil.vue"
+      ),
     beforeEnter: ifAuthenticated
   }
 ];
@@ -96,4 +106,3 @@ const router = new VueRouter({
 });
 
 export default router;
-

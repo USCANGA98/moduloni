@@ -5,7 +5,7 @@
         <h2 class="text-center">
           UNIVERSIDAD TECNOLÓGICA DEL SURESTE DE VERACRUZ
         </h2>
-        <h3 class="text-center">Control de directores de carrera</h3>
+        <h3 class="text-center">Control de Servicios Escolares</h3>
       </v-col>
     </v-row>
 
@@ -113,7 +113,7 @@
               >Enviar información</v-btn
             >
           </template>
-          <span>Enviar Datos</span>
+          <span>Enviar información</span>
         </v-tooltip>
       </v-col>
     </v-container>

@@ -191,7 +191,7 @@
               >Enviar información</v-btn
             >
           </template>
-          <span>Enviar Datos</span>
+          <span>Enviar información</span>
         </v-tooltip>
       </v-col>
     </v-container>

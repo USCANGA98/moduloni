@@ -471,9 +471,22 @@
 
     <v-row>
       <v-col cols="12">
-        <v-btn block large depressed color="green" dark @click="setInfo"
-          >Enviar información</v-btn
-        >
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              block
+              large
+              depressed
+              color="green"
+              dark
+              @click="setInfo"
+              >Enviar información</v-btn
+            >
+          </template>
+          <span>Enviar Información</span>
+        </v-tooltip>
       </v-col>
     </v-row>
 

@@ -292,6 +292,11 @@ export default {
           icon: "mdi-account-circle",
           path: "/admin/nuevo-admin",
         },
+        {
+          title: "Valorar",
+          icon: "mdi-hand-heart",
+          path: "/admin/valorar-proyecto",
+        },
       ],
       itemsStudent: [
         {

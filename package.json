@@ -9,7 +9,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@mdi/font": "^3.6.95",
+    "@mdi/font": "^3.9.97",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
     "express": "^4.17.1",

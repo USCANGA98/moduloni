@@ -8,7 +8,7 @@ import { mapMutations } from 'vuex';
         <v-container>
           <v-row>
             <v-container class="text-right">
-              <v-tooltip bottom>
+              <v-tooltip left>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     elevation="2"

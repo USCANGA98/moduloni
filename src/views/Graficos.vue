@@ -1,5 +1,15 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col cols="12">
+        <h2 class="text-center">
+          UNIVERSIDAD TECNOLÓGICA DEL SURESTE DE VERACRUZ
+        </h2>
+        <h3 class="text-center">
+          Estadísticas de ingresos de Aspirantes-Alumnos
+        </h3>
+      </v-col>
+    </v-row>
     <div>
       <v-row>
         <v-col cols="7">
@@ -15,8 +25,6 @@
                 >
                   <pie-chart
                     :messages="{ empty: 'No data' }"
-                    :refresh="5"
-                    :dataset="{}"
                     :library="{
                       cutoutPercentage: 30,
                       animation: { duration: 3000 },
@@ -65,7 +73,6 @@
                   <column-chart
                     :dataset="{ borderWidth: 5, backgroundColor: '#fff' }"
                     :messages="{ empty: 'No data' }"
-                    :refresh="5"
                     :library="{ animation: { duration: 3000 } }"
                     class="mt-0 mb-0 pa-0"
                     :colors="['#00BFA5']"
