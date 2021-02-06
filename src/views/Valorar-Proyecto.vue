@@ -28,8 +28,8 @@
               elevation="2"
               colored-border
               class="mr-16 mt-n16 ml-16"
-              color="deep-purple lighten-3"
-              border="top"
+              color="deep-purple lighten-3 "
+              border="top "
               rounded
             >
               <v-container>

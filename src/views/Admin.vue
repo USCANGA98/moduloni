@@ -35,13 +35,13 @@ import { mapMutations } from 'vuex';
               v-model="search"
               solo
               color="green"
-              append-icon="mdi-magnify"
+              prepend-inner-icon="mdi-magnify"
               label="Buscar"
             ></v-text-field>
             <v-expand-transition>
               <v-card
                 v-show="expand"
-                class="mx-auto"
+                class="mx-auto rounded-xl"
                 width="100%"
                 elevation="5"
               >

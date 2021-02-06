@@ -13,7 +13,7 @@
         <v-row>
           <v-col cols="12">
             <v-hover v-slot:default="{ hover }" open-delay="0">
-              <v-card :class="`elevation-${hover ? 10 : 1}`">
+              <v-card class="rounded-xl" :class="`elevation-${hover ? 10 : 1}`">
                 <v-container>
                   <h2 class="mb-5">Datos personales</h2>
                   <v-row>
@@ -133,7 +133,7 @@
         <v-row>
           <v-col cols="12">
             <v-hover v-slot:default="{ hover }" open-delay="0">
-              <v-card :class="`elevation-${hover ? 10 : 1}`">
+              <v-card class="rounded-xl" :class="`elevation-${hover ? 10 : 1}`">
                 <v-container>
                   <h2 class="mb-5">Dirección</h2>
                   <v-row>
@@ -233,7 +233,7 @@
         <v-row>
           <v-col cols="12">
             <v-hover v-slot:default="{ hover }" open-delay="0">
-              <v-card :class="`elevation-${hover ? 10 : 1}`">
+              <v-card class="rounded-xl" :class="`elevation-${hover ? 10 : 1}`">
                 <v-container>
                   <h2 class="mb-5">Datos escolares</h2>
                   <v-row>

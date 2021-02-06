@@ -9,7 +9,7 @@
     </v-container>
     <!-- Aqui empieza el container con los datos del alumno-->
     <v-container v-if="user.rol == 'Estudiante'">
-      <v-card class="ma-15 mt-8 text-center" shaped elevation="10">
+      <v-card class="ma-15 mt-8 text-center rounded-xl" elevation="10">
         <v-flex>
           <v-avatar color="#E5E8E8" size="260" class="mt-n16 mb-5">
             <!-- <v-img v-if="image != ''" :src="image"></v-img> -->
@@ -316,7 +316,7 @@
         user.rol == 'DirectorMantto'
       "
     >
-      <v-card class="ma-15 mt-8 text-center" shaped elevation="10">
+      <v-card class="ma-15 mt-8 text-center rounded-xl" elevation="10">
         <v-flex>
           <v-avatar color="#E5E8E8" size="260" class="mt-n16 mb-5">
             <!-- <v-img v-if="image != ''" :src="image"></v-img> -->

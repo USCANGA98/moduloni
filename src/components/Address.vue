@@ -5,7 +5,7 @@
         <v-toolbar-title>Detalle dirección alumno</v-toolbar-title>
       </v-toolbar>
       <v-hover v-slot:default="{ hover }" open-delay="0">
-        <v-card class="ma-8" :class="`elevation-${hover ? 10 : 1}`">
+        <v-card class="ma-8 rounded-xl" :class="`elevation-${hover ? 10 : 1}`">
           <v-container>
             <h2 class="mb-5">Direccion</h2>
             <v-row>

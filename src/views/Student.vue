@@ -12,77 +12,75 @@
           <v-row>
             <v-col cols="12">
               <v-container class="text-left">
-                <v-card
-                  v-if="user.rol == 'Estudiante'"
-                  max-width="auto"
-                  elevation="2"
-                >
-                  <v-card-subtitle
-                    v-if="user.statusProceso != 'Revisado'"
-                    class="text-center"
-                  >
-                    <strong
-                      >¡Hola {{ user.nombre }}!, podrás actualizar tus
-                      documentos hasta que el 'Status' haya cambiado a
-                      'Revisado'.</strong
-                    ></v-card-subtitle
-                  >
-                  <v-card-subtitle
-                    v-if="user.statusProceso == 'Revisado'"
-                    class="text-center"
-                    ><strong>
-                      Tu proceso de evaluación ha concluido satisfactoriamente,
-                      espera las indicaciones de servicios escolares.</strong
+                <v-stepper value="2" class="ma-0 pa-0">
+                  <v-card flat max-width="auto">
+                    <v-card-subtitle
+                      v-if="user.statusProceso != 'Revisado'"
+                      class="text-center"
                     >
-                  </v-card-subtitle>
-                  <v-stepper value="2" class="ma-0 pa-0">
-                    <v-stepper-header>
-                      <v-stepper-step step="1" color="success" complete>
-                        Documentos enviados
-                      </v-stepper-step>
+                      <strong
+                        >¡Hola {{ user.nombre }}!, podrás actualizar tus
+                        documentos hasta que el 'Status' haya cambiado a
+                        'Revisado'.</strong
+                      ></v-card-subtitle
+                    >
+                    <v-card-subtitle
+                      v-if="user.statusProceso == 'Revisado'"
+                      class="text-center"
+                      ><strong>
+                        ¡Tu proceso de evaluación ha concluido
+                        satisfactoriamente!, Espera las indicaciones de
+                        servicios escolares.</strong
+                      >
+                    </v-card-subtitle>
+                  </v-card>
+                  <v-stepper-header>
+                    <v-stepper-step step="1" color="success" complete>
+                      Documentos enviados
+                    </v-stepper-step>
 
-                      <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                      <v-stepper-step
-                        v-if="user.statusProceso != 'Revisado'"
-                        editable
-                        step="2"
-                        color="info"
-                      >
-                        En revisión
-                        <small>Proceso de evaluación</small>
-                      </v-stepper-step>
+                    <v-stepper-step
+                      v-if="user.statusProceso != 'Revisado'"
+                      editable
+                      step="2"
+                      color="info"
+                    >
+                      En revisión
+                      <small>Proceso de evaluación</small>
+                    </v-stepper-step>
 
-                      <v-stepper-step
-                        v-if="user.statusProceso == 'Revisado'"
-                        step="2"
-                        color="success"
-                        complete
-                      >
-                        En revisión
-                        <small>Proceso de evaluación</small>
-                      </v-stepper-step>
+                    <v-stepper-step
+                      v-if="user.statusProceso == 'Revisado'"
+                      step="2"
+                      color="success"
+                      complete
+                    >
+                      En revisión
+                      <small>Proceso de evaluación</small>
+                    </v-stepper-step>
 
-                      <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                      <v-stepper-step
-                        v-if="user.statusProceso != 'Revisado'"
-                        step="3"
-                      >
-                        Finalizado</v-stepper-step
-                      >
-                      <v-stepper-step
-                        v-if="user.statusProceso == 'Revisado'"
-                        step="3"
-                        color="success"
-                        complete
-                      >
-                        Finalizado</v-stepper-step
-                      >
-                    </v-stepper-header>
-                  </v-stepper>
-                </v-card>
-                <v-tooltip bottom>
+                    <v-stepper-step
+                      v-if="user.statusProceso != 'Revisado'"
+                      step="3"
+                    >
+                      Finalizado</v-stepper-step
+                    >
+                    <v-stepper-step
+                      v-if="user.statusProceso == 'Revisado'"
+                      step="3"
+                      color="success"
+                      complete
+                    >
+                      Finalizado</v-stepper-step
+                    >
+                  </v-stepper-header>
+                </v-stepper>
+
+                <v-tooltip right>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
                       v-bind="attrs"
@@ -103,7 +101,7 @@
                 <v-card
                   v-show="expand"
                   width="100%"
-                  class="mx-auto"
+                  class="mx-auto rounded-xl"
                   elevation="5"
                 >
                   <v-container>

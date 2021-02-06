@@ -1,21 +1,9 @@
 <template>
   <div>
-    <v-navigation-drawer
-      app
-      v-model="drawer"
-      expand-on-hover
-      absolute
-      permanent
-    >
+    <v-navigation-drawer app v-model="drawer" expand-on-hover permanent>
       <!-- Condicion de renderizado para asignar un tipo de drawer a un tipo de usuario en este caso "admin" -->
       <v-layout class="align-center" v-if="user.rol === 'admin'">
-        <v-menu
-          transition="scale-transition"
-          bottom
-          min-width="200px"
-          rounded
-          offset-x
-        >
+        <v-menu transition="scale-transition" bottom min-width="200px" offset-x>
           <template v-slot:activator="{ on }">
             <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
               <v-avatar size="50">
@@ -59,13 +47,7 @@
       </v-layout>
       <!-- Condicion de renderizado para "Estudiante" -->
       <v-layout class="align-center" link v-if="user.rol === 'Estudiante'">
-        <v-menu
-          transition="scale-transition"
-          bottom
-          min-width="200px"
-          rounded
-          offset-x
-        >
+        <v-menu transition="scale-transition" bottom min-width="200px" offset-x>
           <template v-slot:activator="{ on }">
             <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
               <v-avatar size="50">
@@ -121,13 +103,7 @@
           user.rol === 'DirectorMantto'
         "
       >
-        <v-menu
-          transition="scale-transition"
-          bottom
-          min-width="200px"
-          rounded
-          offset-x
-        >
+        <v-menu transition="scale-transition" bottom min-width="200px" offset-x>
           <template v-slot:activator="{ on }">
             <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
               <v-avatar size="50">
@@ -283,7 +259,7 @@ export default {
           path: "/admin/graficos",
         },
         {
-          title: "Agregar Usuario",
+          title: "Agregar Director",
           icon: "mdi-account-multiple",
           path: "/admin/nuevo-usuario",
         },

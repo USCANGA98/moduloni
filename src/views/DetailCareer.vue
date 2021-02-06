@@ -11,7 +11,7 @@
         clearable
         color="green"
         solo
-        append-icon="mdi-magnify"
+        prepend-inner-icon="mdi-magnify"
         label="Buscar"
       ></v-text-field>
 

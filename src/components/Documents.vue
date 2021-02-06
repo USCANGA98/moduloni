@@ -14,7 +14,10 @@
         <v-row>
           <v-col cols="12" v-for="item in item.documents" :key="item.name">
             <v-hover v-slot:default="{ hover }" open-delay="0">
-              <v-card :class="`elevation-${hover ? 10 : 1}`" class="pa-8">
+              <v-card
+                :class="`elevation-${hover ? 10 : 1}`"
+                class="pa-8 rounded-xl"
+              >
                 <v-card-title class="mb-5"
                   >{{ item.name }}
                   <v-card-text
