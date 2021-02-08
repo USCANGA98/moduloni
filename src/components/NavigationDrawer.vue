@@ -3,24 +3,52 @@
     <v-navigation-drawer app v-model="drawer" expand-on-hover permanent>
       <!-- Condicion de renderizado para asignar un tipo de drawer a un tipo de usuario en este caso "admin" -->
       <v-layout class="align-center" v-if="user.rol === 'admin'">
-        <v-menu transition="scale-transition" bottom min-width="200px" offset-x>
-          <template v-slot:activator="{ on }">
-            <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
-              <v-avatar size="50">
-                <v-img src="../assets/utsv-logo.png"></v-img>
-              </v-avatar>
-            </v-btn>
+        <v-menu
+          max-width="250"
+          transition="scale-transition"
+          bottom
+          min-width="200"
+          offset-x
+        >
+          <template v-slot:activator="{ on: menu, attrs }">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on: tooltip }">
+                <v-btn
+                  v-bind="attrs"
+                  class="ml-0"
+                  fab
+                  elevation="0"
+                  color="#fff"
+                  v-on="{ ...tooltip, ...menu }"
+                >
+                  <v-avatar size="50">
+                    <v-img src="../assets/utsv-logo.png"></v-img>
+                  </v-avatar>
+                </v-btn>
+              </template>
+              <span>Cuenta Administrador</span>
+            </v-tooltip>
           </template>
           <v-card>
+            <v-card color="blue" min-height="10" tile flat> </v-card>
             <v-list-item-content class="justify-center">
               <div class="mx-auto text-center">
-                <v-avatar class="mb-2" color="#E5E8E8" size="70">
-                  <v-img
-                    max-width="68"
-                    max-height="68"
-                    src="../assets/utsv-logo.png"
-                  ></v-img>
-                </v-avatar>
+                <v-hover v-slot:default="{ hover }" open-delay="0">
+                  <v-btn class="mb-3 mt-3" depressed fab icon>
+                    <v-avatar
+                      :class="`elevation-${hover ? 4 : 1}`"
+                      class="mb-2 mt-1 transition-swing"
+                      color="white"
+                      size="70"
+                    >
+                      <v-img
+                        max-height="68"
+                        max-width="68"
+                        src="../assets/utsv-logo.png"
+                      ></v-img>
+                    </v-avatar>
+                  </v-btn>
+                </v-hover>
                 <h3>
                   {{ user.nombre }}
                   <v-icon color="blue" small> mdi mdi-check-decagram</v-icon>
@@ -47,24 +75,52 @@
       </v-layout>
       <!-- Condicion de renderizado para "Estudiante" -->
       <v-layout class="align-center" link v-if="user.rol === 'Estudiante'">
-        <v-menu transition="scale-transition" bottom min-width="200px" offset-x>
-          <template v-slot:activator="{ on }">
-            <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
-              <v-avatar size="50">
-                <v-img :src="user.documents.fotografia.url"></v-img>
-              </v-avatar>
-            </v-btn>
+        <v-menu
+          max-width="250"
+          transition="scale-transition"
+          bottom
+          min-width="200"
+          offset-x
+        >
+          <template v-slot:activator="{ on: menu, attrs }">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on: tooltip }">
+                <v-btn
+                  v-bind="attrs"
+                  class="ml-0"
+                  fab
+                  elevation="0"
+                  color="#fff"
+                  v-on="{ ...tooltip, ...menu }"
+                >
+                  <v-avatar size="50">
+                    <v-img :src="user.documents.fotografia.url"></v-img>
+                  </v-avatar>
+                </v-btn>
+              </template>
+              <span> Ver Cuenta</span>
+            </v-tooltip>
           </template>
           <v-card>
+            <v-card color="blue" min-height="10" tile flat> </v-card>
             <v-list-item-content class="justify-center">
               <div class="mx-auto text-center">
-                <v-avatar class="mb-2" color="#E5E8E8" size="70">
-                  <v-img
-                    max-height="68"
-                    max-width="68"
-                    :src="user.documents.fotografia.url"
-                  ></v-img>
-                </v-avatar>
+                <v-hover v-slot:default="{ hover }" open-delay="0">
+                  <v-btn @click="perfil()" class="mb-3 mt-3" depressed fab icon>
+                    <v-avatar
+                      :class="`elevation-${hover ? 4 : 1}`"
+                      class="mb-2 transition-swing"
+                      color="white"
+                      size="70"
+                    >
+                      <v-img
+                        max-height="68"
+                        max-width="68"
+                        :src="user.documents.fotografia.url"
+                      ></v-img>
+                    </v-avatar>
+                  </v-btn>
+                </v-hover>
                 <h3>
                   {{ user.nombre }}
                   <v-icon color="blue" small>mdi mdi-check-decagram</v-icon>
@@ -103,24 +159,53 @@
           user.rol === 'DirectorMantto'
         "
       >
-        <v-menu transition="scale-transition" bottom min-width="200px" offset-x>
-          <template v-slot:activator="{ on }">
-            <v-btn class="ml-0" fab elevation="0" color="#fff" v-on="on">
-              <v-avatar size="50">
-                <v-img src="../assets/utsv-logo.png"></v-img>
-              </v-avatar>
-            </v-btn>
+        <v-menu
+          max-width="250"
+          transition="scale-transition"
+          bottom
+          min-width="200"
+          offset-x
+        >
+          <template v-slot:activator="{ on: menu, attrs }">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on: tooltip }">
+                <v-btn
+                  v-bind="attrs"
+                  class="ml-0"
+                  fab
+                  elevation="0"
+                  color="#fff"
+                  v-on="{ ...tooltip, ...menu }"
+                >
+                  <v-avatar size="50">
+                    <v-img src="../assets/utsv-logo.png"></v-img>
+                  </v-avatar>
+                </v-btn>
+              </template>
+              <span>Ver Cuenta</span>
+            </v-tooltip>
           </template>
+
           <v-card>
+            <v-card color="blue" min-height="10" tile flat> </v-card>
             <v-list-item-content class="justify-center">
               <div class="mx-auto text-center">
-                <v-avatar class="mb-2" color="#E5E8E8" size="70">
-                  <v-img
-                    max-width="68"
-                    max-height="68"
-                    src="../assets/utsv-logo.png"
-                  ></v-img>
-                </v-avatar>
+                <v-hover v-slot:default="{ hover }" open-delay="0">
+                  <v-btn @click="perfil()" class="mb-3 mt-3" depressed fab icon>
+                    <v-avatar
+                      :class="`elevation-${hover ? 4 : 1}`"
+                      class="mb-2 mt-1 transition-swing"
+                      color="white"
+                      size="70"
+                    >
+                      <v-img
+                        max-height="68"
+                        max-width="68"
+                        src="../assets/utsv-logo.png"
+                      ></v-img>
+                    </v-avatar>
+                  </v-btn>
+                </v-hover>
                 <h3>
                   {{ user.nombre }}
                   <v-icon color="blue" small> mdi mdi-check-decagram</v-icon>

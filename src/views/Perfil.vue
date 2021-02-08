@@ -8,21 +8,28 @@
       </v-col>
     </v-container>
     <!-- Aqui empieza el container con los datos del alumno-->
-    <v-container v-if="user.rol == 'Estudiante'">
-      <v-card class="ma-15 mt-8 text-center rounded-xl" elevation="10">
-        <v-flex>
-          <v-avatar color="#E5E8E8" size="260" class="mt-n16 mb-5">
-            <!-- <v-img v-if="image != ''" :src="image"></v-img> -->
-            <v-img
-              max-width="250"
-              max-height="250"
-              :src="user.documents.fotografia.url"
+    <v-container v-if="user.rol == 'Estudiante'" class="mt-10">
+      <v-card class="ma-15 text-center rounded-xl" elevation="10">
+        <v-hover v-slot:default="{ hover }" open-delay="0">
+          <v-btn class="mt-5 mb-12" depressed disabled fab icon>
+            <v-avatar
+              :class="`elevation-${hover ? 5 : 5}`"
+              color="white"
+              size="260"
+              class="mt-n16 mb-8"
             >
-            </v-img>
-          </v-avatar>
-        </v-flex>
+              <!-- <v-img v-if="image != ''" :src="image"></v-img> -->
+              <v-img
+                max-width="250"
+                max-height="250"
+                :src="user.documents.fotografia.url"
+              >
+              </v-img>
+            </v-avatar>
+          </v-btn>
+        </v-hover>
 
-        <h2>
+        <h2 class="mt-8">
           {{ user.nombre }} {{ user.apellidoPaterno }}
           {{ user.apellidoMaterno }}
         </h2>
@@ -315,20 +322,28 @@
         user.rol == 'DirectorMeca' ||
         user.rol == 'DirectorMantto'
       "
+      class="mt-10"
     >
-      <v-card class="ma-15 mt-8 text-center rounded-xl" elevation="10">
-        <v-flex>
-          <v-avatar color="#E5E8E8" size="260" class="mt-n16 mb-5">
-            <!-- <v-img v-if="image != ''" :src="image"></v-img> -->
-            <v-img
-              max-width="250"
-              max-height="250"
-              src="../assets/utsv-logo.png"
+      <v-card class="ma-15 text-center rounded-xl" elevation="10">
+        <v-hover v-slot:default="{ hover }" open-delay="0">
+          <v-btn class="mt-5 mb-12" depressed disabled fab icon>
+            <v-avatar
+              :class="`elevation-${hover ? 5 : 5}`"
+              color="white"
+              size="260"
+              class="mt-n16 mb-8"
             >
-            </v-img>
-          </v-avatar>
-        </v-flex>
-        <h2>
+              <!-- <v-img v-if="image != ''" :src="image"></v-img> -->
+              <v-img
+                max-width="250"
+                max-height="250"
+                src="../assets/utsv-logo.png"
+              >
+              </v-img>
+            </v-avatar>
+          </v-btn>
+        </v-hover>
+        <h2 class="mt-8">
           {{ user.nombre }} {{ user.apellidoPaterno }}
           {{ user.apellidoMaterno }}
         </h2>

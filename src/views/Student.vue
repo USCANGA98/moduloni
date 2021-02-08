@@ -88,7 +88,6 @@
                       rounded
                       color="white"
                       class="ma-2 mb-4 my-5"
-                      elevation="2"
                       @click="expand = !expand"
                     >
                       <v-icon color="info">mdi-account-details</v-icon>

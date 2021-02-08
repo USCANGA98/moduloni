@@ -2,7 +2,7 @@
   <v-dialog v-model="viewAddress" persistent max-width="750">
     <v-card>
       <v-toolbar dense flat color="green" dark>
-        <v-toolbar-title>Detalle dirección alumno</v-toolbar-title>
+        <v-toolbar-title>Dirección alumno</v-toolbar-title>
       </v-toolbar>
       <v-hover v-slot:default="{ hover }" open-delay="0">
         <v-card class="ma-8 rounded-xl" :class="`elevation-${hover ? 10 : 1}`">

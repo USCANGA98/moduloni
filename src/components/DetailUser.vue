@@ -13,9 +13,35 @@
         <v-row>
           <v-col cols="12">
             <v-hover v-slot:default="{ hover }" open-delay="0">
-              <v-card class="rounded-xl" :class="`elevation-${hover ? 10 : 1}`">
+              <v-card
+                class="text-center mt-16 rounded-xl"
+                :class="`elevation-${hover ? 10 : 1}`"
+              >
+                <v-btn
+                  class="mb-16 mt-n5"
+                  depressed
+                  disabled
+                  fab
+                  icon
+                  color="#fff"
+                >
+                  <v-avatar
+                    class="transition-swing"
+                    color="white"
+                    :class="`elevation-${hover ? 8 : 3}`"
+                    size="200"
+                  >
+                    <v-img
+                      class="transition-swing"
+                      max-height="190"
+                      max-width="190"
+                      :src="user.documents.fotografia.url"
+                    ></v-img>
+                  </v-avatar>
+                </v-btn>
+
                 <v-container>
-                  <h2 class="mb-5">Datos personales</h2>
+                  <h2 class="mb-5 text-left">Datos personales</h2>
                   <v-row>
                     <v-col cols="12" class="ma-0 pt-0 pb-0">
                       <v-text-field
