@@ -253,6 +253,33 @@
               <v-list-item-title>{{ items.title }} </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
+          <v-list-group
+            active-class="pink darken-1 white--text px-2 mt-1"
+            prepend-icon="mdi-account-group-outline"
+          >
+            <template v-slot:activator>
+              <v-list-item-title class="mx-n3">Acciónes</v-list-item-title>
+            </template>
+
+            <v-list no-action sub-group>
+              <v-list-item
+                active-class="pink darken-1 white--text px-2 mt-1"
+                v-for="items in itemsAdminActions"
+                :key="items.title"
+                link
+                :to="items.path"
+                exact
+              >
+                <v-list-item-icon>
+                  <v-icon>{{ items.icon }} </v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>{{ items.title }} </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-list-group>
         </v-list>
         <!-- Items renderizados de "Estudiante"-->
         <v-list rounded dense v-if="user.rol === 'Estudiante'">
@@ -302,6 +329,19 @@
           </v-list-item>
         </v-list>
       </div>
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-btn
+            @click="cerrarSesion()"
+            block
+            outlined
+            class="pink--text font-weight-bold"
+          >
+            Salir
+            <v-icon color="pink" right>mdi-account-arrow-left-outline</v-icon>
+          </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
   </div>
 </template>
@@ -346,6 +386,14 @@ export default {
           icon: "mdi-chart-areaspline",
           path: "/admin/graficos",
         },
+
+        {
+          title: "Valorar",
+          icon: "mdi-hand-heart",
+          path: "/admin/valorar-proyecto",
+        },
+      ],
+      itemsAdminActions: [
         {
           title: "Nuevo Director",
           icon: "mdi-account-multiple",
@@ -355,11 +403,6 @@ export default {
           title: "Nuevo Admin",
           icon: "mdi-account-circle",
           path: "/admin/nuevo-admin",
-        },
-        {
-          title: "Valorar",
-          icon: "mdi-hand-heart",
-          path: "/admin/valorar-proyecto",
         },
       ],
       itemsStudent: [

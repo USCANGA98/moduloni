@@ -2,7 +2,7 @@
   <div>
     <v-app-bar
       app
-      style="background-color: rgb(4, 146, 6 ); border-color: rgb(44, 56, 86)"
+      style="background-color: rgb(4, 146, 6); border-color: rgb(44, 56, 86)"
       elevate
       dense
       color="green"
@@ -32,11 +32,11 @@ import NavigationDrawer from "./NavigationDrawer";
 
 export default {
   components: {
-    NavigationDrawer
+    NavigationDrawer,
   },
   data: () => ({
-    mostrarNavigationDrawer: false
-  })
+    mostrarNavigationDrawer: false,
+  }),
 };
 </script>
 

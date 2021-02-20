@@ -9,8 +9,11 @@
         flat
         color="rgba(0, 0, 0, 0)"
       >
-        <v-card-text class="font-weight-bold">
-          Todas las carreras {{ new Date().getFullYear() }}
+        <v-card-text v-if="user.rol == 'admin'" class="font-weight-bold">
+          Carreras {{ new Date().getFullYear() }}
+        </v-card-text>
+        <v-card-text v-else class="font-weight-bold">
+          Año {{ new Date().getFullYear() }}
         </v-card-text>
         <v-card-text class="text-right mt-n16">
           Hora actual
@@ -25,6 +28,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 // import BarraNavegacion from "./components/BarraNavegacion";
 import NavigationDrawer from "./components/NavigationDrawer";
 
@@ -40,9 +44,10 @@ export default {
   methods: {
     actualizarHora() {
       let fecha = new Date(Date.now());
-      this.hora = fecha.getHours() - 12;
+      this.hora = fecha.getHours();
       this.minutos = fecha.getMinutes();
       this.segundos = fecha.getSeconds();
+
       this.hora = this.hora > 9 ? this.hora : "0" + this.hora.toString();
       this.minutos =
         this.minutos > 9 ? this.minutos : "0" + this.minutos.toString();
@@ -53,9 +58,10 @@ export default {
   computed: {
     getHora() {
       if (this.hora > 11 && this.minutos > 59) {
-        return `${this.hora}:${this.minutos}:${this.segundos} AM`;
-      } else return `${this.hora}:${this.minutos}:${this.segundos} PM`;
+        return this.hora - 12 + `:${this.minutos}:${this.segundos} PM`;
+      } else return `${this.hora}:${this.minutos}:${this.segundos} AM`;
     },
+    ...mapState(["user"]),
   },
 
   components: {
