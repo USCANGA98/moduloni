@@ -29,8 +29,7 @@
               colored-border
               class="mr-16 mt-n16 ml-16"
               color="deep-purple lighten-3 "
-              border="top "
-              rounded
+              border="top"
             >
               <v-container>
                 <h1 class="mb-10 ma-10 text-justify">
@@ -59,7 +58,6 @@
                       color="success"
                       lazy-validation="true"
                       dense
-                      v-model="user.nombre"
                       :rules="ruleRequired"
                     >
                     </v-text-field>
@@ -74,7 +72,6 @@
                       color="success"
                       lazy-validation="true"
                       dense
-                      v-model="user.correoElectronico"
                       :rules="ruleRequired"
                     >
                     </v-text-field>
@@ -90,31 +87,31 @@
                         color="red"
                         class="ml-10 mt-10"
                         label="Mala"
-                        v-model="user.nivelSatisfaccion.mala"
+                        v-model="user.satisfaccion.mala"
                       ></v-radio>
                       <v-radio
                         color="orange"
                         class="ml-10 mt-10"
                         label="Regular"
-                        v-model="user.nivelSatisfaccion.regular"
+                        v-model="user.satisfaccion.regular"
                       ></v-radio>
                       <v-radio
                         color="yellow"
                         class="ml-10 mt-10"
                         label="Buena"
-                        v-model="user.nivelSatisfaccion.buena"
-                      ></v-radio>
-                      <v-radio
-                        color="info"
-                        class="ml-10 mt-10"
-                        label="Muy buena"
-                        v-model="user.nivelSatisfaccion.muyBuena"
+                        v-model="user.satisfaccion.buena"
                       ></v-radio>
                       <v-radio
                         color="success"
                         class="ml-10 mt-10"
+                        label="Muy buena"
+                        v-model="user.satisfaccion.muyBuena"
+                      ></v-radio>
+                      <v-radio
+                        color="info"
+                        class="ml-10 mt-10"
                         label="Excelente"
-                        v-model="user.nivelSatisfaccion.excelente"
+                        v-model="user.satisfaccion.excelente"
                       ></v-radio>
                     </v-radio-group>
                   </v-col>
@@ -131,7 +128,7 @@
                         depressed
                         color="deep-purple lighten-1"
                         dark
-                        @click="setInfo"
+                        @click="actualizarPerfilAlumno(user)"
                       >
                         Enviar<v-icon right outlined>mdi-send</v-icon></v-btn
                       >
@@ -167,87 +164,19 @@ export default {
     valid: true,
     overlay: false,
     text: "",
+    user: {
+      satisfaccion: {
+        mala: "Mala",
+        regular: "Regular",
+        buena: "Buena",
+        muyBuena: "Muy Buena",
+        excelente: "Excelente",
+      },
+    },
 
     snackbar: false,
     timeout: 5000,
 
-    user: {
-      statusProceso: "En revision",
-      nombre: "",
-      apellidoPaterno: "",
-      apellidoMaterno: "",
-      fechaNacimiento: "",
-      edad: "",
-      sexo: "",
-      numeroSeguroSocial: "",
-      tutor: "",
-      direccion: {
-        calle: "",
-        numeroExterior: "",
-        numeroInterior: "",
-        colonia: "",
-        codigoPostal: "",
-        estado: "",
-        ciudad: "",
-      },
-      escuelaProcedencia: "",
-      carrera: "",
-      correoElectronico: "",
-      contrasena: "",
-      documents: {
-        actaNacimiento: {
-          name: "Acta de nacimiento",
-          url: "",
-          aprobado: false,
-          mensaje: "No ha sido revisado",
-        },
-        curp: {
-          name: "CURP",
-          url: "",
-          aprobado: false,
-          mensaje: "No ha sido revisado",
-        },
-        comprobanteDomicilio: {
-          name: "Comprobante de domicilio",
-          url: "",
-          aprobado: false,
-          mensaje: "No ha sido revisado",
-        },
-        certificadoPreparatoria: {
-          name: "Certificado de preparatoria",
-          url: "",
-          aprobado: false,
-          mensaje: "No ha sido revisado",
-        },
-        credencialElector: {
-          name: "Credencial de elector",
-          url: "",
-          aprobado: false,
-          mensaje: "No ha sido revisado",
-        },
-        fotografia: {
-          name: "Fotografia",
-          url: "",
-          aprobado: false,
-          mensaje: "No ha sido revisado",
-        },
-        analisisVDRL: {
-          name: "Analisis VDRL",
-          url: "",
-          aprobado: false,
-          mensaje: "No ha sido revisado",
-        },
-      },
-      rol: "Estudiante",
-      uid: "",
-      nivelSatisfaccion: {
-        mala: "",
-        regular: "",
-        buena: "",
-        muyBuena: "",
-        excelente: "",
-      },
-    },
     menu: false,
     sexOptions: ["Femenino", "Masculino", "No binario"],
     careerOptions: [
@@ -281,6 +210,31 @@ export default {
     ],
   }),
   methods: {
+    async actualizarPerfilAlumno(user) {
+      // await this.subirImagen();
+      const uid = user.uid;
+
+      const response = await db.collection("users").doc(uid);
+
+      // Set the "capital" field of the city 'DC'
+      return response
+        .update({
+          nivelSatisfaccion: {
+            mala: user.nivelSatisfaccion.mala,
+            regular: user.nivelSatisfaccion.regular,
+            buena: user.nivelSatisfaccion.buena,
+            muyBuena: user.nivelSatisfaccion.muyBuena,
+            excelente: user.nivelSatisfaccion.excelente,
+          },
+        })
+        .then(function () {
+          alert("Documento Actualizado Correctamente!");
+        })
+        .catch(function (error) {
+          // The document probably doesn't exist.
+          alert("Ocurrió un error", error);
+        });
+    },
     async createAccount() {
       try {
         const response = await auth.createUserWithEmailAndPassword(

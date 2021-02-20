@@ -1,63 +1,69 @@
 <template>
-  <v-container
-    ><v-row v-if="$route.path == '/admin/detail-career'">
+  <v-container>
+    <v-row v-if="$route.path == '/admin/detail-career'">
       <v-col cols="12">
         <h2>Alumnos de la carrera {{ careerSelected }}</h2>
       </v-col>
+      <v-container>
+        <v-text-field
+          rounded
+          v-model="search"
+          clearable
+          color="green"
+          solo
+          prepend-inner-icon="mdi-magnify"
+          label="Buscar"
+        ></v-text-field>
 
-      <v-text-field
-        rounded
-        v-model="search"
-        clearable
-        color="green"
-        solo
-        prepend-inner-icon="mdi-magnify"
-        label="Buscar"
-      ></v-text-field>
+        <v-col cols="12">
+          <v-data-table
+            :search="search"
+            :loading="loading"
+            :headers="headers"
+            :items="items"
+            sort-by="statusProceso"
+            class="elevation-1 rounded-xl"
+          >
+            <template v-slot:item.direccion="{ item }">
+              <v-btn
+                small
+                depressed
+                color="green"
+                dark
+                @click="verDireccion(item.direccion)"
+                >dirección</v-btn
+              >
+            </template>
 
-      <v-col cols="12">
-        <v-data-table
-          :search="search"
-          :loading="loading"
-          :headers="headers"
-          :items="items"
-          sort-by="statusProceso"
-          class="elevation-1"
-        >
-          <template v-slot:item.direccion="{ item }">
-            <v-btn
-              small
-              depressed
-              color="green"
-              dark
-              @click="verDireccion(item.direccion)"
-              >dirección</v-btn
-            >
-          </template>
+            <template v-slot:item.documents="{ item }">
+              <v-btn
+                small
+                depressed
+                color="green"
+                dark
+                @click="verDocumentos(item)"
+                >documentos</v-btn
+              >
+            </template>
 
-          <template v-slot:item.documents="{ item }">
-            <v-btn
-              small
-              depressed
-              color="green"
-              dark
-              @click="verDocumentos(item)"
-              >documentos</v-btn
-            >
-          </template>
-
-          <template v-slot:item.detalleCompleto="{ item }">
-            <v-btn small depressed color="green" dark @click="verUsuario(item)"
-              >detalle</v-btn
-            >
-          </template>
-          <template v-slot:item.eliminarestudiante="{ item }">
-            <v-btn icon dark color="red" @click="eliminarEstudiante(item.uid)"
-              ><v-icon> mdi-delete </v-icon></v-btn
-            >
-          </template>
-        </v-data-table>
-      </v-col>
+            <template v-slot:item.detalleCompleto="{ item }">
+              <v-btn
+                small
+                depressed
+                color="green"
+                dark
+                @click="verUsuario(item)"
+                >detalle</v-btn
+              >
+            </template>
+            <template v-slot:item.eliminarestudiante="{ item }">
+              <v-btn icon dark color="red" @click="eliminarEstudiante(item.uid)"
+                ><v-icon> mdi-delete </v-icon></v-btn
+              >
+            </template>
+          </v-data-table>
+        </v-col>
+      </v-container>
     </v-row>
     <!-- renderizado de directores-->
     <v-row v-if="$route.path == '/director/detail-career'">

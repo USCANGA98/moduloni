@@ -1,15 +1,12 @@
 <template>
   <div>
     <v-container>
+      <h3>Carreras</h3>
       <v-row>
         <!-- Aqui empieza linea de todos los alumnos-->
 
         <v-container>
           <v-row>
-            <v-col cols="12">
-              <h2>Carreras</h2>
-            </v-col>
-
             <v-expand-transition>
               <v-card
                 v-show="expand"
@@ -88,7 +85,7 @@
         <!-- Aqui termina linea de todos los alumnos-->
         <!-- Aqui empieza renderizado condicional de directores de carrera TECNOLOGIAS-->
         <v-col
-          cols="3"
+          cols="2"
           v-for="career in careerOptionsTi"
           :key="career"
           v-show="user.rol === 'DirectorTi'"
@@ -128,13 +125,15 @@
         <!-- Aqui termina renderizado condicional de directores de carrera TECNOLOGIAS-->
         <!-- Aqui empieza renderizado condicional de directores de carrera QUIMICA-->
         <v-col
-          cols="3"
+          cols="2"
           v-for="career in careerOptionsQuimica"
           :key="career"
           v-show="user.rol === 'DirectorQui'"
         >
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
+              :min-height="$vuetify.breakpoint.xs ? 135 : '20vh'"
+              min-width="135"
               :class="`elevation-${hover ? 20 : 0}`"
               class="mx-auto transition-swing"
               @click="goDetailCareer(career)"
@@ -154,7 +153,7 @@
               </v-img>
               <v-img
                 v-if="career == 'TSU Energias Renovables'"
-                src="../assets/utsv-logo.png"
+                src="../assets/utsv-logo-2.jpg"
                 class="white--text align-end"
                 gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
               >
@@ -178,7 +177,7 @@
         <!-- Aqui termina renderizado condicional de directores de carrera QUIMICA-->
         <!-- Aqui empieza renderizado condicional de directores de carrera Mantenimiento Industrial-->
         <v-col
-          cols="3"
+          cols="2"
           v-for="career in careerOptionsMantto"
           :key="career"
           v-show="user.rol === 'DirectorMantto'"
@@ -218,7 +217,7 @@
         <!-- Aqui termina renderizado condicional de directores de carrera Mantenimiento Industrial-->
         <!-- Aqui empieza renderizado condicional de directores de carrera Mecatronica-->
         <v-col
-          cols="3"
+          cols="2"
           v-for="career in careerOptionsMecatronica"
           :key="career"
           v-show="user.rol === 'DirectorMeca'"

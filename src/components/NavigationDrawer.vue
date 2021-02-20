@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer app v-model="drawer" expand-on-hover permanent>
+    <v-navigation-drawer app floating v-model="drawer" width="190" permanent>
       <!-- Condicion de renderizado para asignar un tipo de drawer a un tipo de usuario en este caso "admin" -->
       <v-layout class="align-center" v-if="user.rol === 'admin'">
         <v-menu
@@ -15,7 +15,7 @@
               <template v-slot:activator="{ on: tooltip }">
                 <v-btn
                   v-bind="attrs"
-                  class="ml-0"
+                  class="ma-2"
                   fab
                   elevation="0"
                   color="#fff"
@@ -64,13 +64,12 @@
             </v-list-item-content>
           </v-card>
         </v-menu>
-
         <v-list>
-          <v-list-item-content>
-            <v-list-item-title class="title ml-3"
-              >{{ user.nombre }}
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <strong>
+              {{ user.nombre }}
+            </strong>
+          </v-list-item-title>
         </v-list>
       </v-layout>
       <!-- Condicion de renderizado para "Estudiante" -->
@@ -87,7 +86,7 @@
               <template v-slot:activator="{ on: tooltip }">
                 <v-btn
                   v-bind="attrs"
-                  class="ml-0"
+                  class="ma-2"
                   fab
                   elevation="0"
                   color="#fff"
@@ -142,11 +141,11 @@
           </v-card>
         </v-menu>
         <v-list>
-          <v-list-item-content>
-            <v-list-item-title class="title ml-4"
-              >{{ user.nombre }}
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <strong>
+              {{ user.nombre }}
+            </strong>
+          </v-list-item-title>
         </v-list>
       </v-layout>
       <!-- Condicion de renderizado para "director"-->
@@ -171,7 +170,7 @@
               <template v-slot:activator="{ on: tooltip }">
                 <v-btn
                   v-bind="attrs"
-                  class="ml-0"
+                  class="ma-2"
                   fab
                   elevation="0"
                   color="#fff"
@@ -227,18 +226,19 @@
         </v-menu>
 
         <v-list>
-          <v-list-item-content>
-            <v-list-item-title class="title ml-4"
-              >{{ user.nombre }}
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>
+            <strong>
+              {{ user.nombre }}
+            </strong>
+          </v-list-item-title>
         </v-list>
       </v-layout>
       <v-divider></v-divider>
       <!-- Items renderizados de "admin"-->
       <div>
-        <v-list shaped v-if="user.rol === 'admin'">
+        <v-list rounded dense v-if="user.rol === 'admin'">
           <v-list-item
+            active-class="pink darken-1 white--text px-2 mt-1"
             v-for="items in itemsAdmin"
             :key="items.title"
             link
@@ -255,8 +255,9 @@
           </v-list-item>
         </v-list>
         <!-- Items renderizados de "Estudiante"-->
-        <v-list shaped v-if="user.rol === 'Estudiante'">
+        <v-list rounded dense v-if="user.rol === 'Estudiante'">
           <v-list-item
+            active-class="pink darken-1 white--text px-2 mt-1"
             v-for="items in itemsStudent"
             :key="items.title"
             link
@@ -274,7 +275,8 @@
         </v-list>
         <!--Renderizado para "director"-->
         <v-list
-          shaped
+          rounded
+          dense
           v-if="
             user.rol === 'DirectorTi' ||
             user.rol === 'DirectorQui' ||
@@ -283,6 +285,7 @@
           "
         >
           <v-list-item
+            active-class="pink darken-1 white--text px-2 mt-1"
             v-for="items in itemsDirect"
             :key="items.title"
             link
@@ -344,12 +347,12 @@ export default {
           path: "/admin/graficos",
         },
         {
-          title: "Agregar Director",
+          title: "Nuevo Director",
           icon: "mdi-account-multiple",
           path: "/admin/nuevo-usuario",
         },
         {
-          title: "Agregar Admin",
+          title: "Nuevo Admin",
           icon: "mdi-account-circle",
           path: "/admin/nuevo-admin",
         },
@@ -364,6 +367,11 @@ export default {
           title: "Seguimiento",
           icon: "mdi-clipboard-account-outline",
           path: "/student",
+        },
+        {
+          title: "Valorar",
+          icon: "mdi-hand-heart",
+          path: "/admin/valorar-proyecto",
         },
       ],
       itemsDirect: [

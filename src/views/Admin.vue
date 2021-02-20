@@ -1,227 +1,252 @@
-import { mapMutations } from 'vuex';
-
 <template>
-  <div>
+  <v-container>
     <v-container>
-      <v-row>
-        <!-- Aqui empieza linea de todos los alumnos-->
-        <v-container>
-          <v-row>
-            <v-container class="text-right">
-              <v-tooltip left>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    v-bind="attrs"
-                    v-on="on"
-                    color="white"
-                    rounded
-                    class="ma-2 mb-4 my-2"
-                    @click="expand = !expand"
-                  >
-                    <v-icon color="success">mdi-account-search</v-icon>
-                  </v-btn>
-                </template>
-                <span>Buscar Alumno</span>
-              </v-tooltip>
-            </v-container>
-            <v-col cols="12">
-              <h2>Todas las carreras</h2>
-            </v-col>
-            <v-text-field
-              rounded
-              clearable
-              v-show="expand"
-              v-model="search"
-              solo
-              color="green"
-              prepend-inner-icon="mdi-magnify"
-              label="Buscar"
-            ></v-text-field>
-            <v-expand-transition>
-              <v-card
-                v-show="expand"
-                class="mx-auto rounded-xl"
-                width="100%"
-                elevation="5"
-              >
-                <v-data-table
-                  :search="search"
-                  :headers="headers"
-                  :items="estudiantes"
-                  sort-by="statusProceso"
+      <v-fade-transition mode="in-out">
+        <v-card ripple v-if="cardActive" class="d-flex rounded-xl">
+          <v-img
+            transition="fade-transition"
+            class="rounded-xl"
+            max-height="280"
+            src="https://png.pngtree.com/thumb_back/fw800/background/20210205/pngtree-technology-computer-business-office-background-image_543978.jpg"
+            gradient="to top left, rgba(13,60,116,.33), rgba(231,0,112,.7)"
+          >
+            <v-col>
+              <v-card-title class="align-start white--text">
+                <h3><strong> ¡¡Bienvenido!!</strong></h3>
+              </v-card-title>
+              <v-card-subtitle class="white--text ml-10">
+                ¡Es un gusto tenerte de vuelta!
+              </v-card-subtitle>
+              <v-card-actions class="d-flex align-center ml-5">
+                <v-btn
+                  @click="cardActive = false"
+                  class="pink--text"
+                  color="white"
+                  depressed
+                  rounded
+                  dark
                 >
-                  <template v-slot:item.direccion="{ item }">
-                    <v-btn
-                      small
-                      depressed
-                      color="green"
-                      dark
-                      @click="verDireccion(item.direccion)"
-                      >dirección</v-btn
-                    >
-                  </template>
-
-                  <template v-slot:item.documents="{ item }">
-                    <v-btn
-                      small
-                      depressed
-                      color="green"
-                      dark
-                      @click="verDocumentos(item)"
-                      >documentos</v-btn
-                    >
-                  </template>
-
-                  <template v-slot:item.detalleCompleto="{ item }">
-                    <v-btn
-                      small
-                      depressed
-                      color="green"
-                      dark
-                      @click="verUsuario(item)"
-                      >detalle</v-btn
-                    >
-                  </template>
-
-                  <template v-slot:item.eliminarestudiante="{ item }">
-                    <v-btn
-                      icon
-                      dark
-                      color="red"
-                      @click="eliminarEstudiante(item.uid)"
-                      ><v-icon> mdi-delete </v-icon></v-btn
-                    >
-                  </template>
-                </v-data-table>
-              </v-card>
-            </v-expand-transition>
-          </v-row>
-          <addressModal
-            :viewAddress="viewAddress"
-            :address="addressData"
-            @cerrar="viewAddress = false"
-          />
-          <documentsModal
-            :viewDocuments="viewDocuments"
-            :item="item"
-            @cerrar="viewDocuments = false"
-            @guardado="guardado"
-          />
-
-          <userModal
-            :viewDetailUser="viewDetailUser"
-            :user="user"
-            @cerrar="viewDetailUser = false"
-          />
+                  Comenzar
+                </v-btn>
+              </v-card-actions>
+            </v-col>
+          </v-img>
+        </v-card>
+        <v-container class="text-right mt-n10">
+          <v-tooltip left>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                v-bind="attrs"
+                v-on="on"
+                color="white"
+                rounded
+                @click="expand = !expand"
+              >
+                <v-icon color="pink">mdi-account-search</v-icon>
+              </v-btn>
+            </template>
+            <span>Buscar Alumno</span>
+          </v-tooltip>
         </v-container>
-        <!-- Aqui termina linea de todos los alumnos-->
-        <v-col cols="3" v-for="career in careerOptions" :key="career">
-          <v-hover v-slot:default="{ hover }" open-delay="0">
-            <v-card
-              :class="`elevation-${hover ? 20 : 1}`"
-              class="mx-auto transition-swing"
-              @click="goDetailCareer(career)"
-            >
-              <v-img
-                v-if="
-                  career == 'TSU Tecnologias de Informacion y Comunicacion' ||
-                  career == 'Ingenieria en Tecnologias de la Informacion'
-                "
-                src="../assets/utsv-logo-tic.jpg"
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
-              >
-                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
-                  {{ career }}
-                </h3>
-              </v-img>
-
-              <v-img
-                v-if="
-                  career == 'TSU Mantenimiento Area Industrial' ||
-                  career == 'Ingenieria en Mantenimiento Industrial'
-                "
-                src="../assets/utsv-logo-mantto.jpg"
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
-              >
-                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
-                  {{ career }}
-                </h3>
-              </v-img>
-              <v-img
-                v-if="career == 'TSU Contaduria'"
-                src="../assets/utsv-logo-conta.png"
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
-              >
-                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
-                  {{ career }}
-                </h3>
-              </v-img>
-              <v-img
-                v-if="
-                  career == 'TSU Mecatronica Area Automatizacion' ||
-                  career == 'Ingenieria en Mecatronica'
-                "
-                src="../assets/utsv-logo-mecatronica.jpg"
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
-              >
-                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
-                  {{ career }}
-                </h3>
-              </v-img>
-              <v-img
-                v-if="
-                  career == 'TSU Quimica Industrial' ||
-                  career == 'Ingenieria Quimica'
-                "
-                src="../assets/utsv-logo-quimica.jpg"
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
-              >
-                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
-                  {{ career }}
-                </h3>
-              </v-img>
-              <v-img
-                v-if="career == 'TSU Mecanica Area Automotriz'"
-                src="../assets/utsv-logo-mecanica.jpg"
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
-              >
-                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
-                  {{ career }}
-                </h3>
-              </v-img>
-              <v-img
-                v-if="career == 'TSU Administracion Area Capital Humano'"
-                src="../assets/utsv-logo-administracion.jpg"
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
-              >
-                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
-                  {{ career }}
-                </h3>
-              </v-img>
-              <v-img
-                v-if="career == 'TSU Energias Renovables'"
-                src="../assets/utsv-logo.png"
-                class="white--text align-end"
-                gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
-              >
-                <h3 class="pa-3 text-subtitle-2 font-weight-medium">
-                  {{ career }}
-                </h3>
-              </v-img>
-            </v-card>
-          </v-hover>
-        </v-col>
-      </v-row>
+      </v-fade-transition>
     </v-container>
+
+    <!-- Aqui empieza linea de todos los alumnos-->
+    <v-container>
+      <v-container>
+        <v-text-field
+          rounded
+          clearable
+          v-show="expand"
+          v-model="search"
+          solo
+          color="green"
+          prepend-inner-icon="mdi-magnify"
+          label="Buscar"
+        ></v-text-field>
+        <v-expand-transition>
+          <v-card v-show="expand" class="rounded-xl" width="100%" elevation="5">
+            <v-data-table
+              :search="search"
+              :headers="headers"
+              :items="estudiantes"
+              sort-by="statusProceso"
+            >
+              <template v-slot:item.direccion="{ item }">
+                <v-btn
+                  small
+                  depressed
+                  color="green"
+                  dark
+                  @click="verDireccion(item.direccion)"
+                  >dirección</v-btn
+                >
+              </template>
+
+              <template v-slot:item.documents="{ item }">
+                <v-btn
+                  small
+                  depressed
+                  color="green"
+                  dark
+                  @click="verDocumentos(item)"
+                  >documentos</v-btn
+                >
+              </template>
+
+              <template v-slot:item.detalleCompleto="{ item }">
+                <v-btn
+                  small
+                  depressed
+                  color="green"
+                  dark
+                  @click="verUsuario(item)"
+                  >detalle</v-btn
+                >
+              </template>
+
+              <template v-slot:item.eliminarestudiante="{ item }">
+                <v-btn
+                  icon
+                  dark
+                  color="red"
+                  @click="eliminarEstudiante(item.uid)"
+                  ><v-icon> mdi-delete </v-icon></v-btn
+                >
+              </template>
+            </v-data-table>
+          </v-card>
+        </v-expand-transition>
+      </v-container>
+
+      <addressModal
+        :viewAddress="viewAddress"
+        :address="addressData"
+        @cerrar="viewAddress = false"
+      />
+      <documentsModal
+        :viewDocuments="viewDocuments"
+        :item="item"
+        @cerrar="viewDocuments = false"
+        @guardado="guardado"
+      />
+
+      <userModal
+        :viewDetailUser="viewDetailUser"
+        :user="user"
+        @cerrar="viewDetailUser = false"
+      />
+    </v-container>
+    <!-- Aqui termina linea de todos los alumnos-->
+    <v-row>
+      <v-col cols="2" md="sm" v-for="career in careerOptions" :key="career">
+        <v-hover v-slot:default="{ hover }" open-delay="0">
+          <v-card
+            :min-height="$vuetify.breakpoint.xs ? 190 : '20vh'"
+            min-width="140"
+            :class="`elevation-${hover ? 20 : 1}`"
+            class="mx-auto d-flex transition-swing"
+            @click="goDetailCareer(career)"
+          >
+            <v-img
+              v-if="
+                career == 'TSU Tecnologias de Informacion y Comunicacion' ||
+                career == 'Ingenieria en Tecnologias de la Informacion'
+              "
+              src="../assets/utsv-logo-tic.jpg"
+              class="white--text align-end"
+              gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+            >
+              <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                {{ career }}
+              </h3>
+            </v-img>
+
+            <v-img
+              v-if="
+                career == 'TSU Mantenimiento Area Industrial' ||
+                career == 'Ingenieria en Mantenimiento Industrial'
+              "
+              src="../assets/utsv-logo-mantto.jpg"
+              class="white--text align-end"
+              gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+            >
+              <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                {{ career }}
+              </h3>
+            </v-img>
+            <v-img
+              v-if="career == 'TSU Contaduria'"
+              src="../assets/utsv-logo-conta.png"
+              class="white--text align-end"
+              gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+            >
+              <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                {{ career }}
+              </h3>
+            </v-img>
+            <v-img
+              v-if="
+                career == 'TSU Mecatronica Area Automatizacion' ||
+                career == 'Ingenieria en Mecatronica'
+              "
+              src="../assets/utsv-logo-mecatronica.jpg"
+              class="white--text align-end"
+              gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+            >
+              <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                {{ career }}
+              </h3>
+            </v-img>
+            <v-img
+              v-if="
+                career == 'TSU Quimica Industrial' ||
+                career == 'Ingenieria Quimica'
+              "
+              src="../assets/utsv-logo-quimica.jpg"
+              class="white--text align-end"
+              gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+            >
+              <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                {{ career }}
+              </h3>
+            </v-img>
+            <v-img
+              v-if="career == 'TSU Mecanica Area Automotriz'"
+              src="../assets/utsv-logo-mecanica.jpg"
+              class="white--text align-end"
+              gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+            >
+              <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                {{ career }}
+              </h3>
+            </v-img>
+            <v-img
+              v-if="career == 'TSU Administracion Area Capital Humano'"
+              src="../assets/utsv-logo-administracion.jpg"
+              class="white--text align-end"
+              gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+            >
+              <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                {{ career }}
+              </h3>
+            </v-img>
+            <v-img
+              v-if="career == 'TSU Energias Renovables'"
+              src="../assets/utsv-logo.png"
+              class="white--text align-end"
+              gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
+            >
+              <h3 class="pa-3 text-subtitle-2 font-weight-medium">
+                {{ career }}
+              </h3>
+            </v-img>
+          </v-card>
+        </v-hover>
+      </v-col>
+    </v-row>
     <EliminarEstudiante :uid="uid" :dialog="dialog" @cancel="dialog = false" />
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -236,6 +261,7 @@ export default {
     this.getData();
     this.Students();
   },
+
   components: {
     addressModal: () => import("../components/Address"),
     documentsModal: () => import("../components/Documents"),
@@ -251,6 +277,10 @@ export default {
     documents: {},
     expand: false,
     items: [],
+    hora: 0,
+    minutos: 0,
+    segundos: 0,
+    cardActive: true,
     item: {},
     user: {},
     dialog: false,
@@ -315,6 +345,7 @@ export default {
       "Ingenieria Quimica",
     ],
   }),
+
   methods: {
     ...mapMutations(["setCareerSelected"]),
     goDetailCareer(career) {
@@ -358,6 +389,7 @@ export default {
         this.loading = false;
       }
     },
+
     async Students() {
       this.loading = true;
       try {
