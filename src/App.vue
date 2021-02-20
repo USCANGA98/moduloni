@@ -4,6 +4,7 @@
     <NavigationDrawer v-if="$route.path != '/' && $route.path != '/registro'" />
     <v-main class="grey lighten-5">
       <v-card
+        max-height="30"
         v-if="$route.path != '/' && $route.path != '/registro'"
         flat
         color="rgba(0, 0, 0, 0)"

@@ -12,7 +12,7 @@
           >
             <v-col>
               <v-card-title class="align-start white--text">
-                <h3><strong> ¡¡Bienvenido!!</strong></h3>
+                <h3><strong> ¡¡Bienvenido Administrador!!</strong></h3>
               </v-card-title>
               <v-card-subtitle class="white--text ml-10">
                 ¡Es un gusto tenerte de vuelta!
@@ -32,7 +32,7 @@
             </v-col>
           </v-img>
         </v-card>
-        <v-container class="text-right mt-n10">
+        <v-container class="text-right">
           <v-tooltip left>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -277,9 +277,6 @@ export default {
     documents: {},
     expand: false,
     items: [],
-    hora: 0,
-    minutos: 0,
-    segundos: 0,
     cardActive: true,
     item: {},
     user: {},
