@@ -1,6 +1,14 @@
 <template>
   <v-app>
-    <!-- <BarraNavegacion v-if="$route.path != '/' && $route.path != '/registro'" /> -->
+    <v-fade-transition>
+      <BarraNavegacion
+        v-if="
+          $route.path != '/' &&
+          $route.path != '/registro' &&
+          $vuetify.breakpoint.width < 960
+        "
+      />
+    </v-fade-transition>
     <NavigationDrawer v-if="$route.path != '/' && $route.path != '/registro'" />
     <v-main class="grey lighten-5">
       <v-card
@@ -29,7 +37,7 @@
 
 <script>
 import { mapState } from "vuex";
-// import BarraNavegacion from "./components/BarraNavegacion";
+import BarraNavegacion from "./components/BarraNavegacion";
 import NavigationDrawer from "./components/NavigationDrawer";
 
 export default {
@@ -57,15 +65,13 @@ export default {
   },
   computed: {
     getHora() {
-      if (this.hora > 11 && this.minutos > 59) {
-        return this.hora - 12 + `:${this.minutos}:${this.segundos} PM`;
-      } else return `${this.hora}:${this.minutos}:${this.segundos} AM`;
+      return `${this.hora}:${this.minutos}:${this.segundos}`;
     },
     ...mapState(["user"]),
   },
 
   components: {
-    // BarraNavegacion,
+    BarraNavegacion,
     NavigationDrawer,
   },
 

@@ -297,7 +297,7 @@
         </v-container>
         <v-card-actions class="justify-right">
           <v-container class="text-right">
-            <v-tooltip top>
+            <v-tooltip color="grey darken-3" top>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   v-bind="attrs"
@@ -445,7 +445,7 @@
         </v-container>
         <v-card-actions>
           <v-container class="text-right">
-            <v-tooltip top>
+            <v-tooltip color="grey darken-3" top>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   v-bind="attrs"

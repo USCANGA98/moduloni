@@ -80,7 +80,7 @@
                   </v-stepper-header>
                 </v-stepper>
 
-                <v-tooltip right>
+                <v-tooltip color="grey darken-3" right>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
                       v-bind="attrs"

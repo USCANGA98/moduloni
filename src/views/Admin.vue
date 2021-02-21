@@ -34,7 +34,7 @@
       </v-expand-transition>
       <v-scroll-x-transition mode="out-in">
         <v-container v-if="cardActive == false" class="text-right">
-          <v-tooltip left>
+          <v-tooltip color="grey darken-3" left>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 v-bind="attrs"
