@@ -24,17 +24,11 @@
             sort-by="statusProceso"
             class="elevation-1 rounded-xl"
           >
-            <template v-slot:item.direccion="{ item }">
-              <v-btn
-                small
-                depressed
-                color="green"
-                dark
-                @click="verDireccion(item.direccion)"
-                >dirección</v-btn
-              >
+            <template v-slot:item.fotografia="{ item }">
+              <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
+                <v-img :src="item.documents.fotografia.url"> </v-img>
+              </v-avatar>
             </template>
-
             <template v-slot:item.documents="{ item }">
               <v-btn
                 small
@@ -90,17 +84,6 @@
           sort-by="statusProceso"
           class="elevation-1"
         >
-          <template v-slot:item.direccion="{ item }">
-            <v-btn
-              small
-              depressed
-              color="green"
-              dark
-              @click="verDireccion(item.direccion)"
-              >dirección</v-btn
-            >
-          </template>
-
           <template v-slot:item.documents="{ item }">
             <v-btn
               small
@@ -129,11 +112,7 @@
         </v-data-table>
       </v-col>
     </v-row>
-    <addressModal
-      :viewAddress="viewAddress"
-      :address="addressData"
-      @cerrar="viewAddress = false"
-    />
+
     <documentsModal
       :viewDocuments="viewDocuments"
       :item="item"
@@ -161,13 +140,11 @@ export default {
   },
   name: "DetailCareer",
   components: {
-    addressModal: () => import("../components/Address"),
     documentsModal: () => import("../components/Documents"),
     userModal: () => import("../components/DetailUser"),
     EliminarEstudiante,
   },
   data: () => ({
-    viewAddress: false,
     viewDocuments: false,
     viewDetailUser: false,
     loading: false,
@@ -180,6 +157,10 @@ export default {
     user: {},
     search: "",
     headers: [
+      {
+        text: "Fotografía",
+        value: "fotografia",
+      },
       {
         text: "Nombre",
         value: "nombre",
@@ -200,10 +181,7 @@ export default {
         text: "Correo",
         value: "correoElectronico",
       },
-      {
-        text: "Direccion",
-        value: "direccion",
-      },
+
       {
         text: "Documentos",
         value: "documents",

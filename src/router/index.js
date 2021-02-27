@@ -90,6 +90,20 @@ const routes = [
     beforeEnter: ifAuthenticated
   },
   {
+    path: "/student/valorar-proyecto",
+    name: "Valorar",
+    component: () =>
+      import(/* webpackChunkName: "admin" */ "../views/Valorar-Proyecto.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  {
+    path: "/director/valorar-proyecto",
+    name: "Valorar",
+    component: () =>
+      import(/* webpackChunkName: "admin" */ "../views/Valorar-Proyecto.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  {
     path: "/perfil",
     name: "Perfil",
     component: () =>

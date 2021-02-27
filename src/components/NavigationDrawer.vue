@@ -350,6 +350,7 @@
         </div>
       </template>
     </v-navigation-drawer>
+    <!--Aqui termina renderizado de NavigationDrawer-->
     <v-navigation-drawer
       v-if="$vuetify.breakpoint.width < 960"
       app
@@ -371,6 +372,7 @@
             <v-tooltip color="grey darken-3" bottom>
               <template v-slot:activator="{ on: tooltip }">
                 <v-btn
+                  class="ma-1"
                   v-bind="attrs"
                   fab
                   elevation="0"
@@ -441,6 +443,7 @@
             <v-tooltip color="grey darken-3" bottom>
               <template v-slot:activator="{ on: tooltip }">
                 <v-btn
+                  class="ma-1"
                   v-bind="attrs"
                   fab
                   elevation="0"
@@ -524,6 +527,7 @@
             <v-tooltip color="grey darken-3" bottom>
               <template v-slot:activator="{ on: tooltip }">
                 <v-btn
+                  class="ma-1"
                   v-bind="attrs"
                   fab
                   elevation="0"
@@ -768,7 +772,7 @@ export default {
         {
           title: "Valorar",
           icon: "mdi-hand-heart",
-          path: "/admin/valorar-proyecto",
+          path: "/student/valorar-proyecto",
         },
       ],
       itemsDirect: [
@@ -776,6 +780,11 @@ export default {
           title: "Panel",
           icon: "mdi-view-dashboard",
           path: "/director",
+        },
+        {
+          title: "Valorar",
+          icon: "mdi-hand-heart",
+          path: "/director/valorar-proyecto",
         },
       ],
     };

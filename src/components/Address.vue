@@ -1,5 +1,7 @@
 <template>
-  <v-dialog v-model="viewAddress" persistent max-width="750">
+  <!--Se comentó devido a que era redundante la informacion con los detalles completos ya que ahí tambien viene la direccion-->
+  <div></div>
+  <!-- <v-dialog v-model="viewAddress" persistent max-width="750">
     <v-card>
       <v-toolbar dense flat color="green" dark>
         <v-toolbar-title>Dirección alumno</v-toolbar-title>
@@ -103,28 +105,28 @@
         <v-btn color="green darken-1" text @click="cerrar">Cerrar</v-btn>
       </v-card-actions>
     </v-card>
-  </v-dialog>
+  </v-dialog> -->
 </template>
 
 <script>
-export default {
-  name: "AddressComponent",
-  props: {
-    viewAddress: {
-      type: Boolean,
-      required: true,
-    },
-    address: {
-      type: Object,
-      required: true,
-    },
-  },
-  methods: {
-    cerrar() {
-      this.$emit("cerrar");
-    },
-  },
-};
+// export default {
+//   name: "AddressComponent",
+//   props: {
+//     viewAddress: {
+//       type: Boolean,
+//       required: true,
+//     },
+//     address: {
+//       type: Object,
+//       required: true,
+//     },
+//   },
+//   methods: {
+//     cerrar() {
+//       this.$emit("cerrar");
+//     },
+//   },
+// };
 </script>
 
 <style lang="scss" scoped></style>

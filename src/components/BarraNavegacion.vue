@@ -26,7 +26,7 @@
                 color="#fff"
                 v-on="{ ...tooltip, ...menu }"
               >
-                <v-avatar size="45">
+                <v-avatar color="blue-grey lighten-5" size="37">
                   <v-img src="../assets/utsv-logo.png"></v-img>
                 </v-avatar>
               </v-btn>
@@ -49,13 +49,9 @@
                     :class="`elevation-${hover ? 4 : 1}`"
                     class="mb-2 mt-1 transition-swing"
                     color="white"
-                    size="70"
+                    size="60"
                   >
-                    <v-img
-                      max-height="68"
-                      max-width="68"
-                      src="../assets/utsv-logo.png"
-                    ></v-img>
+                    <v-img src="../assets/utsv-logo.png"></v-img>
                   </v-avatar>
                 </v-btn>
               </v-hover>
@@ -80,6 +76,7 @@
           </v-list-item-content>
         </v-card>
       </v-menu>
+      <!--Termina condicional de administrador-->
       <v-menu
         v-if="user.rol == 'Estudiante'"
         max-width="100"
@@ -99,7 +96,7 @@
                 color="#fff"
                 v-on="{ ...tooltip, ...menu }"
               >
-                <v-avatar size="45">
+                <v-avatar color="blue-grey lighten-5" size="37">
                   <v-img :src="user.documents.fotografia.url"></v-img>
                 </v-avatar>
               </v-btn>
@@ -125,13 +122,9 @@
                     :class="`elevation-${hover ? 4 : 1}`"
                     class="mb-2 transition-swing"
                     color="white"
-                    size="70"
+                    size="60"
                   >
-                    <v-img
-                      max-height="68"
-                      max-width="68"
-                      :src="user.documents.fotografia.url"
-                    ></v-img>
+                    <v-img :src="user.documents.fotografia.url"></v-img>
                   </v-avatar>
                 </v-btn>
               </v-hover>
@@ -153,6 +146,7 @@
           </v-list-item-content>
         </v-card>
       </v-menu>
+      <!--Termina condicional de estudiante-->
       <v-menu
         v-if="
           user.rol === 'DirectorTi' ||
@@ -177,7 +171,7 @@
                 color="#fff"
                 v-on="{ ...tooltip, ...menu }"
               >
-                <v-avatar size="45">
+                <v-avatar color="blue-grey lighten-5" size="37">
                   <v-img src="../assets/utsv-logo-2.jpg"></v-img>
                 </v-avatar>
               </v-btn>
@@ -203,13 +197,9 @@
                     :class="`elevation-${hover ? 4 : 1}`"
                     class="mb-2 transition-swing"
                     color="white"
-                    size="70"
+                    size="60"
                   >
-                    <v-img
-                      max-height="68"
-                      max-width="68"
-                      src="../assets/utsv-logo-2.jpg"
-                    ></v-img>
+                    <v-img src="../assets/utsv-logo-2.jpg"></v-img>
                   </v-avatar>
                 </v-btn>
               </v-hover>

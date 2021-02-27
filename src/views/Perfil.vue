@@ -13,6 +13,22 @@
         <v-hover v-slot:default="{ hover }" open-delay="0">
           <v-btn class="mt-5 mb-12" depressed disabled fab icon>
             <v-avatar
+              v-if="$vuetify.breakpoint.width < 960"
+              :class="`elevation-${hover ? 5 : 5}`"
+              color="white"
+              size="150"
+              class="mt-n16 mb-8"
+            >
+              <!-- <v-img v-if="image != ''" :src="image"></v-img> -->
+              <v-img
+                max-width="148"
+                max-height="148"
+                :src="user.documents.fotografia.url"
+              >
+              </v-img>
+            </v-avatar>
+            <v-avatar
+              v-else
               :class="`elevation-${hover ? 5 : 5}`"
               color="white"
               size="260"
@@ -328,6 +344,22 @@
         <v-hover v-slot:default="{ hover }" open-delay="0">
           <v-btn class="mt-5 mb-12" depressed disabled fab icon>
             <v-avatar
+              v-if="$vuetify.breakpoint.width < 960"
+              :class="`elevation-${hover ? 5 : 5}`"
+              color="white"
+              size="150"
+              class="mt-n16 mb-8"
+            >
+              <!-- <v-img v-if="image != ''" :src="image"></v-img> -->
+              <v-img
+                max-width="148"
+                max-height="148"
+                src="../assets/utsv-logo.png"
+              >
+              </v-img>
+            </v-avatar>
+            <v-avatar
+              v-else
               :class="`elevation-${hover ? 5 : 5}`"
               color="white"
               size="260"

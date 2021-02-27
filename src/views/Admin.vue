@@ -73,15 +73,10 @@
               :items="estudiantes"
               sort-by="statusProceso"
             >
-              <template v-slot:item.direccion="{ item }">
-                <v-btn
-                  small
-                  depressed
-                  color="green"
-                  dark
-                  @click="verDireccion(item.direccion)"
-                  >dirección</v-btn
-                >
+              <template v-slot:item.fotografia="{ item }">
+                <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
+                  <v-img :src="item.documents.fotografia.url"> </v-img>
+                </v-avatar>
               </template>
 
               <template v-slot:item.documents="{ item }">
@@ -120,11 +115,6 @@
         </v-expand-transition>
       </v-container>
 
-      <addressModal
-        :viewAddress="viewAddress"
-        :address="addressData"
-        @cerrar="viewAddress = false"
-      />
       <documentsModal
         :viewDocuments="viewDocuments"
         :item="item"
@@ -235,7 +225,7 @@
               </v-img>
               <v-img
                 v-if="career == 'TSU Energias Renovables'"
-                src="../assets/utsv-logo.png"
+                src="../assets/utsv-logo-2.jpg"
                 class="white--text align-end"
                 gradient="to bottom, rgba(0,0,0,.08), rgba(0,0,0,.7)"
               >
@@ -266,13 +256,11 @@ export default {
   },
 
   components: {
-    addressModal: () => import("../components/Address"),
     documentsModal: () => import("../components/Documents"),
     userModal: () => import("../components/DetailUser"),
     EliminarEstudiante,
   },
   data: () => ({
-    viewAddress: false,
     viewDocuments: false,
     viewDetailUser: false,
     loading: false,
@@ -288,6 +276,10 @@ export default {
     search: "",
     estudiantes: [],
     headers: [
+      {
+        text: "Fotografía",
+        value: "fotografia",
+      },
       {
         text: "Nombre",
         value: "nombre",
@@ -312,10 +304,7 @@ export default {
         text: "Carrera",
         value: "carrera",
       },
-      {
-        text: "Direccion",
-        value: "direccion",
-      },
+
       {
         text: "Documentos",
         value: "documents",
