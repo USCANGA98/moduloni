@@ -557,6 +557,7 @@ export default {
           sexo: user.sexo,
           numeroSeguroSocial: user.numeroSeguroSocial,
           tutor: user.tutor,
+
           direccion: {
             calle: user.direccion.calle,
             ciudad: user.direccion.ciudad,

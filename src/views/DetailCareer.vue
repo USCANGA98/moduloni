@@ -24,6 +24,13 @@
             sort-by="statusProceso"
             class="elevation-1 rounded-xl"
           >
+            <template v-slot:top>
+              <v-toolbar flat class="rounded-xl">
+                <v-toolbar-title>Aspirantes</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-icon left>mdi-account</v-icon>
+              </v-toolbar>
+            </template>
             <template v-slot:item.fotografia="{ item }">
               <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
                 <v-img :src="item.documents.fotografia.url"> </v-img>
@@ -64,53 +71,64 @@
       <v-col cols="12">
         <h2>Alumnos de la carrera {{ careerSelected }}</h2>
       </v-col>
+      <v-container>
+        <v-text-field
+          rounded
+          v-model="search"
+          clearable
+          color="green"
+          solo
+          prepend-inner-icon="mdi-magnify"
+          label="Buscar"
+        ></v-text-field>
 
-      <v-text-field
-        rounded
-        v-model="search"
-        clearable
-        color="green"
-        solo
-        append-icon="mdi-magnify"
-        label="Buscar"
-      ></v-text-field>
+        <v-col cols="12">
+          <v-data-table
+            :search="search"
+            :loading="loading"
+            :headers="headers"
+            :items="items"
+            sort-by="statusProceso"
+            class="elevation-1 rounded-xl"
+          >
+            <template v-slot:item.fotografia="{ item }">
+              <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
+                <v-img :src="item.documents.fotografia.url"> </v-img>
+              </v-avatar>
+            </template>
+            <template v-slot:item.documents="{ item }">
+              <v-btn
+                small
+                depressed
+                color="green"
+                dark
+                @click="verDocumentos(item)"
+                >documentos</v-btn
+              >
+            </template>
 
-      <v-col cols="12">
-        <v-data-table
-          :search="search"
-          :loading="loading"
-          :headers="headers"
-          :items="items"
-          sort-by="statusProceso"
-          class="elevation-1"
-        >
-          <template v-slot:item.documents="{ item }">
-            <v-btn
-              small
-              depressed
-              color="green"
-              dark
-              @click="verDocumentos(item)"
-              >documentos</v-btn
-            >
-          </template>
-
-          <template v-slot:item.detalleCompleto="{ item }">
-            <v-btn small depressed color="green" dark @click="verUsuario(item)"
-              >detalle</v-btn
-            >
-          </template>
-          <template v-slot:item.eliminarestudiante="{ item }">
-            <v-btn
-              disabled
-              icon
-              color="red"
-              @click="eliminarEstudiante(item.uid)"
-              ><v-icon> mdi-delete </v-icon></v-btn
-            >
-          </template>
-        </v-data-table>
-      </v-col>
+            <template v-slot:item.detalleCompleto="{ item }">
+              <v-btn
+                small
+                depressed
+                color="green"
+                dark
+                @click="verUsuario(item)"
+                >detalle</v-btn
+              >
+            </template>
+            <template v-slot:item.eliminarestudiante="{ item }">
+              <v-btn
+                disabled
+                icon
+                color="red"
+                @click="eliminarEstudiante(item.uid)"
+                ><v-icon> mdi-delete-off </v-icon></v-btn
+              >
+            </template>
+          </v-data-table>
+        </v-col>
+      </v-container>
     </v-row>
 
     <documentsModal

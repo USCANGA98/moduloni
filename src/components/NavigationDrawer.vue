@@ -306,6 +306,25 @@
               <v-list-item-title>{{ items.title }} </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item
+            v-show="
+              user.rol === 'Estudiante' && user.statusProceso == 'Revisado'
+            "
+            active-class="pink darken-1 white--text px-2 mt-1"
+            v-for="items in itemsStudentFinalized"
+            :key="items.title"
+            link
+            :to="items.path"
+            exact
+          >
+            <v-list-item-icon>
+              <v-icon>{{ items.icon }} </v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>{{ items.title }} </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
         <!--Renderizado para "director"-->
         <v-list
@@ -657,6 +676,26 @@
               <v-list-item-title>{{ items.title }} </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
+          <v-list-item
+            v-show="
+              user.rol === 'Estudiante' && user.statusProceso == 'Revisado'
+            "
+            active-class="pink darken-1 white--text px-2 mt-1"
+            v-for="items in itemsStudentFinalized"
+            :key="items.title"
+            link
+            :to="items.path"
+            exact
+          >
+            <v-list-item-icon>
+              <v-icon>{{ items.icon }} </v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>{{ items.title }} </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
         <!--Renderizado para "director"-->
         <v-list
@@ -750,6 +789,11 @@ export default {
           icon: "mdi-hand-heart",
           path: "/admin/valorar-proyecto",
         },
+        {
+          title: "Inscripcion",
+          icon: "mdi-school",
+          path: "/admin/inscripcion",
+        },
       ],
       itemsAdminActions: [
         {
@@ -773,6 +817,18 @@ export default {
           title: "Valorar",
           icon: "mdi-hand-heart",
           path: "/student/valorar-proyecto",
+        },
+      ],
+      itemsStudentFinalized: [
+        {
+          title: "Inscripcion 1",
+          icon: "mdi-card-account-details-outline",
+          path: "/student/proceso-inscripcion-1",
+        },
+        {
+          title: "Inscripcion 2",
+          icon: "mdi-school",
+          path: "/student/proceso-inscripcion-2",
         },
       ],
       itemsDirect: [

@@ -1,13 +1,6 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12">
-        <h2 class="text-center">
-          UNIVERSIDAD TECNOLÓGICA DEL SURESTE DE VERACRUZ
-        </h2>
-        <h3 class="text-center">Encuesta de satisfacción</h3>
-      </v-col>
-    </v-row>
+    <v-subheader>Valorar proyecto</v-subheader>
     <v-form class="mr-16 ml-16" ref="form" v-model="valid" lazy-validation>
       <v-row>
         <v-col cols="12">
@@ -119,7 +112,7 @@
               </v-container>
               <v-card-actions>
                 <v-container class="text-right">
-                  <v-tooltip bottom>
+                  <v-tooltip color="grey darken-3" bottom>
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
                         block

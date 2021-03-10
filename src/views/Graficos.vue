@@ -1,15 +1,6 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12">
-        <h2 class="text-center">
-          UNIVERSIDAD TECNOLÓGICA DEL SURESTE DE VERACRUZ
-        </h2>
-        <h3 class="text-center">
-          Estadísticas de ingresos de Aspirantes-Alumnos
-        </h3>
-      </v-col>
-    </v-row>
+    <v-subheader>Graficas</v-subheader>
     <div>
       <v-row>
         <v-col cols="7">
@@ -224,8 +215,12 @@
             </v-card>
           </v-hover>
         </v-col>
+        <!--Status proceso graficas-->
       </v-row>
     </div>
+    <v-overlay :value="overlay">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
   </v-container>
 </template>
 
@@ -247,6 +242,7 @@ export default {
   data: () => ({
 
     value: 0,
+    overlay: false,
     Contaduria: [],
     Tic: [],
     Mantto: [],
@@ -259,7 +255,8 @@ export default {
     IngMantto: [],
     IngMeca: [],
     IngQuimica: [],
-    sumaTotal: []
+    sumaTotal: [],
+    statusProceso: []
 
 
   }),
@@ -271,7 +268,7 @@ export default {
 
   methods: {
     async Data() {
-      this.loading = true;
+      this.overlay = true;
       try {
         const response = await db
           .collection("users")
@@ -321,13 +318,15 @@ export default {
           .collection("users")
           .where("carrera", "==", "Ingenieria Quimica")
           .get();
+          const response13 = await db
+          .collection("users")
+          .where("statusProceso", "==", "Revisado")
+          .get();
 
         if (response.docs.length > 0) {
           response.docs.forEach(e => {
             this.Contaduria.push(e.data());
             this.sumaTotal.push(e.data());
-            let Contaduria = this.Contaduria;
-            console.log(Contaduria);
           });
         }
         if (response2.docs.length > 0) {
@@ -397,10 +396,18 @@ export default {
             this.sumaTotal.push(e.data());
           });
         }
+        if (response13.docs.length > 0) {
+          response13.docs.forEach(e => {
+            this.statusProceso.push(e.data());
+            let statusProceso = this.statusProceso;
+            console.log(statusProceso);
+          });
+        }
+        this.overlay= false;
       } catch (error) {
         console.warn(error);
       } finally {
-        this.loading = false;
+        this.overlay = false;
       }
     },
 

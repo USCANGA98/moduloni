@@ -33,7 +33,7 @@
             </template>
             <span
               >Cuenta UTSV <br />
-              <span>{{ user.nombre }} {{ user.apellidos }}</span>
+              <span>{{ user.nombre }} </span>
               <br />
               <span>{{ user.correoElectronico }}</span>
             </span>
@@ -177,7 +177,7 @@
               </v-btn>
             </template>
             <span
-              >Cuenta Director UTSV <br />
+              >Cuenta {{ user.rol }} <br />
               <span
                 >{{ user.nombre }} {{ user.apellidoPaterno }}
                 {{ user.apellidoMaterno }}</span

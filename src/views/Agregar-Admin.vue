@@ -1,14 +1,6 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12">
-        <h2 class="text-center">
-          UNIVERSIDAD TECNOLÓGICA DEL SURESTE DE VERACRUZ
-        </h2>
-        <h3 class="text-center">Control de Servicios Escolares</h3>
-      </v-col>
-    </v-row>
-
+    <v-subheader>Agregar Administrador </v-subheader>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row>
         <v-col cols="12">

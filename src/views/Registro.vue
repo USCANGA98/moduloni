@@ -517,6 +517,8 @@ export default {
     show2: false,
     user: {
       statusProceso: "En revision",
+      statusInscripcion: "Pendiente",
+      anoIngreso: new Date().getFullYear(),
       nombre: "",
       apellidoPaterno: "",
       apellidoMaterno: "",

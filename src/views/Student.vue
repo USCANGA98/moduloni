@@ -1,12 +1,8 @@
 <template>
   <div>
     <v-container>
+      <v-subheader>Proceso Nuevo Ingreso</v-subheader>
       <v-row>
-        <v-col cols="12">
-          <h2 class="text-center">
-            UNIVERSIDAD TECNOLOGICA DEL SURESTE DE VERACRUZ
-          </h2>
-        </v-col>
         <!-- Aqui empieza el container con los datos del alumno-->
         <v-container>
           <v-row>

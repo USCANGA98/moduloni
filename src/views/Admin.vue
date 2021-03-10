@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <v-subheader>Página principal</v-subheader>
     <v-container>
       <v-expand-transition>
         <v-card ripple v-if="cardActive" class="d-flex rounded-xl">
@@ -55,16 +56,18 @@
     <!-- Aqui empieza linea de todos los alumnos-->
     <v-container>
       <v-container>
-        <v-text-field
-          rounded
-          clearable
-          v-show="expand"
-          v-model="search"
-          solo
-          color="green"
-          prepend-inner-icon="mdi-magnify"
-          label="Buscar"
-        ></v-text-field>
+        <v-expand-transition>
+          <v-text-field
+            rounded
+            clearable
+            v-show="expand"
+            v-model="search"
+            solo
+            color="green"
+            prepend-inner-icon="mdi-magnify"
+            label="Buscar"
+          ></v-text-field>
+        </v-expand-transition>
         <v-expand-transition>
           <v-card v-show="expand" class="rounded-xl" width="100%" elevation="5">
             <v-data-table
@@ -73,6 +76,13 @@
               :items="estudiantes"
               sort-by="statusProceso"
             >
+              <template v-slot:top>
+                <v-toolbar flat class="rounded-xl">
+                  <v-toolbar-title>Aspirantes</v-toolbar-title>
+                  <v-spacer></v-spacer>
+                  <v-icon left>mdi-account</v-icon>
+                </v-toolbar>
+              </template>
               <template v-slot:item.fotografia="{ item }">
                 <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
                   <v-img :src="item.documents.fotografia.url"> </v-img>

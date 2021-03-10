@@ -92,6 +92,8 @@
         >
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
+              :min-height="$vuetify.breakpoint.xs ? 135 : '20vh'"
+              min-width="135"
               :class="`elevation-${hover ? 20 : 0}`"
               class="mx-auto transition-swing"
               @click="goDetailCareer(career)"
@@ -184,6 +186,8 @@
         >
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
+              :min-height="$vuetify.breakpoint.xs ? 135 : '20vh'"
+              min-width="135"
               :class="`elevation-${hover ? 20 : 0}`"
               class="mx-auto transition-swing"
               @click="goDetailCareer(career)"
@@ -224,6 +228,8 @@
         >
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
+              :min-height="$vuetify.breakpoint.xs ? 135 : '20vh'"
+              min-width="135"
               :class="`elevation-${hover ? 20 : 0}`"
               class="mx-auto transition-swing"
               @click="goDetailCareer(career)"

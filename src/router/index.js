@@ -13,6 +13,7 @@ const ifAuthenticated = (to, from, next) => {
 };
 
 const routes = [
+  
   {
     path: "/",
     name: "Home",
@@ -24,6 +25,8 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "registro" */ "../views/Registro.vue")
   },
+
+  //********Rutas de Administrador********
   {
     path: "/admin",
     name: "Admin",
@@ -39,17 +42,10 @@ const routes = [
     beforeEnter: ifAuthenticated
   },
   {
-    path: "/director/detail-career",
-    name: "DetailCareerDirector",
+    path: "/admin/nuevo-usuario",
+    name: "Agregar-Usuario",
     component: () =>
-      import(/* webpackChunkName: "admin" */ "../views/DetailCareer.vue"),
-    beforeEnter: ifAuthenticated
-  },
-  {
-    path: "/student",
-    name: "Student",
-    component: () =>
-      import(/* webpackChunkName: "admin" */ "../views/Student.vue"),
+      import(/* webpackChunkName: "admin" */ "../views/Agregar-Usuario.vue"),
     beforeEnter: ifAuthenticated
   },
   {
@@ -57,22 +53,6 @@ const routes = [
     name: "Graficos",
     component: () =>
       import(/* webpackChunkName: "admin" */ "../views/Graficos.vue"),
-    beforeEnter: ifAuthenticated
-  },
-  {
-    path: "/director",
-    name: "Control-Estudiantes",
-    component: () =>
-      import(
-        /* webpackChunkName: "admin" */ "../views/Control-Estudiantes.vue"
-      ),
-    beforeEnter: ifAuthenticated
-  },
-  {
-    path: "/admin/nuevo-usuario",
-    name: "Agregar-Usuario",
-    component: () =>
-      import(/* webpackChunkName: "admin" */ "../views/Agregar-Usuario.vue"),
     beforeEnter: ifAuthenticated
   },
   {
@@ -90,17 +70,61 @@ const routes = [
     beforeEnter: ifAuthenticated
   },
   {
-    path: "/student/valorar-proyecto",
-    name: "Valorar",
+    path: "/admin/inscripcion",
+    name: "Inscripcion-admin",
     component: () =>
-      import(/* webpackChunkName: "admin" */ "../views/Valorar-Proyecto.vue"),
+      import(/* webpackChunkName: "admin" */ "../views/Inscripcion.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  //********Rutas de Estudiante/Aspirante********
+  {
+    path: "/student",
+    name: "Student",
+    component: () =>
+      import(/* webpackChunkName: "student" */ "../views/Student.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  {
+    path: "/student/proceso-inscripcion-1",
+    name: "Inscripcion-student-1",
+    component: ()=> import(/* webpackChunkName: "student" */ "../views/Proceso-Inscripcion-1.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  {
+    path: "/student/proceso-inscripcion-2",
+    name: "Inscripcion-student-2",
+    component: ()=> import(/* webpackChunkName: "student" */ "../views/Proceso-Inscripcion-2.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  {
+    path: "/student/valorar-proyecto",
+    name: "Valorar-student",
+    component: () =>
+      import(/* webpackChunkName: "student" */ "../views/Valorar-Proyecto.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  //********Rutas de directores********
+  {
+    path: "/director/detail-career",
+    name: "DetailCareerDirector",
+    component: () =>
+      import(/* webpackChunkName: "director" */ "../views/DetailCareer.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  {
+    path: "/director",
+    name: "Control-Estudiantes",
+    component: () =>
+      import(
+        /* webpackChunkName: "director" */ "../views/Control-Estudiantes.vue"
+      ),
     beforeEnter: ifAuthenticated
   },
   {
     path: "/director/valorar-proyecto",
-    name: "Valorar",
+    name: "Valorar-director",
     component: () =>
-      import(/* webpackChunkName: "admin" */ "../views/Valorar-Proyecto.vue"),
+      import(/* webpackChunkName: "director" */ "../views/Valorar-Proyecto.vue"),
     beforeEnter: ifAuthenticated
   },
   {
