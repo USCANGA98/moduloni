@@ -20,7 +20,7 @@
                 color="blue-grey"
                 dark
                 icon="mdi-card-account-details-outline"
-                prominent
+                border="left"
               >
                 ¡Felicidades! al parecer toda tu documentacion se encuentra en
                 regla, ahora solo quedan unos ultimos pasos para finalizar toda
@@ -60,8 +60,111 @@
               </v-checkbox>
             </v-container>
           </v-window-item>
-
           <v-window-item :value="3">
+            <v-card-text>
+              <v-alert color="info" text dark icon="mdi-alert-circle-outline">
+                <div>
+                  Procedimiento para pagar en la plataforma de ovh el pago de
+                  inscripcion, si eres alumno de Nuevo Ingreso de la UTSV, se
+                  les informa que la única forma de realizar el pago es mediante
+                  el formato generado por la plataforma de la
+                  <v-tooltip color="grey darken-3" bottom>
+                    <template v-slot:activator="{ on }">
+                      <a
+                        class="blue--text"
+                        target="_blank"
+                        href="https://ovh.veracruz.gob.mx/ovh/menuComunidadesDiversos.jsp?tipo=TEC"
+                        @click.stop
+                        v-on="on"
+                      >
+                        OFICINA VIRTUAL DE HACIENDA “OVH”
+                      </a>
+                    </template>
+                    Abrir en una nueva ventana
+                  </v-tooltip>
+                </div>
+              </v-alert>
+            </v-card-text>
+          </v-window-item>
+          <v-window-item :value="4">
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <div class="text-center">
+                <v-img
+                  contain
+                  height="450"
+                  src="../assets/proceso_inscripcion_1.png"
+                ></v-img>
+              </div>
+            </v-form>
+          </v-window-item>
+          <v-window-item :value="5">
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <div class="text-center">
+                <v-img
+                  contain
+                  height="450"
+                  src="../assets/proceso_inscripcion_2.png"
+                ></v-img>
+              </div>
+            </v-form>
+          </v-window-item>
+          <v-window-item :value="6">
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <div class="text-center">
+                <v-img
+                  contain
+                  height="500"
+                  src="../assets/proceso_inscripcion_3.png"
+                ></v-img>
+              </div>
+            </v-form>
+          </v-window-item>
+          <v-window-item :value="7">
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <div class="text-center">
+                <v-img
+                  contain
+                  height="450"
+                  src="../assets/proceso_inscripcion_4.png"
+                ></v-img>
+              </div>
+            </v-form>
+          </v-window-item>
+          <v-window-item :value="8">
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <div class="text-center">
+                <v-img
+                  contain
+                  height="650"
+                  src="../assets/proceso_inscripcion_5.png"
+                ></v-img>
+              </div>
+            </v-form>
+          </v-window-item>
+          <v-window-item :value="9">
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <div class="text-center">
+                <v-img
+                  contain
+                  height="350"
+                  src="../assets/proceso_inscripcion_6.png"
+                ></v-img>
+              </div>
+            </v-form>
+          </v-window-item>
+          <v-window-item :value="10">
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <div class="text-center">
+                <v-img
+                  contain
+                  height="450"
+                  src="../assets/proceso_inscripcion_7.png"
+                ></v-img>
+              </div>
+            </v-form>
+          </v-window-item>
+
+          <v-window-item :value="11">
             <v-form ref="form" v-model="valid" lazy-validation>
               <div class="text-center">
                 <v-img
@@ -138,7 +241,7 @@
           <v-btn :disabled="step === 1" text @click="step--"> Atrás </v-btn>
           <v-spacer></v-spacer>
           <v-btn
-            :disabled="step === 3 || (step == 2 && checkbox == false)"
+            :disabled="step === 11 || (step == 2 && checkbox == false)"
             color="info"
             depressed
             @click="step++"
@@ -193,6 +296,7 @@ export default {
           mensaje: "No ha sido revisado",
         },
       },
+      statusInscripcion: "Pendiente",
     },
 
     ruleRequired: [(v) => !!v || "Campo requerido"],
@@ -243,7 +347,7 @@ export default {
 
     async subirArchivos() {
       this.overlay = true;
-      console.log(auth.currentUser);
+      console.log(auth.currentUser.uid);
 
       try {
         for (const document in this.user.documentsInscription) {
@@ -279,13 +383,14 @@ export default {
           ficha: this.user.documentsInscription.ficha,
           pagoCuatrimestre: this.user.documentsInscription.pagoCuatrimestre,
         },
+        statusInscripcion: this.user.statusInscripcion,
       });
       try {
         if (response) {
           alert(
-            "Documentos agregados correctamente, ingresa nuevamente para actualizar la informacion"
+            "Documentos enviados, inisia sesión nuevamente para actualizar los cambios"
           );
-          window.location.reload(true);
+          this.$router.push("/student/proceso-inscripcion-2");
         }
       } catch (error) {
         console.log(error);

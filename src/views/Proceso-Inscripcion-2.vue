@@ -11,17 +11,7 @@
                 <v-stepper value="2" class="ma-0 pa-0">
                   <v-card flat max-width="auto">
                     <v-card-subtitle
-                      v-if="user.statusProceso != 'Revisado'"
-                      class="text-center"
-                    >
-                      <strong
-                        >¡Hola {{ user.nombre }}!, podrás actualizar tus
-                        documentos hasta que el 'Status' haya cambiado a
-                        'Revisado'.</strong
-                      ></v-card-subtitle
-                    >
-                    <v-card-subtitle
-                      v-if="user.statusProceso == 'Revisado'"
+                      v-if="user.statusInscripcion == 'Aprobado'"
                       class="text-center"
                       ><strong>
                         ¡Tu proceso de evaluación ha concluido

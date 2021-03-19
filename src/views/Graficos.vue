@@ -3,16 +3,49 @@
     <v-subheader>Graficas</v-subheader>
     <div>
       <v-row>
-        <v-col cols="7">
+        <v-col cols="6">
+          <v-hover v-slot:default="{ hover }" open-delay="0">
+            <v-card class="mt-16" min-height="100" min-width="100">
+              <v-container>
+                <v-card
+                  outlined
+                  ripple
+                  :class="`elevation-${hover ? 10 : 10}`"
+                  class="pa-2 mt-n16 ml-3 mr-3"
+                >
+                  <area-chart
+                    :library="{ animation: { duration: 3000 } }"
+                    xtitle="2018-2021"
+                    :data="[
+                      ['Año 2018', anoIngreso18.length],
+                      ['Año 2019', anoIngreso19.length],
+                      ['Año 2020', sumaTotal.length],
+                      ['Año en curso', anoIngreso21.length],
+                    ]"
+                  ></area-chart>
+                </v-card>
+                <v-card-title class="text-left">
+                  Gráfica de aspirantes anuales
+                </v-card-title>
+                <v-card-subtitle
+                  >Se muestra la cantidad de aspirantes que ingresan desde el
+                  año 2018</v-card-subtitle
+                >
+                <v-divider></v-divider>
+                <v-card-text>UTSV</v-card-text>
+              </v-container>
+            </v-card>
+          </v-hover>
+        </v-col>
+        <v-col cols="6">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card class="mt-16" max-height="800">
               <v-container>
                 <v-card
                   ripple
-                  color="teal accent-4"
                   :class="`elevation-${hover ? 10 : 10}`"
                   outlined
-                  class="ml-3 mt-n16 mr-3 mt"
+                  class="ml-3 mt-n16 mr-3"
                 >
                   <pie-chart
                     :messages="{ empty: 'No data' }"
@@ -22,18 +55,18 @@
                     }"
                     class="mt-3 mb-3"
                     :data="[
-                      [Contaduria[0].carrera, Contaduria.length],
-                      [Tic[0].carrera, Tic.length],
-                      [Mantto[0].carrera, Mantto.length],
-                      [Meca[0].carrera, Meca.length],
-                      [Quimica[0].carrera, Quimica.length],
-                      [Mecanica[0].carrera, Mecanica.length],
-                      [Administracion[0].carrera, Administracion.length],
-                      [Energias[0].carrera, Energias.length],
-                      [IngTi[0].carrera, IngTi.length],
-                      [IngMantto[0].carrera, IngMantto.length],
-                      [IngMeca[0].carrera, IngMeca.length],
-                      [IngQuimica[0].carrera, IngQuimica.length],
+                      ['Administración', Administracion.length],
+                      ['Energías', Energias.length],
+                      ['Contaduría', Contaduria.length],
+                      ['Tic', Tic.length],
+                      ['Mantto', Mantto.length],
+                      ['Mecatrónica', Meca.length],
+                      ['Química', Quimica.length],
+                      ['Mecánica', Mecanica.length],
+                      ['Ing Ti', IngTi.length],
+                      ['Ing Mantto', IngMantto.length],
+                      ['Ing Mecatrónica', IngMeca.length],
+                      ['Ing Química', IngQuimica.length],
                     ]"
                   ></pie-chart>
                 </v-card>
@@ -50,36 +83,35 @@
             </v-card>
           </v-hover>
         </v-col>
-        <v-col cols="5">
+        <v-col cols="6">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card class="mt-16" min-height="100" min-width="100">
               <v-container>
                 <v-card
-                  color="teal accent-4"
                   outlined
                   ripple
                   :class="`elevation-${hover ? 10 : 10}`"
                   class="pa-1 mt-n16 ml-3 mr-3"
                 >
                   <column-chart
-                    :dataset="{ borderWidth: 5, backgroundColor: '#fff' }"
+                    :dataset="{ borderWidth: 5, backgroundColor: '#00BFA5' }"
                     :messages="{ empty: 'No data' }"
                     :library="{ animation: { duration: 3000 } }"
                     class="mt-0 mb-0 pa-0"
                     :colors="['#00BFA5']"
                     :data="[
-                      [Administracion[0].carrera, Administracion.length],
-                      [Energias[0].carrera, Energias.length],
-                      [Contaduria[0].carrera, Contaduria.length],
-                      [Tic[0].carrera, Tic.length],
-                      [Mantto[0].carrera, Mantto.length],
-                      [Meca[0].carrera, Meca.length],
-                      [Quimica[0].carrera, Quimica.length],
-                      [Mecanica[0].carrera, Mecanica.length],
-                      [IngTi[0].carrera, IngTi.length],
-                      [IngMantto[0].carrera, IngMantto.length],
-                      [IngMeca[0].carrera, IngMeca.length],
-                      [IngQuimica[0].carrera, IngQuimica.length],
+                      ['Administración', Administracion.length],
+                      ['Energías', Energias.length],
+                      ['Contaduría', Contaduria.length],
+                      ['Tic', Tic.length],
+                      ['Mantto', Mantto.length],
+                      ['Mecatrónica', Meca.length],
+                      ['Química', Quimica.length],
+                      ['Mecánica', Mecanica.length],
+                      ['Ing Ti', IngTi.length],
+                      ['Ing Mantto', IngMantto.length],
+                      ['Ing Mecatrónica', IngMeca.length],
+                      ['Ing Química', IngQuimica.length],
                     ]"
                   ></column-chart>
                 </v-card>
@@ -97,7 +129,7 @@
           </v-hover>
         </v-col>
 
-        <v-col cols="5">
+        <v-col cols="6">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card class="mt-16" min-height="300" min-width="100">
               <v-container>
@@ -132,7 +164,7 @@
           </v-hover>
         </v-col>
 
-        <v-col cols="7">
+        <v-col cols="5">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card class="mt-16" min-height="200" min-width="100">
               <v-container>
@@ -215,7 +247,7 @@
             </v-card>
           </v-hover>
         </v-col>
-        <!--Status proceso graficas-->
+        <!--Status graficas de aspirantes de cada carrera por ciclo-->
       </v-row>
     </div>
     <v-overlay :value="overlay">
@@ -230,33 +262,40 @@ import { db } from '../services/firebase'
 import Vue from 'vue'
 import Chartkick from 'vue-chartkick'
 import Chart from 'chart.js'
+import {mapState} from 'vuex'
 
 Vue.use(Chartkick.use(Chart))
 
 export default {
   name: "ViewGraficos",
-  colors: [ '#4572A7', '#AA4643', '#89A54E', '#80699B', '#3D96AE', '#DB843D', '#92A8CD', '#A47D7C', '#B5CA92' ], plotOptions: { column: { colorByPoint: true } },
+  colors: [ '#4572A7', '#AA4643', '#89A54E', '#80699B', '#3D96AE', '#DB843D', '#92A8CD', '#A47D7C', '#B5CA92' ], plotOptions: { column: { colorByPoint: true }, },
 
 
 
   data: () => ({
-
+    
     value: 0,
     overlay: false,
     Contaduria: [],
     Tic: [],
     Mantto: [],
+    anoIngreso18:[],
+    anoIngreso19:[],
+    anoIngreso21:[],
     Meca: [],
     Quimica: [],
     Mecanica: [],
     Administracion: [],
     Energias: [],
     IngTi: [],
+    
     IngMantto: [],
     IngMeca: [],
     IngQuimica: [],
     sumaTotal: [],
-    statusProceso: []
+    statusProceso: [],
+    statusInscripcion: [],
+    statusPendiente: [],
 
 
   }),
@@ -321,6 +360,26 @@ export default {
           const response13 = await db
           .collection("users")
           .where("statusProceso", "==", "Revisado")
+          .get();
+        const response14 = await db
+          .collection("users")
+          .where("statusInscripcion", "==", "Aprobado")
+          .get();
+        const response15 = await db
+          .collection("users")
+          .where("statusInscripcion", "==", "Pendiente")
+          .get();
+          const response16 = await db
+          .collection("users")
+          .where("anoIngreso", "==", "2018")
+          .get();
+          const response17 = await db
+          .collection("users")
+          .where("anoIngreso", "==", "2019")
+          .get();
+          const response18 = await db
+          .collection("users")
+          .where("anoIngreso", "==", new Date().getFullYear())
           .get();
 
         if (response.docs.length > 0) {
@@ -403,13 +462,52 @@ export default {
             console.log(statusProceso);
           });
         }
+        if (response14.docs.length > 0) {
+          response14.docs.forEach((e) => {
+            this.statusInscripcion.push(e.data());
+            let statusInscripcion = this.statusInscripcion;
+            console.log(statusInscripcion);
+          });
+        }
+        if (response15.docs.length > 0) {
+          response15.docs.forEach((e) => {
+            this.statusPendiente.push(e.data());
+            let statusPendiente = this.statusPendiente;
+            console.log(statusPendiente);
+          });
+        }
+        if (response16.docs.length > 0) {
+          response16.docs.forEach((e) => {
+            this.anoIngreso18.push(e.data());
+            let anoIngreso18 = this.anoIngreso18;
+            console.log(anoIngreso18);
+          });
+        }
+        if (response17.docs.length > 0) {
+          response17.docs.forEach((e) => {
+            this.anoIngreso19.push(e.data());
+            let anoIngreso19 = this.anoIngreso19;
+            console.log(anoIngreso19);
+          });
+        }
+        if (response18.docs.length > 0) {
+          response18.docs.forEach((e) => {
+            this.anoIngreso21.push(e.data());
+            let anoIngreso21 = this.anoIngreso21;
+            console.log(anoIngreso21);
+          });
+        }
         this.overlay= false;
       } catch (error) {
         console.warn(error);
       } finally {
         this.overlay = false;
       }
+      
     },
+    computed:{
+      ...mapState(["user"]),
+    }
 
 
 

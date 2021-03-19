@@ -2,7 +2,7 @@
   <v-container>
     <v-subheader>Página principal</v-subheader>
     <v-container>
-      <v-expand-transition>
+      <!-- <v-expand-transition>
         <v-card ripple v-if="cardActive" class="d-flex rounded-xl">
           <v-img
             class="rounded-xl"
@@ -32,9 +32,9 @@
             </v-col>
           </v-img>
         </v-card>
-      </v-expand-transition>
+      </v-expand-transition> -->
       <v-scroll-x-transition mode="out-in">
-        <v-container v-if="cardActive == false" class="text-right">
+        <v-container class="text-right">
           <v-tooltip color="grey darken-3" left>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -140,7 +140,7 @@
     </v-container>
     <!-- Aqui termina linea de todos los alumnos-->
     <v-scroll-x-transition>
-      <v-row v-if="cardActive == false">
+      <v-row>
         <v-col cols="2" md="sm" v-for="career in careerOptions" :key="career">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card

@@ -52,6 +52,7 @@
                       lazy-validation="true"
                       dense
                       :rules="ruleRequired"
+                      v-model="user.nombre"
                     >
                     </v-text-field>
                   </v-col>
@@ -121,7 +122,7 @@
                         depressed
                         color="deep-purple lighten-1"
                         dark
-                        @click="actualizarPerfilAlumno(user)"
+                        @click="enviarDatos"
                       >
                         Enviar<v-icon right outlined>mdi-send</v-icon></v-btn
                       >
@@ -158,6 +159,8 @@ export default {
     overlay: false,
     text: "",
     user: {
+      nombre: "",
+      correoElectronico: "",
       satisfaccion: {
         mala: "Mala",
         regular: "Regular",
@@ -203,22 +206,22 @@ export default {
     ],
   }),
   methods: {
-    async actualizarPerfilAlumno(user) {
+    async enviarDatos(user) {
       // await this.subirImagen();
-      const uid = user.uid;
+      const uid = user.currentUser.uid;
 
       const response = await db.collection("users").doc(uid);
 
       // Set the "capital" field of the city 'DC'
       return response
         .update({
-          nivelSatisfaccion: {
-            mala: user.nivelSatisfaccion.mala,
-            regular: user.nivelSatisfaccion.regular,
-            buena: user.nivelSatisfaccion.buena,
-            muyBuena: user.nivelSatisfaccion.muyBuena,
-            excelente: user.nivelSatisfaccion.excelente,
-          },
+          nombre: this.user.nombre,
+          correoElectronico: this.user.correoElectronico,
+          mala: this.user.satisfaccion.mala,
+          regular: this.user.satisfaccion.regular,
+          buena: this.user.satisfaccion.buena,
+          muyBuena: this.user.satisfaccion.muyBuena,
+          excelente: this.user.satisfaccion.excelente,
         })
         .then(function () {
           alert("Documento Actualizado Correctamente!");
