@@ -842,6 +842,11 @@ export default {
           icon: "mdi-hand-heart",
           path: "/director/valorar-proyecto",
         },
+        {
+          title: "Inscripcion",
+          icon: "mdi-school",
+          path: "/director/inscripcion",
+        },
       ],
     };
   },

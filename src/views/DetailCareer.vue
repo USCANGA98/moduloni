@@ -140,7 +140,7 @@
 
     <userModal
       :viewDetailUser="viewDetailUser"
-      :user="user"
+      :userData="userData"
       @cerrar="viewDetailUser = false"
     />
     <EliminarEstudiante :uid="uid" :dialog="dialog" @cancel="dialog = false" />
@@ -172,7 +172,7 @@ export default {
     item: {},
     dialog: false,
     uid: "",
-    user: {},
+    userData: {},
     search: "",
     headers: [
       {
@@ -229,7 +229,7 @@ export default {
       this.viewDocuments = true;
     },
     verUsuario(item) {
-      this.user = Object.assign({}, item);
+      this.userData = Object.assign({}, item);
       this.viewDetailUser = true;
     },
     async getData() {

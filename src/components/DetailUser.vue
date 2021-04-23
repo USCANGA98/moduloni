@@ -3,8 +3,8 @@
     <v-card>
       <v-toolbar dense flat color="green" dark>
         <v-toolbar-title
-          >Detalle alumno - {{ user.nombre }} {{ user.apellidoPaterno }}
-          {{ user.apellidoMaterno }}
+          >Detalle alumno - {{ userData.nombre }} {{ userData.apellidoPaterno }}
+          {{ userData.apellidoMaterno }}
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn color="white" text @click="cerrar">Cerrar</v-btn>
@@ -18,10 +18,10 @@
                 :class="`elevation-${hover ? 10 : 1}`"
               >
                 <v-btn
+                  :href="userData.documents.fotografia.url"
                   class="mb-16 mt-n5"
                   depressed
-                  disabled
-                  fab
+                  target="_blank"
                   icon
                   color="#fff"
                 >
@@ -35,7 +35,7 @@
                       class="transition-swing"
                       max-height="190"
                       max-width="190"
-                      :src="user.documents.fotografia.url"
+                      :src="userData.documents.fotografia.url"
                     ></v-img>
                   </v-avatar>
                 </v-btn>
@@ -50,7 +50,7 @@
                         color="green"
                         label="Nombre(s)"
                         placeholder="Ingresa tu nombre(s)"
-                        v-model="user.nombre"
+                        v-model="userData.nombre"
                         dense
                       ></v-text-field>
                     </v-col>
@@ -61,7 +61,7 @@
                         color="green"
                         label="Apellido paterno"
                         placeholder="Ingresa tu apellido paterno"
-                        v-model="user.apellidoPaterno"
+                        v-model="userData.apellidoPaterno"
                         dense
                       ></v-text-field>
                     </v-col>
@@ -73,7 +73,7 @@
                         label="Correo electrónico"
                         placeholder="Ingresa tu correo electrónico"
                         dense
-                        v-model="user.correoElectronico"
+                        v-model="userData.correoElectronico"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" class="ma-0 pt-0 pb-0">
@@ -83,7 +83,7 @@
                         color="green"
                         label="Apellido materno"
                         placeholder="Ingresa tu apellido materno"
-                        v-model="user.apellidoMaterno"
+                        v-model="userData.apellidoMaterno"
                         dense
                       ></v-text-field>
                     </v-col>
@@ -93,7 +93,7 @@
                         outlined
                         dense
                         color="green"
-                        v-model="user.fechaNacimiento"
+                        v-model="userData.fechaNacimiento"
                         label="Fecha de nacimiento"
                         placeholder="Ingresa tu fecha de nacimiento"
                       ></v-text-field>
@@ -108,7 +108,7 @@
                         type="number"
                         min="0"
                         max="99"
-                        v-model="user.edad"
+                        v-model="userData.edad"
                         dense
                       ></v-text-field>
                     </v-col>
@@ -120,7 +120,7 @@
                         label="Sexo"
                         placeholder="Ingresa tu sexo"
                         dense
-                        v-model="user.sexo"
+                        v-model="userData.sexo"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
@@ -134,7 +134,7 @@
                         min="0"
                         max="99"
                         dense
-                        v-model="user.numeroSeguroSocial"
+                        v-model="userData.numeroSeguroSocial"
                       ></v-text-field>
                     </v-col>
 
@@ -146,7 +146,7 @@
                         label="Padre o tutor"
                         placeholder="Ingresa el nombre de tu padre o tutor"
                         dense
-                        v-model="user.tutor"
+                        v-model="userData.tutor"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -170,7 +170,7 @@
                         label="Calle"
                         placeholder="Ingresa tu calle"
                         dense
-                        v-model="user.direccion.calle"
+                        v-model="userData.direccion.calle"
                         readonly
                       ></v-text-field>
                     </v-col>
@@ -184,7 +184,7 @@
                         min="0"
                         max="99999"
                         dense
-                        v-model="user.direccion.numeroExterior"
+                        v-model="userData.direccion.numeroExterior"
                         readonly
                       ></v-text-field>
                     </v-col>
@@ -198,7 +198,7 @@
                         min="0"
                         max="99999"
                         dense
-                        v-model="user.direccion.numeroInterior"
+                        v-model="userData.direccion.numeroInterior"
                         readonly
                       ></v-text-field>
                     </v-col>
@@ -209,7 +209,7 @@
                         label="Colonia"
                         placeholder="Ingresa tu colonia"
                         dense
-                        v-model="user.direccion.colonia"
+                        v-model="userData.direccion.colonia"
                         readonly
                       ></v-text-field>
                     </v-col>
@@ -223,7 +223,7 @@
                         min="0"
                         max="99999"
                         dense
-                        v-model="user.direccion.codigoPostal"
+                        v-model="userData.direccion.codigoPostal"
                         readonly
                       ></v-text-field>
                     </v-col>
@@ -234,7 +234,7 @@
                         label="Estado"
                         placeholder="Ingresa tu estado"
                         dense
-                        v-model="user.direccion.estado"
+                        v-model="userData.direccion.estado"
                         readonly
                       ></v-text-field>
                     </v-col>
@@ -245,7 +245,7 @@
                         label="Ciudad"
                         placeholder="Ingresa tu ciudad"
                         dense
-                        v-model="user.direccion.ciudad"
+                        v-model="userData.direccion.ciudad"
                         readonly
                       ></v-text-field>
                     </v-col>
@@ -271,7 +271,7 @@
                         label="Escuela de procedencia"
                         placeholder="Ingresa tu escuela de procedencia"
                         dense
-                        v-model="user.escuelaProcedencia"
+                        v-model="userData.escuelaProcedencia"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" class="ma-0 pt-0 pb-0">
@@ -282,7 +282,7 @@
                         label="Carrera"
                         placeholder="Selecciona la carrera a la que deseas inscribirte"
                         dense
-                        v-model="user.carrera"
+                        v-model="userData.carrera"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -309,7 +309,7 @@ export default {
       type: Boolean,
       required: true,
     },
-    user: {
+    userData: {
       type: Object,
       required: true,
     },

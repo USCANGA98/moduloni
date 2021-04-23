@@ -216,7 +216,7 @@
 
       <userModal
         :viewDetailUser="viewDetailUser"
-        :user="user"
+        :userData="userData"
         @cerrar="viewDetailUser = false"
       />
     </v-container>
@@ -283,7 +283,7 @@ export default {
     items: [],
     cardActive: true,
     item: {},
-    user: {},
+    userData: {},
     dialog: false,
     uid: "",
     search: "",
@@ -537,7 +537,7 @@ export default {
       this.viewDocumentsInscription = true;
     },
     verUsuario(item) {
-      this.user = Object.assign({}, item);
+      this.userData = Object.assign({}, item);
       this.viewDetailUser = true;
     },
     async getData() {

@@ -1,3 +1,4 @@
+<!--Renderizado para directores de carrera-->
 <template>
   <div>
     <v-container>

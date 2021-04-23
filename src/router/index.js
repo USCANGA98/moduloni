@@ -128,6 +128,13 @@ const routes = [
     beforeEnter: ifAuthenticated
   },
   {
+    path: "/director/inscripcion",
+    name: "Inscripcion-director",
+    component: () =>
+      import(/* webpackChunkName: "director" */ "../views/InscripcionDirector.vue"),
+    beforeEnter: ifAuthenticated
+  },
+  {
     path: "/perfil",
     name: "Perfil",
     component: () =>
