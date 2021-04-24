@@ -180,6 +180,7 @@
                     max="99999"
                     dense
                     v-model="user.direccion.numeroInterior"
+                    :rules="ruleRequired"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">

@@ -69,6 +69,14 @@
       :item="itemData"
       @cerrar="viewDocumentInscriptionEdit = false"
     />
+    <v-dialog v-model="dialog2" max-width="1020">
+      <iframe
+        allowfullscreen
+        width="650px"
+        height="650px"
+        :src="item.url"
+      ></iframe>
+    </v-dialog>
   </v-dialog>
 </template>
 
@@ -91,6 +99,7 @@ export default {
     },
   },
   data: () => ({
+    dialog2: false,
     viewDocumentInscriptionEdit: false,
     itemData: {},
   }),
@@ -99,7 +108,9 @@ export default {
       this.$emit("cerrar");
     },
     abrir(url) {
-      window.open(url, "_blank");
+      this.dialog2 = true;
+      this.item.url = url;
+      // window.open(url, "_blank");
     },
     editar(item) {
       this.itemData = item;

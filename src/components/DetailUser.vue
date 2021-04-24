@@ -18,12 +18,12 @@
                 :class="`elevation-${hover ? 10 : 1}`"
               >
                 <v-btn
-                  :href="userData.documents.fotografia.url"
                   class="mb-16 mt-n5"
                   depressed
                   target="_blank"
                   icon
                   color="#fff"
+                  @click="mostrarImagen"
                 >
                   <v-avatar
                     class="transition-swing"
@@ -293,6 +293,12 @@
         </v-row>
       </v-container>
     </v-card>
+
+    <v-dialog v-model="dialog2" max-width="750">
+      <v-card>
+        <v-img :src="userData.documents.fotografia.url"></v-img>
+      </v-card>
+    </v-dialog>
   </v-dialog>
 </template>
 
@@ -301,6 +307,7 @@ export default {
   data: () => ({
     viewDocumentEdit: false,
     itemData: {},
+    dialog2: false,
   }),
 
   name: "DetailUserComponent",
@@ -315,6 +322,9 @@ export default {
     },
   },
   methods: {
+    mostrarImagen() {
+      this.dialog2 = true;
+    },
     cerrar() {
       this.$emit("cerrar");
     },

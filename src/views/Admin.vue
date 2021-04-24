@@ -83,6 +83,11 @@
                   <v-icon left>mdi-account</v-icon>
                 </v-toolbar>
               </template>
+              <template v-slot:item.statusProceso="{ item }">
+                <v-chip :color="getColorProceso(item.statusProceso)" dark>
+                  {{ item.statusProceso }}
+                </v-chip>
+              </template>
               <template v-slot:item.fotografia="{ item }">
                 <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
                   <v-img :src="item.documents.fotografia.url"> </v-img>
@@ -282,6 +287,7 @@ export default {
     item: {},
     userData: {},
     dialog: false,
+    dialog2: false,
     uid: "",
     search: "",
     estudiantes: [],
@@ -346,6 +352,10 @@ export default {
   }),
 
   methods: {
+    getColorProceso(statusProceso) {
+      if (statusProceso == "En revision") return "orange";
+      else if (statusProceso == "Revisado") return "green";
+    },
     ...mapMutations(["setCareerSelected"]),
     goDetailCareer(career) {
       this.setCareerSelected(career);
@@ -357,10 +367,7 @@ export default {
       await this.getData();
       this.viewDocuments = false;
     },
-    verDireccion(direccion) {
-      this.addressData = direccion;
-      this.viewAddress = true;
-    },
+
     verDocumentos(item) {
       this.item = item;
       this.viewDocuments = true;

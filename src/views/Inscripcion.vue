@@ -66,7 +66,7 @@
               </v-col>
             </v-row>
 
-            <h3 class="text-left white--text">Proceso Finalizado NI</h3>
+            <h3 class="text-left white--text">Proceso Revisado NI</h3>
             <v-card-text class="text-justify white--text">
               Aspirantes que terminaron el proceso de nuevo ingreso
             </v-card-text>
@@ -170,6 +170,16 @@
                 <v-icon left>mdi-school</v-icon>
               </v-toolbar>
             </template>
+            <template v-slot:item.statusInscripcion="{ item }">
+              <v-chip :color="getColorInscripcion(item.statusInscripcion)" dark>
+                {{ item.statusInscripcion }}
+              </v-chip>
+            </template>
+            <template v-slot:item.statusProceso="{ item }">
+              <v-chip :color="getColorProceso(item.statusProceso)" dark>
+                {{ item.statusProceso }}
+              </v-chip>
+            </template>
             <template v-slot:item.fotografia="{ item }">
               <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
                 <v-img :src="item.documents.fotografia.url"> </v-img>
@@ -241,7 +251,7 @@ Vue.use(Chartkick.use(Chart));
 export default {
   name: "AdminView",
   computed: {
-    ...mapState(["careerSelected"]),
+    ...mapState(["careerSelected", "user"]),
   },
   mounted() {
     this.getData();
@@ -321,7 +331,6 @@ export default {
         text: "Carrera",
         value: "carrera",
       },
-
       {
         text: "Documentos",
         value: "documentsInscription",
@@ -353,6 +362,14 @@ export default {
   }),
 
   methods: {
+    getColorInscripcion(statusInscripcion) {
+      if (statusInscripcion == "Aprobado") return "red";
+      else if (statusInscripcion == "Pendiente") return "orange";
+    },
+    getColorProceso(statusProceso) {
+      if (statusProceso == "En revision") return "orange";
+      else if (statusProceso == "Revisado") return "green";
+    },
     async Data() {
       try {
         const response = await db
@@ -502,15 +519,11 @@ export default {
         if (response14.docs.length > 0) {
           response14.docs.forEach((e) => {
             this.statusInscripcion.push(e.data());
-            let statusInscripcion = this.statusInscripcion;
-            console.log(statusInscripcion);
           });
         }
         if (response15.docs.length > 0) {
           response15.docs.forEach((e) => {
             this.statusPendiente.push(e.data());
-            let statusPendiente = this.statusPendiente;
-            console.log(statusPendiente);
           });
         }
       } catch (error) {

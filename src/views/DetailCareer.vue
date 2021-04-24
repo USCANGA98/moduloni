@@ -31,6 +31,11 @@
                 <v-icon left>mdi-account</v-icon>
               </v-toolbar>
             </template>
+            <template v-slot:item.statusProceso="{ item }">
+              <v-chip :color="getColorProceso(item.statusProceso)" dark>
+                {{ item.statusProceso }}
+              </v-chip>
+            </template>
             <template v-slot:item.fotografia="{ item }">
               <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
                 <v-img :src="item.documents.fotografia.url"> </v-img>
@@ -91,6 +96,18 @@
             sort-by="statusProceso"
             class="elevation-1 rounded-xl"
           >
+            <template v-slot:top>
+              <v-toolbar flat class="rounded-xl">
+                <v-toolbar-title>Aspirantes</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-icon left>mdi-account</v-icon>
+              </v-toolbar>
+            </template>
+            <template v-slot:item.statusProceso="{ item }">
+              <v-chip :color="getColorProceso(item.statusProceso)" dark>
+                {{ item.statusProceso }}
+              </v-chip>
+            </template>
             <template v-slot:item.fotografia="{ item }">
               <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
                 <v-img :src="item.documents.fotografia.url"> </v-img>
@@ -215,6 +232,10 @@ export default {
     ],
   }),
   methods: {
+    getColorProceso(statusProceso) {
+      if (statusProceso == "En revision") return "orange";
+      else if (statusProceso == "Revisado") return "green";
+    },
     async guardado() {
       this.items = [];
       await this.getData();

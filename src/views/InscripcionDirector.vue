@@ -34,6 +34,16 @@
                 <v-icon left>mdi-school</v-icon>
               </v-toolbar>
             </template>
+            <template v-slot:item.statusProceso="{ item }">
+              <v-chip :color="getColorProceso(item.statusProceso)" dark>
+                {{ item.statusProceso }}
+              </v-chip>
+            </template>
+            <template v-slot:item.statusInscripcion="{ item }">
+              <v-chip :color="getColorInscripcion(item.statusInscripcion)" dark>
+                {{ item.statusInscripcion }}
+              </v-chip>
+            </template>
             <template v-slot:item.fotografia="{ item }">
               <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
                 <v-img :src="item.documents.fotografia.url"> </v-img>
@@ -86,6 +96,16 @@
                 <v-spacer></v-spacer>
                 <v-icon left>mdi-school</v-icon>
               </v-toolbar>
+            </template>
+            <template v-slot:item.statusProceso="{ item }">
+              <v-chip :color="getColorProceso(item.statusProceso)" dark>
+                {{ item.statusProceso }}
+              </v-chip>
+            </template>
+            <template v-slot:item.statusInscripcion="{ item }">
+              <v-chip :color="getColorInscripcion(item.statusInscripcion)" dark>
+                {{ item.statusInscripcion }}
+              </v-chip>
             </template>
             <template v-slot:item.fotografia="{ item }">
               <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
@@ -140,6 +160,16 @@
                 <v-icon left>mdi-school</v-icon>
               </v-toolbar>
             </template>
+            <template v-slot:item.statusProceso="{ item }">
+              <v-chip :color="getColorProceso(item.statusProceso)" dark>
+                {{ item.statusProceso }}
+              </v-chip>
+            </template>
+            <template v-slot:item.statusInscripcion="{ item }">
+              <v-chip :color="getColorInscripcion(item.statusInscripcion)" dark>
+                {{ item.statusInscripcion }}
+              </v-chip>
+            </template>
             <template v-slot:item.fotografia="{ item }">
               <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
                 <v-img :src="item.documents.fotografia.url"> </v-img>
@@ -192,6 +222,16 @@
                 <v-spacer></v-spacer>
                 <v-icon left>mdi-school</v-icon>
               </v-toolbar>
+            </template>
+            <template v-slot:item.statusProceso="{ item }">
+              <v-chip :color="getColorProceso(item.statusProceso)" dark>
+                {{ item.statusProceso }}
+              </v-chip>
+            </template>
+            <template v-slot:item.statusInscripcion="{ item }">
+              <v-chip :color="getColorInscripcion(item.statusInscripcion)" dark>
+                {{ item.statusInscripcion }}
+              </v-chip>
             </template>
             <template v-slot:item.fotografia="{ item }">
               <v-avatar class="ma-1" size="45" color="blue-grey lighten-5">
@@ -372,6 +412,16 @@ export default {
   }),
 
   methods: {
+    getColorProceso(statusProceso) {
+      if (statusProceso == "En revision") return "orange";
+      else if (statusProceso == "Revisado") return "green";
+    },
+    getColorInscripcion(statusInscripcion) {
+      if (statusInscripcion == "Pendiente") return "orange";
+      else if (statusInscripcion == "Aprobado") return "red";
+      else if (statusInscripcion == undefined)
+        return (statusInscripcion = "En espera");
+    },
     ...mapMutations(["setCareerSelected"]),
 
     async guardado() {
