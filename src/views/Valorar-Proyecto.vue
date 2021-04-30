@@ -1,137 +1,178 @@
 <template>
   <v-container>
     <v-subheader>Valorar proyecto</v-subheader>
-    <v-form class="mr-16 ml-16" ref="form" v-model="valid" lazy-validation>
+    <v-form ref="form" v-model="valid" lazy-validation>
       <v-row>
-        <v-col cols="12">
-          <v-card
-            class="mr-15 ml-15"
-            min-height="5000"
-            color="grey lighten-4"
-            elevation="12"
-          >
-            <v-card
-              elevation="0"
-              tile
-              min-height="150"
-              color="deep-purple lighten-1"
-            >
-            </v-card>
+        <v-col>
+          <v-container>
             <v-alert
-              elevation="2"
-              colored-border
-              class="mr-16 mt-n16 ml-16"
-              color="deep-purple lighten-3 "
+              style="border: solid 1px #dcdcdc; border-radius: 8px"
+              class="ma-auto mb-3"
+              max-width="700"
               border="top"
+              colored-border
+              color="#673AB7"
             >
-              <v-container>
-                <h1 class="mb-10 ma-10 text-justify">
-                  Encuesta de satisfaccion del Alumno-Aspirante
-                </h1>
-                <p class="ml-10 mr-10 text-justify">
-                  La siguiente encuesta de satisfacción está dirigida con el
-                  único propósito de recoger datos que nos ayuda a conocer la
-                  opinión e impresiones, cualitativas y cuantitativas, de
-                  nuestros clientes. También nos permite analizar otros aspectos
-                  como su experiencia de uso, sus defectos y valoraciones de la
-                  marca y del servicio, etc.
-                </p>
-                <span class="red--text ml-10 text-justify">
-                  *Obligatorio*
-                </span>
+              <h1 class="mb-8 ma-3 text-justify font-weight-medium">
+                Encuesta de satisfacción de la UTSV
+              </h1>
+              <p class="ml-10 mr-10 text-justify font-weight-medium">
+                La siguiente encuesta de satisfacción está dirigida con el único
+                propósito de recoger datos que nos ayuda a conocer la opinión e
+                impresiones. También nos permite analizar otros aspectos como su
+                experiencia de uso, sus defectos y valoraciones del servicio,
+                etc.
+              </p>
+              <p class="ml-10 mr-10 text-justify font-weight-medium">
+                Total de incisos:
+                <v-avatar size="30" color="#673AB7" class="white--text" rounded>
+                  4
+                </v-avatar>
+              </p>
 
-                <v-row>
-                  <v-col cols="12" md="5">
-                    <h3 class="ml-10 mt-10">
-                      Nombre <span class="red--text">*</span>
-                    </h3>
-                    <v-text-field
-                      class="ml-10 mt-10"
-                      label="Nombre del participante"
-                      color="success"
-                      lazy-validation="true"
-                      dense
-                      :rules="ruleRequired"
-                      v-model="user.nombre"
-                    >
-                    </v-text-field>
-                  </v-col>
-                  <v-col cols="12" md="5">
-                    <h3 class="ml-10 mt-10">
-                      Correo <span class="red--text">*</span>
-                    </h3>
-                    <v-text-field
-                      class="ml-10 mt-10"
-                      label="Correo de participante"
-                      color="success"
-                      lazy-validation="true"
-                      dense
-                      :rules="ruleRequired"
-                    >
-                    </v-text-field>
-                  </v-col>
-                  <h3 class="ml-10 mt-10">
-                    ¿Cómo calificarías tu experiencia general con nuestro
-                    producto?
-                    <span class="red--text">*</span>
-                  </h3>
-                  <v-col>
-                    <v-radio-group>
-                      <v-radio
-                        color="red"
-                        class="ml-10 mt-10"
-                        label="Mala"
-                        v-model="user.satisfaccion.mala"
-                      ></v-radio>
-                      <v-radio
-                        color="orange"
-                        class="ml-10 mt-10"
-                        label="Regular"
-                        v-model="user.satisfaccion.regular"
-                      ></v-radio>
-                      <v-radio
-                        color="yellow"
-                        class="ml-10 mt-10"
-                        label="Buena"
-                        v-model="user.satisfaccion.buena"
-                      ></v-radio>
-                      <v-radio
-                        color="success"
-                        class="ml-10 mt-10"
-                        label="Muy buena"
-                        v-model="user.satisfaccion.muyBuena"
-                      ></v-radio>
-                      <v-radio
-                        color="info"
-                        class="ml-10 mt-10"
-                        label="Excelente"
-                        v-model="user.satisfaccion.excelente"
-                      ></v-radio>
-                    </v-radio-group>
-                  </v-col>
-                </v-row>
-              </v-container>
-              <v-card-actions>
-                <v-container class="text-right">
-                  <v-tooltip color="grey darken-3" bottom>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        block
-                        v-bind="attrs"
-                        v-on="on"
-                        depressed
-                        color="deep-purple lighten-1"
-                        dark
-                        @click="enviarDatos"
-                      >
-                        Enviar<v-icon right outlined>mdi-send</v-icon></v-btn
-                      >
-                    </template>
-                    <span>Enviar Datos</span>
-                  </v-tooltip>
-                </v-container>
-              </v-card-actions>
+              <p class="ml-10 mr-10 text-justify font-weight-medium">
+                Encuestado:
+                <strong>
+                  {{ userData.nombre }} {{ userData.apellidoPaterno }}
+                  {{ userData.apellidoMaterno }}
+                </strong>
+              </p>
             </v-alert>
+
+            <v-alert
+              style="border: solid 1px #dcdcdc; border-radius: 8px"
+              colored-border
+              class="ma-auto mb-3"
+              max-width="700"
+              color="white"
+            >
+              <h4 class="font-weight-medium">
+                1. ¿Cual fué tu nivel de satisfacción utilizando la app?
+                <span class="red--text">*</span>
+              </h4>
+              <v-row align="center">
+                <v-col>
+                  <v-radio-group
+                    :rules="ruleRequired"
+                    v-model="user.encuesta.nivelSatisfaccion"
+                  >
+                    <v-radio
+                      class="ml-10 pt-5"
+                      :color="getColorSatisfaccion(item)"
+                      v-for="item in satisfaccionOptions"
+                      :key="item"
+                      :label="item"
+                      :value="item"
+                    ></v-radio>
+                  </v-radio-group>
+                </v-col>
+              </v-row>
+            </v-alert>
+            <v-alert
+              style="border: solid 1px #dcdcdc; border-radius: 8px"
+              colored-border
+              class="ma-auto mb-3"
+              max-width="700"
+              color="white"
+            >
+              <h4 class="font-weight-medium">
+                2. ¿Consideras que el proceso en linea llevó mas o menos tiempo
+                que de manera presencial?
+                <span class="red--text">*</span>
+              </h4>
+              <v-row align="center">
+                <v-col>
+                  <v-radio-group
+                    :rules="ruleRequired"
+                    v-model="user.encuesta.tiempo"
+                  >
+                    <v-radio
+                      class="ml-10 pt-5"
+                      :color="getColorTiempo(item)"
+                      v-for="item in tiempoOptions"
+                      :key="item"
+                      :label="item"
+                      :value="item"
+                    ></v-radio>
+                  </v-radio-group>
+                </v-col>
+              </v-row>
+            </v-alert>
+            <v-alert
+              style="border: solid 1px #dcdcdc; border-radius: 8px"
+              colored-border
+              class="ma-auto mb-5"
+              max-width="700"
+              color="white"
+            >
+              <h4 class="font-weight-medium">
+                3. ¿Cómo calificarías la app tomando en cuenta tú experiencia?
+                <span class="red--text">*</span>
+              </h4>
+              <v-row align="center">
+                <v-col>
+                  <v-radio-group
+                    :rules="ruleRequired"
+                    v-model="user.encuesta.calificacion"
+                  >
+                    <v-radio
+                      class="ml-10 pt-5"
+                      :color="getColor(item)"
+                      v-for="item in calificacionOptions"
+                      :key="item"
+                      :label="item"
+                      :value="item"
+                    ></v-radio>
+                  </v-radio-group>
+                </v-col>
+              </v-row>
+            </v-alert>
+            <v-alert
+              style="border: solid 1px #dcdcdc; border-radius: 8px"
+              colored-border
+              class="ma-auto"
+              max-width="700"
+              color="white"
+            >
+              <h4 class="font-weight-medium">
+                4. ¿Nos ayudarias mucho dejandonos una breve reseña donde
+                comentes que fué lo que más te gustó de la aplicación y cuáles
+                serían tus sugerencias para mejorarla?
+                <span class="red--text">*</span>
+              </h4>
+              <v-textarea
+                v-model="user.encuesta.reseña"
+                label="Comentarios..."
+                :rules="ruleRequired"
+                prepend-icon="mdi-message-reply-text"
+                class="pt-5"
+                filled
+                auto-grow
+                color="#673AB7"
+                outlined
+              >
+              </v-textarea>
+            </v-alert>
+          </v-container>
+
+          <v-card class="ma-auto" max-width="700">
+            <v-tooltip color="grey darken-3" bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  block
+                  :loading="loading"
+                  v-bind="attrs"
+                  v-on="on"
+                  depressed
+                  color="#673AB7"
+                  dark
+                  @click="setInfo"
+                >
+                  Enviar<v-icon right outlined>mdi-send</v-icon></v-btn
+                >
+              </template>
+              <span>Enviar Datos</span>
+            </v-tooltip>
           </v-card>
         </v-col>
       </v-row>
@@ -141,40 +182,56 @@
       <v-col cols="12"> </v-col>
     </v-row>
 
-    <v-snackbar v-model="snackbar" :timeout="timeout">{{ text }}</v-snackbar>
-
-    <v-overlay :value="overlay">
-      <v-progress-circular indeterminate size="64"></v-progress-circular>
-    </v-overlay>
+    <v-snackbar
+      :timeout="timeout"
+      multi-line
+      transition="slide-x-transition"
+      bottom
+      left
+      v-model="snackbar"
+      >{{ text }}
+      <template v-slot:action="{ attrs }">
+        <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
 <script>
 import { auth, storage, db } from "../services/firebase";
+import { mapState } from "vuex";
 export default {
   name: "ValorarView",
 
   data: () => ({
     valid: true,
-    overlay: false,
+    loading: false,
+    timeout: 2000,
+
     text: "",
     user: {
-      nombre: "",
-      correoElectronico: "",
-      satisfaccion: {
-        mala: "Mala",
-        regular: "Regular",
-        buena: "Buena",
-        muyBuena: "Muy Buena",
-        excelente: "Excelente",
+      encuesta: {
+        calificacion: "",
+        nivelSatisfaccion: "",
+        tiempo: "",
+        reseña: "",
       },
     },
 
     snackbar: false,
-    timeout: 5000,
 
-    menu: false,
     sexOptions: ["Femenino", "Masculino", "No binario"],
+    satisfaccionOptions: [
+      "Insatisfecho",
+      "Poco satisfecho",
+      "Satisfecho",
+      "Muy satisfecho",
+      "Me encantó",
+    ],
+    tiempoOptions: ["Sí, es más tardado", "No, es más rápido", "Es lo mismo"],
+    calificacionOptions: ["Mala", "Regular", "Buena", "Muy buena", "Excelente"],
     careerOptions: [
       "TSU Tecnologias de Informacion y Comunicacion",
       "TSU Contaduria",
@@ -190,12 +247,7 @@ export default {
       "Ingenieria Quimica",
     ],
     ruleRequired: [(v) => !!v || "Campo requerido"],
-    rulePassword: [
-      (v) => !!v || "Campo requerido",
-      (v) =>
-        (v && v.length >= 6) ||
-        "La contraseña debe contener al menos 6 caracteres",
-    ],
+
     ruleMail: [
       (v) => !!v || "Campo requerido",
       (v) => /.+@.+\..+/.test(v) || "Ingresa un correo válido",
@@ -206,80 +258,65 @@ export default {
     ],
   }),
   methods: {
-    async enviarDatos(user) {
-      // await this.subirImagen();
-      const uid = user.currentUser.uid;
-
+    getColor(calificacion) {
+      if (calificacion == "Mala") return "red";
+      else if (calificacion == "Regular") return "orange";
+      else if (calificacion == "Buena") return "yellow";
+      else if (calificacion == "Muy buena") return "green";
+      else if (calificacion == "Excelente") return "blue";
+    },
+    getColorSatisfaccion(satisfaccion) {
+      if (satisfaccion == "Insatisfecho") return "red";
+      else if (satisfaccion == "Poco satisfecho") return "orange";
+      else if (satisfaccion == "Satisfecho") return "yellow";
+      else if (satisfaccion == "Muy satisfecho") return "green";
+      else if (satisfaccion == "Me encantó") return "blue";
+    },
+    getColorTiempo(tiempo) {
+      if (tiempo == "Sí, es más tardado") return "orange";
+      else if (tiempo == "No, es más rápido") return "blue";
+      else if (tiempo == "Es lo mismo") return "default";
+      else if (tiempo == "Me encantó") return "blue";
+    },
+    async subirDatosFirebase() {
+      let uid = auth.currentUser.uid;
+      this.overlay = true;
       const response = await db.collection("users").doc(uid);
 
-      // Set the "capital" field of the city 'DC'
-      return response
-        .update({
-          nombre: this.user.nombre,
-          correoElectronico: this.user.correoElectronico,
-          mala: this.user.satisfaccion.mala,
-          regular: this.user.satisfaccion.regular,
-          buena: this.user.satisfaccion.buena,
-          muyBuena: this.user.satisfaccion.muyBuena,
-          excelente: this.user.satisfaccion.excelente,
-        })
-        .then(function () {
-          alert("Documento Actualizado Correctamente!");
-        })
-        .catch(function (error) {
-          // The document probably doesn't exist.
-          alert("Ocurrió un error", error);
-        });
-    },
-    async createAccount() {
+      response.update({
+        encuesta: {
+          calificacion: this.user.encuesta.calificacion,
+          nivelSatisfaccion: this.user.encuesta.nivelSatisfaccion,
+          tiempo: this.user.encuesta.tiempo,
+          reseña: this.user.encuesta.reseña,
+        },
+      });
       try {
-        const response = await auth.createUserWithEmailAndPassword(
-          this.mailRepeat,
-          this.passwordRepeat
-        );
-        this.user.uid = response.user.uid;
-        await this.subirArchivos();
+        if (response) {
+          this.snackbar = true;
+          this.text = "Datos de encuesta enviados correctamente";
+        }
       } catch (error) {
-        this.text = error.message;
-        this.snackbar = true;
-        console.warn(error);
+        console.log(error);
       }
     },
+
     input(e, tipo) {
       this.user.documents[tipo].url = e;
     },
     async setInfo() {
       if (!this.$refs.form.validate()) {
-        this.text =
-          "Faltan campos por llenar y/o la información es incorrecta.";
+        this.text = "Faltan campos por llenar";
         this.snackbar = true;
       }
 
       if (this.$refs.form.validate()) {
         this.overlay = true;
-        await this.createAccount();
+        await this.subirDatosFirebase();
         this.overlay = false;
       }
     },
-    async subirDatosFirebase() {
-      this.user.contrasena = this.password;
-      this.user.correoElectronico = this.mail;
-      let uid = this.user.uid;
 
-      console.log(this.user);
-
-      try {
-        const response = await db.collection("users").doc(uid).set(this.user);
-        if (response == undefined) {
-          alert(
-            "Cuenta creada con exito!, puedes iniciar sesión para ver tu status"
-          );
-          this.$router.push("/");
-        }
-      } catch (error) {
-        console.warn(error);
-      }
-    },
     async subirArchivos() {
       const uid = this.user.uid;
       try {
@@ -305,6 +342,9 @@ export default {
     },
   },
   computed: {
+    ...mapState({
+      userData: "user",
+    }),
     rulePasswordRepeat() {
       return [
         (v) => {

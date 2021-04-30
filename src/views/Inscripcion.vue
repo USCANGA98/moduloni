@@ -232,7 +232,12 @@
     </v-container>
     <!-- Aqui termina linea de todos los alumnos-->
 
-    <EliminarEstudiante :uid="uid" :dialog="dialog" @cancel="dialog = false" />
+    <EliminarEstudiante
+      :snackbar="snackbar"
+      :uid="uid"
+      :dialog="dialog"
+      @cancel="dialog = false"
+    />
   </v-container>
 </template>
 
@@ -267,6 +272,7 @@ export default {
   },
   data: () => ({
     value: 0,
+    snackbar: false,
     overlay: false,
     Contaduria: [],
     Tic: [],

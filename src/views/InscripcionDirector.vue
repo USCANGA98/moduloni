@@ -22,6 +22,7 @@
           <!--Renderizado de Director de Tecnologias de la informacion-->
           <v-data-table
             v-if="user.rol == 'DirectorTi'"
+            :loading="loading"
             :search="search"
             :headers="headers"
             :items="estudiantesTi"
@@ -86,6 +87,7 @@
           <v-data-table
             v-if="user.rol == 'DirectorQui'"
             :search="search"
+            :loading="loading"
             :headers="headers"
             :items="estudiantesQui"
             sort-by="statusProceso"
@@ -149,6 +151,7 @@
           <v-data-table
             v-if="user.rol == 'DirectorMeca'"
             :search="search"
+            :loading="loading"
             :headers="headers"
             :items="estudiantesMeca"
             sort-by="statusProceso"
@@ -213,6 +216,7 @@
             v-if="user.rol == 'DirectorMantto'"
             :search="search"
             :headers="headers"
+            :loading="loading"
             :items="estudiantesMantto"
             sort-by="statusProceso"
           >
@@ -478,6 +482,8 @@ export default {
         }
       } catch (error) {
         console.warn(error);
+      } finally {
+        this.loading = false;
       }
     },
     async studentsQui() {

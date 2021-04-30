@@ -3,8 +3,39 @@
     <v-subheader>Agregar Director </v-subheader>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row>
-        <v-col cols="12">
-          <v-card class="pa-2" elevation="5">
+        <v-col cols="5">
+          <v-card elevation="5" class="pa-2 rounded-xl">
+            <v-card flat>
+              <v-card-title> <strong> Roles</strong> </v-card-title>
+              <v-chip
+                class="ma-1"
+                :color="getColor(item)"
+                v-for="item in rolesDirector"
+                :key="item"
+                dark
+                >{{ item }}</v-chip
+              >
+            </v-card>
+            <v-data-table
+              mobile-breakpoint="1150"
+              :items-per-page="5"
+              :loading="loading"
+              :items="directores"
+              :headers="headers"
+            >
+              <template v-slot:item.rol="{ item }">
+                <v-chip :color="getColor(item.rol)" dark>
+                  {{ item.rol }}
+                </v-chip>
+              </template>
+            </v-data-table>
+          </v-card>
+        </v-col>
+        <v-col cols="7">
+          <v-card class="pa-2 rounded-xl" elevation="5">
+            <h3 class="pl-2 pt-2">
+              Nuevo Director <v-icon right>mdi-account-multiple</v-icon>
+            </h3>
             <v-container>
               <h2 class="mb-5">Datos personales</h2>
               <v-row>
@@ -100,12 +131,6 @@
                 </v-col>
               </v-row>
             </v-container>
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-card class="pa-2" elevation="5">
             <v-container>
               <h2 class="mb-5">Cuenta</h2>
 
@@ -164,29 +189,31 @@
                 </v-col>
               </v-row>
             </v-container>
+            <v-card-actions>
+              <v-col cols="12">
+                <v-tooltip color="grey darken-3" top>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      rounded
+                      v-bind="attrs"
+                      v-on="on"
+                      large
+                      block
+                      color="green"
+                      dark
+                      @click="setInfo"
+                      >Crear cuenta</v-btn
+                    >
+                  </template>
+                  <span>Enviar información</span>
+                </v-tooltip>
+              </v-col>
+            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
     </v-form>
-    <v-container>
-      <v-col cols="12">
-        <v-tooltip top>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              v-bind="attrs"
-              v-on="on"
-              large
-              block
-              color="green"
-              dark
-              @click="setInfo"
-              >Enviar información</v-btn
-            >
-          </template>
-          <span>Enviar información</span>
-        </v-tooltip>
-      </v-col>
-    </v-container>
+
     <v-snackbar v-model="snackbar" :timeout="timeout">{{ text }}</v-snackbar>
 
     <v-overlay :value="overlay">
@@ -199,12 +226,23 @@
 import { auth, storage, db } from "../services/firebase";
 export default {
   name: "Control-direct",
+  mounted() {
+    this.users();
+  },
 
   data: () => ({
+    rolesDirector: [
+      "DirectorQui",
+      "DirectorTi",
+      "DirectorMantto",
+      "DirectorMeca",
+    ],
     valid: true,
     overlay: false,
     text: "",
+    loading: false,
     mail: "",
+    directores: [],
     mailRepeat: "",
     password: "",
     passwordRepeat: "",
@@ -221,6 +259,24 @@ export default {
       rol: "",
       uid: "",
     },
+    headers: [
+      {
+        text: "Nombre",
+        value: "nombre",
+      },
+      {
+        text: "Apellido P",
+        value: "apellidoPaterno",
+      },
+      {
+        text: "Apellido M",
+        value: "apellidoMaterno",
+      },
+      {
+        text: "Roles",
+        value: "rol",
+      },
+    ],
     menu: false,
     rolOptions: ["DirectorTi", "DirectorMeca", "DirectorQui", "DirectorMantto"],
     ruleRequired: [(v) => !!v || "Campo requerido"],
@@ -236,6 +292,56 @@ export default {
     ],
   }),
   methods: {
+    getColor(rol) {
+      if (rol == "DirectorTi") return "blue";
+      else if (rol == "DirectorQui") return "green";
+      else if (rol == "DirectorMantto") return "red";
+      else if (rol == "DirectorMeca") return "orange";
+    },
+    async users() {
+      this.loading = true;
+      try {
+        const response = await db
+          .collection("users")
+          .where("rol", "==", "DirectorTi")
+          .get();
+        const response2 = await db
+          .collection("users")
+          .where("rol", "==", "DirectorQui")
+          .get();
+        const response3 = await db
+          .collection("users")
+          .where("rol", "==", "DirectorMantto")
+          .get();
+        const response4 = await db
+          .collection("users")
+          .where("rol", "==", "DirectorMeca")
+          .get();
+        if (
+          response.docs.length &&
+          response2.docs.length &&
+          response3.docs.length &&
+          response4.docs.length > 0
+        ) {
+          response.docs.forEach((e) => {
+            this.directores.push(e.data());
+          });
+          response2.docs.forEach((e) => {
+            this.directores.push(e.data());
+          });
+          response3.docs.forEach((e) => {
+            this.directores.push(e.data());
+          });
+          response4.docs.forEach((e) => {
+            this.directores.push(e.data());
+          });
+        }
+      } catch (error) {
+        console.warn(error);
+      } finally {
+        this.loading = false;
+      }
+    },
     async createAccount() {
       try {
         const response = await auth.createUserWithEmailAndPassword(
@@ -252,7 +358,7 @@ export default {
     },
     async setInfo() {
       if (!this.$refs.form.validate()) {
-        this.text = "Faltan campos por llenar y/o estan mal llenados.";
+        this.text = "Faltan campos por llenar ó estan mal llenados.";
         this.snackbar = true;
       }
 

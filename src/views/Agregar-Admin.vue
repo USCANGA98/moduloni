@@ -3,8 +3,32 @@
     <v-subheader>Agregar Administrador </v-subheader>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row>
-        <v-col cols="12">
-          <v-card class="pa-2" elevation="5">
+        <v-col cols="5">
+          <v-card elevation="5" class="pa-2 rounded-xl">
+            <v-card flat>
+              <v-card-title> <strong> Roles</strong> </v-card-title>
+              <v-chip class="ma-1" color="red" dark>admin</v-chip>
+            </v-card>
+            <v-data-table
+              mobile-breakpoint="1125"
+              :items-per-page="5"
+              :loading="loading"
+              :items="administradores"
+              :headers="headers"
+            >
+              <template v-slot:item.rol="{ item }">
+                <v-chip color="red" dark>
+                  {{ item.rol }}
+                </v-chip>
+              </template>
+            </v-data-table>
+          </v-card>
+        </v-col>
+        <v-col cols="7">
+          <v-card class="pa-2 rounded-xl" elevation="5">
+            <h3 class="pl-2 pt-2">
+              Nuevo Administrador <v-icon right>mdi-account-circle</v-icon>
+            </h3>
             <v-container>
               <h2 class="mb-5">Cuenta Administrador</h2>
 
@@ -86,29 +110,31 @@
                 </v-col>
               </v-row>
             </v-container>
+            <v-card-actions>
+              <v-col cols="12">
+                <v-tooltip color="grey darken-3" top>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      rounded
+                      v-bind="attrs"
+                      v-on="on"
+                      large
+                      block
+                      color="green"
+                      dark
+                      @click="setInfo"
+                      >Crear cuenta</v-btn
+                    >
+                  </template>
+                  <span>Enviar información</span>
+                </v-tooltip>
+              </v-col>
+            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
     </v-form>
-    <v-container>
-      <v-col cols="12">
-        <v-tooltip top>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              v-bind="attrs"
-              v-on="on"
-              large
-              block
-              color="green"
-              dark
-              @click="setInfo"
-              >Enviar información</v-btn
-            >
-          </template>
-          <span>Enviar información</span>
-        </v-tooltip>
-      </v-col>
-    </v-container>
+
     <v-snackbar v-model="snackbar" :timeout="timeout">{{ text }}</v-snackbar>
 
     <v-overlay :value="overlay">
@@ -122,12 +148,17 @@ import { auth, storage, db } from "../services/firebase";
 export default {
   name: "Control-direct",
 
+  mounted() {
+    this.users();
+  },
   data: () => ({
     valid: true,
     overlay: false,
     text: "",
+    administradores: [],
     mail: "",
     mailRepeat: "",
+    loading: false,
     password: "",
     passwordRepeat: "",
     snackbar: false,
@@ -140,6 +171,21 @@ export default {
       rol: "admin",
       uid: "",
     },
+    headers: [
+      {
+        text: "Nombre",
+        value: "nombre",
+      },
+      {
+        text: "Apellidos",
+        value: "apellidos",
+      },
+
+      {
+        text: "Rol",
+        value: "rol",
+      },
+    ],
     menu: false,
 
     ruleRequired: [(v) => !!v || "Campo requerido"],
@@ -155,6 +201,25 @@ export default {
     ],
   }),
   methods: {
+    async users() {
+      this.loading = true;
+      try {
+        const response = await db
+          .collection("users")
+          .where("rol", "==", "admin")
+          .get();
+
+        if (response.docs.length > 0) {
+          response.docs.forEach((e) => {
+            this.administradores.push(e.data());
+          });
+        }
+      } catch (error) {
+        console.warn(error);
+      } finally {
+        this.loading = false;
+      }
+    },
     async createAccount() {
       try {
         const response = await auth.createUserWithEmailAndPassword(

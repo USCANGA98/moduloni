@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-navigation-drawer
-      v-if="$vuetify.breakpoint.width > 960"
+      v-if="$vuetify.breakpoint.width >= 960"
       app
       floating
       v-model="drawer"
@@ -71,7 +71,7 @@
             </v-list-item-content>
           </v-card>
         </v-menu>
-        <v-list>
+        <v-list class="cortar">
           <v-list-item-title>
             <strong>
               {{ user.nombre }}
@@ -147,7 +147,7 @@
             </v-list-item-content>
           </v-card>
         </v-menu>
-        <v-list>
+        <v-list class="cortar">
           <v-list-item-title>
             <strong>
               {{ user.nombre }}
@@ -232,7 +232,7 @@
           </v-card>
         </v-menu>
 
-        <v-list>
+        <v-list class="cortar">
           <v-list-item-title>
             <strong>
               {{ user.nombre }}
@@ -441,7 +441,7 @@
             </v-list-item-content>
           </v-card>
         </v-menu>
-        <v-list>
+        <v-list class="cortar">
           <v-list-item-title>
             <strong>
               {{ user.nombre }}
@@ -517,7 +517,7 @@
             </v-list-item-content>
           </v-card>
         </v-menu>
-        <v-list>
+        <v-list class="cortar">
           <v-list-item-title>
             <strong>
               {{ user.nombre }}
@@ -602,7 +602,7 @@
           </v-card>
         </v-menu>
 
-        <v-list>
+        <v-list class="cortar">
           <v-list-item-title>
             <strong>
               {{ user.nombre }}
@@ -797,14 +797,19 @@ export default {
       ],
       itemsAdminActions: [
         {
+          title: "Nuevo Admin",
+          icon: "mdi-account-circle",
+          path: "/admin/nuevo-admin",
+        },
+        {
           title: "Nuevo Director",
           icon: "mdi-account-multiple",
           path: "/admin/nuevo-usuario",
         },
         {
-          title: "Nuevo Admin",
-          icon: "mdi-account-circle",
-          path: "/admin/nuevo-admin",
+          title: "Egresados",
+          icon: "mdi-account-tie",
+          path: "/admin/egresados",
         },
       ],
       itemsStudent: [
@@ -862,4 +867,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.cortar {
+  width: 230px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+</style>

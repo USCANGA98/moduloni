@@ -1,22 +1,39 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="500">
+    <v-dialog v-model="dialog" persistent max-width="290">
       <v-card>
         <v-card-title class="headline">
-          Está a punto de eliminar a este usuario
+          Desea eliminar a este usuario?
         </v-card-title>
-        <v-card-text>Esta acción es irreversible</v-card-text>
+        <v-card-text
+          >Está a punto de eliminar a éste usuario de la base de datos, ésta
+          acción es irreversible.
+        </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" text @click="$emit('cancel')">
             Cancelar
           </v-btn>
           <v-btn color="green darken-1" text @click="eliminarEstudiante()">
-            Aceptar
+            Continuar
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-snackbar
+      :timeout="timeout"
+      transition="slide-x-transition"
+      bottom
+      left
+      v-model="snackbar"
+    >
+      {{ text }}
+      <template v-slot:action="{ attrs }">
+        <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-row>
 </template>
 <script>
@@ -31,18 +48,24 @@ export default {
       type: String,
     },
   },
-  data: () => ({}),
+  data: () => ({
+    snackbar: false,
+    timeout: 2000,
+    text: "",
+  }),
   methods: {
     async eliminarEstudiante() {
       try {
         const response = await db.collection("users").doc(this.uid).delete();
         console.log(response);
-        alert("Eliminado correctamente de Firestore");
+        this.snackbar = true;
+        this.text = "Eliminado correctamente de Firestore";
 
         this.$emit("cancel");
       } catch (error) {
         console.log(error);
-        alert("No se ha podido eliminar de Firestore");
+        this.snackbar = true;
+        this.text = "hubo un error al eliminar de Firestore";
       }
     },
     async eliminarDocumento() {

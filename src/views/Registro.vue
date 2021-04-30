@@ -518,7 +518,7 @@ export default {
     show2: false,
     user: {
       statusProceso: "En revision",
-      anoIngreso: new Date().getFullYear(),
+      anoIngreso: new Date().getFullYear().toString(),
       nombre: "",
       apellidoPaterno: "",
       apellidoMaterno: "",

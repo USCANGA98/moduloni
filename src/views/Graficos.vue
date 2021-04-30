@@ -15,11 +15,10 @@
                 >
                   <area-chart
                     :library="{ animation: { duration: 3000 } }"
-                    xtitle="2018-2021"
                     :data="[
                       ['Año 2018', anoIngreso18.length],
                       ['Año 2019', anoIngreso19.length],
-                      ['Año 2020', sumaTotal.length],
+                      ['Año 2020', anoIngreso20.length],
                       ['Año en curso', anoIngreso21.length],
                     ]"
                   ></area-chart>
@@ -281,6 +280,7 @@ export default {
     Mantto: [],
     anoIngreso18:[],
     anoIngreso19:[],
+    anoIngreso20:[],
     anoIngreso21:[],
     Meca: [],
     Quimica: [],
@@ -379,7 +379,11 @@ export default {
           .get();
           const response18 = await db
           .collection("users")
-          .where("anoIngreso", "==", new Date().getFullYear())
+          .where("anoIngreso", "==", new Date().getFullYear().toString())
+          .get();
+          const response19 = await db
+          .collection("users")
+          .where("anoIngreso", "==", "2020")
           .get();
 
         if (response.docs.length > 0) {
@@ -495,6 +499,13 @@ export default {
             this.anoIngreso21.push(e.data());
             let anoIngreso21 = this.anoIngreso21;
             console.log(anoIngreso21);
+          });
+        }
+        if (response19.docs.length > 0) {
+          response19.docs.forEach((e) => {
+            this.anoIngreso20.push(e.data());
+            let anoIngreso20 = this.anoIngreso20;
+            console.log(anoIngreso20);
           });
         }
         this.overlay= false;

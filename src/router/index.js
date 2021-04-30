@@ -76,6 +76,13 @@ const routes = [
       import(/* webpackChunkName: "admin" */ "../views/Inscripcion.vue"),
     beforeEnter: ifAuthenticated
   },
+  {
+    path: "/admin/egresados",
+    name: "Egresados",
+    component: () =>
+      import(/* webpackChunkName: "admin" */ "../views/Egresados.vue"),
+    beforeEnter: ifAuthenticated
+  },
   //********Rutas de Estudiante/Aspirante********
   {
     path: "/student",

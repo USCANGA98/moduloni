@@ -71,6 +71,7 @@
         <v-expand-transition>
           <v-card v-show="expand" class="rounded-xl" width="100%" elevation="5">
             <v-data-table
+              :loading="loading"
               :search="search"
               :headers="headers"
               :items="estudiantes"
@@ -253,7 +254,12 @@
         </v-col>
       </v-row>
     </v-scroll-x-transition>
-    <EliminarEstudiante :uid="uid" :dialog="dialog" @cancel="dialog = false" />
+    <EliminarEstudiante
+      :snackbar="snackbar"
+      :uid="uid"
+      :dialog="dialog"
+      @cancel="dialog = false"
+    />
   </v-container>
 </template>
 
@@ -283,6 +289,7 @@ export default {
     documents: {},
     expand: false,
     items: [],
+    snackbar: false,
     cardActive: true,
     item: {},
     userData: {},

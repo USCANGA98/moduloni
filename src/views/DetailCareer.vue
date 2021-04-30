@@ -160,7 +160,12 @@
       :userData="userData"
       @cerrar="viewDetailUser = false"
     />
-    <EliminarEstudiante :uid="uid" :dialog="dialog" @cancel="dialog = false" />
+    <EliminarEstudiante
+      :snackbar="snackbar"
+      :uid="uid"
+      :dialog="dialog"
+      @cancel="dialog = false"
+    />
   </v-container>
 </template>
 
@@ -186,6 +191,7 @@ export default {
     addressData: {},
     documents: {},
     items: [],
+    snackbar: false,
     item: {},
     dialog: false,
     uid: "",
