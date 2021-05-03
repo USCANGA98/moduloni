@@ -77,7 +77,7 @@
           <v-card
             ripple
             color="orange"
-            class="pa-5 pb-16"
+            class="pa-5"
             max-width="300"
             max-height="280"
           >
@@ -518,8 +518,6 @@ export default {
         if (response13.docs.length > 0) {
           response13.docs.forEach((e) => {
             this.statusProceso.push(e.data());
-            let statusProceso = this.statusProceso;
-            console.log(statusProceso);
           });
         }
         if (response14.docs.length > 0) {

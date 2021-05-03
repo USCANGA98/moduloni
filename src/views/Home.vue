@@ -12,6 +12,7 @@
                 <v-hover v-slot:default="{ hover }" open-delay="0">
                   <v-btn
                     href="http://www.utsv.com.mx/wp/"
+                    target="_blank"
                     class="mt-5 mb-12"
                     fab
                     icon
@@ -32,6 +33,7 @@
               <v-hover v-slot:default="{ hover }" open-delay="0">
                 <v-btn
                   href="https://www.facebook.com/UTSV1/"
+                  target="_blank"
                   class="mx-1"
                   :class="`elevation-${hover ? 5 : 0}`"
                   color="#fff"
@@ -45,6 +47,7 @@
               <v-hover v-slot:default="{ hover }" open-delay="0">
                 <v-btn
                   href="https://twitter.com/UTSV1"
+                  target="_blank"
                   class="mx-1"
                   :class="`elevation-${hover ? 5 : 0}`"
                   color="#fff"
@@ -58,6 +61,7 @@
               <v-hover v-slot:default="{ hover }" open-delay="0">
                 <v-btn
                   href="https://www.youtube.com/channel/UCROW9bCyFzCL7lKw1JuFZnA"
+                  target="_blank"
                   class="mx-1"
                   :class="`elevation-${hover ? 5 : 0}`"
                   color="#fff"
