@@ -3,7 +3,7 @@
     <v-subheader>Graficas</v-subheader>
     <div>
       <v-row>
-        <v-col cols="6">
+        <v-col cols="12" sm="6" lg="6" md="6">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card class="mt-16" min-height="100" min-width="100">
               <v-container>
@@ -36,7 +36,7 @@
             </v-card>
           </v-hover>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12" sm="6" lg="6" md="6">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card class="mt-16" max-height="800">
               <v-container>
@@ -82,7 +82,7 @@
             </v-card>
           </v-hover>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12" sm="6" lg="6" md="6">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card class="mt-16" min-height="100" min-width="100">
               <v-container>
@@ -128,7 +128,7 @@
           </v-hover>
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="12" sm="6" lg="6" md="6">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card class="mt-16" min-height="300" min-width="100">
               <v-container>
@@ -163,7 +163,7 @@
           </v-hover>
         </v-col>
 
-        <v-col cols="5">
+        <v-col cols="12" sm="6" lg="6" md="6">
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card class="mt-16" min-height="200" min-width="100">
               <v-container>
@@ -176,7 +176,7 @@
                   class="pa-2 mt-n16 ml-3 mr-3"
                 >
                   <v-row>
-                    <v-col cols="6">
+                    <v-col cols="6" sm="6" lg="6" md="6">
                       <v-card-text class="text-left ma-2 mt-n3">
                         <v-icon left x-small>mdi-checkbox-blank-circle</v-icon
                         ><strong>{{
@@ -201,34 +201,40 @@
                       </v-card-text>
                     </v-col>
 
-                    <v-col cols="6">
+                    <v-col cols="6" sm="6" lg="6" md="6">
                       <v-card-text class="text-right ma-2 mt-n3">
+                        <v-icon left x-small
+                          >mdi-checkbox-blank-circle</v-icon
+                        >
                         <strong>{{ Quimica[0].direccion.ciudad }}</strong
-                        ><v-icon right x-small
-                          >mdi-checkbox-blank-circle</v-icon
                         >
                         <br />
+                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon
+                        >
                         <strong>{{ Mecanica[0].direccion.ciudad }}</strong>
-                        <v-icon right x-small>mdi-checkbox-blank-circle</v-icon
-                        ><br />
+                        <br />
+                        <v-icon left x-small
+                          >mdi-checkbox-blank-circle</v-icon
+                        >
                         <strong>{{ IngTi[0].direccion.ciudad }}</strong
-                        ><v-icon right x-small
-                          >mdi-checkbox-blank-circle</v-icon
                         >
                         <br />
+                        <v-icon left x-small
+                          >mdi-checkbox-blank-circle</v-icon
+                        >
                         <strong>{{ IngMantto[0].direccion.ciudad }}</strong
-                        ><v-icon right x-small
-                          >mdi-checkbox-blank-circle</v-icon
                         >
                         <br />
+                        <v-icon left x-small
+                          >mdi-checkbox-blank-circle</v-icon
+                        >
                         <strong>{{ IngMeca[0].direccion.ciudad }}</strong
-                        ><v-icon right x-small
-                          >mdi-checkbox-blank-circle</v-icon
                         >
                         <br />
-                        <strong>{{ IngQuimica[0].direccion.ciudad }}</strong
-                        ><v-icon right x-small
+                        <v-icon right x-small
                           >mdi-checkbox-blank-circle</v-icon
+                        >
+                        <strong>{{ IngQuimica[0].direccion.ciudad }}</strong
                         >
                         <br />
                       </v-card-text>

@@ -4,7 +4,7 @@
 
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row>
-        <v-col cols="6">
+        <v-col cols="12" sm="5" lg="5" md="5">
           <v-card elevation="5" class="pa-2 rounded-xl">
             <v-card flat>
               <v-card-title> <strong> Egresados</strong> </v-card-title>
@@ -32,7 +32,7 @@
               </template>
             </v-data-table>
           </v-card>
-          <v-col cols="12">
+          <v-col cols="12" >
             <v-hover v-slot:default="{ hover }" open-delay="0">
               <v-card class="mt-16 rounded-xl" min-height="100" min-width="100">
                 <v-container>
@@ -66,7 +66,7 @@
             </v-hover>
           </v-col>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="12" sm="7" lg="7" md="7">
           <v-card class="pa-2 rounded-xl" elevation="5">
             <h3 class="pl-2 pt-2">
               Agregar Alumno Egresado <v-icon right>mdi-account-tie</v-icon>

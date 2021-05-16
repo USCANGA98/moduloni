@@ -3,7 +3,7 @@
     <v-subheader>Agregar Director </v-subheader>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row>
-        <v-col cols="5">
+        <v-col cols="12" sm="5" lg="5" md="5">
           <v-card elevation="5" class="pa-2 rounded-xl">
             <v-card flat>
               <v-card-title> <strong> Roles</strong> </v-card-title>
@@ -31,7 +31,7 @@
             </v-data-table>
           </v-card>
         </v-col>
-        <v-col cols="7">
+        <v-col cols="12" sm="7" lg="7" md="7">
           <v-card class="pa-2 rounded-xl" elevation="5">
             <h3 class="pl-2 pt-2">
               Nuevo Director <v-icon right>mdi-account-multiple</v-icon>

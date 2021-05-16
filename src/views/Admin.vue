@@ -142,11 +142,12 @@
     <!-- Aqui termina linea de todos los alumnos-->
 
     <v-row>
-      <v-col cols="2" md="sm" v-for="career in careerOptions" :key="career">
+      <v-col  md="3" lg="2" xl="2" sm="4" cols="5"  v-for="career in careerOptions" :key="career">
         <v-hover v-slot:default="{ hover }" open-delay="0">
           <v-card
-            :min-height="$vuetify.breakpoint.xs ? 190 : '20vh'"
-            min-width="140"
+            :min-height="$vuetify.breakpoint.xs ? 140 : '15vh'"
+            :min-width="$vuetify.breakpoint.xs ? 140 : '15vh'"
+            
             :class="`elevation-${hover ? 20 : 1}`"
             class="mx-auto d-flex transition-swing"
             @click="goDetailCareer(career)"

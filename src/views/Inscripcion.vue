@@ -6,16 +6,19 @@
     >
     <v-container class="pl-10 pr-10 mt-n5">
       <v-row>
-        <v-col cols="3">
+        <v-col md="5" lg="3" xl="3" sm="4" >
           <v-card
             ripple
             color="blue"
             class="pa-5"
-            max-width="300"
-            max-height="280"
+            height="100%"
+            width="100%"
+            :min-height="$vuetify.breakpoint.xs ? 140 : '15vh'"
+            :min-width="$vuetify.breakpoint.xs ? 140 : '15vh'"
+           
           >
             <v-row align="center">
-              <v-col cols="6" md="6">
+              <v-col cols="6">
                 <v-progress-circular
                   class="justify-center"
                   :size="100"
@@ -39,16 +42,19 @@
             >
           </v-card>
         </v-col>
-        <v-col cols="3">
+        <v-col md="5" lg="3" xl="3" sm="4">
           <v-card
             ripple
             color="green"
             class="pa-5"
-            max-width="300"
-            max-height="280"
+            height="100%"
+            width="100%"
+            :min-height="$vuetify.breakpoint.xs ? 140 : '15vh'"
+            :min-width="$vuetify.breakpoint.xs ? 140 : '15vh'"
+            
           >
             <v-row align="center">
-              <v-col cols="6" md="6">
+              <v-col cols="6">
                 <v-progress-circular
                   class="justify-center"
                   :size="100"
@@ -73,16 +79,18 @@
           </v-card>
         </v-col>
 
-        <v-col cols="3">
+        <v-col md="5" lg="3" xl="3" sm="4">
           <v-card
             ripple
             color="orange"
             class="pa-5"
-            max-width="300"
-            max-height="280"
+            height="100%"
+            width="100%"
+            :min-height="$vuetify.breakpoint.xs ? 140 : '15vh'"
+            :min-width="$vuetify.breakpoint.xs ? 140 : '15vh'"
           >
             <v-row align="center">
-              <v-col cols="6" md="6">
+              <v-col cols="6" >
                 <v-progress-circular
                   class="justify-center"
                   :size="100"
@@ -107,16 +115,18 @@
             >
           </v-card>
         </v-col>
-        <v-col cols="3">
+        <v-col md="5" lg="3" xl="3" sm="4">
           <v-card
             ripple
             color="pink"
             class="pa-5"
-            max-width="300"
-            max-height="280"
+            height="100%"
+            width="100%"
+            :min-height="$vuetify.breakpoint.xs ? 140 : '15vh'"
+            :min-width="$vuetify.breakpoint.xs ? 140 : '15vh'"
           >
             <v-row align="center">
-              <v-col cols="6" md="6">
+              <v-col cols="6">
                 <v-progress-circular
                   class="justify-center"
                   :size="100"
