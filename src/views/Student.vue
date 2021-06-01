@@ -354,7 +354,11 @@
         <!-- Aqui termina el container con los datos del alumno-->
 
         <v-col
-          cols="4"
+          md="4"
+          lg="4"
+          sm="6"
+          cols="12"
+          v-show="document.mensaje != null"
           v-for="(document, index) in user.documents"
           :key="document.name"
         >
@@ -376,18 +380,40 @@
               {{ document.mensaje }}
             </v-card-text>
             <v-card-actions>
-              <v-file-input
-                :disabled="document.aprobado"
-                color="green"
-                prepend-icon
-                prepend-inner-icon="mdi-file-document-outline"
-                label="Editar documento"
-                outlined
-                show-size
-                dense
-                accept="application/pdf, image/*"
-                @change="input($event, index)"
-              ></v-file-input>
+              <v-row>
+                <v-col cols="8">
+                  <v-file-input
+                    :disabled="document.aprobado"
+                    color="green"
+                    prepend-icon
+                    prepend-inner-icon="mdi-file-document-outline"
+                    label="Editar documento"
+                    outlined
+                    show-size
+                    dense
+                    accept="application/pdf, image/*"
+                    @change="input($event, index)"
+                  ></v-file-input>
+                </v-col>
+                <v-col v-if="document.aprobado == true" cols="3">
+                  <v-tooltip color="grey darken-3" top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        icon
+                        v-bind="attrs"
+                        v-on="on"
+                        
+                        color="blue"
+                        dark
+                        depressed
+                        @click="abrir(document.url)"
+                        ><v-icon>mdi-file-move-outline</v-icon></v-btn
+                      >
+                    </template>
+                    <span>Abrir documento</span>
+                  </v-tooltip>
+                </v-col>
+              </v-row>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -405,11 +431,16 @@ import { storage, db } from "../services/firebase";
 export default {
   name: "Student",
   data: () => ({
+    dialog2: false,
     overlay: false,
     expand: false,
   }),
   components: {},
   methods: {
+    abrir(url) {
+      this.user.documents.url = url;
+      window.open(url, "_blank");
+    },
     async input(e, tipo) {
       this.overlay = true;
       const uid = this.user.uid;

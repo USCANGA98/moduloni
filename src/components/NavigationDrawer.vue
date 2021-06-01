@@ -3,7 +3,6 @@
     <v-navigation-drawer
       v-if="$vuetify.breakpoint.width >= 960"
       app
-      floating
       v-model="drawer"
       width="190"
       permanent
@@ -373,7 +372,7 @@
     <v-navigation-drawer
       v-if="$vuetify.breakpoint.width < 960"
       app
-      floating
+      
       v-model="drawer"
       width="190"
       temporary

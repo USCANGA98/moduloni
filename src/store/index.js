@@ -5,8 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: "",
-    careerSelected: ""
+    user: [],
+    careerSelected: []
   },
   mutations: {
     setUser(state, payload) {
@@ -14,8 +14,16 @@ export default new Vuex.Store({
     },
     setCareerSelected(state, payload) {
       state.careerSelected = payload;
-    }
+    },
+    // ELIMINAR_USUARIO(state, index){
+    //   state.user.splice(index, 1)
+    // }
   },
-  actions: {},
+  actions: {
+    // eliminarUsuario({commit}, index){
+    //   commit('ELIMINAR_USUARIO', index);
+    // }
+    
+  },
   modules: {}
 });

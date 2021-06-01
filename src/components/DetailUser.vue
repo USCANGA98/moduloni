@@ -26,7 +26,6 @@
                   @click="mostrarImagen"
                 >
                   <v-avatar
-                    class="transition-swing"
                     color="white"
                     :class="`elevation-${hover ? 8 : 3}`"
                     size="200"

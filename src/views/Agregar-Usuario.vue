@@ -226,8 +226,8 @@
 import { auth, storage, db } from "../services/firebase";
 export default {
   name: "Control-direct",
-  mounted() {
-    this.users();
+  async mounted() {
+    await this.init();
   },
 
   data: () => ({
@@ -298,48 +298,72 @@ export default {
       else if (rol == "DirectorMantto") return "red";
       else if (rol == "DirectorMeca") return "orange";
     },
-    async users() {
+    async init() {
       this.loading = true;
+      await this.getDirectorTi();
+      await this.getDirectorQui();
+      await this.getDirectorMantto();
+      await this.getDirectorMeca();
+      this.loading = false;
+    },
+    async getDirectorTi() {
       try {
         const response = await db
           .collection("users")
           .where("rol", "==", "DirectorTi")
           .get();
-        const response2 = await db
-          .collection("users")
-          .where("rol", "==", "DirectorQui")
-          .get();
-        const response3 = await db
-          .collection("users")
-          .where("rol", "==", "DirectorMantto")
-          .get();
-        const response4 = await db
-          .collection("users")
-          .where("rol", "==", "DirectorMeca")
-          .get();
-        if (
-          response.docs.length &&
-          response2.docs.length &&
-          response3.docs.length &&
-          response4.docs.length > 0
-        ) {
+        if (response.docs.length > 0) {
           response.docs.forEach((e) => {
-            this.directores.push(e.data());
-          });
-          response2.docs.forEach((e) => {
-            this.directores.push(e.data());
-          });
-          response3.docs.forEach((e) => {
-            this.directores.push(e.data());
-          });
-          response4.docs.forEach((e) => {
             this.directores.push(e.data());
           });
         }
       } catch (error) {
-        console.warn(error);
-      } finally {
-        this.loading = false;
+        console.log(error);
+      }
+    },
+    async getDirectorQui() {
+      try {
+        const response = await db
+          .collection("users")
+          .where("rol", "==", "DirectorQui")
+          .get();
+        if (response.docs.length > 0) {
+          response.docs.forEach((e) => {
+            this.directores.push(e.data());
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getDirectorMantto() {
+      try {
+        const response = await db
+          .collection("users")
+          .where("rol", "==", "DirectorMantto")
+          .get();
+        if (response.docs.length > 0) {
+          response.docs.forEach((e) => {
+            this.directores.push(e.data());
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getDirectorMeca() {
+      try {
+        const response = await db
+          .collection("users")
+          .where("rol", "==", "DirectorMeca")
+          .get();
+        if (response.docs.length > 0) {
+          response.docs.forEach((e) => {
+            this.directores.push(e.data());
+          });
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
     async createAccount() {

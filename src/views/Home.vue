@@ -1,35 +1,76 @@
 <template>
-  <v-container fluid class="img">
-    <v-row class="d-flex ma-15 justify-center">
-      <v-col cols="12" md="4">
-        <v-card elevation="24">
-          <v-card-subtitle class="text-center">
-            Módulo de alumnos de nuevo ingreso</v-card-subtitle
+  <v-container class="fondo">
+    <v-row class="d-flex justify-center align-center">
+      <v-col md="6" lg="7" sm="6" cols="12">
+        <v-card color="rgba(0,0,0,0)" elevation="5" flat rounded="xl" style="">
+          <!-- <h2 class="text-center" style="color: grey" >
+            Universidad tecnologica del sureste de veracruz
+          </h2> -->
+          <v-carousel
+            
+            hide-delimiter-background
+            cycle
+            show-arrows-on-hover
+            interval="4000"
           >
-          <v-row class="ma-0 pa-0">
-            <v-container class="mt-0 p-0 ma-0">
-              <v-col cols="12" class="d-flex justify-center pa-0 ma-0">
-                <v-hover v-slot:default="{ hover }" open-delay="0">
-                  <v-btn
-                    href="http://www.utsv.com.mx/wp/"
-                    target="_blank"
-                    class="mt-5 mb-12"
-                    fab
-                    icon
-                    color="#fff"
+            <v-carousel-item
+              gradient="to top, rgba(0,0,0,.1), rgba(0,0,0,.4)"
+              v-for="(item, i) in items"
+              :key="i"
+              :src="item.src"
+            >
+              <div class="text-center">
+                <v-avatar size="150">
+                  <v-img src="../assets/utsv-logo-3.jpg"></v-img>
+                </v-avatar>
+
+                <h3 class="title font-weight-bold mb-2">
+                  Universidad Tecnológica del Sureste de Veracruz
+                </h3>
+                <span class="caption font-weight-light"
+                  >Un mejor futuro...</span
+                >
+              </div>
+            </v-carousel-item>
+          </v-carousel>
+        </v-card>
+      </v-col>
+      <v-col md="6" lg="4" sm="6" cols="12">
+        <v-container>
+          <v-card
+            elevation="5"
+            rounded="xl"
+            style="
+              border-top: solid 8px rgb(76, 175, 80);
+              border-bottom: solid 8px rgb(76, 175, 80);
+            "
+          >
+            <v-card-subtitle class="text-center">
+              Módulo de alumnos de nuevo ingreso</v-card-subtitle
+            >
+
+            <v-col cols="12" class="d-flex justify-center">
+              <v-hover v-slot:default="{ hover }" open-delay="0">
+                <v-btn
+                  href="http://www.utsv.com.mx/wp/"
+                  target="_blank"
+                  class="mt-5 mb-10"
+                  fab
+                  icon
+                  color="#fff"
+                >
+                  <v-avatar
+                    :class="`elevation-${hover ? 5 : 0}`"
+                    class="transition-swing"
+                    size="150"
                   >
-                    <v-avatar
-                      :class="`elevation-${hover ? 5 : 0}`"
-                      class="transition-swing"
-                      size="150"
-                    >
-                      <v-img src="../assets/utsv-logo.png"></v-img>
-                    </v-avatar>
-                  </v-btn>
-                </v-hover>
-              </v-col>
-            </v-container>
-            <v-container class="justify-center d-flex pa-0 ma-0">
+                    <v-img src="../assets/utsv-logo.png"></v-img>
+                  </v-avatar>
+                </v-btn>
+              </v-hover>
+            </v-col>
+
+            <v-col class="d-flex justify-center">
               <v-hover v-slot:default="{ hover }" open-delay="0">
                 <v-btn
                   href="https://www.facebook.com/UTSV1/"
@@ -39,9 +80,19 @@
                   color="#fff"
                   outlined
                   fab
-                  ><v-icon color="blue-grey darken-2"
-                    >mdi mdi-facebook</v-icon
-                  ></v-btn
+                  ><v-icon color="#3b5998">mdi mdi-facebook</v-icon></v-btn
+                >
+              </v-hover>
+              <v-hover v-slot:default="{ hover }" open-delay="0">
+                <v-btn
+                  href="https://wa.me/9212532929?text=Hola,%20quiero%20más%20detalles"
+                  target="_blank"
+                  class="mx-1"
+                  :class="`elevation-${hover ? 5 : 0}`"
+                  color="#fff"
+                  outlined
+                  fab
+                  ><v-icon color="#4fce5d">mdi mdi-whatsapp</v-icon></v-btn
                 >
               </v-hover>
               <v-hover v-slot:default="{ hover }" open-delay="0">
@@ -53,9 +104,7 @@
                   color="#fff"
                   outlined
                   fab
-                  ><v-icon color="blue-grey darken-2"
-                    >mdi mdi-twitter</v-icon
-                  ></v-btn
+                  ><v-icon color="#00acee">mdi mdi-twitter</v-icon></v-btn
                 >
               </v-hover>
               <v-hover v-slot:default="{ hover }" open-delay="0">
@@ -67,59 +116,64 @@
                   color="#fff"
                   outlined
                   fab
-                  ><v-icon color="blue-grey darken-2"
-                    >mdi mdi-youtube</v-icon
-                  ></v-btn
+                  ><v-icon color="#c4302b">mdi mdi-youtube</v-icon></v-btn
                 >
               </v-hover>
-            </v-container>
+            </v-col>
             <v-col cols="12" v-if="error != ''">
               <v-alert outlined type="error" text dense>{{ error }}</v-alert>
             </v-col>
-          </v-row>
 
-          <v-form class="pa-5">
-            <v-text-field
-              outlined
-              dense
-              v-model="user.mail"
-              color="green"
-              label="Usuario"
-              required
-              @keyup.enter="iniciarSesion"
-            ></v-text-field>
-            <v-text-field
-              outlined
-              dense
-              v-model="user.password"
-              color="green"
-              label="Contraseña"
-              type="password"
-              required
-              @keyup.enter="iniciarSesion"
-            ></v-text-field>
-            <v-btn
-              class="mb-0"
-              block
-              rounded
-              color="green"
-              dark
-              depressed
-              :loading="loading"
-              @click="iniciarSesion"
-              >Ingresar</v-btn
-            >
-            <v-row>
-              <v-col cols="12" class="d-flex justify-end pt-2">
-                <router-link
-                  to="/registro"
-                  class="enlace blue--text text-subtitle-2"
-                  >Crear cuenta</router-link
-                >
-              </v-col>
-            </v-row>
-          </v-form>
-        </v-card>
+            <v-form class="pa-5">
+              <v-text-field
+                outlined
+                dense
+                v-model="user.mail"
+                color="green"
+                label="Usuario"
+                required
+                @keyup.enter="iniciarSesion"
+              ></v-text-field>
+              <v-text-field
+                outlined
+                dense
+                v-model="user.password"
+                color="green"
+                label="Contraseña"
+                type="password"
+                required
+                @keyup.enter="iniciarSesion"
+              ></v-text-field>
+              <v-tooltip color="grey darken-3" top>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    v-bind="attrs"
+                    v-on="on"
+                    class="mb-0"
+                    block
+                    rounded
+                    color="green"
+                    dark
+                    depressed
+                    :loading="loading"
+                    @click="iniciarSesion"
+                    >Ingresar</v-btn
+                  >
+                </template>
+                <span>Iniciar sesión</span>
+              </v-tooltip>
+              <v-row>
+                <v-col cols="12" class="d-flex justify-end pt-2">
+                  <router-link
+                    to="/registro"
+                    class="enlace blue--text text-subtitle-2"
+                    >Crear cuenta</router-link
+                  >
+                </v-col>
+              </v-row>
+            </v-form>
+          </v-card>
+        </v-container>
       </v-col>
     </v-row>
   </v-container>
@@ -133,6 +187,29 @@ export default {
   name: "Home",
 
   data: () => ({
+    items: [
+      {
+        src: "http://www.utsv.com.mx/wp/wp-content/uploads/2021/04/GENERAL-768x769.jpeg"
+      },
+      {
+        src: "https://sic.cultura.gob.mx/galeria_imagen/5d665487cda12patio.jpg",
+      },
+      {
+        src: "http://www.utsv.com.mx/wp/wp-content/uploads/2021/02/alumnos.png",
+      },
+      {
+        src:
+          "https://veracruz.quadratin.com.mx/www/wp-content/uploads/2016/10/UTCV.jpg",
+      },
+      {
+        src:
+          "http://parquealis.com/img/data/galerias/EventosParqueAlis/Taller%22AnalisisdelaSituaciondelTrabajo%22enlaUTSV/7a099bfa-5dda-42bf-91bd-b45345caadd1png.png",
+      },
+      {
+        src:
+          "https://lh3.googleusercontent.com/proxy/_cO95iuq8BHLi2FKUGhtXUmJ72kAHQT4ljlIJelE44r1CdxSlaS1KQFZO-mc3pMIWbw3DqxuEp_bjqrElxr4G9a7vuuI2pdqT2EcQZCHX6nvnmZCdYJpNlYjzp4ELWAvk1Roki-R2TDOAhlvbrnWRT01",
+      },
+    ],
     loading: false,
     user: {
       mail: "",
@@ -208,11 +285,13 @@ export default {
   text-decoration: underline;
 }
 .img {
-  background: url("../assets/utsv_portada.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100vh;
+  background-image: url("../assets/utsv_portada.jpg");
 
+  height: 100%;
+  background-position: center;
   background-size: cover;
+}
+.fondo {
+  background-color: #fafafa;
 }
 </style>

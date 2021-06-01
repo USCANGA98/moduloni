@@ -4,8 +4,8 @@
       <BarraNavegacion
         v-if="
           $route.path != '/' &&
-          $route.path != '/registro' &&
-          $vuetify.breakpoint.width < 960
+          $route.path != '/registro'
+          
         "
       />
     </v-fade-transition>
