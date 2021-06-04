@@ -390,7 +390,7 @@ export default {
           alert(
             "Documentos enviados, inisia sesión nuevamente para actualizar los cambios"
           );
-          this.$router.push("/student/proceso-inscripcion-2");
+          this.$router.push({name: 'Inscripcion-student-2'});
         }
       } catch (error) {
         console.log(error);

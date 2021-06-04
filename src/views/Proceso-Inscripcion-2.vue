@@ -103,7 +103,10 @@
         <!-- Aqui termina el container con los datos del alumno-->
 
         <v-col
-          cols="4"
+          md="4"
+          lg="4"
+          sm="6"
+          cols="12"
           v-for="(document, index) in user.documentsInscription"
           :key="document.name"
         >

@@ -86,15 +86,19 @@
         <!-- Aqui termina linea de todos los alumnos-->
         <!-- Aqui empieza renderizado condicional de directores de carrera TECNOLOGIAS-->
         <v-col
-          cols="2"
+          md="3"
+          lg="2"
+          xl="2"
+          sm="4"
+          cols="5"
           v-for="career in careerOptionsTi"
           :key="career"
           v-show="user.rol === 'DirectorTi'"
         >
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
-              :min-height="$vuetify.breakpoint.xs ? 135 : '20vh'"
-              min-width="135"
+              :min-height="$vuetify.breakpoint.xs ? 140 : '15vh'"
+              :min-width="$vuetify.breakpoint.xs ? 140 : '15vh'"
               :class="`elevation-${hover ? 20 : 0}`"
               class="mx-auto transition-swing"
               @click="goDetailCareer(career)"
@@ -128,15 +132,19 @@
         <!-- Aqui termina renderizado condicional de directores de carrera TECNOLOGIAS-->
         <!-- Aqui empieza renderizado condicional de directores de carrera QUIMICA-->
         <v-col
-          cols="2"
+          md="3"
+          lg="2"
+          xl="2"
+          sm="4"
+          cols="5"
           v-for="career in careerOptionsQuimica"
           :key="career"
           v-show="user.rol === 'DirectorQui'"
         >
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
-              :min-height="$vuetify.breakpoint.xs ? 135 : '20vh'"
-              min-width="135"
+              :min-height="$vuetify.breakpoint.xs ? 140 : '15vh'"
+              :min-width="$vuetify.breakpoint.xs ? 140 : '15vh'"
               :class="`elevation-${hover ? 20 : 0}`"
               class="mx-auto transition-swing"
               @click="goDetailCareer(career)"
@@ -180,15 +188,19 @@
         <!-- Aqui termina renderizado condicional de directores de carrera QUIMICA-->
         <!-- Aqui empieza renderizado condicional de directores de carrera Mantenimiento Industrial-->
         <v-col
-          cols="2"
+          md="3"
+          lg="2"
+          xl="2"
+          sm="4"
+          cols="5"
           v-for="career in careerOptionsMantto"
           :key="career"
           v-show="user.rol === 'DirectorMantto'"
         >
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
-              :min-height="$vuetify.breakpoint.xs ? 135 : '20vh'"
-              min-width="135"
+              :min-height="$vuetify.breakpoint.xs ? 140 : '15vh'"
+              :min-width="$vuetify.breakpoint.xs ? 140 : '15vh'"
               :class="`elevation-${hover ? 20 : 0}`"
               class="mx-auto transition-swing"
               @click="goDetailCareer(career)"
@@ -222,15 +234,19 @@
         <!-- Aqui termina renderizado condicional de directores de carrera Mantenimiento Industrial-->
         <!-- Aqui empieza renderizado condicional de directores de carrera Mecatronica-->
         <v-col
-          cols="2"
+          md="3"
+          lg="2"
+          xl="2"
+          sm="4"
+          cols="5"
           v-for="career in careerOptionsMecatronica"
           :key="career"
           v-show="user.rol === 'DirectorMeca'"
         >
           <v-hover v-slot:default="{ hover }" open-delay="0">
             <v-card
-              :min-height="$vuetify.breakpoint.xs ? 135 : '20vh'"
-              min-width="135"
+              :min-height="$vuetify.breakpoint.xs ? 140 : '15vh'"
+              :min-width="$vuetify.breakpoint.xs ? 140 : '15vh'"
               :class="`elevation-${hover ? 20 : 0}`"
               class="mx-auto transition-swing"
               @click="goDetailCareer(career)"
@@ -350,7 +366,7 @@ export default {
     ...mapMutations(["setCareerSelected"]),
     goDetailCareer(career) {
       this.setCareerSelected(career);
-      this.$router.push("/director/detail-career");
+      this.$router.push({ name: "DetailCareerDirector" });
     },
 
     async guardado() {

@@ -62,10 +62,6 @@
                 <p class="caption mt-1">
                   {{ user.rol }}
                 </p>
-                <v-divider class="my-3"></v-divider>
-                <v-btn @click="cerrarSesion()" depressed rounded text>
-                  Cerrar Sesión
-                </v-btn>
               </div>
             </v-list-item-content>
           </v-card>
@@ -137,10 +133,6 @@
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="perfil()" depressed rounded text>
                   Editar Cuenta
-                </v-btn>
-                <v-divider class="my-3"></v-divider>
-                <v-btn @click="cerrarSesion()" depressed rounded text>
-                  Cerrar Sesión
                 </v-btn>
               </div>
             </v-list-item-content>
@@ -222,10 +214,6 @@
                 <v-btn @click="perfil()" depressed rounded text>
                   Editar Cuenta
                 </v-btn>
-                <v-divider class="my-3"></v-divider>
-                <v-btn @click="cerrarSesion()" depressed rounded text>
-                  Cerrar Sesión
-                </v-btn>
               </div>
             </v-list-item-content>
           </v-card>
@@ -248,7 +236,7 @@
             v-for="items in itemsAdmin"
             :key="items.title"
             link
-            :to="items.path"
+            :to="{name: items.name}"
             exact
           >
             <v-list-item-icon>
@@ -274,7 +262,7 @@
                 v-for="items in itemsAdminActions"
                 :key="items.title"
                 link
-                :to="items.path"
+                :to="{name: items.name}"
                 exact
               >
                 <v-list-item-icon>
@@ -294,7 +282,7 @@
             v-for="items in itemsStudent"
             :key="items.title"
             link
-            :to="items.path"
+            :to="{name: items.name}"
             exact
           >
             <v-list-item-icon>
@@ -313,7 +301,7 @@
             v-for="items in itemsStudentFinalized"
             :key="items.title"
             link
-            :to="items.path"
+            :to="{name: items.name}"
             exact
           >
             <v-list-item-icon>
@@ -341,7 +329,7 @@
             v-for="items in itemsDirect"
             :key="items.title"
             link
-            :to="items.path"
+            :to="{name: items.name}"
             exact
           >
             <v-list-item-icon>
@@ -372,7 +360,6 @@
     <v-navigation-drawer
       v-if="$vuetify.breakpoint.width < 960"
       app
-      
       v-model="drawer"
       width="190"
       temporary
@@ -432,10 +419,6 @@
                 <p class="caption mt-1">
                   {{ user.rol }}
                 </p>
-                <v-divider class="my-3"></v-divider>
-                <v-btn @click="cerrarSesion()" depressed rounded text>
-                  Cerrar Sesión
-                </v-btn>
               </div>
             </v-list-item-content>
           </v-card>
@@ -507,10 +490,6 @@
                 <v-divider class="my-3"></v-divider>
                 <v-btn @click="perfil()" depressed rounded text>
                   Editar Cuenta
-                </v-btn>
-                <v-divider class="my-3"></v-divider>
-                <v-btn @click="cerrarSesion()" depressed rounded text>
-                  Cerrar Sesión
                 </v-btn>
               </div>
             </v-list-item-content>
@@ -592,10 +571,6 @@
                 <v-btn @click="perfil()" depressed rounded text>
                   Editar Cuenta
                 </v-btn>
-                <v-divider class="my-3"></v-divider>
-                <v-btn @click="cerrarSesion()" depressed rounded text>
-                  Cerrar Sesión
-                </v-btn>
               </div>
             </v-list-item-content>
           </v-card>
@@ -618,7 +593,7 @@
             v-for="items in itemsAdmin"
             :key="items.title"
             link
-            :to="items.path"
+            :to="{name: items.name}"
             exact
           >
             <v-list-item-icon>
@@ -644,7 +619,7 @@
                 v-for="items in itemsAdminActions"
                 :key="items.title"
                 link
-                :to="items.path"
+                :to="{name: items.name}"
                 exact
               >
                 <v-list-item-icon>
@@ -664,7 +639,7 @@
             v-for="items in itemsStudent"
             :key="items.title"
             link
-            :to="items.path"
+            :to="{name: items.name}"
             exact
           >
             <v-list-item-icon>
@@ -684,7 +659,7 @@
             v-for="items in itemsStudentFinalized"
             :key="items.title"
             link
-            :to="items.path"
+            :to="{name: items.name}"
             exact
           >
             <v-list-item-icon>
@@ -712,7 +687,7 @@
             v-for="items in itemsDirect"
             :key="items.title"
             link
-            :to="items.path"
+            :to="{name: items.name}"
             exact
           >
             <v-list-item-icon>
@@ -754,19 +729,15 @@ export default {
   },
   methods: {
     cerrarSesion() {
-      auth
-        .signOut()
-        .then(function () {
-          window.location.reload(true);
-          // Sign-out successful.
-        })
-        .catch((error) => {
-          // An error happened.
-          console.log(error);
-        });
+      try {
+        auth.signOut();
+        this.$router.push({ name: "Home" });
+      } catch (error) {
+        console.log(error);
+      }
     },
     perfil() {
-      this.$router.push("/perfil");
+      this.$router.push({name: 'Perfil'});
     },
   },
   data() {
@@ -775,81 +746,81 @@ export default {
         {
           title: "Panel",
           icon: "mdi-view-dashboard",
-          path: "/admin",
+          name: "Admin",
         },
         {
           title: "Graficas",
           icon: "mdi-chart-areaspline",
-          path: "/admin/graficos",
+          name: "Graficos",
         },
 
         {
           title: "Valorar",
           icon: "mdi-hand-heart",
-          path: "/admin/valorar-proyecto",
+          name: "Valorar",
         },
         {
           title: "Inscripcion",
           icon: "mdi-school",
-          path: "/admin/inscripcion",
+          name: "Inscripcion-admin",
         },
       ],
       itemsAdminActions: [
         {
           title: "Nuevo Admin",
           icon: "mdi-account-circle",
-          path: "/admin/nuevo-admin",
+          name: "Agregar-Admin",
         },
         {
           title: "Nuevo Director",
           icon: "mdi-account-multiple",
-          path: "/admin/nuevo-usuario",
+          name: "Agregar-Usuario",
         },
         {
           title: "Egresados",
           icon: "mdi-account-tie",
-          path: "/admin/egresados",
+          name: "Egresados",
         },
       ],
       itemsStudent: [
         {
           title: "Seguimiento",
           icon: "mdi-clipboard-account-outline",
-          path: "/student",
+          name: "Student",
         },
         {
           title: "Valorar",
           icon: "mdi-hand-heart",
-          path: "/student/valorar-proyecto",
+          name: "Valorar-student",
         },
       ],
       itemsStudentFinalized: [
         {
           title: "Inscripcion 1",
           icon: "mdi-card-account-details-outline",
-          path: "/student/proceso-inscripcion-1",
+          name: "Inscripcion-student-1",
         },
         {
           title: "Inscripcion 2",
           icon: "mdi-school",
-          path: "/student/proceso-inscripcion-2",
+          name: "Inscripcion-student-2",
         },
       ],
       itemsDirect: [
         {
           title: "Panel",
           icon: "mdi-view-dashboard",
-          path: "/director",
+          name: "Control-Estudiantes",
         },
         {
           title: "Valorar",
           icon: "mdi-hand-heart",
-          path: "/director/valorar-proyecto",
+          name: "Valorar-director",
         },
         {
           title: "Inscripcion",
           icon: "mdi-school",
-          path: "/director/inscripcion",
+          name: "Inscripcion-director",
         },
       ],
     };

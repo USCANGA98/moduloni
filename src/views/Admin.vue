@@ -362,7 +362,7 @@ export default {
     ...mapMutations(["setCareerSelected"]),
     goDetailCareer(career) {
       this.setCareerSelected(career);
-      this.$router.push("/admin/detail-career");
+      this.$router.push({name: 'DetailCareer'});
     },
 
     async guardado() {

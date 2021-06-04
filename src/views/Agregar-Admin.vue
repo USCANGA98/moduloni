@@ -258,7 +258,7 @@ export default {
         if (response == undefined) {
           alert("Cuenta creada con exito!");
           console.log(response);
-          this.$router.push("/admin");
+          this.$router.push({name: 'Admin'});
         }
       } catch (error) {
         console.warn(error);

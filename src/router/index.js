@@ -8,7 +8,7 @@ const ifAuthenticated = (to, from, next) => {
   if (Vuex.state.user != "") {
     next();
   } else {
-    next("/");
+    next({name: 'Home'});
   }
 };
 
@@ -24,6 +24,12 @@ const routes = [
     name: "Registro",
     component: () =>
       import(/* webpackChunkName: "registro" */ "../views/Registro.vue")
+  },
+  {
+    path: "/restablecer-contrasena",
+    name: "PasswordReset",
+    component: () =>
+      import(/* webpackChunkName: "registro" */ "../views/Restablecer-Contraseña.vue")
   },
 
   //********Rutas de Administrador********
@@ -49,7 +55,7 @@ const routes = [
     beforeEnter: ifAuthenticated
   },
   {
-    path: "/admin/Graficos",
+    path: "/admin/graficos",
     name: "Graficos",
     component: () =>
       import(/* webpackChunkName: "admin" */ "../views/Graficos.vue"),

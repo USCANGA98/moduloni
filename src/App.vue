@@ -4,16 +4,15 @@
       <BarraNavegacion
         v-if="
           $route.path != '/' &&
-          $route.path != '/registro'
-          
-        "
+          $route.path != '/registro' &&
+          $route.path != '/restablecer-contrasena'"
       />
     </v-fade-transition>
-    <NavigationDrawer v-if="$route.path != '/' && $route.path != '/registro'" />
+    <NavigationDrawer v-if="$route.path != '/' && $route.path != '/registro' && $route.path != '/restablecer-contrasena'" />
     <v-main class="grey lighten-5">
       <v-card
         max-height="30"
-        v-if="$route.path != '/' && $route.path != '/registro'"
+        v-if="$route.path != '/' && $route.path != '/registro' && $route.path != '/restablecer-contrasena'"
         flat
         color="rgba(0, 0, 0, 0)"
       >

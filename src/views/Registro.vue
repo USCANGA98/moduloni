@@ -663,7 +663,7 @@ export default {
           alert(
             "Cuenta creada con exito!, puedes iniciar sesión para ver tu status"
           );
-          this.$router.push("/");
+          this.$router.push({name: 'Home'});
         }
       } catch (error) {
         console.warn(error);

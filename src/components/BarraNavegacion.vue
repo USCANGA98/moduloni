@@ -249,7 +249,6 @@
 
 <script>
 import { mapState } from "vuex";
-import { auth } from "../services/firebase";
 import NavigationDrawer from "./NavigationDrawer";
 
 export default {
@@ -291,21 +290,8 @@ export default {
       this.user.documents.url = url;
       window.open(url, "_blank");
     },
-
-    cerrarSesion() {
-      auth
-        .signOut()
-        .then(function () {
-          window.location.reload(true);
-          // Sign-out successful.
-        })
-        .catch((error) => {
-          // An error happened.
-          console.log(error);
-        });
-    },
     perfil() {
-      this.$router.push("/perfil");
+      this.$router.push({name: 'Perfil'});
     },
   },
 

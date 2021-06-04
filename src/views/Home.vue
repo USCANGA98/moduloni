@@ -7,7 +7,6 @@
             Universidad tecnologica del sureste de veracruz
           </h2> -->
           <v-carousel
-            
             hide-delimiter-background
             cycle
             show-arrows-on-hover
@@ -39,7 +38,7 @@
         <v-container>
           <v-card
             elevation="5"
-            rounded="xl"
+            rounded="lg"
             style="
               border-top: solid 8px rgb(76, 175, 80);
               border-bottom: solid 8px rgb(76, 175, 80);
@@ -124,7 +123,7 @@
               <v-alert outlined type="error" text dense>{{ error }}</v-alert>
             </v-col>
 
-            <v-form class="pa-5">
+            <v-form class="pr-5 pl-5">
               <v-text-field
                 outlined
                 dense
@@ -144,33 +143,37 @@
                 required
                 @keyup.enter="iniciarSesion"
               ></v-text-field>
-              <v-tooltip color="grey darken-3" top>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    v-bind="attrs"
-                    v-on="on"
-                    class="mb-0"
-                    block
-                    rounded
-                    color="green"
-                    dark
-                    depressed
-                    :loading="loading"
-                    @click="iniciarSesion"
-                    >Ingresar</v-btn
-                  >
-                </template>
-                <span>Iniciar sesión</span>
-              </v-tooltip>
+              <v-btn
+                class="text-capitalize font-weight-bold white--text"
+                block
+                color="green"
+                dark
+                depressed
+                :loading="loading"
+                @click="iniciarSesion"
+                >Iniciar sesión</v-btn
+              >
               <v-row>
-                <v-col cols="12" class="d-flex justify-end pt-2">
+                <v-col cols="12" class="d-flex justify-center pt-2">
                   <router-link
-                    to="/registro"
-                    class="enlace blue--text text-subtitle-2"
-                    >Crear cuenta</router-link
+                    :to="{ name: 'PasswordReset' }"
+                    class="enlace font-weight-light blue--text text-subtitle-2"
+                    >¿Olvidaste tu contraseña?</router-link
                   >
                 </v-col>
               </v-row>
+              <v-divider></v-divider>
+              <v-col cols="12" class="d-flex justify-center">
+                <v-btn
+                  depressed
+                  width="200px"
+                  :to="{ name: 'Registro' }"
+                  color="blue"
+                  class="text-capitalize font-weight-bold white--text"
+                >
+                  Crear Cuenta
+                </v-btn>
+              </v-col>
             </v-form>
           </v-card>
         </v-container>
@@ -189,7 +192,8 @@ export default {
   data: () => ({
     items: [
       {
-        src: "http://www.utsv.com.mx/wp/wp-content/uploads/2021/04/GENERAL-768x769.jpeg"
+        src:
+          "http://www.utsv.com.mx/wp/wp-content/uploads/2021/04/GENERAL-768x769.jpeg",
       },
       {
         src: "https://sic.cultura.gob.mx/galeria_imagen/5d665487cda12patio.jpg",
@@ -227,11 +231,11 @@ export default {
         this.setUser(this.userData);
         if (this.userData.rol == "admin") {
           console.log("accedió el admin");
-          this.$router.push("/admin");
+          this.$router.push({name: 'Admin'});
         }
         if (this.userData.rol == "Estudiante") {
           console.log("accedió el estudiante");
-          this.$router.push("/student");
+          this.$router.push({name: 'Student'});
         }
         if (
           this.userData.rol == "DirectorTi" ||
@@ -240,7 +244,7 @@ export default {
           this.userData.rol == "DirectorMantto"
         ) {
           console.log("accedió el director de carrera");
-          this.$router.push("/director");
+          this.$router.push({name: 'Control-Estudiantes'});
         }
       } catch (error) {
         console.warn(error);
