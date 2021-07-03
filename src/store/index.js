@@ -5,8 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: [],
-    careerSelected: []
+    user: "",
+    careerSelected: ""
   },
   mutations: {
     setUser(state, payload) {
@@ -16,7 +16,9 @@ export default new Vuex.Store({
       state.careerSelected = payload;
     },
     // ELIMINAR_USUARIO(state, index){
-    //   state.user.splice(index, 1)
+    //   console.log("soy el index antes de ser eliminado", index)
+    //   console.log(state)
+    //   console.log("soy el index eliminado", index)
     // }
   },
   actions: {

@@ -21,6 +21,11 @@
                   {{ item.rol }}
                 </v-chip>
               </template>
+              <template v-slot:item.eliminaradministrador="{ item }">
+              <v-btn :disabled="user <= 1" icon dark color="red" @click="eliminarAdministrador(item.uid)"
+                ><v-icon> mdi-delete </v-icon></v-btn
+              >
+            </template>
             </v-data-table>
           </v-card>
         </v-col>
@@ -140,16 +145,27 @@
     <v-overlay :value="overlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
+    <EliminarAdministrador
+      :snackbar="snackbar"
+      :uid="uid"
+      :dialog="dialog"
+      :administradores="administradores"
+      @cancel="dialog = false"
+    />
   </v-container>
 </template>
 
 <script>
+import EliminarAdministrador from "../components/actions/EliminarUsuario";
 import { auth, storage, db } from "../services/firebase";
 export default {
   name: "Control-direct",
 
   mounted() {
     this.users();
+  },
+  components:{
+    EliminarAdministrador,
   },
   data: () => ({
     valid: true,
@@ -159,10 +175,12 @@ export default {
     mail: "",
     mailRepeat: "",
     loading: false,
+    dialog: false,
     password: "",
     passwordRepeat: "",
     snackbar: false,
     timeout: 5000,
+    uid: "",
     show1: false,
     show2: false,
     user: {
@@ -180,10 +198,13 @@ export default {
         text: "Apellidos",
         value: "apellidos",
       },
-
       {
         text: "Rol",
         value: "rol",
+      },
+      {
+        text: "Eliminar Administrador",
+        value: "eliminaradministrador",
       },
     ],
     menu: false,
@@ -286,6 +307,10 @@ export default {
       } catch (error) {
         console.warn(error);
       }
+    },
+    async eliminarAdministrador(uid) {
+      this.uid = uid;
+      this.dialog = true;
     },
   },
   computed: {

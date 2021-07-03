@@ -28,6 +28,11 @@
                   {{ item.rol }}
                 </v-chip>
               </template>
+              <template v-slot:item.eliminardirector="{ item }">
+              <v-btn icon dark color="red" @click="eliminarDirector(item.uid)"
+                ><v-icon> mdi-delete </v-icon></v-btn
+              >
+            </template>
             </v-data-table>
           </v-card>
         </v-col>
@@ -219,15 +224,26 @@
     <v-overlay :value="overlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
+    <EliminarEstudiante
+      :snackbar="snackbar"
+      :uid="uid"
+      :dialog="dialog"
+      :directores="directores"
+      @cancel="dialog = false"
+    />
   </v-container>
 </template>
 
 <script>
+import EliminarEstudiante from "../components/actions/EliminarUsuario";
 import { auth, storage, db } from "../services/firebase";
 export default {
   name: "Control-direct",
   async mounted() {
     await this.init();
+  },
+  components:{
+    EliminarEstudiante,
   },
 
   data: () => ({
@@ -242,12 +258,14 @@ export default {
     text: "",
     loading: false,
     mail: "",
+    dialog: false,
     directores: [],
     mailRepeat: "",
     password: "",
     passwordRepeat: "",
     snackbar: false,
     timeout: 5000,
+    uid: "",
     show1: false,
     show2: false,
     user: {
@@ -275,6 +293,10 @@ export default {
       {
         text: "Roles",
         value: "rol",
+      },
+      {
+        text: "Eliminar Director",
+        value: "eliminardirector",
       },
     ],
     menu: false,
@@ -432,6 +454,10 @@ export default {
       } catch (error) {
         console.warn(error);
       }
+    },
+    async eliminarDirector(uid) {
+      this.uid = uid;
+      this.dialog = true;
     },
   },
   computed: {

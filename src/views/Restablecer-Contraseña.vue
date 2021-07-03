@@ -36,7 +36,7 @@
               class="mr-4 ml-4"
               outlined
               color="blue"
-              label="Usuario"
+              label="Correo"
               required
               @keyup.enter="init"
             ></v-text-field>

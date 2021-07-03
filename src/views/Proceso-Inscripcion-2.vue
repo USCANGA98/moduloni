@@ -128,18 +128,45 @@
               {{ document.mensaje }}
             </v-card-text>
             <v-card-actions>
-              <v-file-input
-                :disabled="document.aprobado"
-                color="green"
-                prepend-icon
-                prepend-inner-icon="mdi-file-document-outline"
-                label="Editar documento"
-                outlined
-                show-size
-                dense
-                accept="application/pdf, image/*"
-                @change="input($event, index)"
-              ></v-file-input>
+              <v-row>
+                <v-col cols="8">
+                  <v-file-input
+                    :disabled="document.aprobado"
+                    color="green"
+                    prepend-icon
+                    prepend-inner-icon="mdi-file-document-outline"
+                    label="Editar documento"
+                    outlined
+                    show-size
+                    dense
+                    accept="application/pdf, image/*"
+                    @change="input($event, index)"
+                  ></v-file-input>
+                </v-col>
+                <v-col
+                  v-if="
+                    document.aprobado == true ||
+                    document.mensaje != 'No ha sido revisado'
+                  "
+                  cols="3"
+                >
+                  <v-tooltip color="grey darken-3" top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        icon
+                        v-bind="attrs"
+                        v-on="on"
+                        color="blue"
+                        dark
+                        depressed
+                        @click="abrir(document.url)"
+                        ><v-icon>mdi-file-move-outline</v-icon></v-btn
+                      >
+                    </template>
+                    <span>Abrir documento</span>
+                  </v-tooltip>
+                </v-col>
+              </v-row>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -161,6 +188,10 @@ export default {
   }),
   components: {},
   methods: {
+    abrir(url) {
+      this.user.documents.url = url;
+      window.open(url, "_blank");
+    },
     async input(e, tipo) {
       this.overlay = true;
       const uid = this.user.uid;

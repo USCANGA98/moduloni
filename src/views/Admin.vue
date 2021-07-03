@@ -33,24 +33,23 @@
           </v-img>
         </v-card>
       </v-expand-transition> -->
-    <v-scroll-x-transition mode="out-in">
-      <v-container class="text-right">
-        <v-tooltip color="grey darken-3" left>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              v-bind="attrs"
-              v-on="on"
-              color="white"
-              rounded
-              @click="expand = !expand"
-            >
-              <v-icon color="pink">mdi-account-search</v-icon>
-            </v-btn>
-          </template>
-          <span>Buscar Alumno</span>
-        </v-tooltip>
-      </v-container>
-    </v-scroll-x-transition>
+
+    <div class="text-right">
+      <v-tooltip color="grey darken-3" left>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            v-bind="attrs"
+            v-on="on"
+            color="white"
+            rounded
+            @click="expand = !expand"
+          >
+            <v-icon color="pink">mdi-account-search</v-icon>
+          </v-btn>
+        </template>
+        <span>Buscar Alumno</span>
+      </v-tooltip>
+    </div>
 
     <!-- Aqui empieza linea de todos los alumnos-->
 
@@ -112,7 +111,7 @@
                 color="green"
                 dark
                 @click="verUsuario(item)"
-                >detalle</v-btn
+                >detalles</v-btn
               >
             </template>
 
@@ -142,12 +141,19 @@
     <!-- Aqui termina linea de todos los alumnos-->
 
     <v-row>
-      <v-col  md="3" lg="2" xl="2" sm="4" cols="5"  v-for="career in careerOptions" :key="career">
+      <v-col
+        md="3"
+        lg="2"
+        xl="2"
+        sm="4"
+        cols="5"
+        v-for="career in careerOptions"
+        :key="career"
+      >
         <v-hover v-slot:default="{ hover }" open-delay="0">
           <v-card
             :min-height="$vuetify.breakpoint.xs ? 140 : '15vh'"
             :min-width="$vuetify.breakpoint.xs ? 140 : '15vh'"
-            
             :class="`elevation-${hover ? 20 : 1}`"
             class="mx-auto d-flex transition-swing"
             @click="goDetailCareer(career)"
@@ -254,13 +260,14 @@
       :snackbar="snackbar"
       :uid="uid"
       :dialog="dialog"
+      :estudiantes="estudiantes"
       @cancel="dialog = false"
     />
   </v-container>
 </template>
 
 <script>
-import EliminarEstudiante from "../components/actions/EliminarEstudiante";
+import EliminarEstudiante from "../components/actions/EliminarUsuario";
 import { db } from "../services/firebase";
 import { mapState } from "vuex";
 import { mapMutations } from "vuex";
@@ -269,7 +276,7 @@ export default {
   name: "AdminView",
   mounted() {
     this.getData();
-    this.Students();
+    this.getStudents();
   },
 
   components: {
@@ -323,7 +330,6 @@ export default {
         text: "Carrera",
         value: "carrera",
       },
-
       {
         text: "Documentos",
         value: "documents",
@@ -362,7 +368,7 @@ export default {
     ...mapMutations(["setCareerSelected"]),
     goDetailCareer(career) {
       this.setCareerSelected(career);
-      this.$router.push({name: 'DetailCareer'});
+      this.$router.push({ name: "DetailCareer" });
     },
 
     async guardado() {
@@ -399,7 +405,7 @@ export default {
       }
     },
 
-    async Students() {
+    async getStudents() {
       this.loading = true;
       try {
         const response = await db

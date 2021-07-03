@@ -1,6 +1,6 @@
 <template>
-  <v-dialog v-model="viewDocuments" persistent max-width="750">
-    <v-card>
+  <v-dialog scrollable v-model="viewDocuments" persistent max-width="750">
+    <v-card style="overflow-y: hidden;">
       <v-toolbar dense flat color="green" dark>
         <v-toolbar-title
           >Documentos de {{ item.nombre }} {{ item.apellidoPaterno }}
@@ -10,7 +10,7 @@
         <v-btn color="white" text @click="cerrar">Cerrar</v-btn>
         <v-btn color="white" text @click="guardar">Guardar cambios</v-btn>
       </v-toolbar>
-      <v-container>
+      <v-container style="overflow-y: scroll;">
         <v-row>
           <v-col cols="12" v-for="item in item.documents" :key="item.name">
             <v-hover v-slot:default="{ hover }" open-delay="0">

@@ -203,39 +203,23 @@
 
                     <v-col cols="6" sm="6" lg="6" md="6">
                       <v-card-text class="text-right ma-2 mt-n3">
-                        <v-icon left x-small
-                          >mdi-checkbox-blank-circle</v-icon
-                        >
-                        <strong>{{ Quimica[0].direccion.ciudad }}</strong
-                        >
+                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon>
+                        <strong>{{ Quimica[0].direccion.ciudad }}</strong>
                         <br />
-                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon
-                        >
+                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon>
                         <strong>{{ Mecanica[0].direccion.ciudad }}</strong>
                         <br />
-                        <v-icon left x-small
-                          >mdi-checkbox-blank-circle</v-icon
-                        >
-                        <strong>{{ IngTi[0].direccion.ciudad }}</strong
-                        >
+                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon>
+                        <strong>{{ IngTi[0].direccion.ciudad }}</strong>
                         <br />
-                        <v-icon left x-small
-                          >mdi-checkbox-blank-circle</v-icon
-                        >
-                        <strong>{{ IngMantto[0].direccion.ciudad }}</strong
-                        >
+                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon>
+                        <strong>{{ IngMantto[0].direccion.ciudad }}</strong>
                         <br />
-                        <v-icon left x-small
-                          >mdi-checkbox-blank-circle</v-icon
-                        >
-                        <strong>{{ IngMeca[0].direccion.ciudad }}</strong
-                        >
+                        <v-icon left x-small>mdi-checkbox-blank-circle</v-icon>
+                        <strong>{{ IngMeca[0].direccion.ciudad }}</strong>
                         <br />
-                        <v-icon right x-small
-                          >mdi-checkbox-blank-circle</v-icon
-                        >
-                        <strong>{{ IngQuimica[0].direccion.ciudad }}</strong
-                        >
+                        <v-icon right x-small>mdi-checkbox-blank-circle</v-icon>
+                        <strong>{{ IngQuimica[0].direccion.ciudad }}</strong>
                         <br />
                       </v-card-text>
                     </v-col>
@@ -267,18 +251,13 @@ import { db } from '../services/firebase'
 import Vue from 'vue'
 import Chartkick from 'vue-chartkick'
 import Chart from 'chart.js'
-import {mapState} from 'vuex'
 
 Vue.use(Chartkick.use(Chart))
 
 export default {
   name: "ViewGraficos",
   colors: [ '#4572A7', '#AA4643', '#89A54E', '#80699B', '#3D96AE', '#DB843D', '#92A8CD', '#A47D7C', '#B5CA92' ], plotOptions: { column: { colorByPoint: true }, },
-
-
-
   data: () => ({
-    
     value: 0,
     overlay: false,
     Contaduria: [],
@@ -294,7 +273,6 @@ export default {
     Administracion: [],
     Energias: [],
     IngTi: [],
-    
     IngMantto: [],
     IngMeca: [],
     IngQuimica: [],
@@ -302,8 +280,6 @@ export default {
     statusProceso: [],
     statusInscripcion: [],
     statusPendiente: [],
-
-
   }),
 
   mounted() {
@@ -522,22 +498,6 @@ export default {
       }
       
     },
-    computed:{
-      ...mapState(["user"]),
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
   },
 };
 </script>

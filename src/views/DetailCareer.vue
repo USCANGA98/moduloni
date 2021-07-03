@@ -59,7 +59,7 @@
                 color="green"
                 dark
                 @click="verUsuario(item)"
-                >detalle</v-btn
+                >detalles</v-btn
               >
             </template>
             <template v-slot:item.eliminarestudiante="{ item }">
@@ -172,7 +172,7 @@
 <script>
 import { db } from "../services/firebase";
 import { mapState } from "vuex";
-import EliminarEstudiante from "../components/actions/EliminarEstudiante";
+import EliminarEstudiante from "../components/actions/EliminarUsuario";
 
 export default {
   mounted() {

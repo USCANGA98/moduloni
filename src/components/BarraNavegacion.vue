@@ -1,17 +1,42 @@
 <template>
   <div>
-    <v-app-bar app elevate-on-scroll color="grey lighten-5">
+    <v-app-bar
+      app
+      elevate-on-scroll
+      :class="$vuetify.theme.dark ? '' : 'grey lighten-5'"
+    >
       <v-app-bar-nav-icon
         v-if="$vuetify.breakpoint.width < 960"
-        style="color: black"
+        :class="$vuetify.theme.dark ? '' : 'grey lighten-5'"
         @click="mostrarNavigationDrawer = true"
       ></v-app-bar-nav-icon>
       <h4 class="title font-weight-black">
         {{ toolbarTitle }}
       </h4>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
       <!-- Notificaciones empiezan -->
+
+      <v-icon
+        
+        :class="!$vuetify.theme.dark ? '' : 'moon'"
+        v-show="$vuetify.theme.dark"
+        class="mx-n4"
+        small
+        >mdi-brightness-3</v-icon
+      >
+
+      <v-icon
+        :class="$vuetify.theme.dark ? '' : 'sun'"
+        v-show="!$vuetify.theme.dark"
+        class="mx-n10"
+        small
+        >mdi-white-balance-sunny</v-icon
+      >
+
+      <v-switch color="yellow" hide-details inset v-model="$vuetify.theme.dark">
+      </v-switch>
+
       <v-menu
         max-height="500"
         v-if="user.rol == 'Estudiante'"
@@ -34,10 +59,13 @@
                     :value="messages"
                     color="error"
                     overlap
-                    dot
                     left
                   >
-                    <v-icon color="grey darken-2">mdi-bell</v-icon>
+                    <v-icon
+                      :class="messages ? 'shake' : ''"
+                      :color="$vuetify.theme.dark ? '' : 'grey darken-2'"
+                      >mdi-bell</v-icon
+                    >
                   </v-badge>
                 </v-btn>
               </v-btn>
@@ -47,13 +75,16 @@
         </template>
         <v-card min-height="500" min-width="450" max-width="450">
           <h2 class="pl-2 pt-2 mb-5">Notificaciones</h2>
-
           <v-list nav dense class="mx-n1">
             <div class="subtitle-2 pl-2 pt-2">Nuevo Ingreso</div>
             <v-list-item
               v-for="document in user.documents"
               :key="document.name"
-              v-show="document.aprobado"
+              v-show="
+                document.aprobado ||
+                (document.mensaje != 'No ha sido revisado' &&
+                  document.mensaje != undefined)
+              "
               link
             >
               <v-badge class="mr-6" avatar bordered overlap>
@@ -71,7 +102,14 @@
                 <h3 class="pb-1">Servicios Escolares</h3>
                 <span class="caption mx-2" style="color: grey">
                   {{ document.name }} <br />
-                  {{ document.mensaje }}
+                  {{ document.mensaje }} <br />
+                  Aprobado:
+                  <v-chip
+                    class="white--text"
+                    x-small
+                    :color="document.aprobado ? 'green' : 'orange'"
+                    >{{ document.aprobado }}</v-chip
+                  >
                 </span>
               </v-list-item-content>
               <v-tooltip color="grey darken-3" top>
@@ -96,7 +134,11 @@
             <v-list-item
               v-for="document in user.documentsInscription"
               :key="document.name"
-              v-show="document.aprobado"
+              v-show="
+                document.aprobado ||
+                (document.mensaje != 'No ha sido revisado' &&
+                  document.mensaje != undefined)
+              "
               link
             >
               <v-badge class="mr-6" avatar bordered overlap>
@@ -114,7 +156,14 @@
                 <h3 class="pb-1">Servicios Escolares</h3>
                 <span class="caption mx-2" style="color: grey">
                   {{ document.name }} <br />
-                  {{ document.mensaje }}
+                  {{ document.mensaje }} <br />
+                  Aprobado:
+                  <v-chip
+                    class="white--text"
+                    x-small
+                    :color="document.aprobado ? 'green' : 'orange'"
+                    >{{ document.aprobado }}</v-chip
+                  >
                 </span>
               </v-list-item-content>
               <v-tooltip color="grey darken-3" top>
@@ -177,7 +226,12 @@
       >
         <v-tooltip color="grey darken-3" bottom>
           <template v-slot:activator="{ on: tooltip }">
-            <v-btn @click="perfil()" icon color="#fff" v-on="{ ...tooltip }">
+            <v-btn
+              :to="{ name: 'Perfil' }"
+              icon
+              color="#fff"
+              v-on="{ ...tooltip }"
+            >
               <v-avatar
                 :class="`elevation-${hover ? 5 : 5}`"
                 color="blue-grey lighten-5"
@@ -212,7 +266,12 @@
       >
         <v-tooltip color="grey darken-3" bottom>
           <template v-slot:activator="{ on: tooltip }">
-            <v-btn @click="perfil()" icon color="#fff" v-on="{ ...tooltip }">
+            <v-btn
+              :to="{ name: 'Perfil' }"
+              icon
+              color="#fff"
+              v-on="{ ...tooltip }"
+            >
               <v-avatar
                 :class="`elevation-${hover ? 5 : 5}`"
                 color="blue-grey lighten-5"
@@ -261,37 +320,102 @@ export default {
     NavigationDrawer,
   },
   mounted() {
-    this.sendNotification();
+    this.init();
   },
   created() {
     this.getUser();
   },
   methods: {
+    async init() {
+      if (this.user.rol == "Estudiante") {
+        this.sendNotification2();
+      } else {
+        return true;
+      }
+    },
     getUser() {
       if (this.user.rol == "Estudiante") this.toolbarTitle = "Estudiante";
       else return (this.toolbarTitle = "UTSV");
     },
-    sendNotification() {
+    searchNotification() {
       if (
         this.user.documents.actaNacimiento.aprobado ||
         this.user.documents.certificadoPreparatoria.aprobado ||
         this.user.documents.analisisVDRL.aprobado ||
-        this.user.documents.certificadoPreparatoria.aprobado ||
         this.user.documents.comprobanteDomicilio.aprobado ||
         this.user.documents.credencialElector.aprobado ||
         this.user.documents.curp.aprobado ||
         this.user.documents.fotografia.aprobado
       ) {
+        const audio = new Audio(
+          "https://firebasestorage.googleapis.com/v0/b/moduloni.appspot.com/o/postman.mp3?alt=media&token=2e74187c-70ab-4e8a-9458-348a15b200cd"
+        );
+        audio.play();
+      }
+    },
+    sendNotification2() {
+      this.searchNotification();
+      if (
+        this.user.documents.actaNacimiento.aprobado == true ||
+        this.user.documents.actaNacimiento.mensaje != "No ha sido revisado"
+      ) {
         this.messages++;
       }
-      console.log(this.user.documents.actaNacimiento.aprobado);
+      if (
+        this.user.documents.certificadoPreparatoria.aprobado == true ||
+        this.user.documents.certificadoPreparatoria.mensaje !=
+          "No ha sido revisado"
+      ) {
+        this.messages++;
+      }
+      if (
+        this.user.documents.analisisVDRL.aprobado == true ||
+        this.user.documents.analisisVDRL.mensaje != "No ha sido revisado"
+      ) {
+        this.messages++;
+      }
+      if (
+        this.user.documents.comprobanteDomicilio.aprobado == true ||
+        this.user.documents.comprobanteDomicilio.mensaje !=
+          "No ha sido revisado"
+      ) {
+        this.messages++;
+      }
+      if (
+        this.user.documents.credencialElector.aprobado == true ||
+        this.user.documents.credencialElector.mensaje != "No ha sido revisado"
+      ) {
+        this.messages++;
+      }
+      if (
+        this.user.documents.curp.aprobado == true ||
+        this.user.documents.curp.mensaje != "No ha sido revisado"
+      ) {
+        this.messages++;
+      }
+      if (
+        this.user.documents.fotografia.aprobado == true ||
+        this.user.documents.fotografia.mensaje != "No ha sido revisado"
+      ) {
+        this.messages++;
+      }
+      if (
+        this.user.documentsInscription.ficha.aprobado == true ||
+        this.user.documentsInscription.ficha.mensaje != "No ha sido revisado"
+      ) {
+        this.messages++;
+      }
+      if (
+        this.user.documentsInscription.pagoCuatrimestre.aprobado == true ||
+        this.user.documentsInscription.pagoCuatrimestre.mensaje !=
+          "No ha sido revisado"
+      ) {
+        this.messages++;
+      }
     },
     abrir(url) {
       this.user.documents.url = url;
       window.open(url, "_blank");
-    },
-    perfil() {
-      this.$router.push({name: 'Perfil'});
     },
   },
 
@@ -307,5 +431,41 @@ export default {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+.shake {
+  animation: shake 2s ease infinite;
+}
+@keyframes shake {
+  5% {
+    transform: rotate(10deg);
+  }
+  10% {
+    transform: rotate(-10deg);
+  }
+  15% {
+    transform: rotate(10deg);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  30% {
+    transform: rotate(0deg);
+  }
+}
+.moon {
+  animation: moon .8s;
+}
+@keyframes moon {
+  5% {
+    transform: rotate(-100deg);
+  }
+}
+.sun {
+  animation: sun .8s;
+}
+@keyframes sun {
+  5% {
+    transform: rotate(100deg);
+  }
 }
 </style>

@@ -100,7 +100,7 @@
                   elevation="5"
                 >
                   <v-container>
-                    <v-alert text dense type="info" border="left"
+                    <v-alert text dense type="info" class="font-weight-medium" border="left"
                       >Tu información es de carácter sensible, no compartas tu
                       usuario y contraseña.
                     </v-alert>
@@ -108,7 +108,7 @@
                     <v-row>
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
                         <v-text-field
-                          disabled
+                          readonly
                           outlined
                           color="green"
                           label="Nombre(s)"
@@ -120,7 +120,7 @@
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
                         <v-text-field
                           outlined
-                          disabled
+                          readonly
                           color="green"
                           label="Apellido paterno"
                           placeholder="Ingresa tu apellido paterno"
@@ -130,7 +130,7 @@
                       </v-col>
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
                         <v-text-field
-                          disabled
+                          readonly
                           outlined
                           color="green"
                           label="Correo electrónico"
@@ -141,7 +141,7 @@
                       </v-col>
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
                         <v-text-field
-                          disabled
+                          readonly
                           outlined
                           color="green"
                           label="Apellido materno"
@@ -152,7 +152,7 @@
                       </v-col>
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
                         <v-text-field
-                          disabled
+                          readonly
                           outlined
                           dense
                           color="green"
@@ -164,7 +164,7 @@
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
                         <v-text-field
                           outlined
-                          disabled
+                          readonly
                           color="green"
                           label="Edad"
                           placeholder="Ingresa tu edad"
@@ -178,7 +178,7 @@
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
                         <v-text-field
                           outlined
-                          disabled
+                          readonly
                           color="green"
                           label="Sexo"
                           placeholder="Ingresa tu sexo"
@@ -189,7 +189,7 @@
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
                         <v-text-field
                           outlined
-                          disabled
+                          readonly
                           color="green"
                           label="Número seguro social"
                           placeholder="Ingresa número de seguridad social"
@@ -204,7 +204,7 @@
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
                         <v-text-field
                           outlined
-                          disabled
+                          readonly
                           color="green"
                           label="Padre o tutor"
                           placeholder="Ingresa el nombre de tu padre o tutor"
@@ -225,7 +225,7 @@
                           placeholder="Ingresa tu calle"
                           dense
                           v-model="user.direccion.calle"
-                          disabled
+                          readonly
                         ></v-text-field>
                       </v-col>
 
@@ -240,7 +240,7 @@
                           max="99999"
                           dense
                           v-model="user.direccion.numeroExterior"
-                          disabled
+                          readonly
                         ></v-text-field>
                       </v-col>
 
@@ -255,7 +255,7 @@
                           max="99999"
                           dense
                           v-model="user.direccion.numeroExterior"
-                          disabled
+                          readonly
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
@@ -269,7 +269,7 @@
                           max="99999"
                           dense
                           v-model="user.direccion.numeroInterior"
-                          disabled
+                          readonly
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
@@ -280,7 +280,7 @@
                           placeholder="Ingresa tu colonia"
                           dense
                           v-model="user.direccion.colonia"
-                          disabled
+                          readonly
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
@@ -294,7 +294,7 @@
                           max="99999"
                           dense
                           v-model="user.direccion.codigoPostal"
-                          disabled
+                          readonly
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
@@ -305,7 +305,7 @@
                           placeholder="Ingresa tu estado"
                           dense
                           v-model="user.direccion.estado"
-                          disabled
+                          readonly
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" md="4" class="ma-0 pt-0 pb-0">
@@ -316,7 +316,7 @@
                           placeholder="Ingresa tu ciudad"
                           dense
                           v-model="user.direccion.ciudad"
-                          disabled
+                          readonly
                         ></v-text-field>
                       </v-col>
                       <v-container
@@ -325,7 +325,7 @@
                       <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
                         <v-text-field
                           outlined
-                          disabled
+                          readonly
                           color="green"
                           label="Escuela de procedencia"
                           placeholder="Ingresa tu escuela de procedencia"
@@ -336,7 +336,7 @@
                       <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
                         <v-text-field
                           outlined
-                          disabled
+                          readonly
                           color="green"
                           label="Carrera"
                           placeholder="Selecciona la carrera a la que deseas inscribirte"
@@ -395,7 +395,7 @@
                     @change="input($event, index)"
                   ></v-file-input>
                 </v-col>
-                <v-col v-if="document.aprobado == true" cols="3">
+                <v-col v-if="document.aprobado == true || document.mensaje != 'No ha sido revisado'" cols="3">
                   <v-tooltip color="grey darken-3" top>
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn

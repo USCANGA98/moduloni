@@ -298,7 +298,7 @@
 </template>
 
 <script>
-import EliminarEstudiante from "../components/actions/EliminarEstudiante";
+import EliminarEstudiante from "../components/actions/EliminarUsuario";
 import { db } from "../services/firebase";
 import { mapState } from "vuex";
 import { mapMutations } from "vuex";

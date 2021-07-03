@@ -107,7 +107,13 @@
             <v-list-item-content class="justify-center">
               <div class="mx-auto text-center">
                 <v-hover v-slot:default="{ hover }" open-delay="0">
-                  <v-btn @click="perfil()" class="mb-3 mt-3" depressed fab icon>
+                  <v-btn
+                    :to="{ name: 'Perfil' }"
+                    class="mb-3 mt-3"
+                    depressed
+                    fab
+                    icon
+                  >
                     <v-avatar
                       :class="`elevation-${hover ? 4 : 1}`"
                       class="mb-2 transition-swing"
@@ -131,7 +137,7 @@
                   {{ user.correoElectronico }}
                 </p>
                 <v-divider class="my-3"></v-divider>
-                <v-btn @click="perfil()" depressed rounded text>
+                <v-btn :to="{ name: 'Perfil' }" depressed rounded text>
                   Editar Cuenta
                 </v-btn>
               </div>
@@ -188,7 +194,13 @@
             <v-list-item-content class="justify-center">
               <div class="mx-auto text-center">
                 <v-hover v-slot:default="{ hover }" open-delay="0">
-                  <v-btn @click="perfil()" class="mb-3 mt-3" depressed fab icon>
+                  <v-btn
+                    :to="{ name: 'Perfil' }"
+                    class="mb-3 mt-3"
+                    depressed
+                    fab
+                    icon
+                  >
                     <v-avatar
                       :class="`elevation-${hover ? 4 : 1}`"
                       class="mb-2 mt-1 transition-swing"
@@ -211,7 +223,7 @@
                   {{ user.rol }}
                 </p>
                 <v-divider class="my-3"></v-divider>
-                <v-btn @click="perfil()" depressed rounded text>
+                <v-btn :to="{ name: 'Perfil' }" depressed rounded text>
                   Editar Cuenta
                 </v-btn>
               </div>
@@ -236,21 +248,28 @@
             v-for="items in itemsAdmin"
             :key="items.title"
             link
-            :to="{name: items.name}"
+            :to="{ name: items.name }"
             exact
           >
-            <v-list-item-icon>
-              <v-icon>{{ items.icon }} </v-icon>
-            </v-list-item-icon>
+            <v-tooltip color="grey darken-3" right>
+              <template v-slot:activator="{ on }">
+                <v-list-item-icon v-on="on">
+                  <v-icon>{{ items.icon }} </v-icon>
+                </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ items.title }} </v-list-item-title>
-            </v-list-item-content>
+                <v-list-item-content>
+                  <v-list-item-title v-on="on"
+                    >{{ items.title }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </template>
+              <span>{{ items.title }}</span>
+            </v-tooltip>
           </v-list-item>
 
           <v-list-group
             active-class="pink darken-1 white--text px-2 mt-1"
-            prepend-icon="mdi-account-group-outline"
+            prepend-icon="mdi-account-cog"
           >
             <template v-slot:activator>
               <v-list-item-title class="mx-n3">Acciónes</v-list-item-title>
@@ -262,15 +281,23 @@
                 v-for="items in itemsAdminActions"
                 :key="items.title"
                 link
-                :to="{name: items.name}"
+                :to="{ name: items.name }"
                 exact
               >
-                <v-list-item-icon>
-                  <v-icon>{{ items.icon }} </v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title>{{ items.title }} </v-list-item-title>
-                </v-list-item-content>
+                <v-tooltip color="grey darken-3" right>
+                  <template v-slot:activator="{ on }">
+                    <v-list-item-icon v-on="on">
+                      <v-icon>{{ items.icon }} </v-icon>
+                    </v-list-item-icon>
+
+                    <v-list-item-content>
+                      <v-list-item-title v-on="on"
+                        >{{ items.title }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </template>
+                  <span>{{ items.title }}</span>
+                </v-tooltip>
               </v-list-item>
             </v-list>
           </v-list-group>
@@ -282,16 +309,23 @@
             v-for="items in itemsStudent"
             :key="items.title"
             link
-            :to="{name: items.name}"
+            :to="{ name: items.name }"
             exact
           >
-            <v-list-item-icon>
-              <v-icon>{{ items.icon }} </v-icon>
-            </v-list-item-icon>
+            <v-tooltip color="grey darken-3" right>
+              <template v-slot:activator="{ on }">
+                <v-list-item-icon v-on="on">
+                  <v-icon>{{ items.icon }} </v-icon>
+                </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ items.title }} </v-list-item-title>
-            </v-list-item-content>
+                <v-list-item-content>
+                  <v-list-item-title v-on="on"
+                    >{{ items.title }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </template>
+              <span>{{ items.title }}</span>
+            </v-tooltip>
           </v-list-item>
           <v-list-item
             v-show="
@@ -301,16 +335,23 @@
             v-for="items in itemsStudentFinalized"
             :key="items.title"
             link
-            :to="{name: items.name}"
+            :to="{ name: items.name }"
             exact
           >
-            <v-list-item-icon>
-              <v-icon>{{ items.icon }} </v-icon>
-            </v-list-item-icon>
+            <v-tooltip color="grey darken-3" right>
+              <template v-slot:activator="{ on }">
+                <v-list-item-icon v-on="on">
+                  <v-icon>{{ items.icon }} </v-icon>
+                </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ items.title }} </v-list-item-title>
-            </v-list-item-content>
+                <v-list-item-content>
+                  <v-list-item-title v-on="on"
+                    >{{ items.title }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </template>
+              <span>{{ items.title }}</span>
+            </v-tooltip>
           </v-list-item>
         </v-list>
         <!--Renderizado para "director"-->
@@ -329,16 +370,23 @@
             v-for="items in itemsDirect"
             :key="items.title"
             link
-            :to="{name: items.name}"
+            :to="{ name: items.name }"
             exact
           >
-            <v-list-item-icon>
-              <v-icon>{{ items.icon }} </v-icon>
-            </v-list-item-icon>
+            <v-tooltip color="grey darken-3" right>
+              <template v-slot:activator="{ on }">
+                <v-list-item-icon v-on="on">
+                  <v-icon>{{ items.icon }} </v-icon>
+                </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ items.title }} </v-list-item-title>
-            </v-list-item-content>
+                <v-list-item-content>
+                  <v-list-item-title v-on="on"
+                    >{{ items.title }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </template>
+              <span>{{ items.title }}</span>
+            </v-tooltip>
           </v-list-item>
         </v-list>
       </div>
@@ -348,9 +396,9 @@
             @click="cerrarSesion()"
             block
             outlined
-            class="pink--text font-weight-bold"
+            class="text-capitalize pink--text font-weight-bold"
           >
-            Salir
+            Cerrar sesión
             <v-icon color="pink" right>mdi-account-arrow-left-outline</v-icon>
           </v-btn>
         </div>
@@ -464,7 +512,13 @@
             <v-list-item-content class="justify-center">
               <div class="mx-auto text-center">
                 <v-hover v-slot:default="{ hover }" open-delay="0">
-                  <v-btn @click="perfil()" class="mb-3 mt-3" depressed fab icon>
+                  <v-btn
+                    :to="{ name: 'Perfil' }"
+                    class="mb-3 mt-3"
+                    depressed
+                    fab
+                    icon
+                  >
                     <v-avatar
                       :class="`elevation-${hover ? 4 : 1}`"
                       class="mb-2 transition-swing"
@@ -488,7 +542,7 @@
                   {{ user.correoElectronico }}
                 </p>
                 <v-divider class="my-3"></v-divider>
-                <v-btn @click="perfil()" depressed rounded text>
+                <v-btn :to="{ name: 'Perfil' }" depressed rounded text>
                   Editar Cuenta
                 </v-btn>
               </div>
@@ -545,7 +599,13 @@
             <v-list-item-content class="justify-center">
               <div class="mx-auto text-center">
                 <v-hover v-slot:default="{ hover }" open-delay="0">
-                  <v-btn @click="perfil()" class="mb-3 mt-3" depressed fab icon>
+                  <v-btn
+                    :to="{ name: 'Perfil' }"
+                    class="mb-3 mt-3"
+                    depressed
+                    fab
+                    icon
+                  >
                     <v-avatar
                       :class="`elevation-${hover ? 4 : 1}`"
                       class="mb-2 mt-1 transition-swing"
@@ -568,7 +628,7 @@
                   {{ user.rol }}
                 </p>
                 <v-divider class="my-3"></v-divider>
-                <v-btn @click="perfil()" depressed rounded text>
+                <v-btn :to="{ name: 'Perfil' }" depressed rounded text>
                   Editar Cuenta
                 </v-btn>
               </div>
@@ -593,16 +653,23 @@
             v-for="items in itemsAdmin"
             :key="items.title"
             link
-            :to="{name: items.name}"
+            :to="{ name: items.name }"
             exact
           >
-            <v-list-item-icon>
-              <v-icon>{{ items.icon }} </v-icon>
-            </v-list-item-icon>
+            <v-tooltip color="grey darken-3" right>
+              <template v-slot:activator="{ on }">
+                <v-list-item-icon v-on="on">
+                  <v-icon>{{ items.icon }} </v-icon>
+                </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ items.title }} </v-list-item-title>
-            </v-list-item-content>
+                <v-list-item-content>
+                  <v-list-item-title v-on="on"
+                    >{{ items.title }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </template>
+              <span>{{ items.title }}</span>
+            </v-tooltip>
           </v-list-item>
 
           <v-list-group
@@ -619,15 +686,23 @@
                 v-for="items in itemsAdminActions"
                 :key="items.title"
                 link
-                :to="{name: items.name}"
+                :to="{ name: items.name }"
                 exact
               >
-                <v-list-item-icon>
-                  <v-icon>{{ items.icon }} </v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title>{{ items.title }} </v-list-item-title>
-                </v-list-item-content>
+                <v-tooltip color="grey darken-3" right>
+                  <template v-slot:activator="{ on }">
+                    <v-list-item-icon v-on="on">
+                      <v-icon>{{ items.icon }} </v-icon>
+                    </v-list-item-icon>
+
+                    <v-list-item-content>
+                      <v-list-item-title v-on="on"
+                        >{{ items.title }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </template>
+                  <span>{{ items.title }}</span>
+                </v-tooltip>
               </v-list-item>
             </v-list>
           </v-list-group>
@@ -639,16 +714,23 @@
             v-for="items in itemsStudent"
             :key="items.title"
             link
-            :to="{name: items.name}"
+            :to="{ name: items.name }"
             exact
           >
-            <v-list-item-icon>
-              <v-icon>{{ items.icon }} </v-icon>
-            </v-list-item-icon>
+            <v-tooltip color="grey darken-3" right>
+              <template v-slot:activator="{ on }">
+                <v-list-item-icon v-on="on">
+                  <v-icon>{{ items.icon }} </v-icon>
+                </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ items.title }} </v-list-item-title>
-            </v-list-item-content>
+                <v-list-item-content>
+                  <v-list-item-title v-on="on"
+                    >{{ items.title }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </template>
+              <span>{{ items.title }}</span>
+            </v-tooltip>
           </v-list-item>
 
           <v-list-item
@@ -659,16 +741,23 @@
             v-for="items in itemsStudentFinalized"
             :key="items.title"
             link
-            :to="{name: items.name}"
+            :to="{ name: items.name }"
             exact
           >
-            <v-list-item-icon>
-              <v-icon>{{ items.icon }} </v-icon>
-            </v-list-item-icon>
+            <v-tooltip color="grey darken-3" right>
+              <template v-slot:activator="{ on }">
+                <v-list-item-icon v-on="on">
+                  <v-icon>{{ items.icon }} </v-icon>
+                </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ items.title }} </v-list-item-title>
-            </v-list-item-content>
+                <v-list-item-content>
+                  <v-list-item-title v-on="on"
+                    >{{ items.title }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </template>
+              <span>{{ items.title }}</span>
+            </v-tooltip>
           </v-list-item>
         </v-list>
         <!--Renderizado para "director"-->
@@ -687,16 +776,23 @@
             v-for="items in itemsDirect"
             :key="items.title"
             link
-            :to="{name: items.name}"
+            :to="{ name: items.name }"
             exact
           >
-            <v-list-item-icon>
-              <v-icon>{{ items.icon }} </v-icon>
-            </v-list-item-icon>
+            <v-tooltip color="grey darken-3" right>
+              <template v-slot:activator="{ on }">
+                <v-list-item-icon v-on="on">
+                  <v-icon>{{ items.icon }} </v-icon>
+                </v-list-item-icon>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ items.title }} </v-list-item-title>
-            </v-list-item-content>
+                <v-list-item-content>
+                  <v-list-item-title v-on="on"
+                    >{{ items.title }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </template>
+              <span>{{ items.title }}</span>
+            </v-tooltip>
           </v-list-item>
         </v-list>
       </div>
@@ -706,9 +802,9 @@
             @click="cerrarSesion()"
             block
             outlined
-            class="pink--text font-weight-bold"
+            class="text-capitalize pink--text font-weight-bold"
           >
-            Salir
+            Cerrar sesión
             <v-icon color="pink" right>mdi-account-arrow-left-outline</v-icon>
           </v-btn>
         </div>
@@ -718,7 +814,6 @@
 </template>
 
 <script>
-import { auth } from "../services/firebase";
 import { mapState } from "vuex";
 export default {
   name: "NavigationDrawerComponent",
@@ -730,14 +825,10 @@ export default {
   methods: {
     cerrarSesion() {
       try {
-        auth.signOut();
-        this.$router.push({ name: "Home" });
+        location.reload();
       } catch (error) {
         console.log(error);
       }
-    },
-    perfil() {
-      this.$router.push({name: 'Perfil'});
     },
   },
   data() {
@@ -749,8 +840,8 @@ export default {
           name: "Admin",
         },
         {
-          title: "Graficas",
-          icon: "mdi-chart-areaspline",
+          title: "Gráficas",
+          icon: "mdi-chart-pie",
           name: "Graficos",
         },
 
@@ -760,7 +851,7 @@ export default {
           name: "Valorar",
         },
         {
-          title: "Inscripcion",
+          title: "Inscripción",
           icon: "mdi-school",
           name: "Inscripcion-admin",
         },
@@ -796,12 +887,12 @@ export default {
       ],
       itemsStudentFinalized: [
         {
-          title: "Inscripcion 1",
+          title: "Inscripción 1",
           icon: "mdi-card-account-details-outline",
           name: "Inscripcion-student-1",
         },
         {
-          title: "Inscripcion 2",
+          title: "Inscripción 2",
           icon: "mdi-school",
           name: "Inscripcion-student-2",
         },
@@ -810,7 +901,7 @@ export default {
         {
           title: "Panel",
           icon: "mdi-view-dashboard",
-          name: "Control-Estudiantes",
+          name: "Director",
         },
         {
           title: "Valorar",
@@ -818,7 +909,7 @@ export default {
           name: "Valorar-director",
         },
         {
-          title: "Inscripcion",
+          title: "Inscripción",
           icon: "mdi-school",
           name: "Inscripcion-director",
         },

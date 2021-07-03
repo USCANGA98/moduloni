@@ -123,7 +123,7 @@
               <v-alert outlined type="error" text dense>{{ error }}</v-alert>
             </v-col>
 
-            <v-form class="pr-5 pl-5">
+            <v-form class="pr-5 pl-5" @submit.prevent="iniciarSesion()">
               <v-text-field
                 outlined
                 dense
@@ -131,7 +131,6 @@
                 color="green"
                 label="Usuario"
                 required
-                @keyup.enter="iniciarSesion"
               ></v-text-field>
               <v-text-field
                 outlined
@@ -141,7 +140,6 @@
                 label="Contraseña"
                 type="password"
                 required
-                @keyup.enter="iniciarSesion"
               ></v-text-field>
               <v-btn
                 class="text-capitalize font-weight-bold white--text"
@@ -150,7 +148,7 @@
                 dark
                 depressed
                 :loading="loading"
-                @click="iniciarSesion"
+                type="submit"
                 >Iniciar sesión</v-btn
               >
               <v-row>
@@ -192,26 +190,22 @@ export default {
   data: () => ({
     items: [
       {
-        src:
-          "http://www.utsv.com.mx/wp/wp-content/uploads/2021/04/GENERAL-768x769.jpeg",
+        src: "https://firebasestorage.googleapis.com/v0/b/moduloni.appspot.com/o/GENERAL-768x769.jpeg?alt=media&token=2c2f2dc7-d972-4448-b0a1-818e00f87e47",
       },
       {
-        src: "https://sic.cultura.gob.mx/galeria_imagen/5d665487cda12patio.jpg",
+        src: "https://firebasestorage.googleapis.com/v0/b/moduloni.appspot.com/o/5d665487cda12patio.jpg?alt=media&token=fc542297-8f28-4c1a-af27-2f4747e9af0d",
       },
       {
-        src: "http://www.utsv.com.mx/wp/wp-content/uploads/2021/02/alumnos.png",
+        src: "https://firebasestorage.googleapis.com/v0/b/moduloni.appspot.com/o/unnamed.png?alt=media&token=4b21c083-3dc6-498c-bf28-585f3a70d83e",
       },
       {
-        src:
-          "https://veracruz.quadratin.com.mx/www/wp-content/uploads/2016/10/UTCV.jpg",
+        src: "https://firebasestorage.googleapis.com/v0/b/moduloni.appspot.com/o/unnamed.jpg?alt=media&token=6def235e-2af2-4a43-bb7f-b735ebdd3e5c",
       },
       {
-        src:
-          "http://parquealis.com/img/data/galerias/EventosParqueAlis/Taller%22AnalisisdelaSituaciondelTrabajo%22enlaUTSV/7a099bfa-5dda-42bf-91bd-b45345caadd1png.png",
+        src: "http://parquealis.com/img/data/galerias/EventosParqueAlis/Taller%22AnalisisdelaSituaciondelTrabajo%22enlaUTSV/7a099bfa-5dda-42bf-91bd-b45345caadd1png.png",
       },
       {
-        src:
-          "https://lh3.googleusercontent.com/proxy/_cO95iuq8BHLi2FKUGhtXUmJ72kAHQT4ljlIJelE44r1CdxSlaS1KQFZO-mc3pMIWbw3DqxuEp_bjqrElxr4G9a7vuuI2pdqT2EcQZCHX6nvnmZCdYJpNlYjzp4ELWAvk1Roki-R2TDOAhlvbrnWRT01",
+        src: "https://firebasestorage.googleapis.com/v0/b/moduloni.appspot.com/o/unnamed%20(1).jpg?alt=media&token=1ad19a5c-b8b9-4f8a-8d41-39f7ea757c9b",
       },
     ],
     loading: false,
@@ -225,26 +219,27 @@ export default {
   methods: {
     ...mapMutations(["setUser"]),
     async iniciarSesion() {
+      const directores = [
+        "DirectorTi",
+        "DirectorQui",
+        "DirectorMeca",
+        "DirectorMantto",
+      ];
       this.loading = true;
       try {
         this.userData = await this.getUser();
         this.setUser(this.userData);
         if (this.userData.rol == "admin") {
           console.log("accedió el admin");
-          this.$router.push({name: 'Admin'});
+          this.$router.push({ name: "Admin" });
         }
         if (this.userData.rol == "Estudiante") {
           console.log("accedió el estudiante");
-          this.$router.push({name: 'Student'});
+          this.$router.push({ name: "Student" });
         }
-        if (
-          this.userData.rol == "DirectorTi" ||
-          this.userData.rol == "DirectorQui" ||
-          this.userData.rol == "DirectorMeca" ||
-          this.userData.rol == "DirectorMantto"
-        ) {
+        if (directores.includes(this.userData.rol)) {
           console.log("accedió el director de carrera");
-          this.$router.push({name: 'Control-Estudiantes'});
+          this.$router.push({ name: "Director" });
         }
       } catch (error) {
         console.warn(error);

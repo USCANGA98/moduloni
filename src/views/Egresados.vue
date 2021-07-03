@@ -7,15 +7,34 @@
         <v-col cols="12" sm="5" lg="5" md="5">
           <v-card elevation="5" class="pa-2 rounded-xl">
             <v-card flat>
-              <v-card-title> <strong> Egresados</strong> </v-card-title>
-              <v-chip class="ma-1" color="blue-grey lighten-2" dark
-                >Año de Ingreso</v-chip
-              >
-              <v-chip class="ma-1" color="cyan darken-1" dark>Rol</v-chip>
+              <v-row class="d-flex align-center">
+                <v-col cols="6">
+                  <v-card-title>
+                    <strong> Egresados</strong>
+                  </v-card-title>
+                  <v-chip class="ma-1" color="blue-grey lighten-2" dark
+                    >Año de Egreso</v-chip
+                  >
+                  <v-chip class="ma-1" color="cyan darken-1" dark>Rol</v-chip>
+                </v-col>
+                <v-col cols="6">
+                  <v-text-field
+                    outlined
+                    dense
+                    rounded
+                    clearable
+                    v-model="search"
+                    color="green"
+                    prepend-inner-icon="mdi-magnify"
+                    label="Buscar"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
             </v-card>
             <v-data-table
               mobile-breakpoint="960"
               :items-per-page="5"
+              :search="search"
               :loading="loading"
               :items="estudiantesEgresados"
               :headers="headers"
@@ -32,7 +51,7 @@
               </template>
             </v-data-table>
           </v-card>
-          <v-col cols="12" >
+          <v-col cols="12">
             <v-hover v-slot:default="{ hover }" open-delay="0">
               <v-card class="mt-16 rounded-xl" min-height="100" min-width="100">
                 <v-container>
@@ -303,8 +322,8 @@
                       <v-select
                         outlined
                         color="green"
-                        label="Año de ingreso"
-                        placeholder="Selecciona el año de ingreso del estudiante"
+                        label="Año de egreso"
+                        placeholder="Selecciona el año de egreso del estudiante"
                         dense
                         :items="ingresoOptions"
                         v-model="user.anoIngreso"
@@ -350,204 +369,6 @@
           </v-card>
         </v-col>
       </v-row>
-
-      <!-- <v-row>
-        <v-col cols="12">
-          <v-card class="pa-2 rounded-xl" elevation="5">
-            <v-container>
-              <h2 class="mb-5">Cuenta</h2>
-              <v-row>
-                <v-col cols="12">
-                  <v-alert text dense color="info" type="info" border="left"
-                    >Es importante que guarde los siguientes datos en un lugar
-                    seguro, ya que serán los accesos para que puedas ingresara a
-                    la plataforma y saber el status de su trámite.</v-alert
-                  >
-                </v-col>
-                <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
-                  <v-text-field
-                    outlined
-                    color="green"
-                    label="Correo electrónico"
-                    placeholder="Ingresa tu correo electrónico"
-                    dense
-                    v-model="mail"
-                    :rules="ruleMail"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
-                  <v-text-field
-                    outlined
-                    color="green"
-                    label="Correo electrónico"
-                    placeholder="Repite tu correo electrónico"
-                    dense
-                    :disabled="mail == ''"
-                    v-model="mailRepeat"
-                    :rules="ruleMailRepeat"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
-                  <v-text-field
-                    outlined
-                    color="green"
-                    label="Contraseña"
-                    placeholder="Ingresa tu contraseña"
-                    dense
-                    v-model="password"
-                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                    :type="show1 ? 'text' : 'password'"
-                    @click:append="show1 = !show1"
-                    :rules="rulePassword"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="6" class="ma-0 pt-0 pb-0">
-                  <v-text-field
-                    outlined
-                    color="green"
-                    label="Contraseña"
-                    placeholder="Repite tu contraseña"
-                    dense
-                    v-model="passwordRepeat"
-                    :rules="rulePasswordRepeat"
-                    :disabled="password == ''"
-                    :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                    :type="show2 ? 'text' : 'password'"
-                    @click:append="show2 = !show2"
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card>
-        </v-col>
-      </v-row> -->
-
-      <!-- <v-row>
-        <v-col cols="12">
-          <v-card class="pa-2 rounded-xl" elevation="5">
-            <v-container>
-              <h2 class="mb-5">Documentos</h2>
-              <v-row>
-                <v-col cols="12">
-                  <v-alert
-                    text
-                    dense
-                    type="info"
-                    icon="mdi-information"
-                    border="left"
-                  >
-                    Adjunta la documentación en formato
-                    <strong>PDF</strong> y una fotografía en formato
-                    <strong>JPG</strong> o <strong>PNG</strong> con buena
-                    calidad, con peso máximo de <strong>2 MB</strong>, en caso
-                    de no contar con la credencial de elector, subir una imagen
-                    con el texto "Credencial de elector en trámite".
-                  </v-alert>
-                </v-col>
-                <v-col cols="6" md="4" class="ma-0 pt-0 pb-0">
-                  <v-file-input
-                    color="green"
-                    prepend-icon
-                    prepend-inner-icon="mdi-file-document-outline"
-                    label="Acta de nacimiento"
-                    outlined
-                    show-size
-                    dense
-                    :rules="ruleDocument"
-                    accept="application/pdf, image/*"
-                    @change="input($event, 'actaNacimiento')"
-                  ></v-file-input>
-                </v-col>
-                <v-col cols="6" md="4" class="ma-0 pt-0 pb-0">
-                  <v-file-input
-                    color="green"
-                    prepend-icon
-                    prepend-inner-icon="mdi-file-document-outline"
-                    label="CURP"
-                    outlined
-                    show-size
-                    dense
-                    :rules="ruleDocument"
-                    accept="application/pdf, image/*"
-                    @change="input($event, 'curp')"
-                  ></v-file-input>
-                </v-col>
-                <v-col cols="6" md="4" class="ma-0 pt-0 pb-0">
-                  <v-file-input
-                    color="green"
-                    prepend-icon
-                    prepend-inner-icon="mdi-file-document-outline"
-                    label="Comprobante de domicilio"
-                    outlined
-                    show-size
-                    dense
-                    :rules="ruleDocument"
-                    accept="application/pdf, image/*"
-                    @change="input($event, 'comprobanteDomicilio')"
-                  ></v-file-input>
-                </v-col>
-                <v-col cols="6" md="3" class="ma-0 pt-0 pb-0">
-                  <v-file-input
-                    color="green"
-                    prepend-icon
-                    prepend-inner-icon="mdi-file-document-outline"
-                    label="Certificado preparatoria"
-                    outlined
-                    show-size
-                    dense
-                    :rules="ruleDocument"
-                    accept="application/pdf, image/*"
-                    @change="input($event, 'certificadoPreparatoria')"
-                  ></v-file-input>
-                </v-col>
-                <v-col cols="6" md="3" class="ma-0 pt-0 pb-0">
-                  <v-file-input
-                    color="green"
-                    prepend-icon
-                    prepend-inner-icon="mdi-file-document-outline"
-                    label="Credencial de elector"
-                    outlined
-                    show-size
-                    dense
-                    :rules="ruleDocument"
-                    accept="application/pdf, image/*"
-                    @change="input($event, 'credencialElector')"
-                  ></v-file-input>
-                </v-col>
-                <v-col cols="6" md="3" class="ma-0 pt-0 pb-0">
-                  <v-file-input
-                    color="green"
-                    prepend-icon
-                    prepend-inner-icon="mdi-file-document-outline"
-                    label="Fotografía"
-                    outlined
-                    show-size
-                    dense
-                    :rules="ruleDocument"
-                    accept="application/pdf, image/*"
-                    @change="input($event, 'fotografia')"
-                  ></v-file-input>
-                </v-col>
-                <v-col cols="6" md="3" class="ma-0 pt-0 pb-0">
-                  <v-file-input
-                    color="green"
-                    prepend-icon
-                    prepend-inner-icon="mdi-file-document-outline"
-                    label="Analisis VDRL"
-                    outlined
-                    show-size
-                    dense
-                    type="file"
-                    accept="application/pdf, image/*"
-                    :rules="ruleDocument"
-                    @change="input($event, 'analisisVDRL')"
-                  ></v-file-input>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card>
-        </v-col>
-      </v-row> -->
     </v-form>
 
     <v-snackbar
@@ -580,7 +401,7 @@ import Chart from "chart.js";
 
 Vue.use(Chartkick.use(Chart));
 export default {
-  name: "RegistroView",
+  name: "GraficasView",
   mounted() {
     this.egresados();
     this.Data();
@@ -588,6 +409,7 @@ export default {
   data: () => ({
     valid: true,
     overlay: false,
+    search: "",
     text: "",
     anoIngreso18: [],
     anoIngreso19: [],
@@ -624,30 +446,7 @@ export default {
     },
     menu: false,
     sexOptions: ["Femenino", "Masculino", "No binario"],
-    ingresoOptions: [
-      "2000",
-      "2001",
-      "2002",
-      "2003",
-      "2004",
-      "2005",
-      "2006",
-      "2007",
-      "2008",
-      "2009",
-      "2010",
-      "2011",
-      "2012",
-      "2013",
-      "2014",
-      "2015",
-      "2016",
-      "2017",
-      "2018",
-      "2019",
-      "2020",
-      "2021",
-    ],
+    ingresoOptions: ["2018", "2019", "2020", "2021"],
     careerOptions: [
       "TSU Tecnologias de Informacion y Comunicacion",
       "TSU Contaduria",

@@ -126,10 +126,10 @@ const routes = [
   },
   {
     path: "/director",
-    name: "Control-Estudiantes",
+    name: "Director",
     component: () =>
       import(
-        /* webpackChunkName: "director" */ "../views/Control-Estudiantes.vue"
+        /* webpackChunkName: "director" */ "../views/Director.vue"
       ),
     beforeEnter: ifAuthenticated
   },
